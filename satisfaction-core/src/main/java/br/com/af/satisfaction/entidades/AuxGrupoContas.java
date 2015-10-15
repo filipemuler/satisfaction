@@ -7,13 +7,13 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "TB_AUX_GRUPOCONTAS")
+@Table(name = "AUX_GRUPOCONTAS")
 public class AuxGrupoContas {
 
 	private Long id;
 	private String nome;
 	private Date dataCadastro;
-	private Usuarios usuario;
+	private Usuario usuario;
 	private Date ultimaModificacao;
 
 	@Id
