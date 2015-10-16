@@ -4,20 +4,18 @@ import static javax.persistence.GenerationType.SEQUENCE;
 
 import java.util.Date;
 
-import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.MappedSuperclass;
 import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
 
-@Entity
-@Table(name = "AUX_GRUPOCONTAS")
-public class AuxGrupoContas {
+@MappedSuperclass
+public class AuxContasBase {
 
 	private Long id;
 	private String nome;
 	private Date dataCadastro;
-	private Usuario usuario;
+	private Usuarios usuario;
 	private Date ultimaModificacao;
 
 	@Id
