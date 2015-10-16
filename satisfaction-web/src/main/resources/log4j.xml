@@ -12,4 +12,9 @@
         <appender-ref ref="stdout" />
     </category>
     <!-- incluir outras definições aqui -->
+    
+     <category name="br.com.af">
+        <priority value="DEBUG" />
+        <appender-ref ref="stdout" />
+    </category>
 </log4j:configuration>

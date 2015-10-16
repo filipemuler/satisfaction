@@ -47,11 +47,11 @@ public class AuxGrupoContas {
 		this.dataCadastro = dataCadastro;
 	}
 
-	public Usuarios getUsuario() {
+	public Usuario getUsuario() {
 		return usuario;
 	}
 
-	public void setUsuario(Usuarios usuario) {
+	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
 	}
 

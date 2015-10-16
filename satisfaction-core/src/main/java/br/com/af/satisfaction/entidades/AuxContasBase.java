@@ -15,7 +15,7 @@ public class AuxContasBase {
 	private Long id;
 	private String nome;
 	private Date dataCadastro;
-	private Usuarios usuario;
+	private Usuario usuario;
 	private Date ultimaModificacao;
 
 	@Id
@@ -45,11 +45,11 @@ public class AuxContasBase {
 		this.dataCadastro = dataCadastro;
 	}
 
-	public Usuarios getUsuario() {
+	public Usuario getUsuario() {
 		return usuario;
 	}
 
-	public void setUsuario(Usuarios usuario) {
+	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
 	}
 

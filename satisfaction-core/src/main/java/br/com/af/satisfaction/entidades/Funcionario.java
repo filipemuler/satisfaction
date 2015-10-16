@@ -10,7 +10,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Transient;
-import javax.validation.Constraint;
 
 /**
  * matricula vira id no banco, mas criei um transient de matricula
