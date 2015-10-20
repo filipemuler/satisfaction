@@ -4,7 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "TB_ENTIDADES")
+@Table(name = "ENTIDADES")
 public class Entidades {
 
 }

@@ -4,7 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "TB_MOVIMENTACAO")
+@Table(name = "MOVIMENTACAO")
 public class Movimentacao {
 
 }

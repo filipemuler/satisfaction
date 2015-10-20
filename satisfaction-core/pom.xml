@@ -9,9 +9,36 @@
 	<artifactId>satisfaction-core</artifactId>
 
 	<dependencies>
+
+		<dependency>
+			<groupId>br.com.caelum</groupId>
+			<artifactId>vraptor</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>br.com.caelum.vraptor</groupId>
+			<artifactId>vraptor-jpa</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.jboss.weld.servlet</groupId>
+			<artifactId>weld-servlet-core</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.jboss.weld</groupId>
+			<artifactId>weld-core-impl</artifactId>
+		</dependency>
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-entitymanager</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-validator-cdi</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>br.com.caelum.vraptor</groupId>
+			<artifactId>vraptor-java8</artifactId>
 		</dependency>
 	</dependencies>
 </project>

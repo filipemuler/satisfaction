@@ -10,12 +10,17 @@
 	<packaging>war</packaging>
 
 	<dependencies>
+
 		<dependency>
-			<groupId>org.jboss.weld.servlet</groupId>
-			<artifactId>weld-servlet</artifactId>
+			<artifactId>satisfaction-core</artifactId>
+			<groupId>br.com.af</groupId>
 		</dependency>
-		
-				<dependency>
+		<!-- <dependency> -->
+		<!-- <groupId>org.jboss.weld.servlet</groupId> -->
+		<!-- <artifactId>weld-servlet</artifactId> -->
+		<!-- </dependency> -->
+
+		<dependency>
 			<groupId>com.sun.jersey</groupId>
 			<artifactId>jersey-server</artifactId>
 			<version>1.8</version>
@@ -25,8 +30,7 @@
 			<artifactId>jersey-json</artifactId>
 			<version>1.8</version>
 		</dependency>
-		
-		
+
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-log4j12</artifactId>
@@ -45,11 +49,17 @@
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-config</artifactId>
 		</dependency>
-<!-- 		<dependency> -->
-<!-- 			<groupId>org.springframework</groupId> -->
-<!-- 			<artifactId>spring-webmvc</artifactId> -->
-<!-- 			<version>4.0.2.RELEASE</version> -->
-<!-- 		</dependency>		 -->
+		<!-- <dependency> -->
+		<!-- <groupId>org.springframework</groupId> -->
+		<!-- <artifactId>spring-webmvc</artifactId> -->
+		<!-- <version>4.0.2.RELEASE</version> -->
+		<!-- </dependency> -->
+
+		<dependency>
+			<groupId>org.javassist</groupId>
+			<artifactId>javassist</artifactId>
+			<version>3.18.1-GA</version>
+		</dependency>
 
 		<dependency>
 			<groupId>jstl</groupId>
