@@ -17,8 +17,8 @@ public class Usuario {
 	private String email;
 	private String senha;
 	private boolean admin;
-	private Filial filial;
-	private Funcionario funcionario;
+//	private Filial filial;
+//	private Funcionario funcionario;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -62,20 +62,20 @@ public class Usuario {
 		this.admin = admin;
 	}
 
-	public Filial getFilial() {
-		return filial;
-	}
-
-	public void setFilial(Filial filial) {
-		this.filial = filial;
-	}
-
-	public Funcionario getFuncionario() {
-		return funcionario;
-	}
-
-	public void setFuncionario(Funcionario funcionario) {
-		this.funcionario = funcionario;
-	}
+//	public Filial getFilial() {
+//		return filial;
+//	}
+//
+//	public void setFilial(Filial filial) {
+//		this.filial = filial;
+//	}
+//
+//	public Funcionario getFuncionario() {
+//		return funcionario;
+//	}
+//
+//	public void setFuncionario(Funcionario funcionario) {
+//		this.funcionario = funcionario;
+//	}
 
 }

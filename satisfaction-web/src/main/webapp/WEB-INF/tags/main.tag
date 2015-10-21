@@ -47,9 +47,11 @@
 		</nav>
 		
 		
-		<div class="page-header">
-  			<h3>Alertas</h3>
-		</div>
+<!-- 		<div class="page-header"> -->
+<!--   			<h3>Alertas</h3> -->
+<!-- 		</div> -->
+		
+		<jsp:doBody />
 		
 	</div>
 	

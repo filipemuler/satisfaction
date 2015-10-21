@@ -17,7 +17,7 @@ public class AuxGrupoContas {
 	private Long id;
 	private String nome;
 	private Date dataCadastro;
-	private Usuario usuario;
+//	private Usuario usuario;
 	private Date ultimaModificacao;
 
 	@Id
@@ -47,13 +47,13 @@ public class AuxGrupoContas {
 		this.dataCadastro = dataCadastro;
 	}
 
-	public Usuario getUsuario() {
-		return usuario;
-	}
-
-	public void setUsuario(Usuario usuario) {
-		this.usuario = usuario;
-	}
+//	public Usuario getUsuario() {
+//		return usuario;
+//	}
+//
+//	public void setUsuario(Usuario usuario) {
+//		this.usuario = usuario;
+//	}
 
 	public Date getUltimaModificacao() {
 		return ultimaModificacao;

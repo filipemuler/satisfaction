@@ -11,12 +11,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-        http
-        .authorizeRequests()
-            .anyRequest().authenticated()
-            .and()
-        .formLogin()
-            .loginPage("/login.html");
+//        http
+//        .authorizeRequests()
+//            .anyRequest().authenticated()
+//            .and()
+//        .formLogin()
+//            .loginPage("/login");
 	}
 	
     @Autowired
