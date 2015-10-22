@@ -1,4 +1,4 @@
-package br.com.af.web.filters;
+package br.com.af.web.controllers;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -6,7 +6,7 @@ import javax.ws.rs.Path;
 import br.com.caelum.vraptor.Controller;
 
 @Controller
-public class Teste {
+public class LoginController {
 
 	@GET
 	@Path("/login")

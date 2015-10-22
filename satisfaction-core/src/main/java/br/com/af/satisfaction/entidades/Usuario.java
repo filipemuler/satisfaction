@@ -6,6 +6,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -18,7 +20,7 @@ public class Usuario {
 	private String senha;
 	private boolean admin;
 //	private Filial filial;
-//	private Funcionario funcionario;
+	private Funcionario funcionario;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -70,12 +72,14 @@ public class Usuario {
 //		this.filial = filial;
 //	}
 //
-//	public Funcionario getFuncionario() {
-//		return funcionario;
-//	}
-//
-//	public void setFuncionario(Funcionario funcionario) {
-//		this.funcionario = funcionario;
-//	}
+	@OneToOne
+	@JoinColumn(name = "FUNCIONARIO_ID")
+	public Funcionario getFuncionario() {
+		return funcionario;
+	}
+
+	public void setFuncionario(Funcionario funcionario) {
+		this.funcionario = funcionario;
+	}
 
 }
