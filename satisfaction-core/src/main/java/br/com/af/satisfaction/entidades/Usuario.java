@@ -19,8 +19,9 @@ public class Usuario {
 	private String email;
 	private String senha;
 	private boolean admin;
-//	private Filial filial;
+	private Filial filial;
 	private Funcionario funcionario;
+	private Permissao permissao;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -64,14 +65,16 @@ public class Usuario {
 		this.admin = admin;
 	}
 
-//	public Filial getFilial() {
-//		return filial;
-//	}
-//
-//	public void setFilial(Filial filial) {
-//		this.filial = filial;
-//	}
-//
+	@OneToOne
+	@JoinColumn(name = "FILIAL_ID")
+	public Filial getFilial() {
+		return filial;
+	}
+
+	public void setFilial(Filial filial) {
+		this.filial = filial;
+	}
+
 	@OneToOne
 	@JoinColumn(name = "FUNCIONARIO_ID")
 	public Funcionario getFuncionario() {
@@ -82,4 +85,15 @@ public class Usuario {
 		this.funcionario = funcionario;
 	}
 
+	@OneToOne
+	@JoinColumn(name = "PERMISSAO_ID")
+	public Permissao getPermissao() {
+		return permissao;
+	}
+
+	public void setPermissao(Permissao permissao) {
+		this.permissao = permissao;
+	}
+
+	
 }

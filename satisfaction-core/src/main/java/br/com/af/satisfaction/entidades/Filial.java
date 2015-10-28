@@ -4,6 +4,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -13,7 +15,7 @@ public class Filial {
 	private Long id;
 	private String nome;
 	private String tipoEstabelecimento;
-//	private Usuario gestor;
+	private Usuario gestor;
 	private String razaoSocial;
 	private String cnpj;
 	private String inscricaoEstadual;
@@ -51,13 +53,15 @@ public class Filial {
 		this.tipoEstabelecimento = tipoEstabelecimento;
 	}
 
-//	public Usuario getGestor() {
-//		return gestor;
-//	}
-//
-//	public void setGestor(Usuario gestor) {
-//		this.gestor = gestor;
-//	}
+	@OneToOne
+	@JoinColumn(name = "USUARIO_ID")
+	public Usuario getGestor() {
+		return gestor;
+	}
+
+	public void setGestor(Usuario gestor) {
+		this.gestor = gestor;
+	}
 
 	public String getRazaoSocial() {
 		return razaoSocial;

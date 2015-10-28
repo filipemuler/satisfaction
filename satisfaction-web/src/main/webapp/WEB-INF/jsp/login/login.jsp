@@ -13,7 +13,7 @@
 	}
 	</style>
 
-	<h:main>
+	<h:login>
 		<form class="form-signin" action="${app}/j_spring_security_check" method="post">
 			<h3 class="form-signin-heading">Entrar</h3>
 			<div class="form-group">
@@ -24,6 +24,6 @@
 			</div>
 			<button class="btn btn-lg btn-primary btn-block" type="submit">Entrar</button>
 		</form>
-	</h:main>
+	</h:login>
 
 </jsp:root>

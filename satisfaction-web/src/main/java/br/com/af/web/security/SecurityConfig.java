@@ -11,19 +11,21 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-//        http
-//        .authorizeRequests()
-//            .anyRequest().authenticated()
-//            .and()
-//        .formLogin()
-//            .loginPage("/login/login");
+        http
+        .authorizeRequests()
+        	.antMatchers("/login").permitAll()
+        	.anyRequest().authenticated()
+        	.and()
+        .formLogin()
+            .loginPage("/login/login")
+            .permitAll();
 	}
 	
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         auth
             .inMemoryAuthentication()
-                .withUser("user").password("password").roles("USER");
+                .withUser("user").password("asd").roles("USER");
     }
 	
 }

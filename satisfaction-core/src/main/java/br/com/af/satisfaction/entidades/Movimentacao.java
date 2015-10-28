@@ -9,6 +9,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "MOVIMENTACAO")
 public class Movimentacao {
+	
 	private Long id;
 
 	@Id
