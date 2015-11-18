@@ -41,6 +41,7 @@
 		      <ul class="nav navbar-nav navbar-right">
 		        <li><a href="#"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span></a></li>
 		        <li><a href="#"><span class="glyphicon glyphicon-bell" aria-hidden="true"></span></a></li>
+		        <li><a href="#"><span class="glyphicon glyphicon-log-out" aria-hidden="true"></span></a></li>
 		      </ul>
 		    </div><!-- /.navbar-collapse -->
 		  </div><!-- /.container-fluid -->
@@ -55,10 +56,5 @@
 		
 	</div>
 	
-	
-	
-		
-		
-
 
 </jsp:root>

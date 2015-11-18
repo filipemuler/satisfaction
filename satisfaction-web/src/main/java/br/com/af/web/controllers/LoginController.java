@@ -1,17 +1,30 @@
 package br.com.af.web.controllers;
 
+import javax.inject.Inject;
 import javax.ws.rs.GET;
-import javax.ws.rs.Path;
 
 import br.com.caelum.vraptor.Controller;
+import br.com.caelum.vraptor.Result;
 
 @Controller
 public class LoginController {
 
-	@GET
-	@Path("/login")
-	public void login() {
-		System.out.println("blabla");
+	private Result result;
+	
+	public LoginController() {
+	}
+	
+	@Inject
+	public LoginController(Result result) {
+		super();
+		this.result = result;
 	}
 
+	@GET
+	public void login() {
+	}
+
+	public void signup(){
+		result.redirectTo(HomeController.class).home();
+	}
 }

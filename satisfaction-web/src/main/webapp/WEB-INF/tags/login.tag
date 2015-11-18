@@ -9,8 +9,6 @@
 	<link rel="stylesheet" href="${app}/bootstrap/css/bootstrap-theme.css" type="text/css" />
 
 	<!-- JAVASCRIPTS -->
-	<script type="text/javascript" src="${app}/jquery/jquery-1.11.3.min.js"><!-- nada --></script>
-	<script type="text/javascript" src="${app}/jquery/jquery-1.11.3.min.map"><!-- nada --></script>
 	<script type="text/javascript" src="${app}/bootstrap/js/bootstrap.js"><!-- nada --></script>
 
 	<div class="container">
