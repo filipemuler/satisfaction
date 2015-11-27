@@ -11,6 +11,10 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
+
+import com.google.common.base.Objects.ToStringHelper;
+
 /**
  * matricula vira id no banco, mas criei um transient de matricula
  * sobrenome eu acho inutil, tirei
@@ -100,6 +104,11 @@ public class Funcionario {
 
 	public void setGestorFilial(boolean gestorFilial) {
 		this.gestorFilial = gestorFilial;
+	}
+	
+	@Override
+	public String toString() {
+		return ToStringBuilder.reflectionToString(this);
 	}
 
 }

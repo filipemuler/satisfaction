@@ -40,5 +40,11 @@
 			<groupId>br.com.caelum.vraptor</groupId>
 			<artifactId>vraptor-java8</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+			<version>3.0</version>
+		</dependency>
+
 	</dependencies>
 </project>

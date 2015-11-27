@@ -36,6 +36,18 @@
 		        <li><a href="#">Contas</a></li>
 		        <li><a href="#">Lancamentos</a></li>
 		        <li><a href="#">Relatorios</a></li>
+                <li class="dropdown">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Cadastro <span class="caret"></span></a>
+				  	<ul class="dropdown-menu">
+				    	<li><a href="#">Funcionário</a></li>
+				    	<li><a href="#">Usuário</a></li>
+<!-- 				    	<li><a href="#">Something else here</a></li> -->
+<!-- 				    	<li role="separator" class="divider"></li> -->
+<!-- 				    	<li><a href="#">Separated link</a></li> -->
+<!-- 				    	<li role="separator" class="divider"></li> -->
+<!-- 				    	<li><a href="#">One more separated link</a></li> -->
+				  	</ul>
+				</li>
 		      </ul>
 
 		      <ul class="nav navbar-nav navbar-right">
