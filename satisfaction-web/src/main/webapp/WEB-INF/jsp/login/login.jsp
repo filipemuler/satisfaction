@@ -22,7 +22,9 @@
 			<div class="form-group">
 				<input type="password" class="form-control" placeholder="Senha" name="password"/>
 			</div>
-			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/> 
+			<!--  
+			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+			--> 
 			<button class="btn btn-lg btn-primary btn-block" type="submit">Entrar</button>
 		</form>
 	</h:login>

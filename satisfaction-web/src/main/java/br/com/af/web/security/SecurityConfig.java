@@ -17,6 +17,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
         	.antMatchers("/login").permitAll()
         	.anyRequest().authenticated()
         	.and()
+        .csrf().disable()
         .formLogin()
             .loginPage("/login/login")
             .defaultSuccessUrl("/login/signup")

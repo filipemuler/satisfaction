@@ -6,14 +6,13 @@
 		contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" />
 
 	<h:main>
-<!-- 
-		<form action="${linkTo[FuncionarioController].salva}" method="post"> -->
 
 		<div class="panel panel-default">
 			<div class="panel-heading">
 				<h3 class="panel-title">Cadastro de Funcionario</h3>
 			</div>
-			<form action="${app}/funcionario/salva" method="post">
+<!-- 			<form action="${app}/funcionario/salva" method="post"> -->
+			<form action="${linkTo[FuncionarioController].salva}" method="post">
 				<div class="panel-body">
 					<div class="form-group">
 						<label for="nome">Nome</label>
@@ -23,7 +22,7 @@
 						<label for="cpf">CPF</label>
 						<input type="text" class="form-control" name="funcionario.cpf" />
 					</div>
-					<div class="form-group">
+					<div class="form-group col-xs-2">
 						<label for="data">Data de Nascimento</label>
 						<input type="date" class="form-control" name="funcionario.dataNascimento" />
 					</div>
@@ -43,7 +42,6 @@
 				<div class="panel-footer">
 					<button type="submit" class="btn btn-primary">Salvar</button>
 				</div>
-
 			</form>
 		</div>
 

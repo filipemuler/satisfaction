@@ -14,7 +14,7 @@ public class FuncionarioController {
 		
 	}
 	
-//	public void salva(Funcionario funcionario){
-//		System.out.println("Salvando funcionario" );
-//	}
+	public void salva(Funcionario funcionario){
+		System.out.println("Salvando funcionario" );
+	}
 }
