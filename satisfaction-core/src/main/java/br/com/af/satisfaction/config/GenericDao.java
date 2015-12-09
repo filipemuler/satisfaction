@@ -13,53 +13,45 @@ import org.hibernate.criterion.Restrictions;
 @Dependent
 public class GenericDao<T> {
 
+	private EntityManager em;
+
+	public GenericDao() {
+		this(null);
+	}
+
 	@Inject
-    private EntityManager em;
-    
-//    public GenericDao(){
-//	this(null);
-//    }
+	public GenericDao(EntityManager em) {
+		this.em = em;
+	}
 
-//    @Inject
-//    public GenericDao(EntityManager em) {
-//	this.em = em;
-//    }
+	public void persist(T entity) {
+		this.em.persist(entity);
+	}
 
-    public void persist(T entity) {
-	this.em.persist(entity);
-    }
+	public T merge(T entity) {
+		return this.em.merge(entity);
+	}
 
-    public T merge(T entity) {
-	return this.em.merge(entity);
-    }
+	public void remove(T entity) {
+		this.em.remove(entity);
+	}
 
-    public void remove(T entity) {
-	this.em.remove(entity);
-    }
+	public List<T> findAll(Class<T> klass) {
+		Session session = (Session) this.em.getDelegate();
+		List<T> list = session.createCriteria(klass).list();
+		return list;
+	}
 
-    public List<T> findAll(Class klass) {
-	Session session = (Session) this.em.getDelegate();
-	List<T> list = session.createCriteria(klass).list();
-	return list;
-    }
+	public List<T> findByNome(String nome, Class klass) {
+		Session session = (Session) this.em.getDelegate();
+		List<T> list = session.createCriteria(klass).add(Restrictions.ilike("nome", nome, MatchMode.START)).list();
+		return list;
+	}
 
-    public List<T> findByNome(String nome, Class klass) {
-	Session session = (Session) this.em.getDelegate();
-	List<T> list = session.createCriteria(klass)
-		.add(Restrictions.ilike("nome", nome, MatchMode.START)).list();
-	return list;
-    }
-
-
-
-    public T findById(Long id, Class klass) {
-	Session session = (Session) this.em.getDelegate();
-	T paciente = (T) session.createCriteria(klass)
-		.add(Restrictions.eq("id", id)).uniqueResult();
-	return paciente;
-    }
-
-
-
+	public T findById(Long id, Class klass) {
+		Session session = (Session) this.em.getDelegate();
+		T paciente = (T) session.createCriteria(klass).add(Restrictions.eq("id", id)).uniqueResult();
+		return paciente;
+	}
 
 }

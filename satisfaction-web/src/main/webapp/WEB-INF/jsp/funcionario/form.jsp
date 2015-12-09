@@ -11,7 +11,6 @@
 			<div class="panel-heading">
 				<h3 class="panel-title">Cadastro de Funcionario</h3>
 			</div>
-<!-- 			<form action="${app}/funcionario/salva" method="post"> -->
 			<form action="${linkTo[FuncionarioController].salva}" method="post">
 				<div class="panel-body">
 					<div class="form-group">
