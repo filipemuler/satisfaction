@@ -14,20 +14,20 @@ public class FuncionarioController {
 	private GenericDao<Funcionario> funcionarioService;
 
 	public FuncionarioController() {
+		// nada
 	}
 
 	@Inject
-	public FuncionarioController(GenericDao<Funcionario> funcionarioService, Result result) {
-		this.funcionarioService = funcionarioService;
+	public FuncionarioController(Result result, GenericDao<Funcionario> funcionarioService) {
 		this.result = result;
+		this.funcionarioService = funcionarioService;
 	}
-
+	
 	public void form() {
-
+		//carrega o formulario
 	}
 
 	public void salva(Funcionario funcionario) {
-		System.out.println("Salvando funcionario");
 		this.funcionarioService.persist(funcionario);
 		
 		this.result.forwardTo(HomeController.class).home();

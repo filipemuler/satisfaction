@@ -9,17 +9,42 @@
 	<artifactId>satisfaction-web</artifactId>
 	<packaging>war</packaging>
 
+	<properties>
+		<tomcat.version>8.0.28</tomcat.version>
+	</properties>
+
 	<dependencies>
 
 		<dependency>
 			<artifactId>satisfaction-core</artifactId>
 			<groupId>br.com.af</groupId>
+			<exclusions>
+				<exclusion>
+					<artifactId>jboss-el-api_3.0_spec</artifactId>
+					<groupId>org.jboss.spec.javax.el</groupId>
+				</exclusion>
+			</exclusions>
 		</dependency>
+		<dependency>
+			<groupId>org.jboss.weld.servlet</groupId>
+			<artifactId>weld-servlet-core</artifactId>
+			<exclusions>
+				<exclusion>
+					<artifactId>jboss-el-api_3.0_spec</artifactId>
+					<groupId>org.jboss.spec.javax.el</groupId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+
 		<!-- <dependency> -->
 		<!-- <groupId>org.jboss.weld.servlet</groupId> -->
 		<!-- <artifactId>weld-servlet</artifactId> -->
 		<!-- </dependency> -->
-
+		<!-- <dependency> -->
+		<!-- <groupId>javax</groupId> -->
+		<!-- <artifactId>javaee-web-api</artifactId> -->
+		<!-- <scope>provided</scope> -->
+		<!-- </dependency> -->
 		<dependency>
 			<groupId>com.sun.jersey</groupId>
 			<artifactId>jersey-server</artifactId>
@@ -39,7 +64,10 @@
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>javax.servlet-api</artifactId>
+			<version>3.1.0</version>
+			<scope>provided</scope>
 		</dependency>
+
 
 		<dependency>
 			<groupId>org.springframework.security</groupId>
@@ -83,5 +111,28 @@
 			<artifactId>commons-logging</artifactId>
 		</dependency>
 
+		<dependency>
+			<groupId>javax.el</groupId>
+			<artifactId>el-api</artifactId>
+			<version>2.2</version>
+			<scope>provided</scope>
+		</dependency>
+
+
+		<!-- necessario para o jetty -->
+		<dependency>
+			<groupId>org.jboss</groupId>
+			<artifactId>jandex</artifactId>
+			<version>1.2.2.Final</version>
+		</dependency>
+		<!-- <dependency> -->
+		<!-- <groupId>org.eclipse.jetty</groupId> -->
+		<!-- <artifactId>jetty-server</artifactId> -->
+		<!-- <version>9.3.6.v20151106</version> -->
+		<!-- <scope>provided</scope> -->
+		<!-- </dependency> -->
+
 	</dependencies>
+
+
 </project>
