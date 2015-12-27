@@ -1,1 +1,1 @@
-web: mvn tomcat7:run
+worker: mvn tomcat7:run
