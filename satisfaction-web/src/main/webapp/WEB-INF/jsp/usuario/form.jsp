@@ -12,7 +12,7 @@
 				<h3 class="panel-title">Cadastro de Usuario</h3>
 			</div>
 			<form action="${linkTo[UsuarioController].salva}" method="post">
-				<div class="panel-body">
+				<div class="panel-body" style="width: 500px; margin: 0 auto;">
 					<div class="form-group">
 						<label for="email">Email</label>
 						<input type="text" class="form-control" name="usuario.email" />

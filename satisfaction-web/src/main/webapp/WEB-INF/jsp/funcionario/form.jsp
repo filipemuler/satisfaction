@@ -12,7 +12,7 @@
 				<h3 class="panel-title">Cadastro de Funcionario</h3>
 			</div>
 			<form action="${linkTo[FuncionarioController].salva}" method="post">
-				<div class="panel-body">
+				<div class="panel-body" style="width: 500px; margin: 0 auto;">
 					<div class="form-group">
 						<label for="nome">Nome</label>
 						<input type="text" class="form-control" name="funcionario.nome" />
@@ -21,11 +21,11 @@
 						<label for="cpf">CPF</label>
 						<input type="text" class="form-control" name="funcionario.cpf" />
 					</div>
-					<div class="form-group col-xs-2">
+					<div class="form-group">
 						<label for="data">Data de Nascimento</label>
 						<input type="date" class="form-control" name="funcionario.dataNascimento" />
 					</div>
-					<div class="form-group col-xs-2">
+					<div class="form-group">
 						<label for="data">Data de Admissão</label>
 						<input type="date" class="form-control" name="funcionario.dataAdmissao" />
 					</div>
@@ -34,8 +34,10 @@
 							<label><input type="checkbox" name="funcionario.socio" /> Sócio  </label>
 						</div>
 					</div>
-					<div class="checkbox">
-						<label><input type="checkbox" name="funcionario.gestorFilial" /> Gestor Filial  </label>
+					<div class="form-group">
+						<div class="checkbox">
+							<label><input type="checkbox" name="funcionario.gestorFilial" /> Gestor Filial  </label>
+						</div>
 					</div>
 				</div>
 				<div class="panel-footer">
