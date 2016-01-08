@@ -10,6 +10,12 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+/**
+ * Entidade acho que são as emrpesas ligadas ao negocio de alguma forma.
+ * <p>Poderão ser fornecedores, pintores, pedreiros, manutenção, serivço de lavanderia e etc...</p>
+ *  
+ * @author filipe
+ */
 @Entity
 @Table(name = "ENTIDADE")
 public class Entidade {
@@ -17,10 +23,8 @@ public class Entidade {
 	private Long id;
 	private TipoEntidade tipoEntidade;
 	private Date dataCadastro;
-	private String cnpj;
-	private String inscricaoEstadual;
-	private String razaoSocial;
-	private String telefoneEmpresa;
+	private Empresa empresa;
+	
 	private String contato;
 	private String email;
 	private String cpf;
@@ -58,37 +62,13 @@ public class Entidade {
 	public void setDataCadastro(Date dataCadastro) {
 		this.dataCadastro = dataCadastro;
 	}
-
-	public String getCnpj() {
-		return cnpj;
+	
+	public Empresa getEmpresa() {
+		return empresa;
 	}
 
-	public void setCnpj(String cnpj) {
-		this.cnpj = cnpj;
-	}
-
-	public String getInscricaoEstadual() {
-		return inscricaoEstadual;
-	}
-
-	public void setInscricaoEstadual(String inscricaoEstadual) {
-		this.inscricaoEstadual = inscricaoEstadual;
-	}
-
-	public String getRazaoSocial() {
-		return razaoSocial;
-	}
-
-	public void setRazaoSocial(String razaoSocial) {
-		this.razaoSocial = razaoSocial;
-	}
-
-	public String getTelefoneEmpresa() {
-		return telefoneEmpresa;
-	}
-
-	public void setTelefoneEmpresa(String telefoneEmpresa) {
-		this.telefoneEmpresa = telefoneEmpresa;
+	public void setEmpresa(Empresa empresa) {
+		this.empresa = empresa;
 	}
 
 	public String getContato() {

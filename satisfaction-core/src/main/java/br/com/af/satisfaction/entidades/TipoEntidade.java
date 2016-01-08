@@ -5,6 +5,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+/**
+ * Não sei o que é
+ * 
+ * @author filipe
+ */
 @Entity
 @Table(name = "TIPO_ENTIDADE")
 public class TipoEntidade {

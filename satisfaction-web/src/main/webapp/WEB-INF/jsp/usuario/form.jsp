@@ -21,7 +21,7 @@
 						<label for="password">Senha</label>
 						<input type="password" class="form-control" name="usuario.senha" />
 					</div>
-					<div class="form-group col-xs-2">
+					<div class="form-group">
 						<label for="data">Data de Cadastro</label>
 						<input type="date" class="form-control" name="usuario.dataCadastro" />
 					</div>

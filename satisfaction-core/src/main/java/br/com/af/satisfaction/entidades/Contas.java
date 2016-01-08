@@ -1,23 +1,51 @@
 package br.com.af.satisfaction.entidades;
 
+import java.io.Serializable;
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "CONTAS")
-public class Contas {
-	private Long id;
+public class Contas implements Serializable{
+
+	private static final long serialVersionUID = 1L;
+	
+	private AuxContas auxContasId;
+	private AuxGrupoContas auxGrupoContasId;
+	private AuxTipoContas auxTipoContasId;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	public Long getId() {
-		return id;
+	@Column(name = "auxcontasid")
+	public AuxContas getAuxContasId() {
+		return auxContasId;
 	}
 
-	public void setId(Long id) {
-		this.id = id;
+	public void setAuxContasId(AuxContas auxContasId) {
+		this.auxContasId = auxContasId;
 	}
+
+	@Id
+	@Column(name = "auxgrupocontasid")
+	public AuxGrupoContas getAuxGrupoContasId() {
+		return auxGrupoContasId;
+	}
+
+	public void setAuxGrupoContasId(AuxGrupoContas auxGrupoContasId) {
+		this.auxGrupoContasId = auxGrupoContasId;
+	}
+
+	@Id
+	@Column(name = "auxtipocontasid")
+	public AuxTipoContas getAuxTipoContasId() {
+		return auxTipoContasId;
+	}
+
+	public void setAuxTipoContasId(AuxTipoContas auxTipoContasId) {
+		this.auxTipoContasId = auxTipoContasId;
+	}
+
 }
