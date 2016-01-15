@@ -9,10 +9,6 @@
 	<artifactId>satisfaction-web</artifactId>
 	<packaging>war</packaging>
 
-	<properties>
-		<tomcat.version>8.0.28</tomcat.version>
-	</properties>
-
 	<dependencies>
 
 		<dependency>
@@ -36,15 +32,6 @@
 			</exclusions>
 		</dependency>
 
-		<!-- <dependency> -->
-		<!-- <groupId>org.jboss.weld.servlet</groupId> -->
-		<!-- <artifactId>weld-servlet</artifactId> -->
-		<!-- </dependency> -->
-		<!-- <dependency> -->
-		<!-- <groupId>javax</groupId> -->
-		<!-- <artifactId>javaee-web-api</artifactId> -->
-		<!-- <scope>provided</scope> -->
-		<!-- </dependency> -->
 		<dependency>
 			<groupId>com.sun.jersey</groupId>
 			<artifactId>jersey-server</artifactId>
@@ -56,10 +43,6 @@
 			<version>1.8</version>
 		</dependency>
 
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-log4j12</artifactId>
-		</dependency>
 
 		<dependency>
 			<groupId>javax.servlet</groupId>
@@ -77,11 +60,6 @@
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-config</artifactId>
 		</dependency>
-		<!-- <dependency> -->
-		<!-- <groupId>org.springframework</groupId> -->
-		<!-- <artifactId>spring-webmvc</artifactId> -->
-		<!-- <version>4.0.2.RELEASE</version> -->
-		<!-- </dependency> -->
 
 		<dependency>
 			<groupId>postgresql</groupId>
@@ -107,6 +85,10 @@
 		</dependency>
 
 		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-log4j12</artifactId>
+		</dependency>
+		<dependency>
 			<groupId>commons-logging</groupId>
 			<artifactId>commons-logging</artifactId>
 		</dependency>
@@ -118,19 +100,13 @@
 			<scope>provided</scope>
 		</dependency>
 
-
-		<!-- necessario para o jetty -->
+		<!-- necessario para o jetty/wildfly -->
 		<dependency>
 			<groupId>org.jboss</groupId>
 			<artifactId>jandex</artifactId>
 			<version>1.2.2.Final</version>
 		</dependency>
-		<!-- <dependency> -->
-		<!-- <groupId>org.eclipse.jetty</groupId> -->
-		<!-- <artifactId>jetty-server</artifactId> -->
-		<!-- <version>9.3.6.v20151106</version> -->
-		<!-- <scope>provided</scope> -->
-		<!-- </dependency> -->
 
 	</dependencies>
+
 </project>

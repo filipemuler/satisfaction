@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0"
-	xmlns:c="http://java.sun.com/jsp/jstl/core">
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:fmt="http://java.sun.com/jsp/jstl/fmt">
 	<jsp:output doctype-root-element="HTML"
 		doctype-system="about:legacy-compat" />
 
@@ -13,7 +14,6 @@
 	<script type="text/javascript" src="${app}/jquery/jquery-1.11.3.min.map"><!-- nada --></script>
 	<script type="text/javascript" src="${app}/bootstrap/js/bootstrap.js"><!-- nada --></script>
 
-	
 	<div class="container">
 		<img alt="Brand" src="${app}/imgs/mbr.png" />
 		<nav class="navbar navbar-default">
