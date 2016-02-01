@@ -1,136 +1,134 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<modelVersion>4.0.0</modelVersion>
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
 
-	<groupId>br.com.af</groupId>
-	<artifactId>satisfaction</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
-	<packaging>pom</packaging>
-	<modules>
-		<module>satisfaction-core</module>
-		<module>satisfaction-web</module>
-	</modules>
+    <groupId>br.com.af</groupId>
+    <artifactId>satisfaction</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <packaging>pom</packaging>
+    <modules>
+        <module>satisfaction-core</module>
+        <module>satisfaction-web</module>
+    </modules>
 
-	<properties>
-		<vraptor.version>4.2.0-RC3</vraptor.version>
-		<vraptor.java8.version>4.0.0.Final</vraptor.java8.version>
-		<vraptor.jpa.version>4.0.4</vraptor.jpa.version>
-		<weld.version>2.3.2.Final</weld.version>
-	</properties>
+    <properties>
+        <vraptor.version>4.2.0-RC3</vraptor.version>
+        <vraptor.java8.version>4.0.0.Final</vraptor.java8.version>
+        <vraptor.jpa.version>4.0.4</vraptor.jpa.version>
+        <weld.version>2.3.2.Final</weld.version>
+    </properties>
 
 
-	<dependencyManagement>
-		<dependencies>
-			<dependency>
-				<artifactId>satisfaction-core</artifactId>
-				<groupId>br.com.af</groupId>
-				<version>${project.version}</version>
-			</dependency>
-			<dependency>
-				<artifactId>satisfaction-web</artifactId>
-				<groupId>br.com.af</groupId>
-				<version>${project.version}</version>
-			</dependency>
-			
-			<!-- VRAPTOR -->
-			<dependency>
-				<groupId>br.com.caelum</groupId>
-				<artifactId>vraptor</artifactId>
-				<version>${vraptor.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>br.com.caelum.vraptor</groupId>
-				<artifactId>vraptor-java8</artifactId>
-				<version>${vraptor.java8.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>br.com.caelum.vraptor</groupId>
-				<artifactId>vraptor-jpa</artifactId>
-				<version>${vraptor.jpa.version}</version>
-			</dependency>
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <artifactId>satisfaction-core</artifactId>
+                <groupId>br.com.af</groupId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <artifactId>satisfaction-web</artifactId>
+                <groupId>br.com.af</groupId>
+                <version>${project.version}</version>
+            </dependency>
 
-			<!-- WELD -->
-			<dependency>
-				<groupId>org.jboss.weld.servlet</groupId>
-				<artifactId>weld-servlet-core</artifactId>
-				<version>${weld.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.jboss.weld</groupId>
-				<artifactId>weld-core-impl</artifactId>
-				<version>${weld.version}</version>
-			</dependency>
+            <!-- VRAPTOR -->
+            <dependency>
+                <groupId>br.com.caelum</groupId>
+                <artifactId>vraptor</artifactId>
+                <version>${vraptor.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>br.com.caelum.vraptor</groupId>
+                <artifactId>vraptor-java8</artifactId>
+                <version>${vraptor.java8.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>br.com.caelum.vraptor</groupId>
+                <artifactId>vraptor-jpa</artifactId>
+                <version>${vraptor.jpa.version}</version>
+            </dependency>
 
-			<!-- HIBERNATE -->
-			<dependency>
-				<groupId>org.hibernate</groupId>
-				<artifactId>hibernate-validator-cdi</artifactId>
-				<version>5.1.1.Final</version>
-			</dependency>
-			<dependency>
-				<groupId>org.hibernate</groupId>
-				<artifactId>hibernate-entitymanager</artifactId>
-				<version>4.3.0.Final</version>
-			</dependency>
-			
-			<!-- Spring Security -->
-			<dependency>
-				<groupId>org.springframework.security</groupId>
-				<artifactId>spring-security-web</artifactId>
-				<version>4.0.2.RELEASE</version>
-			</dependency>
-			<dependency>
-				<groupId>org.springframework.security</groupId>
-				<artifactId>spring-security-config</artifactId>
-				<version>4.0.2.RELEASE</version>
-			</dependency>
+            <!-- WELD -->
+            <dependency>
+                <groupId>org.jboss.weld.servlet</groupId>
+                <artifactId>weld-servlet-core</artifactId>
+                <version>${weld.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.jboss.weld</groupId>
+                <artifactId>weld-core-impl</artifactId>
+                <version>${weld.version}</version>
+            </dependency>
 
-			<!-- LOG -->
-			<dependency>
-				<groupId>org.slf4j</groupId>
-				<artifactId>slf4j-log4j12</artifactId>
-				<version>1.7.5</version>
-			</dependency>
-			<dependency>
-				<groupId>commons-logging</groupId>
-				<artifactId>commons-logging</artifactId>
-				<version>1.1.1</version>
-			</dependency>
+            <!-- HIBERNATE -->
+            <dependency>
+                <groupId>org.hibernate</groupId>
+                <artifactId>hibernate-validator-cdi</artifactId>
+                <version>5.1.1.Final</version>
+            </dependency>
+            <dependency>
+                <groupId>org.hibernate</groupId>
+                <artifactId>hibernate-entitymanager</artifactId>
+                <version>4.3.0.Final</version>
+            </dependency>
 
-		</dependencies>
-	</dependencyManagement>
+            <!-- Spring Security -->
+            <dependency>
+                <groupId>org.springframework.security</groupId>
+                <artifactId>spring-security-web</artifactId>
+                <version>4.0.2.RELEASE</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.security</groupId>
+                <artifactId>spring-security-config</artifactId>
+                <version>4.0.2.RELEASE</version>
+            </dependency>
 
-	<build>
-		<finalName>satisfaction-web</finalName>
-		<plugins>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.1</version>
-				<configuration>
-					<fork>true</fork>
-					<source>1.8</source>
-					<target>1.8</target>
-					<encoding>UTF-8</encoding>
-					<compilerArgument>-parameters</compilerArgument>
-				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.tomcat.maven</groupId>
-				<artifactId>tomcat7-maven-plugin</artifactId>
-				<version>2.2</version>
-<!--
-				<configuration>
-					<path>/satisfaction-web</path>
-				</configuration>
--->
-			</plugin>
-     <plugin>
-        <groupId>com.heroku.sdk</groupId>
-        <artifactId>heroku-maven-plugin</artifactId>
-        <version>0.5.7</version>
-      </plugin>
-		</plugins>
-	</build>
+            <!-- LOG -->
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-log4j12</artifactId>
+                <version>1.7.5</version>
+            </dependency>
+            <dependency>
+                <groupId>commons-logging</groupId>
+                <artifactId>commons-logging</artifactId>
+                <version>1.1.1</version>
+            </dependency>
+
+        </dependencies>
+    </dependencyManagement>
+
+    <build>
+        <finalName>satisfaction-web</finalName>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.1</version>
+                <configuration>
+                    <fork>true</fork>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                    <encoding>UTF-8</encoding>
+                    <compilerArgument>-parameters</compilerArgument>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.tomcat.maven</groupId>
+                <artifactId>tomcat7-maven-plugin</artifactId>
+                <version>2.2</version>
+                <configuration>
+                    <path>/mbr</path>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>com.heroku.sdk</groupId>
+                <artifactId>heroku-maven-plugin</artifactId>
+                <version>0.5.7</version>
+            </plugin>
+        </plugins>
+    </build>
 
 </project>

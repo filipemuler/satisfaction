@@ -6,6 +6,7 @@ import javax.enterprise.context.Dependent;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 
+import br.com.af.satisfaction.entidades.Conta;
 import org.hibernate.Session;
 import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Restrictions;
@@ -66,6 +67,15 @@ public class GenericDao<T> {
 		Session session = (Session) this.em.getDelegate();
 		T paciente = (T) session.createCriteria(klass).add(Restrictions.eq("id", id)).uniqueResult();
 		return paciente;
+	}
+
+	public void salvarConta(Conta conta){
+		if(conta.getReferenteA() != null && conta.getReferenteA().getId() != null) {
+			Conta pai = this.em.find(Conta.class, conta.getReferenteA().getId());
+			conta.getContas().add(pai);
+		}
+		this.em.persist(conta);
+
 	}
 
 //	public List<Event> findEvents(long start, long end) {

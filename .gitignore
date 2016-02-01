@@ -4,3 +4,8 @@ target
 *~
 .project
 .classpath
+
+# Idea IntelliJ
+.idea
+*.iml
+overlays/
