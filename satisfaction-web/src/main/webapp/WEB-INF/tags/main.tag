@@ -39,6 +39,8 @@
                 <li class="dropdown">
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Cadastro <span class="caret"></span></a>
 				  	<ul class="dropdown-menu">
+				  	    <li><a href="${app}/movimentacao/form">Movimentação</a></li>
+				  	    <li><a href="${app}/conta/form">Conta</a></li>
 				  		<li><a href="${app}/filial/form">Filial</a></li>
 				    	<li><a href="${app}/funcionario/form">Funcionário</a></li>
 				    	<li role="separator" class="divider"></li>
