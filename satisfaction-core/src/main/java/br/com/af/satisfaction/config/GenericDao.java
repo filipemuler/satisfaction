@@ -5,10 +5,13 @@ import java.util.List;
 import javax.enterprise.context.Dependent;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
+import javax.swing.*;
 
 import br.com.af.satisfaction.entidades.Conta;
+import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.MatchMode;
+import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 
 @Dependent
@@ -69,6 +72,19 @@ public class GenericDao<T> {
 		return paciente;
 	}
 
+	public Paginator<T> findPaginator(Class klass, int firstResult){
+		Session session = (Session) this.em.getDelegate();
+		Criteria criteria = session.createCriteria(klass);
+		criteria.setFirstResult(firstResult*10);
+		criteria.setMaxResults(10);
+		List<T> list = criteria.list();
+		//Total count
+		Criteria criteriaCount = session.createCriteria(klass);
+		criteriaCount.setProjection(Projections.rowCount());
+		Long count = (Long) criteriaCount.uniqueResult();
+		return new Paginator<>(count, list, Math.floorDiv(count-1, 10));
+	}
+
 	public void salvarConta(Conta conta){
 		if(conta.getReferenteA() != null && conta.getReferenteA().getId() != null) {
 			Conta pai = this.em.find(Conta.class, conta.getReferenteA().getId());
@@ -95,4 +111,8 @@ public class GenericDao<T> {
 //		return list;
 //	}
 
+
+	public static void main(String[] args) {
+		System.out.println(Math.floorDiv(11-1, 10));
+	}
 }
