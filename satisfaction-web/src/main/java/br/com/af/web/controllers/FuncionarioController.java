@@ -29,20 +29,16 @@ public class FuncionarioController {
 		//carrega o formulario
 	}
 
-	public void list() {
-		Paginator<Funcionario> paginator = this.funcionarioService.findPaginator(Funcionario.class, 0);
-		this.result.include("paginator", paginator);
-	}
-
-	@Path("/funcionario/list/{page}")
-	public void goPage(int page){
+	@Path({"/funcionario/list", "/funcionario/list/{page}"})
+	public void list(Integer page) {
+		page = (page==null) ? 0 : page;
 		Paginator<Funcionario> paginator = this.funcionarioService.findPaginator(Funcionario.class, page);
-		this.result.include("paginator", paginator).of(this).list();
+		this.result.include("paginator", paginator);
 	}
 
 	public void salva(Funcionario funcionario) {
 		this.funcionarioService.persist(funcionario);
 		
-		this.result.forwardTo(HomeController.class).home();
+		this.result.redirectTo(this).list(0);
 	}
 }

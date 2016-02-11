@@ -9,13 +9,16 @@
 
 		<properties>
 			<property name="hibernate.hbm2ddl.auto" value="update" />
-			<property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect" />
+			<property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQL82Dialect" />
 			<property name="hibernate.connection.driver_class" value="org.postgresql.Driver" />
 			<property name="hibernate.connection.username" value="mbr" />
 			<property name="hibernate.connection.password" value="mbr" />
 			<property name="hibernate.connection.url" value="jdbc:postgresql://localhost:5432/mbr" />
 <!-- 			<property name="hibernate.connection.password" value="KliKos123" /> -->
 <!-- 			<property name="hibernate.connection.url" value="jdbc:postgresql://teste.c6mckifarezo.sa-east-1.rds.amazonaws.com:5432/satisfaction" /> -->
+			<!--<property name="hibernate.connection.username" value="gvtaekyfepvayf" />-->
+			<!--<property name="hibernate.connection.password" value="w0IUUfum8SFc8KkpFXwLSNRuk9" />-->
+			<!--<property name="hibernate.connection.url" value="jdbc:postgresql://ec2-107-22-197-152.compute-1.amazonaws.com:5432/d6nrnbj0rmhkhi" />-->
 			<property name="hibernate.show_sql" value="false" />
 			<property name="hibernate.max_fetch_depth" value="3" />
 		</properties>

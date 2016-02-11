@@ -47,9 +47,13 @@
                         <span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span>
                       </a>
                     </li>
-                    <c:forEach var="page" begin="0" end="${paginator.pages}">
-                        <li><a href="${app}/funcionario/list/${page}">${page+1}</a></li>
-                    </c:forEach>
+                    <c:if test="${!empty paginator and paginator.pages > 0}">
+                        <c:forEach var="page" begin="0" end="${paginator.pages}">
+
+                            <li><a href="${app}/funcionario/list/${page}">${page+1}</a></li>
+
+                        </c:forEach>
+                    </c:if>
                     <li>
                       <a href="#" aria-label="Next">
                         <span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span>
