@@ -42,28 +42,53 @@
                 	</tbody>
                 </table>
                 <ul class="pagination pagination-sm centered">
+                    <!--
                     <li>
                       <a href="#" aria-label="Previous">
                         <span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span>
                       </a>
                     </li>
+                    -->
                     <c:if test="${!empty paginator and paginator.pages > 0}">
                         <c:forEach var="page" begin="0" end="${paginator.pages}">
-
                             <li><a href="${app}/funcionario/list/${page}">${page+1}</a></li>
-
                         </c:forEach>
                     </c:if>
+                    <!--
                     <li>
                       <a href="#" aria-label="Next">
                         <span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span>
                       </a>
                     </li>
+                    -->
                 </ul>
             </div>
-
+            <div class="panel-footer">
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Criar</button>
+            </div>
 		</div>
-
+        <!-- Modal -->
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+            <!--
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"></span></button>
+                <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+              </div>
+              <div class="modal-body">
+              -->
+                <jsp:include page="./form.jsp"/>
+                <!--
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+              </div>
+              -->
+            </div>
+          </div>
+        </div>
 
 	</h:main>
 

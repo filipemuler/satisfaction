@@ -14,63 +14,73 @@
 	<script type="text/javascript" src="${app}/jquery/jquery-1.11.3.min.map"><!-- nada --></script>
 	<script type="text/javascript" src="${app}/bootstrap/js/bootstrap.js"><!-- nada --></script>
 
-	<div class="container">
-		<img alt="Brand" src="${app}/imgs/mbr.png" />
-		<nav class="navbar navbar-default">
-		  <div class="container-fluid">
-		    <!-- Brand and toggle get grouped for better mobile display -->
-		    <div class="navbar-header">
-		      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-		        <span class="sr-only">Toggle navigation</span>
-		        <span class="icon-bar"></span>
-		        <span class="icon-bar"></span>
-		        <span class="icon-bar"></span>
-		      </button>
-		      <a class="navbar-brand" href="#"><span class="glyphicon glyphicon-home" aria-hidden="true"></span></a>
-		    </div>
-		
-		    <!-- Collect the nav links, forms, and other content for toggling -->
-		    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-		      <ul class="nav navbar-nav">
-		        <li class="active"><a href="#">Acessos <span class="sr-only">(current)</span></a></li>
-		        <li><a href="#">Contas</a></li>
-		        <li><a href="#">Lancamentos</a></li>
-		        <li><a href="#">Relatorios</a></li>
-                <li class="dropdown">
-					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Cadastro <span class="caret"></span></a>
-				  	<ul class="dropdown-menu">
-				  	    <li><a href="${app}/movimentacao/form">Movimentação</a></li>
-				  	    <li><a href="${app}/conta/form">Conta</a></li>
-				  		<li><a href="${app}/filial/form">Filial</a></li>
-				    	<li><a href="${app}/funcionario/form">Funcionário</a></li>
-				    	<li role="separator" class="divider"></li>
-				    	<li><a href="${app}/usuario/form">Usuário</a></li>
-				    	<li><a href="${app}/permissao/form">Permissão</a></li>
-<!-- 				    	<li><a href="#">Something else here</a></li> -->
-<!-- 				    	<li><a href="#">Separated link</a></li> -->
-<!-- 				    	<li role="separator" class="divider"></li> -->
-<!-- 				    	<li><a href="#">One more separated link</a></li> -->
-				  	</ul>
-				</li>
-		      </ul>
 
-		      <ul class="nav navbar-nav navbar-right">
-		        <li><a href="#"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span></a></li>
-		        <li><a href="#"><span class="glyphicon glyphicon-bell" aria-hidden="true"></span></a></li>
-		        <li><a href="#"><span class="glyphicon glyphicon-log-out" aria-hidden="true"></span></a></li>
-		      </ul>
-		    </div><!-- /.navbar-collapse -->
-		  </div><!-- /.container-fluid -->
+		<style>
+			body { padding-top: 70px; }
+			.conteudo {padding-top: 70px;}
+		</style>
+
+		<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+			<div class="container-fluid">
+				<div>
+					<ul class="nav navbar-nav navbar-right">
+						<li><a class="nav-item nav-link" href="#">Dashboard</a></li>
+						<li><a class="nav-item nav-link" href="#">Settings</a></li>
+						<li><a class="nav-item nav-link" href="#">Profile</a></li>
+						<li><a class="nav-item nav-link" href="#">Help</a></li>
+					</ul>
+				</div>
+			</div>
 		</nav>
-		
-		
-<!-- 		<div class="page-header"> -->
-<!--   			<h3>Alertas</h3> -->
-<!-- 		</div> -->
-		
-		<jsp:doBody />
-		
-	</div>
-	
+
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-md-2">
+					<ul class="nav nav-pills nav-stacked">
+						<li class="active"><a href="${app}/">Dashboard</a></li>
+						<li><a href="${app}/movimentacao/form">Movimentações</a></li>
+						<li><a href="#">Menu 1</a></li>
+						<li><a href="#">Menu 3</a></li>
+						<li><a href="#">Menu 4</a></li>
+						<li><a href="#">Menu 5</a></li>
+						<li><a href="#">Menu 6</a></li>
+						<li role="presentation" class="dropdown">
+						    <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+						        Cadastros <span class="caret"/>
+						    </a>
+						    <ul class="dropdown-menu">
+						        <li><a href="${app}/conta/form">Contas</a></li>
+                            	<li><a href="${app}/filial/form">Filial</a></li>
+                            	<li><a href="${app}/funcionario/list">Funcionario</a></li>
+                            	<li><a href="${app}/usuario/form">Usuario</a></li>
+                            	<li><a href="${app}/permissao/form">Permissão</a></li>
+						    </ul>
+						</li>
+					</ul>
+				</div>
+				<div class="col-md-10">
+					<div class="well well-sm clearfix">
+					<img alt="Brand" src="${app}/imgs/mbr2.png" style="width:70px"/>
+						<div class="pull-right">
+							<input type="text" class="input-sm" placeholder="Search"/>
+							<button type="button" class="btn btn-sm btn-default ">button</button>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-8">
+						    <jsp:doBody />
+						</div>
+						<div class="col-md-4">
+							<div class="panel panel-default">
+								<div class="panel-heading">Faturamento</div>
+								<div class="panel-body">
+									Panel content
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 
 </jsp:root>
