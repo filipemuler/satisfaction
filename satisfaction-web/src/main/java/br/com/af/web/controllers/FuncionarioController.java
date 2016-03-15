@@ -1,13 +1,15 @@
 package br.com.af.web.controllers;
 
-import javax.inject.Inject;
-
 import br.com.af.satisfaction.config.GenericDao;
 import br.com.af.satisfaction.config.Paginator;
 import br.com.af.satisfaction.entidades.Funcionario;
 import br.com.caelum.vraptor.Controller;
 import br.com.caelum.vraptor.Path;
 import br.com.caelum.vraptor.Result;
+
+import javax.inject.Inject;
+
+import static org.apache.commons.lang3.math.NumberUtils.toInt;
 
 @Controller
 public class FuncionarioController {
@@ -30,15 +32,14 @@ public class FuncionarioController {
 	}
 
 	@Path({"/funcionario/list", "/funcionario/list/{page}"})
-	public void list(Integer page) {
-		page = (page==null) ? 0 : page;
-		Paginator<Funcionario> paginator = this.funcionarioService.findPaginator(Funcionario.class, page);
+	public void list(String page) {
+		Paginator<Funcionario> paginator = this.funcionarioService.findPaginator(Funcionario.class, toInt(page));
 		this.result.include("paginator", paginator);
 	}
 
 	public void salva(Funcionario funcionario) {
 		this.funcionarioService.persist(funcionario);
 		
-		this.result.redirectTo(this).list(0);
+		this.result.redirectTo(this).list(null);
 	}
 }

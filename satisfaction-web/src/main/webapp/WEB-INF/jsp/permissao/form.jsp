@@ -5,27 +5,16 @@
 	<jsp:directive.page language="java"
 		contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" />
 
-	<h:main>
-		<div class="panel panel-default">
-			<div class="panel-heading">
-				<h3 class="panel-title">Cadastro de Permissão</h3>
-			</div>
-			<form action="${linkTo[PermissaoController].salva}" method="post">
-				<div class="panel-body" style="width: 500px; margin: 0 auto;">
-					<div class="form-group">
-						<label for="rotina">Rotina</label>
-						<input type="text" class="form-control" name="permissao.rotina" />
-					</div>
-					<div class="form-group">
-						<label for="tipo">Tipo</label>
-						<input type="text" class="form-control" name="permissao.tipo" />
-					</div>
-				</div>
-				<div class="panel-footer">
-					<button type="submit" class="btn btn-primary">Salvar</button>
-				</div>
-			</form>
-		</div>
-	</h:main>
+	<div class="modal-body" style="width: 500px; margin: 0 auto;">
+        <div class="form-group">
+            <label for="rotina">Rotina</label>
+            <input type="text" class="form-control" name="permissao.rotina" />
+        </div>
+        <div class="form-group">
+            <label for="tipo">Tipo</label>
+            <input type="text" class="form-control" name="permissao.tipo" />
+        </div>
+    </div>
+
 
 </jsp:root>

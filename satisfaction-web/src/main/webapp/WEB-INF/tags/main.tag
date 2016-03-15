@@ -44,18 +44,43 @@
 						<li><a href="#">Menu 4</a></li>
 						<li><a href="#">Menu 5</a></li>
 						<li><a href="#">Menu 6</a></li>
+						<p>Cadastros</p>
+						<li><a href="${app}/conta/form">Contas</a></li>
+                        <li><a href="${app}/filial/list">Filial</a></li>
+                        <li><a href="${app}/funcionario/list">Funcionario</a></li>
+                        <li><a href="${app}/usuario/list">Usuario</a></li>
+                        <li><a href="${app}/permissao/list">Permissão</a></li>
+						<!--
 						<li role="presentation" class="dropdown">
 						    <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
 						        Cadastros <span class="caret"/>
 						    </a>
 						    <ul class="dropdown-menu">
 						        <li><a href="${app}/conta/form">Contas</a></li>
-                            	<li><a href="${app}/filial/form">Filial</a></li>
+                            	<li><a href="${app}/filial/list">Filial</a></li>
                             	<li><a href="${app}/funcionario/list">Funcionario</a></li>
-                            	<li><a href="${app}/usuario/form">Usuario</a></li>
-                            	<li><a href="${app}/permissao/form">Permissão</a></li>
+                            	<li><a href="${app}/usuario/list">Usuario</a></li>
+                            	<li><a href="${app}/permissao/list">Permissão</a></li>
 						    </ul>
 						</li>
+						<li role="button" >
+                            <a data-toggle="collapse" href="#cadastros" role="button" aria-expanded="false" aria-controls="cadastros">
+                                Cadastros
+                            </a>
+                        </li>
+                        <div class="collapse" id="cadastros">
+                            <ul class="nav nav-pills nav-stacked">
+                                <li><a href="${app}/conta/form">Contas</a></li>
+                                <li><a href="${app}/filial/list">Filial</a></li>
+                                <li><a href="${app}/funcionario/list">Funcionario</a></li>
+                                <li><a href="${app}/usuario/list">Usuario</a></li>
+                                <li><a href="${app}/permissao/list">Permissão</a></li>
+                            </ul>
+                        </div>
+						-->
+
+
+
 					</ul>
 				</div>
 				<div class="col-md-10">

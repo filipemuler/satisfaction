@@ -23,6 +23,14 @@ public class Permissao {
 	private String rotina;
 	private String tipo;
 
+	public Permissao() {
+	}
+
+	public Permissao(String rotina, String tipo) {
+		this.rotina = rotina;
+		this.tipo = tipo;
+	}
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	public Long getId() {

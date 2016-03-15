@@ -8,6 +8,7 @@ import javax.persistence.EntityManager;
 import javax.swing.*;
 
 import br.com.af.satisfaction.entidades.Conta;
+import br.com.af.satisfaction.entidades.Permissao;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.MatchMode;
@@ -50,6 +51,13 @@ public class GenericDao<T> {
 		Session session = (Session) this.em.getDelegate();
 		List<T> list = session.createCriteria(klass).add(Restrictions.ilike("nome", nome, MatchMode.START)).list();
 		return list;
+	}
+
+	public boolean findUserRole(){
+		Session session = (Session) this.em.getDelegate();
+		Permissao result = (Permissao) session.createCriteria(Permissao.class).add(Restrictions.eq("rotina", "ROLE_USER")).uniqueResult();
+		if(result == null) return false;
+		return true;
 	}
 
 	// public List<Autocomplete> autoCompletePaciente(String nome) {
