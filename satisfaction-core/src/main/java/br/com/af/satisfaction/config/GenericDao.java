@@ -9,6 +9,8 @@ import javax.swing.*;
 
 import br.com.af.satisfaction.entidades.Conta;
 import br.com.af.satisfaction.entidades.Permissao;
+import br.com.af.satisfaction.entidades.Usuario;
+
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.MatchMode;
@@ -51,6 +53,13 @@ public class GenericDao<T> {
 		Session session = (Session) this.em.getDelegate();
 		List<T> list = session.createCriteria(klass).add(Restrictions.ilike("nome", nome, MatchMode.START)).list();
 		return list;
+	}
+
+
+	public Usuario findByUserName(String username){
+		Session session = (Session) this.em.getDelegate();
+		Usuario result = (Usuario) session.createCriteria(Usuario.class).add(Restrictions.eq("email", username)).uniqueResult();
+		return result;
 	}
 
 	public boolean findUserRole(){
