@@ -6,11 +6,16 @@ import org.hibernate.internal.SessionFactoryImpl;
 import org.hibernate.jpa.HibernateEntityManagerFactory;
 import org.hibernate.jpa.internal.EntityManagerImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
@@ -19,10 +24,9 @@ import javax.sql.DataSource;
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter{
 
-//	@Autowired
-//	private EntityManager em;
-//	@Autowired
-//	private DataSource datasource;
+	@Autowired
+	@Qualifier("userDetailsService")
+	UserDetailsService userDetailsService;
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
@@ -50,6 +54,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 //		ConnectionProvider connectionProvider = ((SessionFactoryImpl) factory.getSessionFactory()).getConnectionProvider();
 //		DataSource datasource = ((DatasourceConnectionProviderImpl) connectionProvider).getDataSource();
 		auth
+			.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder()).and()
             .inMemoryAuthentication()
                 .withUser("asd").password("asd").roles("USER");
 
@@ -59,5 +64,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 //				.usersByUsernameQuery("select email, senha from Usuario where email=?");
 
     }
+
+	@Bean
+	public PasswordEncoder passwordEncoder(){
+		PasswordEncoder encoder = new BCryptPasswordEncoder();
+		return encoder;
+	}
 
 }
