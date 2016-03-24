@@ -14,16 +14,16 @@ import javax.servlet.ServletContext;
 @ApplicationScoped
 public class ApplicationInitializer {
 
-    @Inject
-    private GenericDao<Permissao> permissaoService;
+//    @Inject
+//    private GenericDao<Permissao> permissaoService;
 
     public void onStartup(@Observes @Initialized ServletContext ctx) {
         System.out.println("Initialized web application at context path " + ctx.getContextPath());
 
-        if(!this.permissaoService.findUserRole()){
-            Permissao permissao = new Permissao("ROLE_USER", "Usuario generico");
-            this.permissaoService.persist(permissao);
-        }
+//        if(!this.permissaoService.findUserRole()){
+//            Permissao permissao = new Permissao("ROLE_USER", "Usuario generico");
+//            this.permissaoService.persist(permissao);
+//        }
 
     }
 }

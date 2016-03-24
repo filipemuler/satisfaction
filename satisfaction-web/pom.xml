@@ -60,6 +60,12 @@
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-config</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-orm</artifactId>
+			<version>4.1.9.RELEASE</version>
+		</dependency>
+
 
 		<dependency>
 			<groupId>postgresql</groupId>
@@ -111,11 +117,11 @@
 
 	<build>
 		<plugins>
-		    <plugin>
-	        	<groupId>com.heroku.sdk</groupId>
-	        	<artifactId>heroku-maven-plugin</artifactId>
-	        	<version>0.5.7</version>
-	      	</plugin>
+			<plugin>
+				<groupId>com.heroku.sdk</groupId>
+				<artifactId>heroku-maven-plugin</artifactId>
+				<version>0.5.7</version>
+			</plugin>
 		</plugins>
 	</build>
 
