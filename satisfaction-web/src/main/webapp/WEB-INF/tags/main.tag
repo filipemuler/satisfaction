@@ -8,11 +8,13 @@
 	<!-- CSS -->
 	<link rel="stylesheet" href="${app}/bootstrap/css/bootstrap.css" type="text/css" />
 	<link rel="stylesheet" href="${app}/bootstrap/css/bootstrap-theme.css" type="text/css" />
+	<link rel="stylesheet" href="${app}/lou-multi-select/css/multi-select.css" type="text/css"/>
 
 	<!-- JAVASCRIPTS -->
 	<script type="text/javascript" src="${app}/jquery/jquery-1.11.3.min.js"><!-- nada --></script>
 	<script type="text/javascript" src="${app}/jquery/jquery-1.11.3.min.map"><!-- nada --></script>
 	<script type="text/javascript" src="${app}/bootstrap/js/bootstrap.js"><!-- nada --></script>
+	<script type="text/javascript" src="${app}/lou-multi-select/js/jquery.multi-select.js"><!-- nada --></script>
 
 
 		<style>

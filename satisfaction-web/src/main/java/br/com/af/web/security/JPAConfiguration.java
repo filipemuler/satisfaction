@@ -1,26 +1,34 @@
 package br.com.af.web.security;
 
-import javax.naming.Context;
-import javax.naming.InitialContext;
-import javax.naming.NamingException;
 import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
-import javax.persistence.PersistenceUnit;
 
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.orm.jpa.JpaTransactionManager;
+import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
+import org.springframework.transaction.PlatformTransactionManager;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+@Configuration
+@ComponentScan("br.com.af.web.security.*")
+@EnableTransactionManagement
 public class JPAConfiguration {
 
-//	@PersistenceUnit(unitName = "default")
-//	private EntityManagerFactory entityManagerFactory;
-	
 	@Bean
-	public EntityManagerFactory emf() throws NamingException {
-//		Context ctx = new InitialContext();
-//		EntityManagerFactory lookup = (EntityManagerFactory) ctx.lookup("java:comp/env");
-//		return lookup;
-		EntityManagerFactory emf = Persistence.createEntityManagerFactory("default");
-		return emf;
+	public LocalContainerEntityManagerFactoryBean emf() {
+		LocalContainerEntityManagerFactoryBean managerFactoryBean = new LocalContainerEntityManagerFactoryBean();
+		managerFactoryBean.setPersistenceUnitName("default");
+		return managerFactoryBean;
 	}
+
+	@Bean
+	public PlatformTransactionManager transactionManager(EntityManagerFactory emf){
+		JpaTransactionManager transactionManager = new JpaTransactionManager();
+		transactionManager.setEntityManagerFactory(emf);
+
+		return transactionManager;
+	}
+
 
 }

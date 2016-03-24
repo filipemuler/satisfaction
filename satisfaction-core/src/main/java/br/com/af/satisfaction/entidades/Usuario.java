@@ -24,7 +24,7 @@ public class Usuario {
 	private boolean admin;
 	private Filial filial;
 	private Funcionario funcionario;
-	private List<Permissao> permissao;
+	private List<Permissao> permissoes;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -91,11 +91,11 @@ public class Usuario {
 	@OneToMany
 	@JoinTable(name = "USUARIO_PERMISSAO", joinColumns = @JoinColumn(name = "USUARIO_ID"),
 			inverseJoinColumns = @JoinColumn(name = "PERMISSAO_ID"))
-	public List<Permissao> getPermissao() {
-		return permissao;
+	public List<Permissao> getPermissoes() {
+		return permissoes;
 	}
 
-	public void setPermissao(List<Permissao> permissao) {
-		this.permissao = permissao;
+	public void setPermissoes(List<Permissao> permissao) {
+		this.permissoes = permissao;
 	}
 }

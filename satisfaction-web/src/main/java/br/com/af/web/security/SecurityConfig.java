@@ -14,8 +14,6 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-@Configuration
-@ComponentScan("br.com.af.web.security.*")
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
