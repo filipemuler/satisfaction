@@ -3,8 +3,6 @@ package br.com.af.web.security;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
@@ -36,9 +34,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
 
 		auth
-			.userDetailsService(userDetailsService).and()
 			.inMemoryAuthentication()
-				.withUser("asd").password("asd").roles("USER");
+				.withUser("asd").password("asd").roles("USER").and()
+			.and()
+			.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
 
 		// .and().and()
 		// .jdbcAuthentication()

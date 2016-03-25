@@ -9,7 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -88,9 +88,10 @@ public class Usuario {
 		this.funcionario = funcionario;
 	}
 
-	@OneToMany
-	@JoinTable(name = "USUARIO_PERMISSAO", joinColumns = @JoinColumn(name = "USUARIO_ID"),
-			inverseJoinColumns = @JoinColumn(name = "PERMISSAO_ID"))
+	@ManyToMany
+	@JoinTable(name = "USUARIO_PERMISSAO", 
+		joinColumns = @JoinColumn(name = "USUARIO_ID") , 
+		inverseJoinColumns = @JoinColumn(name = "PERMISSAO_ID"))
 	public List<Permissao> getPermissoes() {
 		return permissoes;
 	}

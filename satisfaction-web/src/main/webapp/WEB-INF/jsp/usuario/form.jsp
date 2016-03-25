@@ -26,13 +26,12 @@
             </div>
         </div>
 
-        <div>
-            <select multiple="multiple" id="my-select" name="my-select[]">
-                <option value='elem_1'>elem 1</option>
-                <option value='elem_2'>elem 2</option>
-                <option value='elem_3'>elem 3</option>
-                <option value='elem_4'>elem 4</option>
-                <option value='elem_100'>elem 100</option>
+        <div class="form-group">
+        <label for="permissao">Permissões</label>
+            <select name="usuario.permissoes[].id" class="form-control"  multiple="multiple" id="my-select" >
+                <c:forEach var="permissao" items="${permissoes}">
+                	<option value="${permissao.id}">${permissao.rotina}</option>
+                </c:forEach>
             </select>
         </div>
 
