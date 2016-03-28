@@ -9,6 +9,7 @@
 	<link rel="stylesheet" href="${app}/bootstrap/css/bootstrap.css" type="text/css" />
 	<link rel="stylesheet" href="${app}/bootstrap/css/bootstrap-theme.css" type="text/css" />
 	<link rel="stylesheet" href="${app}/lou-multi-select/css/multi-select.css" type="text/css"/>
+	<link rel="stylesheet" href="${app}/css/mbr.css" type="text/css"/>
 
 	<!-- JAVASCRIPTS -->
 	<script type="text/javascript" src="${app}/jquery/jquery-1.11.3.min.js"><!-- nada --></script>
@@ -29,7 +30,10 @@
 						<li><a class="nav-item nav-link" href="#">Dashboard</a></li>
 						<li><a class="nav-item nav-link" href="#">Settings</a></li>
 						<li><a class="nav-item nav-link" href="#">Profile</a></li>
-						<li><a class="nav-item nav-link" href="#">Help</a></li>
+						<li>
+							<span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>
+							<a class="nav-item nav-link" href="${app}/logout">Logout</a>
+						</li>
 					</ul>
 				</div>
 			</div>
@@ -41,11 +45,6 @@
 					<ul class="nav nav-pills nav-stacked">
 						<li class="active"><a href="${app}/">Dashboard</a></li>
 						<li><a href="${app}/movimentacao/form">Movimentações</a></li>
-						<li><a href="#">Menu 1</a></li>
-						<li><a href="#">Menu 3</a></li>
-						<li><a href="#">Menu 4</a></li>
-						<li><a href="#">Menu 5</a></li>
-						<li><a href="#">Menu 6</a></li>
 						<p>Cadastros</p>
 						<li><a href="${app}/conta/form">Contas</a></li>
                         <li><a href="${app}/filial/list">Filial</a></li>

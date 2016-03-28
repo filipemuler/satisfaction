@@ -6,30 +6,31 @@
 		contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" />
 
         <div class="modal-body" style="width: 500px; margin: 0 auto;">
+        	<input type="hidden" name="funcionario.id" value="${funcionario.id}"/>
             <div class="form-group">
                 <label for="nome">Nome</label>
-                <input type="text" class="form-control" name="funcionario.nome" />
+                <input type="text" class="form-control" name="funcionario.nome" value="${funcionario.nome}"/>
             </div>
             <div class="form-group">
                 <label for="cpf">CPF</label>
-                <input type="text" class="form-control" name="funcionario.cpf" />
+                <input type="text" class="form-control" name="funcionario.cpf" value="${funcionario.cpf}"/>
             </div>
             <div class="form-group">
                 <label for="data">Data de Nascimento</label>
-                <input type="date" class="form-control" name="funcionario.dataNascimento" />
+                <input type="date" class="form-control" name="funcionario.dataNascimento" value="${funcionario.dataNascimento}"/>
             </div>
             <div class="form-group">
                 <label for="data">Data de Admissão</label>
-                <input type="date" class="form-control" name="funcionario.dataAdmissao" />
+                <input type="date" class="form-control" name="funcionario.dataAdmissao" ${funcionario.dataAdmissao}/>
             </div>
             <div class="form-group">
                 <div class="checkbox">
-                    <label><input type="checkbox" name="funcionario.socio" /> Sócio  </label>
+                    <label><input type="checkbox" name="funcionario.socio" value="${funcionario.socio}"/> Sócio  </label>
                 </div>
             </div>
             <div class="form-group">
                 <div class="checkbox">
-                    <label><input type="checkbox" name="funcionario.gestorFilial" /> Gestor Filial  </label>
+                    <label><input type="checkbox" name="funcionario.gestorFilial" value="${funcionario.gestorFilial}"/> Gestor Filial  </label>
                 </div>
             </div>
         </div>

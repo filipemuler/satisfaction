@@ -25,33 +25,33 @@ import br.com.af.satisfaction.entidades.Usuario;
 @Transactional
 public class MyUserDetailsService implements UserDetailsService {
 
-    @PersistenceContext
-    private EntityManager em;
+	@PersistenceContext
+	private EntityManager em;
 
-    @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Usuario user = (Usuario) em.createQuery("select u from Usuario u where u.email = :email").setParameter("email", username).getSingleResult();
-        List<GrantedAuthority> authorities = buildUserAuthority(user.getPermissoes());
-        return this.buildUserForAuthentication(user, authorities);
-    }
+	@Override
+	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+		Usuario user = (Usuario) em.createQuery("select u from Usuario u where u.email = :email")
+				.setParameter("email", username).getSingleResult();
+		List<GrantedAuthority> authorities = buildUserAuthority(user.getPermissoes());
+		return this.buildUserForAuthentication(user, authorities);
+	}
 
-    private User buildUserForAuthentication(Usuario user, List<GrantedAuthority> authorities) {
-        return new User(user.getEmail(), user.getSenha(), true, true, true, true, authorities);
-    }
+	private User buildUserForAuthentication(Usuario user, List<GrantedAuthority> authorities) {
+		return new User(user.getEmail(), user.getSenha(), true, true, true, true, authorities);
+	}
 
-    private List<GrantedAuthority> buildUserAuthority(List<Permissao> userRoles) {
+	private List<GrantedAuthority> buildUserAuthority(List<Permissao> userRoles) {
 
-        List<GrantedAuthority> setAuths = new ArrayList<GrantedAuthority>();
+		List<GrantedAuthority> setAuths = new ArrayList<GrantedAuthority>();
 
-        // Build user's authorities
-        for (Permissao userRole : userRoles) {
-            setAuths.add(new SimpleGrantedAuthority(userRole.getRotina()));
-        }
+		// Build user's authorities
+		for (Permissao userRole : userRoles) {
+			setAuths.add(new SimpleGrantedAuthority(userRole.getRotina()));
+		}
 
-        List<GrantedAuthority> Result = new ArrayList<GrantedAuthority>(setAuths);
+		List<GrantedAuthority> Result = new ArrayList<GrantedAuthority>(setAuths);
 
-        return Result;
-    }
-    
-    
+		return Result;
+	}
+
 }

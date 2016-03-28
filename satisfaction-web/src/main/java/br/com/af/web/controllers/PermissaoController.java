@@ -4,6 +4,7 @@ import javax.inject.Inject;
 
 import br.com.af.satisfaction.config.GenericDao;
 import br.com.af.satisfaction.config.Paginator;
+import br.com.af.satisfaction.entidades.Funcionario;
 import br.com.af.satisfaction.entidades.Permissao;
 import br.com.af.satisfaction.entidades.Usuario;
 import br.com.caelum.vraptor.Controller;
@@ -38,8 +39,25 @@ public class PermissaoController {
 		this.result.include("paginator", paginator);
 	}
 	
+	@Path("/permissao/edita/{permissao.id}")
+	public void edita(Permissao permissao){
+		Permissao permissaoRecuperada = this.permissaoService.findById(permissao.getId(), Permissao.class);
+		this.result.include("permissao", permissaoRecuperada).forwardTo(this).form();
+	}
+	
+	@Path("/permissao/exclui/{permissao.id}")
+	public void exclui(Permissao permissao){
+		Permissao permissaoRecuperada = this.permissaoService.findById(permissao.getId(), Permissao.class);
+		this.permissaoService.remove(permissaoRecuperada);
+		this.result.forwardTo(this).list(null);
+	}
+	
 	public void salva(Permissao permissao) {
-		this.permissaoService.persist(permissao);
+		if(permissao.getId() != null){
+			this.permissaoService.merge(permissao);
+		}else{
+			this.permissaoService.persist(permissao);
+		}
 
 		this.result.forwardTo(this).list(null);
 	}

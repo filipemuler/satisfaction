@@ -5,17 +5,6 @@
 	<jsp:directive.page language="java"
 		contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" />
 
-    <style>
-        .centered {
-          position: relative;
-          top: 50%;
-          left: 50%;
-          /* bring your own prefixes */
-          transform: translate(-50%, -50%);
-        }
-    </style>
-
-
 	<h:main>
 
 		<div class="panel panel-default">
@@ -27,12 +16,27 @@
                 	<thead>
                 		<tr>
                 			<th>E-mail</th>
+                			<th></th>
+                			<th></th>
                 		</tr>
                 	</thead>
                 	<tbody>
                 	    <c:forEach var="usuario" items="${paginator.list}">
                             <tr>
                                 <td>${usuario.email}</td>
+                                <td style="width: 30px">
+                                	<button type="button" class="btn btn-default btn-xs"
+                                		data-toggle="modal" data-target="#myModal" 
+                                		data-whatever="usuario/edita/${usuario.id}">
+										<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+									</button>
+                                </td>
+                                <td style="width: 30px">
+                                	<button type="button" class="btn btn-default btn-xs" 
+                                		onClick="confirm('Deseja excluir?') ? location.href='${app}/usuario/exclui/${usuario.id}' : ''">
+										<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+									</button>
+                                </td>
                             </tr>
                 		</c:forEach>
                 	</tbody>
@@ -46,11 +50,11 @@
                 </ul>
             </div>
             <div class="panel-footer">
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Criar</button>
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" data-whatever="usuario/form">Criar</button>
             </div>
 		</div>
 
-        <h:modal action="${linkTo[UsuarioController].salva}"/>
+        <h:modal action="${linkTo[UsuarioController].salva}" label="Cadastro de Usuário"/>
 
 	</h:main>
 

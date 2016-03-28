@@ -5,6 +5,7 @@
 	<jsp:output doctype-root-element="HTML" doctype-system="about:legacy-compat" />
 
     <jsp:directive.attribute name="action" required="true" type="java.lang.String"/>
+    <jsp:directive.attribute name="label" required="true" type="java.lang.String"/>
 
     <!-- Modal -->
     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -14,20 +15,30 @@
                 <form action="${action}" method="post">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"></span></button>
-                        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+                        <h4 class="modal-title" id="myModalLabel">${label}</h4>
                     </div>
                     <div class="modal-body">
-
-                        <jsp:include page="./form.jsp"/>
-
+						<!-- form -->
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Save changes</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+                        <button type="submit" class="btn btn-primary">Salvar</button>
                     </div>
                 </form>
 
             </div>
         </div>
     </div>
+    
+	<script>
+		$('#myModal').on('show.bs.modal', function (e) {
+			var button = $(e.relatedTarget)
+			var recipient = button.data('whatever')
+			$.ajax({
+				url: "${app}/" + recipient
+				}).done(function(data) {
+					$('div.modal-body').html(data);
+				});
+			})
+	</script>
 </jsp:root>

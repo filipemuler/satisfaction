@@ -5,17 +5,6 @@
 	<jsp:directive.page language="java"
 		contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" />
 
-    <style>
-        .centered {
-          position: relative;
-          top: 50%;
-          left: 50%;
-          /* bring your own prefixes */
-          transform: translate(-50%, -50%);
-        }
-    </style>
-
-
 	<h:main>
 
 		<div class="panel panel-default">
@@ -28,6 +17,8 @@
                 		<tr>
                 			<th>Rotina</th>
                 			<th>Tipo</th>
+                			<th></th>
+                			<th></th>
                 		</tr>
                 	</thead>
                 	<tbody>
@@ -35,6 +26,19 @@
                             <tr>
                                 <td>${permissao.rotina}</td>
                                 <td>${permissao.tipo}</td>
+                                <td style="width: 30px">
+                                	<button type="button" class="btn btn-default btn-xs"
+                                		data-toggle="modal" data-target="#myModal" 
+                                		data-whatever="permissao/edita/${permissao.id}">
+										<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+									</button>
+                                </td>
+                                <td style="width: 30px">
+                                	<button type="button" class="btn btn-default btn-xs" 
+                                		onClick="confirm('Deseja excluir?') ? location.href='${app}/permissao/exclui/${permissao.id}' : ''">
+										<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+									</button>
+                                </td>
                             </tr>
                 		</c:forEach>
                 	</tbody>
@@ -48,11 +52,11 @@
                 </ul>
             </div>
             <div class="panel-footer">
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Criar</button>
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" data-whatever="permissao/form">Criar</button>
             </div>
 		</div>
 
-        <h:modal action="${linkTo[PermissaoController].salva}"/>
+        <h:modal action="${linkTo[PermissaoController].salva}" label="Cadastro de Permissão"/>
 
 	</h:main>
 

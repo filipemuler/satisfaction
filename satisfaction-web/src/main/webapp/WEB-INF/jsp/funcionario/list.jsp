@@ -5,17 +5,6 @@
 	<jsp:directive.page language="java"
 		contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" />
 
-    <style>
-        .centered {
-          position: relative;
-          top: 50%;
-          left: 50%;
-          /* bring your own prefixes */
-          transform: translate(-50%, -50%);
-        }
-    </style>
-
-
 	<h:main>
 
 		<div class="panel panel-default">
@@ -29,6 +18,8 @@
                 			<th>Nome</th>
                 			<th>CPF</th>
                 			<th>Data Nascimento</th>
+                			<th></th>
+                			<th></th>
                 		</tr>
                 	</thead>
                 	<tbody>
@@ -37,6 +28,19 @@
                                 <td>${funcionario.nome}</td>
                                 <td>${funcionario.cpf}</td>
                                 <td>${funcionario.dataNascimento}</td>
+                                <td style="width: 30px">
+                                	<button type="button" class="btn btn-default btn-xs"
+                                		data-toggle="modal" data-target="#myModal" 
+                                		data-whatever="funcionario/edita/${funcionario.id}">
+										<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+									</button>
+                                </td>
+                                <td style="width: 30px">
+                                	<button type="button" class="btn btn-default btn-xs" 
+                                		onClick="confirm('Deseja excluir?') ? location.href='${app}/funcionario/exclui/${funcionario.id}' : ''">
+										<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+									</button>
+                                </td>
                             </tr>
                 		</c:forEach>
                 	</tbody>
@@ -50,11 +54,11 @@
                 </ul>
             </div>
             <div class="panel-footer">
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Criar</button>
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" data-whatever="funcionario/form">Criar</button>
             </div>
 		</div>
 
-        <h:modal action="${linkTo[FuncionarioController].salva}"/>
+        <h:modal action="${linkTo[FuncionarioController].salva}" label="Cadastro de Funcionário"/>
 
 	</h:main>
 

@@ -2,6 +2,7 @@ package br.com.af.web.controllers;
 
 import br.com.af.satisfaction.config.GenericDao;
 import br.com.af.satisfaction.config.Paginator;
+import br.com.af.satisfaction.entidades.Filial;
 import br.com.af.satisfaction.entidades.Funcionario;
 import br.com.caelum.vraptor.Controller;
 import br.com.caelum.vraptor.Path;
@@ -36,9 +37,26 @@ public class FuncionarioController {
 		Paginator<Funcionario> paginator = this.funcionarioService.findPaginator(Funcionario.class, toInt(page));
 		this.result.include("paginator", paginator);
 	}
+	
+	@Path("/funcionario/edita/{funcionario.id}")
+	public void edita(Funcionario funcionario){
+		Funcionario funcionarioRecuperado = this.funcionarioService.findById(funcionario.getId(), Funcionario.class);
+		this.result.include("funcionario", funcionarioRecuperado).forwardTo(this).form();
+	}
+	
+	@Path("/funcionario/exclui/{funcionario.id}")
+	public void exclui(Funcionario funcionario){
+		Funcionario funcionarioRecuperado = this.funcionarioService.findById(funcionario.getId(), Funcionario.class);
+		this.funcionarioService.remove(funcionarioRecuperado);
+		this.result.forwardTo(this).list(null);
+	}
 
 	public void salva(Funcionario funcionario) {
-		this.funcionarioService.persist(funcionario);
+		if(funcionario.getId()!=null){
+			this.funcionarioService.merge(funcionario);
+		}else{
+			this.funcionarioService.persist(funcionario);	
+		}
 		
 		this.result.redirectTo(this).list(null);
 	}
