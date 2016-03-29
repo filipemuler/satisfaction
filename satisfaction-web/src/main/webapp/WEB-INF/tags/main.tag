@@ -9,7 +9,7 @@
 	<link rel="stylesheet" href="${app}/bootstrap/css/bootstrap.css" type="text/css" />
 	<link rel="stylesheet" href="${app}/bootstrap/css/bootstrap-theme.css" type="text/css" />
 	<link rel="stylesheet" href="${app}/lou-multi-select/css/multi-select.css" type="text/css"/>
-	<link rel="stylesheet" href="${app}/css/mbr.css" type="text/css"/>
+	<link rel="stylesheet" href="${app}/mbr/mbr.css" type="text/css"/>
 
 	<!-- JAVASCRIPTS -->
 	<script type="text/javascript" src="${app}/jquery/jquery-1.11.3.min.js"><!-- nada --></script>
@@ -94,6 +94,7 @@
 					</div>
 					<div class="row">
 						<div class="col-md-8">
+						    <input type="hidden" value="${app}" id="applicationContext"/>
 						    <jsp:doBody />
 						</div>
 						<div class="col-md-4">

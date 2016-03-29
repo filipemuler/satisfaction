@@ -8,13 +8,19 @@
 
 	<div class="modal-body" style="width: 500px; margin: 0 auto;">
 		<input type="hidden" name="usuario.id" value="${usuario.id}"/>
+		<!-- Esses campos são para o browser não autocompletar com algum usuario/senha -->
+		<input type="text" style="display:none" name="emailfake" />
+		<input type="password" style="display:none" name="senhafake" />
+
         <div class="form-group">
             <label for="email">Email</label>
-            <input type="text" class="form-control" name="usuario.email" value="${usuario.email}"/>
+            <input type="text" class="form-control" name="usuario.email" value="${usuario.email}"
+                autocomplete="off"/>
         </div>
         <div class="form-group">
             <label for="password">Senha</label>
-            <input type="password" class="form-control" name="usuario.senha" value="${usuario.senha}"/>
+            <input type="password" class="form-control" name="usuario.senha" value="${usuario.senha}"
+                autocomplete="off"/>
         </div>
         <div class="form-group">
             <label for="data">Data de Cadastro</label>
@@ -35,13 +41,6 @@
                 </c:forEach>
             </select>
         </div>
-
     </div>
-
-    <script>
-    $('#my-select').multiSelect();
-    </script>
-
-
 
 </jsp:root>

@@ -29,16 +29,7 @@
             </div>
         </div>
     </div>
-    
-	<script>
-		$('#myModal').on('show.bs.modal', function (e) {
-			var button = $(e.relatedTarget)
-			var recipient = button.data('whatever')
-			$.ajax({
-				url: "${app}/" + recipient
-				}).done(function(data) {
-					$('div.modal-body').html(data);
-				});
-			})
-	</script>
+
+    <script type="text/javascript" src="${app}/mbr/mbr.js"><!-- nada --></script>
+
 </jsp:root>
