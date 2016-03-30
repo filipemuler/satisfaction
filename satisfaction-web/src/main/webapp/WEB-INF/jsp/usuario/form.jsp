@@ -19,8 +19,7 @@
         </div>
         <div class="form-group">
             <label for="password">Senha</label>
-            <input type="password" class="form-control" name="usuario.senha" value="${usuario.senha}"
-                autocomplete="off"/>
+            <input type="password" class="form-control" name="usuario.senha" autocomplete="off"/>
         </div>
         <div class="form-group">
             <label for="data">Data de Cadastro</label>
@@ -34,12 +33,14 @@
         </div>
 
         <div class="form-group">
-        <label for="permissao">Permissões</label>
-            <select name="usuario.permissoes[].id" class="form-control"  multiple="multiple" id="my-select" >
-                <c:forEach var="permissao" items="${permissoes}">
-                	<option value="${permissao.id}">${permissao.rotina}</option>
-                </c:forEach>
-            </select>
+            <label for="permissao">Permissões</label>
+            <div>
+                <select name="usuario.permissoes[].id" class="form-control"  multiple="multiple" id="my-select" >
+                    <c:forEach var="permissao" items="${permissoes}">
+                        <option value="${permissao.id}">${permissao.rotina}</option>
+                    </c:forEach>
+                </select>
+            </div>
         </div>
     </div>
 

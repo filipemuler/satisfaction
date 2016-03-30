@@ -22,13 +22,14 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
-                        <button type="submit" class="btn btn-primary">Salvar</button>
+                        <button type="button" class="btn btn-primary" id="botaoModal">Salvar</button>
                     </div>
                 </form>
 
             </div>
         </div>
     </div>
+
 
     <script type="text/javascript" src="${app}/mbr/mbr.js"><!-- nada --></script>
 

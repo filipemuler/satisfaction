@@ -10,12 +10,14 @@
 	<link rel="stylesheet" href="${app}/bootstrap/css/bootstrap-theme.css" type="text/css" />
 	<link rel="stylesheet" href="${app}/lou-multi-select/css/multi-select.css" type="text/css"/>
 	<link rel="stylesheet" href="${app}/mbr/mbr.css" type="text/css"/>
+	<link rel="stylesheet" href="${app}/select2-4.0.2/dist/css/select2.min.css" type="text/css"/>
 
 	<!-- JAVASCRIPTS -->
 	<script type="text/javascript" src="${app}/jquery/jquery-1.11.3.min.js"><!-- nada --></script>
 	<script type="text/javascript" src="${app}/jquery/jquery-1.11.3.min.map"><!-- nada --></script>
 	<script type="text/javascript" src="${app}/bootstrap/js/bootstrap.js"><!-- nada --></script>
 	<script type="text/javascript" src="${app}/lou-multi-select/js/jquery.multi-select.js"><!-- nada --></script>
+	<script type="text/javascript" src="${app}/select2-4.0.2/dist/js/select2.min.js"><!-- nada --></script>
 
 
 		<style>
@@ -30,10 +32,7 @@
 						<li><a class="nav-item nav-link" href="#">Dashboard</a></li>
 						<li><a class="nav-item nav-link" href="#">Settings</a></li>
 						<li><a class="nav-item nav-link" href="#">Profile</a></li>
-						<li>
-							<span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>
-							<a class="nav-item nav-link" href="${app}/logout">Logout</a>
-						</li>
+						<li><a class="nav-item nav-link" href="${app}/logout">Logout</a></li>
 					</ul>
 				</div>
 			</div>
@@ -42,46 +41,15 @@
 		<div class="container-fluid">
 			<div class="row">
 				<div class="col-md-2">
-					<ul class="nav nav-pills nav-stacked">
-						<li class="active"><a href="${app}/">Dashboard</a></li>
-						<li><a href="${app}/movimentacao/form">Movimentações</a></li>
+					<ul class="nav nav-pills nav-stacked" id="myTabs">
+						<li class="active"><a href="#dashboard" data-whatever="${app}/dashboard/form" data-toggle="pill">Dashboard</a></li>
+						<li><a href="#movimentacao" data-whatever="${app}/movimentacao/form" data-toggle="pill" >Movimentações</a></li>
 						<p>Cadastros</p>
-						<li><a href="${app}/conta/form">Contas</a></li>
-                        <li><a href="${app}/filial/list">Filial</a></li>
-                        <li><a href="${app}/funcionario/list">Funcionario</a></li>
-                        <li><a href="${app}/usuario/list">Usuario</a></li>
-                        <li><a href="${app}/permissao/list">Permissão</a></li>
-						<!--
-						<li role="presentation" class="dropdown">
-						    <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-						        Cadastros <span class="caret"/>
-						    </a>
-						    <ul class="dropdown-menu">
-						        <li><a href="${app}/conta/form">Contas</a></li>
-                            	<li><a href="${app}/filial/list">Filial</a></li>
-                            	<li><a href="${app}/funcionario/list">Funcionario</a></li>
-                            	<li><a href="${app}/usuario/list">Usuario</a></li>
-                            	<li><a href="${app}/permissao/list">Permissão</a></li>
-						    </ul>
-						</li>
-						<li role="button" >
-                            <a data-toggle="collapse" href="#cadastros" role="button" aria-expanded="false" aria-controls="cadastros">
-                                Cadastros
-                            </a>
-                        </li>
-                        <div class="collapse" id="cadastros">
-                            <ul class="nav nav-pills nav-stacked">
-                                <li><a href="${app}/conta/form">Contas</a></li>
-                                <li><a href="${app}/filial/list">Filial</a></li>
-                                <li><a href="${app}/funcionario/list">Funcionario</a></li>
-                                <li><a href="${app}/usuario/list">Usuario</a></li>
-                                <li><a href="${app}/permissao/list">Permissão</a></li>
-                            </ul>
-                        </div>
-						-->
-
-
-
+						<li><a href="#conta" data-whatever="${app}/conta/form" data-toggle="pill">Contas</a></li>
+                        <li><a href="#filial" data-whatever="${app}/filial/list" data-toggle="pill">Filial</a></li>
+                        <li><a href="#funcionario" data-whatever="${app}/funcionario/list" data-toggle="pill">Funcionario</a></li>
+                        <li><a href="#usuario" data-whatever="${app}/usuario/list" data-toggle="pill">Usuario</a></li>
+                        <li><a href="#permissao" data-whatever="${app}/permissao/list" data-toggle="pill">Permissão</a></li>
 					</ul>
 				</div>
 				<div class="col-md-10">
@@ -95,7 +63,17 @@
 					<div class="row">
 						<div class="col-md-8">
 						    <input type="hidden" value="${app}" id="applicationContext"/>
-						    <jsp:doBody />
+						    <!-- <jsp:doBody /> -->
+                            <!-- Tab panes -->
+                            <div class="tab-content">
+                                <div role="tabpanel" class="tab-pane active" id="dashboard"><!-- dashboard --></div>
+                                <div role="tabpanel" class="tab-pane" id="movimentacao"><!-- movimentacao --></div>
+                                <div role="tabpanel" class="tab-pane" id="conta"><!-- conta --></div>
+                                <div role="tabpanel" class="tab-pane" id="filial"><!-- filial --></div>
+                                <div role="tabpanel" class="tab-pane" id="funcionario"><!-- funcionario --></div>
+                                <div role="tabpanel" class="tab-pane" id="usuario"><!-- usuario --></div>
+                                <div role="tabpanel" class="tab-pane" id="permissao"><!-- permissao --></div>
+                            </div>
 						</div>
 						<div class="col-md-4">
 							<div class="panel panel-default">
@@ -110,4 +88,5 @@
 			</div>
 		</div>
 
+        <script type="text/javascript" src="${app}/mbr/mbr.js"><!-- nada --></script>
 </jsp:root>
