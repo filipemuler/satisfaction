@@ -7,12 +7,14 @@
     <jsp:directive.attribute name="action" required="true" type="java.lang.String"/>
     <jsp:directive.attribute name="label" required="true" type="java.lang.String"/>
 
+
+
     <!-- Modal -->
     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
 
-                <form action="${action}" method="post">
+                <form action="${action}" method="post" id="modalForm">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"></span></button>
                         <h4 class="modal-title" id="myModalLabel">${label}</h4>
@@ -22,7 +24,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
-                        <button type="button" class="btn btn-primary" id="botaoModal">Salvar</button>
+                        <button type="button" class="btn btn-primary" id="botaoModal" data-whatever="${action}">Salvar</button>
                     </div>
                 </form>
 
@@ -30,7 +32,5 @@
         </div>
     </div>
 
-
-    <script type="text/javascript" src="${app}/mbr/mbr.js"><!-- nada --></script>
 
 </jsp:root>

@@ -18,8 +18,7 @@
 	<script type="text/javascript" src="${app}/bootstrap/js/bootstrap.js"><!-- nada --></script>
 	<script type="text/javascript" src="${app}/lou-multi-select/js/jquery.multi-select.js"><!-- nada --></script>
 	<script type="text/javascript" src="${app}/select2-4.0.2/dist/js/select2.min.js"><!-- nada --></script>
-
-
+	
 		<style>
 			body { padding-top: 70px; }
 			.conteudo {padding-top: 70px;}
@@ -87,6 +86,9 @@
 				</div>
 			</div>
 		</div>
+		
+		<script type="text/javascript" src="${app}/mbr/mbr.js"><!-- nada --></script>
+		<script type="text/javascript" src="${app}/mbr/modalCadastro.js"><!-- nada --></script>
 
-        <script type="text/javascript" src="${app}/mbr/mbr.js"><!-- nada --></script>
+
 </jsp:root>
