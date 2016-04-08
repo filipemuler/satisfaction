@@ -21,7 +21,9 @@
 	</context-param>
 
 	<welcome-file-list>
-		<welcome-file>home.jsp</welcome-file>
+		<welcome-file>index.html</welcome-file>
+		<!--
+		<welcome-file>home.jsp</welcome-file> -->
 	</welcome-file-list>
 
 </web-app>
