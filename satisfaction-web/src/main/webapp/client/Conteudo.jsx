@@ -14,7 +14,7 @@ class Conteudo extends Component {
         </div>
         <div class="row">
             <div className="col-md-8">
-                <ConteudoVariavel />
+                <ConteudoVariavel conteudo={this.props.conteudo}/>
             </div>
             <div className="col-md-4">
                 <div className="panel panel-default">
