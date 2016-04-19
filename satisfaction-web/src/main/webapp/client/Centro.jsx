@@ -1,7 +1,7 @@
 import React, {Component, PropTypes} from 'react'
 import Conteudo from './Conteudo'
 import LeftMenu from './LeftMenu'
-import $ from 'jquery'
+import request from 'superagent'
 
 class Centro extends Component {
 
@@ -18,10 +18,14 @@ class Centro extends Component {
       menu[tela] = 'active';
       this.setState(menu);
 
-      this.serverRequest = $.get('http://www.google.com', function (result) {
-        conteudo = result[0];
-      }.bind(this));
-
+      request
+        .get('http://localhost:8000/teste')
+        .set('Content-Type', 'application/json')
+        .set('Access-Control-Allow-Origin', '*')
+        .set('Access-Control-Allow-Credentials', 'true')
+        .end(function(err, res){
+          console.log(res)
+        });
     }
 
     render = () =>
@@ -39,7 +43,7 @@ class Centro extends Component {
 
 }
 
-var conteudo = {}
+var conteudo
 
 var menu = {
   dashboard : 'active'

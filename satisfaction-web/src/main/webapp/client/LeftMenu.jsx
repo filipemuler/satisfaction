@@ -1,5 +1,4 @@
 import React, {Component, PropTypes} from 'react'
-import $ from 'jquery'
 import LeftMenuEntry from './LeftMenuEntry'
 
 class LeftMenu extends Component {

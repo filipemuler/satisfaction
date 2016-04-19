@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 
-http-server
+nodemon server/index.js

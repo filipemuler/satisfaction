@@ -6,7 +6,7 @@ class ConteudoVariavel extends Component {
     render = () =>
     <div className="panel panel-default">
       <div className="panel-heading">Conteudo</div>
-      <div className="panel-body">{this.props.conteudo.toString()}
+      <div className="panel-body">{this.props.conteudo}
       </div>
     </div>
 }
