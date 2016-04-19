@@ -1,10 +1,10 @@
 import React, {Component, PropTypes} from 'react'
-import TopMenu from './TopMenu'
+import Tela from './Tela'
 
 class App extends Component {
 
     render = () =>
-        <TopMenu />
+        <Tela />
 }
 
 

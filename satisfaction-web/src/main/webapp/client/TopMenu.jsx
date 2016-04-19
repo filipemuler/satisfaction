@@ -1,5 +1,4 @@
 import React, {Component, PropTypes} from 'react'
-import Tela from './Tela'
 
 class TopMenu extends Component {
 
@@ -17,7 +16,6 @@ class TopMenu extends Component {
                     </div>
                 </div>
             </nav>
-            <Tela />
         </div>
 }
 
