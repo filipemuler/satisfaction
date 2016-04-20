@@ -1,7 +1,6 @@
 import bodyParser from 'body-parser'
 import express from 'express'
 import {index, pessoas} from './routes'
-import file from '../index.html'
 
 const app = express()
 
@@ -11,7 +10,7 @@ app.use(express.static(__dirname + '/public'))
 
 // Routes
 app.get('/', function (req, res) {
-   res.sendfile(file);
+   res.sendFile('/home/filipe/workspace/satisfaction/satisfaction-web/src/main/webapp/index.html');
 })
 
 app.use('/teste', index)

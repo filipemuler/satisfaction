@@ -16,16 +16,16 @@ class Centro extends Component {
       menu = {};
       var tela = event.target.href.split("#")[1];
       menu[tela] = 'active';
-      this.setState(menu);
+      var self = this;
 
+      var x;
       request
-        .get('http://localhost:8000/teste')
-        .set('Content-Type', 'application/json')
-        .set('Access-Control-Allow-Origin', '*')
-        .set('Access-Control-Allow-Credentials', 'true')
+        .get('/teste')
         .end(function(err, res){
-          console.log(res)
+          conteudo = res.text;
+          self.setState([menu, conteudo])
         });
+
     }
 
     render = () =>
