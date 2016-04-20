@@ -1,22 +1,20 @@
 import React, {Component, PropTypes} from 'react'
+import Navbar from 'react-bootstrap/lib/Navbar';
+import Nav from 'react-bootstrap/lib/Nav';
+import NavItem from 'react-bootstrap/lib/NavItem';
+import MenuItem from 'react-bootstrap/lib/MenuItem';
 
 class TopMenu extends Component {
 
     render = () =>
-        <div>
-            <nav className="navbar navbar-default navbar-fixed-top" role="navigation">
-                <div className="container-fluid">
-                    <div>
-                        <ul className="nav navbar-nav navbar-right">
-                            <li><a className="nav-item nav-link" href="#">Dashboard</a></li>
-                            <li><a className="nav-item nav-link" href="#">Settings</a></li>
-                            <li><a className="nav-item nav-link" href="#">Profile</a></li>
-                            <li><a className="nav-item nav-link" href="${app}/logout">Logout</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </nav>
-        </div>
+    <Navbar>
+      <Nav pullRight>
+        <NavItem eventKey={1} href="#">Dashboard</NavItem>
+        <NavItem eventKey={2} href="#">Settings</NavItem>
+        <NavItem eventKey={3} href="#">Profile</NavItem>
+        <NavItem eventKey={4} href="${app}/logout">Logout</NavItem>
+      </Nav>
+    </Navbar>
 }
 
 export default TopMenu
