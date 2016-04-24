@@ -7,7 +7,7 @@ import MenuItem from 'react-bootstrap/lib/MenuItem';
 class TopMenu extends Component {
 
     render = () =>
-    <Navbar>
+    <Navbar fluid>
       <Nav pullRight>
         <NavItem eventKey={1} href="#">Dashboard</NavItem>
         <NavItem eventKey={2} href="#">Settings</NavItem>

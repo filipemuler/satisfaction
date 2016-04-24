@@ -5,42 +5,26 @@ import Col from 'react-bootstrap/lib/Col'
 import Tab from 'react-bootstrap/lib/Tab'
 import Nav from 'react-bootstrap/lib/Nav'
 import NavItem from 'react-bootstrap/lib/NavItem'
-import Conteudo from './Conteudo'
-import LeftMenu from './LeftMenu'
+import Cadastro from './Cadastro'
+import Movimentacao from './Movimentacao'
 import request from 'superagent'
 
 class Centro extends Component {
 
     constructor(props){
       super(props)
-      this.handleClick = this.handleClick.bind(this)
       this.handleSelect = this.handleSelect.bind(this)
     }
 
-    handleClick(event){
-      // event.defaultPrevented
-      // console.log(event.target)
-      // menu = {};
-      // var tela = event.target.href.split("#")[1];
-      // menu[tela] = 'active';
-      // var self = this;
-
-      request
-        .get('/' + tela)
-        .end(function(err, res){
-          conteudo = res.text;
-          self.setState([menu, conteudo])
-        });
-
+    componentWillMount(){
+      this.setState({x : 'dashboard'})
     }
 
-    handleSelect(selectedKey){
-      request
-        .get('/' + selectedKey)
-        .end(function(err, res){
-          console.log(selectedKey)
-        });
+    handleSelect(selectedKey, event){
+      // console.log(selectedKey)
+      this.setState({x : selectedKey})
     }
+
 
     render = () =>
       <Tab.Container id="left-tabs-example" defaultActiveKey="dashboard" onSelect={this.handleSelect}>
@@ -58,53 +42,33 @@ class Centro extends Component {
             </Nav>
           </Col>
           <Col sm={10}>
-            <Tab.Content animation>
+            <Tab.Content>
               <Tab.Pane eventKey="dashboard">
+                <Cadastro header="Dashboard" url="dashboard" t={this.state.x}/>
               </Tab.Pane>
               <Tab.Pane eventKey="movimentacao">
+                <Movimentacao header="Movimentação" url="movimentacao" t={this.state.x}/>
               </Tab.Pane>
               <Tab.Pane eventKey="contas">
-                contas
+                <Cadastro header="Contas" url="contas" t={this.state.x}/>
               </Tab.Pane>
               <Tab.Pane eventKey="filial">
-                filial
+                <Cadastro header="Filial" url="filial" t={this.state.x}/>
               </Tab.Pane>
               <Tab.Pane eventKey="funcionario">
-                funcionario
+                <Cadastro header="Funcionario" url="funcionario" t={this.state.x}/>
               </Tab.Pane>
               <Tab.Pane eventKey="usuario">
-                usuario
+                <Cadastro header="Usuario" url="usuario" t={this.state.x}/>
               </Tab.Pane>
               <Tab.Pane eventKey="permissao">
-                permissao
+                <Cadastro header="Permissão" url="permissao" t={this.state.x}/>
               </Tab.Pane>
             </Tab.Content>
           </Col>
         </Row>
       </Tab.Container>
-		// <div className="container-fluid">
-		// 	<div className="row">
-		// 		<div className="col-md-2">
-    //         <LeftMenu onClick={this.handleClick} status={menu}/>
-		// 		</div>
-		// 		<div className="col-md-10">
-		// 		    <Conteudo conteudo={conteudo}/>
-		// 		</div>
-		// 	</div>
-		// </div>
 
-}
-
-var conteudo
-
-var menu = {
-  dashboard : 'active'
-}
-
-const s = {
-    root: {
-        "width" : "70px"
-    }
 }
 
 export default Centro

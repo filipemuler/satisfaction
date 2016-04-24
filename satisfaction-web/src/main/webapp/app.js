@@ -16,7 +16,7 @@ app.get('/dashboard', function(req, res) {
 });
 
 app.get('/movimentacao', function(req, res) {
-    res.send("Movimentacao");
+    res.send("");
 });
 
 app.get('/contas', function(req, res) {
@@ -32,7 +32,7 @@ app.get('/funcionario', function(req, res) {
 });
 
 app.get('/usuario', function(req, res) {
-    res.send("Usuario");
+    res.send({results : [{'id':'1001', 'usuario': 'filipe'}, {'id':'1002', 'usuario': 'andre'}]});
 });
 
 app.get('/permissao', function(req, res) {
