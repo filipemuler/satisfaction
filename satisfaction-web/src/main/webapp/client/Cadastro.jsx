@@ -17,24 +17,19 @@ class Cadastro extends Component {
     }
 
     componentDidMount(){
-      console.log(this.props.t)
-    }
-
-    shouldComponentUpdate(nextProps, nextState){
-      return nextProps.t == this.props.t
     }
 
     componentWillReceiveProps(nextProps, nextState){
-      if(nextProps.t == this.props.t){
-        console.log('componentWillReceiveProps: '+this.props.t)
-        var self = this
-        request
-          .get('/' + this.props.url)
-          .end(function(err, res){
-            console.log(res.body)
-            self.setState(res.body)
-          });
-      }
+      // if(nextProps.t == this.props.t){
+      //   console.log('componentWillReceiveProps: '+this.props.t)
+      //   var self = this
+      //   request
+      //     .get('/' + this.props.url)
+      //     .end(function(err, res){
+      //       console.log(res.body)
+      //       self.setState(res.body)
+      //     });
+      // }
     }
 
 

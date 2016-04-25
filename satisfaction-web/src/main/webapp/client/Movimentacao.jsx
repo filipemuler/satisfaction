@@ -8,8 +8,9 @@ import InputGroup from 'react-bootstrap/lib/InputGroup'
 import Col from 'react-bootstrap/lib/Col'
 import ControlLabel from 'react-bootstrap/lib/ControlLabel'
 import ButtonToolbar from 'react-bootstrap/lib/ButtonToolbar'
-import Select from 'react-select';
 import request from 'superagent'
+
+import SimpleSelect from 'react-selectize/src/SimpleSelect'
 
 class Movimentacao extends Component {
 
@@ -27,11 +28,18 @@ class Movimentacao extends Component {
       return nextProps.t == this.props.t
     }
 
-    logChange(val) {
-      console.log("Selected: " + val);
+    logChange() {
+      options = ["apple", "mango", "grapes", "melon", "strawberry"].map(function(fruit){
+                      return {label: fruit, value: fruit}
+                  });
+
     }
 
-    render = () =>
+    render(){
+      var options = ["apple", "mango", "grapes", "melon", "strawberry"].map(function(fruit){
+                return {label: fruit, value: fruit}
+            });
+            return (
     <Panel header={this.props.header} footer={footer}>
       <Form horizontal>
         <FormGroup controlId="valor">
@@ -51,17 +59,15 @@ class Movimentacao extends Component {
            Conta
          </Col>
          <Col sm={10}>
-           <FormControl type="text" />
+           <SimpleSelect options = {options} placeholder = "Select a fruit"></SimpleSelect>
          </Col>
        </FormGroup>
      </Form>
-      <select><option value="asds">asds</option></select>
 
-    <Select options={[
-    { value: 'one', label: 'One' },
-    { value: 'two', label: 'Two' }
-]} onChange={this.logChange} />
-    </Panel>
+
+
+    </Panel>)
+  }
 }
 
 const buttonCriar = <Button bsStyle="primary">Salvar</Button>

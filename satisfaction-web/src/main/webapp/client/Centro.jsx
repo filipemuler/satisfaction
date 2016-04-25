@@ -14,17 +14,39 @@ class Centro extends Component {
     constructor(props){
       super(props)
       this.handleSelect = this.handleSelect.bind(this)
+      this.resetMenu = this.resetMenu.bind(this)
     }
 
     componentWillMount(){
-      this.setState({x : 'dashboard'})
+      // this.setState({x : 'dashboard'})
+      menu.dashboard = <Cadastro header="Dashboard" url="dashboard" />;
+    }
+
+    resetMenu(){
+      menu.dashboard = <div></div>
+      menu.movimentacao = <div></div>
+      menu.contas= <div></div>
+      menu.funcionario=<div></div>
+      menu.filial=<div></div>
+      menu.usuario=<div></div>
+      menu.permissao=<div></div>
     }
 
     handleSelect(selectedKey, event){
       // console.log(selectedKey)
-      this.setState({x : selectedKey})
-    }
+      // this.setState({x : selectedKey})
+      this.resetMenu
+      switch (selectedKey) {
+        case "dashboard":
+          menu.dashboard = <Cadastro header="Dashboard" url="dashboard" />;
+          break;
+          case "movimentacao":
+          menu.movimentacao = <Movimentacao header="Dashboard" url="dashboard" />;
+          break;
+        default:
 
+      }
+    }
 
     render = () =>
       <Tab.Container id="left-tabs-example" defaultActiveKey="dashboard" onSelect={this.handleSelect}>
@@ -44,31 +66,41 @@ class Centro extends Component {
           <Col sm={10}>
             <Tab.Content>
               <Tab.Pane eventKey="dashboard">
-                <Cadastro header="Dashboard" url="dashboard" t={this.state.x}/>
+                {menu.dashboard}
               </Tab.Pane>
               <Tab.Pane eventKey="movimentacao">
-                <Movimentacao header="Movimentação" url="movimentacao" t={this.state.x}/>
+                // {menu.movimentacao}
               </Tab.Pane>
               <Tab.Pane eventKey="contas">
-                <Cadastro header="Contas" url="contas" t={this.state.x}/>
+
               </Tab.Pane>
               <Tab.Pane eventKey="filial">
-                <Cadastro header="Filial" url="filial" t={this.state.x}/>
+
               </Tab.Pane>
               <Tab.Pane eventKey="funcionario">
-                <Cadastro header="Funcionario" url="funcionario" t={this.state.x}/>
+
               </Tab.Pane>
               <Tab.Pane eventKey="usuario">
-                <Cadastro header="Usuario" url="usuario" t={this.state.x}/>
+
               </Tab.Pane>
               <Tab.Pane eventKey="permissao">
-                <Cadastro header="Permissão" url="permissao" t={this.state.x}/>
+
               </Tab.Pane>
             </Tab.Content>
           </Col>
         </Row>
       </Tab.Container>
 
+}
+
+const menu = {
+  dashboard : {},
+  movimentacao : {},
+  contas: {},
+  filial:{},
+  funcionario:{},
+  usuario:{},
+  permissao:{}
 }
 
 export default Centro
