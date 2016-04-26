@@ -26,6 +26,7 @@
     "jest-cli": "~0.4.0",
     "nodemon": "^1.9.1",
     "parallelshell": "^2.0.0",
+    "react-chartist": "^0.10.2",
     "watchify": "^3.6.0"
   },
   "scripts": {

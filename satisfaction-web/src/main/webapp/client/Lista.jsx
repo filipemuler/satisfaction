@@ -17,7 +17,7 @@ class Lista extends Component {
       var headers = [<th>id</th>,<th>usuario</th>]
       var lista = []
         this.props.lista.forEach(function(o){
-          lista.push(<tr>
+          lista.push(<tr key={o.id}>
             <td>{o.id}</td>
             <td>{o.usuario}</td>
           </tr>)
@@ -33,13 +33,8 @@ class Lista extends Component {
             {lista}
         </tbody>
       </Table>
-      <Pagination
-  prev
-  next
-  boundaryLinks
-  items={1}
-  maxButtons={5}
-  activePage={this.state.activePage} />
+      <Pagination prev next boundaryLinks items={1} maxButtons={5}
+        activePage={this.state.activePage} />
         </div>)
 
     }

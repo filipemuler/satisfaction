@@ -6,6 +6,7 @@ import Tab from 'react-bootstrap/lib/Tab'
 import Nav from 'react-bootstrap/lib/Nav'
 import NavItem from 'react-bootstrap/lib/NavItem'
 import Cadastro from './Cadastro'
+import Dashboard from './Dashboard'
 import Movimentacao from './Movimentacao'
 import request from 'superagent'
 
@@ -14,38 +15,15 @@ class Centro extends Component {
     constructor(props){
       super(props)
       this.handleSelect = this.handleSelect.bind(this)
-      this.resetMenu = this.resetMenu.bind(this)
     }
 
     componentWillMount(){
       // this.setState({x : 'dashboard'})
-      menu.dashboard = <Cadastro header="Dashboard" url="dashboard" />;
-    }
-
-    resetMenu(){
-      menu.dashboard = <div></div>
-      menu.movimentacao = <div></div>
-      menu.contas= <div></div>
-      menu.funcionario=<div></div>
-      menu.filial=<div></div>
-      menu.usuario=<div></div>
-      menu.permissao=<div></div>
     }
 
     handleSelect(selectedKey, event){
       // console.log(selectedKey)
       // this.setState({x : selectedKey})
-      this.resetMenu
-      switch (selectedKey) {
-        case "dashboard":
-          menu.dashboard = <Cadastro header="Dashboard" url="dashboard" />;
-          break;
-          case "movimentacao":
-          menu.movimentacao = <Movimentacao header="Dashboard" url="dashboard" />;
-          break;
-        default:
-
-      }
     }
 
     render = () =>
@@ -66,13 +44,13 @@ class Centro extends Component {
           <Col sm={10}>
             <Tab.Content>
               <Tab.Pane eventKey="dashboard">
-                {menu.dashboard}
+                <Dashboard header="Dashboard" url="dashboard" />
               </Tab.Pane>
               <Tab.Pane eventKey="movimentacao">
-                // {menu.movimentacao}
+                <Movimentacao header="Movimentacao" url="movimentacao" />
               </Tab.Pane>
               <Tab.Pane eventKey="contas">
-
+                <Cadastro header="Contas" url="contas" />
               </Tab.Pane>
               <Tab.Pane eventKey="filial">
 
@@ -91,16 +69,6 @@ class Centro extends Component {
         </Row>
       </Tab.Container>
 
-}
-
-const menu = {
-  dashboard : {},
-  movimentacao : {},
-  contas: {},
-  filial:{},
-  funcionario:{},
-  usuario:{},
-  permissao:{}
 }
 
 export default Centro
