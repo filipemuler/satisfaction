@@ -14,6 +14,7 @@ class Centro extends Component {
 
     constructor(props){
       super(props)
+      this.state = {url : 'dashboard'}
       this.handleSelect = this.handleSelect.bind(this)
     }
 
@@ -23,7 +24,14 @@ class Centro extends Component {
 
     handleSelect(selectedKey, event){
       // console.log(selectedKey)
-      // this.setState({x : selectedKey})
+      // this.setState({url : selectedKey})
+      event.preventDefault();
+      var self = this
+      request
+        .get('/' + selectedKey)
+        .end(function(err, res){
+          self.setState(res.body)
+        });
     }
 
     render = () =>
@@ -44,25 +52,25 @@ class Centro extends Component {
           <Col sm={10}>
             <Tab.Content>
               <Tab.Pane eventKey="dashboard">
-                <Dashboard header="Dashboard" url="dashboard" />
+                <Dashboard id="dashboard" json={this.state.dashboard}/>
               </Tab.Pane>
               <Tab.Pane eventKey="movimentacao">
-                <Movimentacao header="Movimentacao" url="movimentacao" />
+                <Movimentacao id="movimentacao" json={this.state.movimentacao}/>
               </Tab.Pane>
               <Tab.Pane eventKey="contas">
-                <Cadastro header="Contas" url="contas" />
+                <Cadastro id="contas" json={this.state.contas}/>
               </Tab.Pane>
               <Tab.Pane eventKey="filial">
-
+                <Cadastro id="filial" json={this.state.filial}/>
               </Tab.Pane>
               <Tab.Pane eventKey="funcionario">
-
+                <Cadastro id="funcionario" json={this.state.funcionario}/>
               </Tab.Pane>
               <Tab.Pane eventKey="usuario">
-
+                <Cadastro id="usuario" json={this.state.usuario}/>
               </Tab.Pane>
               <Tab.Pane eventKey="permissao">
-
+                <Cadastro id="permissao" json={this.state.permissao}/>
               </Tab.Pane>
             </Tab.Content>
           </Col>

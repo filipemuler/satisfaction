@@ -3,6 +3,8 @@ import Panel from 'react-bootstrap/lib/Panel'
 import Button from 'react-bootstrap/lib/Button'
 import ButtonToolbar from 'react-bootstrap/lib/ButtonToolbar'
 import ChartistGraph from 'react-chartist';
+import Row from 'react-bootstrap/lib/Row'
+import Col from 'react-bootstrap/lib/Col'
 import request from 'superagent'
 
 class Dashboard extends Component {
@@ -19,17 +21,31 @@ class Dashboard extends Component {
     componentDidMount(){
     }
 
+    shouldComponentUpdate(nextProps, nextState){
+
+      return nextProps.id != this.props.json['id']
+    //     // console.log('componentWillReceiveProps id: '+this.props.id + ' url: ' + nextProps.url)
+    //   //   var self = this
+    //   //   request
+    //   //     .get('/' + this.props.url)
+    //   //     .end(function(err, res){
+    //   //       console.log(res.body)
+    //   //       self.setState(res.body)
+    //   //     });
+    }
+
     componentWillReceiveProps(nextProps, nextState){
-      // if(nextProps.t == this.props.t){
-      //   console.log('componentWillReceiveProps: '+this.props.t)
-      //   var self = this
-      //   request
-      //     .get('/' + this.props.url)
-      //     .end(function(err, res){
-      //       console.log(res.body)
-      //       self.setState(res.body)
-      //     });
-      // }
+        console.log(nextProps)
+      // if(nextProps.url == this.props.id){
+    //     console.log('componentWillReceiveProps id: '+this.props.id + ' url: ' + nextProps.url)
+    //   //   var self = this
+    //   //   request
+    //   //     .get('/' + this.props.url)
+    //   //     .end(function(err, res){
+    //   //       console.log(res.body)
+    //   //       self.setState(res.body)
+    //   //     });
+    //   }
     }
 
 
@@ -43,16 +59,25 @@ class Dashboard extends Component {
 
     var options = {
       donut: true,
-      donutWidth: 60,
-      startAngle: 0,
+      donutWidth: 30,
       total: 100,
+      chartPadding: 20,
+labelOffset: 15,
+labelDirection: 'explode',
       showLabel: true
     };
 
     var type = 'Pie'
 return(
-    <Panel header={this.props.header} >
-<ChartistGraph data={data} options={options} type={type} />
+    <Panel header={this.props.id} >
+      <Row className="clearfix">
+        <Col sm={3}>
+          <ChartistGraph data={data} options={options} type={type} />
+        </Col>
+        <Col sm={3}>
+          <ChartistGraph data={data} options={options} type={type} />
+        </Col>
+      </Row>
     </Panel>);
 }
 }

@@ -17,7 +17,7 @@ class Lista extends Component {
       var headers = [<th>id</th>,<th>usuario</th>]
       var lista = []
         this.props.lista.forEach(function(o){
-          lista.push(<tr key={o.id}>
+          lista.push(<tr>
             <td>{o.id}</td>
             <td>{o.usuario}</td>
           </tr>)

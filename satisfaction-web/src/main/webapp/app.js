@@ -12,7 +12,7 @@ app.get('/', function(req, res) {
 });
 
 app.get('/dashboard', function(req, res) {
-    res.send("Dashboard");
+    res.send({dashboard : [{'id':'1001', 'dash': 'dash'}]});
 });
 
 app.get('/movimentacao', function(req, res) {
@@ -32,7 +32,7 @@ app.get('/funcionario', function(req, res) {
 });
 
 app.get('/usuario', function(req, res) {
-    res.send({results : [{'id':'1001', 'usuario': 'filipe'}, {'id':'1002', 'usuario': 'andre'}]});
+    res.send({usuario : [{'id':'1001', 'usuario': 'filipe'}, {'id':'1002', 'usuario': 'andre'}]});
 });
 
 app.get('/permissao', function(req, res) {

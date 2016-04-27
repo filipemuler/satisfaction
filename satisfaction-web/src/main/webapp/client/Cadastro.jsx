@@ -19,9 +19,9 @@ class Cadastro extends Component {
     componentDidMount(){
     }
 
-    componentWillReceiveProps(nextProps, nextState){
-      // if(nextProps.t == this.props.t){
-      //   console.log('componentWillReceiveProps: '+this.props.t)
+    shouldComponentUpdate(nextProps, nextState){
+      return nextProps.url == this.props.id
+        // console.log('componentWillReceiveProps id: '+this.props.id + ' url: ' + nextProps.url)
       //   var self = this
       //   request
       //     .get('/' + this.props.url)
@@ -29,12 +29,25 @@ class Cadastro extends Component {
       //       console.log(res.body)
       //       self.setState(res.body)
       //     });
-      // }
+
     }
+
+    // componentWillReceiveProps(nextProps, nextState){
+    //   if(nextProps.url == this.props.id){
+    //     console.log('componentWillReceiveProps id: '+this.props.id + ' url: ' + nextProps.url)
+    //   //   var self = this
+    //   //   request
+    //   //     .get('/' + this.props.url)
+    //   //     .end(function(err, res){
+    //   //       console.log(res.body)
+    //   //       self.setState(res.body)
+    //   //     });
+    //   }
+    // }
 
 
     render = () =>
-    <Panel header={this.props.header} footer={footer}>
+    <Panel header={this.props.id} footer={footer}>
       <Lista lista={this.state.results}></Lista>
     </Panel>
 }
