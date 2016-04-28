@@ -16,7 +16,7 @@ app.get('/dashboard', function(req, res) {
 });
 
 app.get('/movimentacao', function(req, res) {
-    res.send("");
+    res.send({movimentacao : [{'id':'1001', 'movi': 'movi'}]});
 });
 
 app.get('/contas', function(req, res) {

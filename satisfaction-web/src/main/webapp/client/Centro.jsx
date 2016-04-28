@@ -24,14 +24,15 @@ class Centro extends Component {
 
     handleSelect(selectedKey, event){
       // console.log(selectedKey)
-      // this.setState({url : selectedKey})
+
       event.preventDefault();
+      this.setState({selected : selectedKey})
       var self = this
-      request
-        .get('/' + selectedKey)
-        .end(function(err, res){
-          self.setState(res.body)
-        });
+      // request
+      //   .get('/' + selectedKey)
+      //   .end(function(err, res){
+      //     self.setState(res.body)
+      //   });
     }
 
     render = () =>
@@ -52,10 +53,10 @@ class Centro extends Component {
           <Col sm={10}>
             <Tab.Content>
               <Tab.Pane eventKey="dashboard">
-                <Dashboard id="dashboard" json={this.state.dashboard}/>
+                <Dashboard id="dashboard" json={this.state.dashboard} selected={this.state.selected}/>
               </Tab.Pane>
               <Tab.Pane eventKey="movimentacao">
-                <Movimentacao id="movimentacao" json={this.state.movimentacao}/>
+                <Movimentacao id="movimentacao" json={this.state.movimentacao} selected={this.state.selected}/>
               </Tab.Pane>
               <Tab.Pane eventKey="contas">
                 <Cadastro id="contas" json={this.state.contas}/>

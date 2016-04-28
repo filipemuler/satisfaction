@@ -19,8 +19,8 @@ class Cadastro extends Component {
     componentDidMount(){
     }
 
-    shouldComponentUpdate(nextProps, nextState){
-      return nextProps.url == this.props.id
+    // shouldComponentUpdate(nextProps, nextState){
+      // return nextProps.url == this.props.id
         // console.log('componentWillReceiveProps id: '+this.props.id + ' url: ' + nextProps.url)
       //   var self = this
       //   request
@@ -30,7 +30,7 @@ class Cadastro extends Component {
       //       self.setState(res.body)
       //     });
 
-    }
+    // }
 
     // componentWillReceiveProps(nextProps, nextState){
     //   if(nextProps.url == this.props.id){

@@ -25,7 +25,16 @@ class Movimentacao extends Component {
     }
 
     shouldComponentUpdate(nextProps, nextState){
-      return nextProps.t == this.props.t
+      console.log(nextProps.selected)
+      console.log(this.props.id)
+      return nextProps.selected == this.props.id
+    // console.log('shouldComponentUpdate')
+
+    // console.log(nextState)
+    }
+
+    componentWillUpdate(nextProps, nextState){
+      console.log('bla')
     }
 
     logChange() {

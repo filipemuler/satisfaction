@@ -22,9 +22,11 @@ class Dashboard extends Component {
     }
 
     shouldComponentUpdate(nextProps, nextState){
-
-      return nextProps.id != this.props.json['id']
-    //     // console.log('componentWillReceiveProps id: '+this.props.id + ' url: ' + nextProps.url)
+      // console.log(nextProps)
+      // console.log(this.props)
+      return nextProps.selected == this.props.id
+      // return nextProps.id != this.props.json['id']
+        // console.log('componentWillReceiveProps id: '+this.props.id + ' url: ' + nextProps.url)
     //   //   var self = this
     //   //   request
     //   //     .get('/' + this.props.url)
@@ -34,8 +36,8 @@ class Dashboard extends Component {
     //   //     });
     }
 
-    componentWillReceiveProps(nextProps, nextState){
-        console.log(nextProps)
+    componentWillUpdate(nextProps, nextState){
+        console.log('deve haver um')
       // if(nextProps.url == this.props.id){
     //     console.log('componentWillReceiveProps id: '+this.props.id + ' url: ' + nextProps.url)
     //   //   var self = this
