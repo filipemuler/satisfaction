@@ -20,23 +20,23 @@ app.get('/movimentacao', function(req, res) {
 });
 
 app.get('/contas', function(req, res) {
-    res.send("Contas");
+    res.send({funcionarios : [{'id':'1001', 'usuario': 'funcionario1'}, {'id':'1002', 'usuario': 'funcionario2'}]});
 });
 
 app.get('/filial', function(req, res) {
-    res.send("Filial");
+    res.send({funcionarios : [{'id':'1001', 'usuario': 'filial1'}, {'id':'1002', 'usuario': 'filial2'}]});
 });
 
 app.get('/funcionario', function(req, res) {
-    res.send("Funcionario");
+    res.send({funcionarios : [{'id':'1001', 'usuario': 'funcionario1'}, {'id':'1002', 'usuario': 'funcionario2'}]});
 });
 
 app.get('/usuario', function(req, res) {
-    res.send({usuario : [{'id':'1001', 'usuario': 'filipe'}, {'id':'1002', 'usuario': 'andre'}]});
+    res.send({usuarios : [{'id':'1001', 'usuario': 'filipe'}, {'id':'1002', 'usuario': 'andre'}]});
 });
 
 app.get('/permissao', function(req, res) {
-    res.send("Permissao");
+    res.send({permissoes : [{'id':'1001', 'usuario': 'permissao1'}, {'id':'1002', 'usuario': 'permissao2'}]});
 });
 
 app.listen(3000);

@@ -59,19 +59,19 @@ class Centro extends Component {
                 <Movimentacao id="movimentacao" json={this.state.movimentacao} selected={this.state.selected}/>
               </Tab.Pane>
               <Tab.Pane eventKey="contas">
-                <Cadastro id="contas" json={this.state.contas}/>
+                <Cadastro id="contas" json={this.state.contas} selected={this.state.selected}/>
               </Tab.Pane>
               <Tab.Pane eventKey="filial">
-                <Cadastro id="filial" json={this.state.filial}/>
+                <Cadastro id="filial" json={this.state.filial} selected={this.state.selected}/>
               </Tab.Pane>
               <Tab.Pane eventKey="funcionario">
-                <Cadastro id="funcionario" json={this.state.funcionario}/>
+                <Cadastro id="funcionario" json={this.state.funcionario} selected={this.state.selected}/>
               </Tab.Pane>
               <Tab.Pane eventKey="usuario">
-                <Cadastro id="usuario" json={this.state.usuario}/>
+                <Cadastro id="usuario" json={this.state.usuario} selected={this.state.selected}/>
               </Tab.Pane>
               <Tab.Pane eventKey="permissao">
-                <Cadastro id="permissao" json={this.state.permissao}/>
+                <Cadastro id="permissao" json={this.state.permissao} selected={this.state.selected}/>
               </Tab.Pane>
             </Tab.Content>
           </Col>

@@ -7,17 +7,18 @@ class Lista extends Component {
 
   constructor(props){
     super(props)
+    this.state = {activePage : 1}
   }
 
   componentWillMount(){
-    this.setState({activePage : 1})
+    // this.setState({activePage : 1  })
   }
 
     render () {
       var headers = [<th>id</th>,<th>usuario</th>]
       var lista = []
         this.props.lista.forEach(function(o){
-          lista.push(<tr>
+          lista.push(<tr key={o.id}>
             <td>{o.id}</td>
             <td>{o.usuario}</td>
           </tr>)

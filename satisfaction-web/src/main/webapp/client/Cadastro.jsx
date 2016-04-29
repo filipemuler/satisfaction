@@ -13,42 +13,32 @@ class Cadastro extends Component {
   }
 
     componentWillMount(){
-      this.setState({results : []})
+      this.setState({usuarios : []})
     }
 
     componentDidMount(){
     }
 
-    // shouldComponentUpdate(nextProps, nextState){
-      // return nextProps.url == this.props.id
-        // console.log('componentWillReceiveProps id: '+this.props.id + ' url: ' + nextProps.url)
-      //   var self = this
-      //   request
-      //     .get('/' + this.props.url)
-      //     .end(function(err, res){
-      //       console.log(res.body)
-      //       self.setState(res.body)
-      //     });
+    shouldComponentUpdate(nextProps, nextState){
+      return nextProps.selected == this.props.id
+    }
 
-    // }
-
-    // componentWillReceiveProps(nextProps, nextState){
-    //   if(nextProps.url == this.props.id){
-    //     console.log('componentWillReceiveProps id: '+this.props.id + ' url: ' + nextProps.url)
-    //   //   var self = this
-    //   //   request
-    //   //     .get('/' + this.props.url)
-    //   //     .end(function(err, res){
-    //   //       console.log(res.body)
-    //   //       self.setState(res.body)
-    //   //     });
-    //   }
-    // }
+    componentWillReceiveProps(nextProps, nextState){
+      if(nextProps.selected == this.props.id){
+        var self = this
+        request
+          .get('/' + nextProps.selected)
+          .end(function(err, res){
+            console.log(res.body)
+            self.setState(res.body)
+          });
+      }
+    }
 
 
     render = () =>
     <Panel header={this.props.id} footer={footer}>
-      <Lista lista={this.state.results}></Lista>
+      <Lista lista={this.state.usuarios}></Lista>
     </Panel>
 }
 

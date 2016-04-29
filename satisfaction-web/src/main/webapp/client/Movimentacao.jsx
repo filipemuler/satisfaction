@@ -25,15 +25,15 @@ class Movimentacao extends Component {
     }
 
     shouldComponentUpdate(nextProps, nextState){
-      console.log(nextProps.selected)
-      console.log(this.props.id)
       return nextProps.selected == this.props.id
     // console.log('shouldComponentUpdate')
 
     // console.log(nextState)
     }
 
-    componentWillUpdate(nextProps, nextState){
+    componentWillReceiveProps(nextProps, nextState){
+      console.log('movimentacao: '+nextProps.selected)
+      console.log('movimentacao: '+this.props.id)
       console.log('bla')
     }
 
