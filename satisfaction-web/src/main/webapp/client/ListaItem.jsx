@@ -10,7 +10,6 @@ class ListaItem extends Component {
   }
 
   componentWillMount(){
-    // this.setState({activePage : 1  })
   }
 
     render () {

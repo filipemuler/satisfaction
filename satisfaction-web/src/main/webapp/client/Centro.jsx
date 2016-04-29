@@ -19,20 +19,11 @@ class Centro extends Component {
     }
 
     componentWillMount(){
-      // this.setState({x : 'dashboard'})
     }
 
     handleSelect(selectedKey, event){
-      // console.log(selectedKey)
-
       event.preventDefault();
       this.setState({selected : selectedKey})
-      var self = this
-      // request
-      //   .get('/' + selectedKey)
-      //   .end(function(err, res){
-      //     self.setState(res.body)
-      //   });
     }
 
     render = () =>
@@ -77,7 +68,6 @@ class Centro extends Component {
           </Col>
         </Row>
       </Tab.Container>
-
 }
 
 export default Centro

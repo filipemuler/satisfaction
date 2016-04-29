@@ -11,7 +11,6 @@ class ListaHeader extends Component {
 
   render = () => <th>{this.props.header}</th>
 
-  }
 }
 
 export default ListaHeader

@@ -4,47 +4,57 @@ import Button from 'react-bootstrap/lib/Button'
 import ButtonToolbar from 'react-bootstrap/lib/ButtonToolbar'
 import request from 'superagent'
 import Lista from './Lista'
+import Criar from './Criar'
 
 class Cadastro extends Component {
 
   constructor(props){
     super(props)
-    // this.handleEvent = this.handleEvent.bind(this)
+    this.clickCriar = this.clickCriar.bind(this)
   }
 
-    componentWillMount(){
-      this.setState({usuarios : []})
+  componentWillMount(){
+    this.setState({usuarios : [], showModal : false})
+  }
+
+  componentDidMount(){
+  }
+
+  shouldComponentUpdate(nextProps, nextState){
+    return nextProps.selected == this.props.id
+  }
+
+  componentWillReceiveProps(nextProps, nextState){
+    if(nextProps.selected == this.props.id){
+      var self = this
+      request
+        .get('/' + nextProps.selected)
+        .end(function(err, res){
+          self.setState(res.body)
+        });
     }
+  }
 
-    componentDidMount(){
-    }
+  clickCriar(){
+    this.setState({showModal : true})
+  }
 
-    shouldComponentUpdate(nextProps, nextState){
-      return nextProps.selected == this.props.id
-    }
+  render(){
+    const buttonCriar = <Button bsStyle="primary" onClick={this.clickCriar}>Criar</Button>
+    const buttonCancelar = <Button>Cancelar</Button>
+    const footer =  <ButtonToolbar>{buttonCriar}{buttonCancelar}</ButtonToolbar>
 
-    componentWillReceiveProps(nextProps, nextState){
-      if(nextProps.selected == this.props.id){
-        var self = this
-        request
-          .get('/' + nextProps.selected)
-          .end(function(err, res){
-            console.log(res.body)
-            self.setState(res.body)
-          });
-      }
-    }
+      return(
+        <Panel header={this.props.id} footer={footer}>
+          <Lista lista={this.state.results}></Lista>
+          <Criar showModal={this.state.showModal}/>
+        </Panel>
+      )
+  }
 
-
-    render = () =>
-    <Panel header={this.props.id} footer={footer}>
-      <Lista lista={this.state.usuarios}></Lista>
-    </Panel>
 }
 
-const buttonCriar = <Button bsStyle="primary">Criar</Button>
-const buttonCancelar = <Button>Cancelar</Button>
-const footer = <ButtonToolbar>{buttonCriar}{buttonCancelar}</ButtonToolbar>
+
 
 
 export default Cadastro
