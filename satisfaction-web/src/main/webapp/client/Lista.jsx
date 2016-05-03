@@ -31,12 +31,16 @@ class Lista extends Component {
 
       return (
         <div>
-          <Table striped condensed hover>
-            <thead><tr>{headers}</tr></thead>
-            <tbody>{lista}</tbody>
-          </Table>
-          <Pagination prev next boundaryLinks items={1} maxButtons={5}
-            activePage={this.state.activePage} />
+          <div style={{margin:'auto', width:'85%'}}>
+            <Table striped condensed hover>
+              <thead><tr>{headers}</tr></thead>
+              <tbody>{lista}</tbody>
+            </Table>
+          </div>
+          <div style={{margin: 'auto', width:'15%'}}>
+            <Pagination prev next boundaryLinks items={1} maxButtons={5}
+              activePage={this.state.activePage} bsSize="small"/>
+          </div>
         </div>
       )
 

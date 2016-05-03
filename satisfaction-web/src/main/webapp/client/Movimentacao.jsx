@@ -49,7 +49,7 @@ class Movimentacao extends Component {
                 return {label: fruit, value: fruit}
             });
             return (
-    <Panel header={this.props.header} footer={footer}>
+    <Panel header={this.props.id} footer={footer}>
       <Form horizontal>
         <FormGroup controlId="valor">
           <Col componentClass={ControlLabel} sm={2}>
