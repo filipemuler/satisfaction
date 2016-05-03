@@ -24,24 +24,10 @@ class Movimentacao extends Component {
       this.setState({results : []})
     }
 
-    shouldComponentUpdate(nextProps, nextState){
-      return nextProps.selected == this.props.id
-    // console.log('shouldComponentUpdate')
-
-    // console.log(nextState)
-    }
-
-    componentWillReceiveProps(nextProps, nextState){
-      console.log('movimentacao: '+nextProps.selected)
-      console.log('movimentacao: '+this.props.id)
-      console.log('bla')
-    }
-
     logChange() {
       options = ["apple", "mango", "grapes", "melon", "strawberry"].map(function(fruit){
                       return {label: fruit, value: fruit}
                   });
-
     }
 
     render(){

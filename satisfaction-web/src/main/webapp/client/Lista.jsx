@@ -12,21 +12,25 @@ class Lista extends Component {
     this.state = {activePage : 1}
   }
 
+  componentWillReceiveProps(nextProps, nextState){
+    // console.log(nextProps.lista)
+  }
+
   componentWillMount(){
   }
 
     render () {
       var headers = new Set();
       var lista = []
-      if(this.props.lista !== undefined){
-        for (let key of Object.keys(this.props.lista[0])) {
-          headers.add(<ListaHeader key={key} header={key} />)
-        }
-
-        this.props.lista.forEach(function(obj){
-          const vals = Object.keys(obj).map(key => obj[key]);
-          lista.push(<ListaItem key={vals[0]} itens={vals} />)
-        })
+      if(this.props.lista !== undefined && this.props.lista != null){
+        // for (let key of Object.keys(this.props.lista[0])) {
+        //   headers.add(<ListaHeader key={key} header={key} />)
+        // }
+        //
+        // this.props.lista.forEach(function(obj){
+        //   const vals = Object.keys(obj).map(key => obj[key]);
+        //   lista.push(<ListaItem key={vals[0]} itens={vals} />)
+        // })
       }
 
       return (

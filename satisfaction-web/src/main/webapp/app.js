@@ -22,7 +22,7 @@ app.get('/movimentacao', function(req, res) {
 });
 
 app.get('/contas', function(req, res) {
-    res.send({results : [{'id':'1001', 'usuario': 'funcionario1'}, {'id':'1002', 'usuario': 'funcionario2'}]});
+    res.send({results : [{'id':'1001', 'usuario': 'conta1'}, {'id':'1002', 'usuario': 'conta2'}]});
 });
 
 app.get('/filial', function(req, res) {

@@ -10,29 +10,18 @@ class Cadastro extends Component {
 
   constructor(props){
     super(props)
+    this.state = {showModal : false}
     this.clickCriar = this.clickCriar.bind(this)
   }
 
   componentWillMount(){
-    this.setState({usuarios : [], showModal : false})
   }
 
   componentDidMount(){
   }
 
-  shouldComponentUpdate(nextProps, nextState){
-    return nextProps.selected == this.props.id
-  }
-
   componentWillReceiveProps(nextProps, nextState){
-    if(nextProps.selected == this.props.id){
-      var self = this
-      request
-        .get('/' + nextProps.selected)
-        .end(function(err, res){
-          self.setState(res.body)
-        });
-    }
+    console.log(this.state.ajax)
   }
 
   clickCriar(){
@@ -46,7 +35,7 @@ class Cadastro extends Component {
 
       return(
         <Panel header={this.props.id} footer={footer}>
-          <Lista lista={this.state.results}></Lista>
+          <Lista lista={this.props.ajax}></Lista>
           <Criar showModal={this.state.showModal}/>
         </Panel>
       )

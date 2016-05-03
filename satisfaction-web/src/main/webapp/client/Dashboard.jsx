@@ -30,13 +30,13 @@ class Dashboard extends Component {
       // console.log('dashboard: '+this.props.id)
       //   console.log('deve haver um')
       if(nextProps.selected == this.props.id){
-        var self = this
-        request
-          .get('/' + nextProps.selected)
-          .end(function(err, res){
-            console.log(res.body)
-            self.setState(res.body)
-          });
+        // var self = this
+        // request
+        //   .get('/' + nextProps.selected)
+        //   .end(function(err, res){
+        //     console.log(res.body)
+        //     self.setState(res.body)
+        //   });
       }
     }
 
