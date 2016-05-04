@@ -9,17 +9,19 @@ class ListaItem extends Component {
     super(props)
   }
 
-  componentWillMount(){
+  render () {
+    var lista = []
+      this.props.itens.forEach(function(element, index, array){
+        var key = element + '_' + index;
+        lista.push(<ListaItemColuna key={key} value={element} />)
+      })
+    return (<tr>{lista}</tr>)
+
   }
-
-    render () {
-      var lista = []
-        this.props.itens.forEach(function(o){
-          lista.push(<td>{o}</td>)
-        })
-      return (<tr>{lista}</tr>)
-
-    }
 }
-
 export default ListaItem
+
+class ListaItemColuna extends Component {
+   render = () =>
+      <td>{this.props.value}</td>
+}

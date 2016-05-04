@@ -20,10 +20,6 @@ class Cadastro extends Component {
   componentDidMount(){
   }
 
-  componentWillReceiveProps(nextProps, nextState){
-    console.log(this.state.ajax)
-  }
-
   clickCriar(){
     this.setState({showModal : true})
   }

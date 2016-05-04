@@ -14,7 +14,7 @@ class Centro extends Component {
 
     constructor(props){
       super(props)
-      this.state = {dashboard : [], movimentacao : [], contas : []}
+      this.state = {dashboard : []}
       this.handleSelect = this.handleSelect.bind(this)
     }
 
@@ -38,7 +38,6 @@ class Centro extends Component {
     }
 
     render () {
-      console.log(this.state)
       return (
         <Tab.Container id="left-tabs-example" defaultActiveKey="dashboard" onSelect={this.handleSelect}>
           <Row className="clearfix">
