@@ -29,6 +29,10 @@ app.get('/filial', function(req, res) {
     res.send({results : [{'id':'1001', 'usuario': 'filial1'}, {'id':'1002', 'usuario': 'filial2'}]});
 });
 
+app.get('/filial/list/tipoLogradouro', function(req, res) {
+    res.send(['Rua', 'Avenida', 'Viela']);
+});
+
 app.get('/funcionario', function(req, res) {
     res.send({results : [{'id':'1001', 'usuario': 'funcionario1'}, {'id':'1002', 'usuario': 'funcionario2'}]});
 });

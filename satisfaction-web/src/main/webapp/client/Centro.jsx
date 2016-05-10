@@ -14,12 +14,10 @@ class Centro extends Component {
 
     constructor(props){
       super(props)
-      this.state = {dashboard : []}
+      this.state = {dashboard : [], contexto : 'dashboard'}
       this.handleSelect = this.handleSelect.bind(this)
     }
 
-    componentWillMount(){
-    }
 
     handleSelect(selectedKey, event){
       event.preventDefault();
@@ -30,10 +28,10 @@ class Centro extends Component {
           var stateObject = function() {
             var returnObj = {};
             returnObj[selectedKey] = res.body;
-               return returnObj;
+            returnObj['contexto'] = selectedKey;
+            return returnObj;
           }.bind(event)();
           self.setState(stateObject)
-          // self.props = {selectedKey : res.body}
         });
     }
 
@@ -56,25 +54,25 @@ class Centro extends Component {
             <Col sm={10}>
               <Tab.Content>
                 <Tab.Pane eventKey="dashboard">
-                  <Dashboard id="dashboard" ajax={this.state.dashboard}/>
+                  <Dashboard  contexto={this.state.contexto} ajax={this.state.dashboard}/>
                 </Tab.Pane>
                 <Tab.Pane eventKey="movimentacao">
-                  <Movimentacao id="movimentacao" json={this.state.movimentacao} selected={this.state.selected}/>
+                  <Movimentacao contexto={this.state.contexto} ajax={this.state.movimentacao}/>
                 </Tab.Pane>
                 <Tab.Pane eventKey="contas">
-                  <Cadastro id="contas" ajax={this.state.contas}/>
+                  <Cadastro key="contas" contexto={this.state.contexto} ajax={this.state.contas}/>
                 </Tab.Pane>
                 <Tab.Pane eventKey="filial">
-                  <Cadastro id="filial" ajax={this.state.filial}/>
+                  <Cadastro contexto={this.state.contexto} ajax={this.state.filial}/>
                 </Tab.Pane>
                 <Tab.Pane eventKey="funcionario">
-                  <Cadastro id="funcionario" ajax={this.state.funcionario}/>
+                  <Cadastro contexto={this.state.contexto} ajax={this.state.funcionario}/>
                 </Tab.Pane>
                 <Tab.Pane eventKey="usuario">
-                  <Cadastro id="usuario" ajax={this.state.usuario}/>
+                  <Cadastro contexto={this.state.contexto} ajax={this.state.usuario}/>
                 </Tab.Pane>
                 <Tab.Pane eventKey="permissao">
-                  <Cadastro id="permissao" ajax={this.state.premissao}/>
+                  <Cadastro contexto={this.state.contexto} ajax={this.state.permissao}/>
                 </Tab.Pane>
               </Tab.Content>
             </Col>

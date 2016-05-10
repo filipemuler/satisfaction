@@ -18,29 +18,6 @@ class Dashboard extends Component {
       this.setState({results : []})
     }
 
-    componentDidMount(){
-    }
-
-    shouldComponentUpdate(nextProps, nextState){
-      return nextProps.selected == this.props.id
-    }
-
-    componentWillReceiveProps(nextProps, nextState){
-      // console.log('dashboard: '+nextProps.selected)
-      // console.log('dashboard: '+this.props.id)
-      //   console.log('deve haver um')
-      if(nextProps.selected == this.props.id){
-        // var self = this
-        // request
-        //   .get('/' + nextProps.selected)
-        //   .end(function(err, res){
-        //     console.log(res.body)
-        //     self.setState(res.body)
-        //   });
-      }
-    }
-
-
     render(){
     var data = {
       labels: ['a', 'b', 'c', 'd', 'e', 'f'],
@@ -61,7 +38,7 @@ labelDirection: 'explode',
 
     var type = 'Pie'
 return(
-    <Panel header={this.props.id} >
+    <Panel header={this.props.contexto} >
       <Row className="clearfix">
         <Col sm={3}>
           <ChartistGraph data={data} options={options} type={type} />
