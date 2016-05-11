@@ -11,26 +11,21 @@ import request from 'superagent'
 
 class FilialForm extends Component {
 
-  constructor(props, options){
+  constructor(props){
     super(props)
-    this.options = options
+    this.state = { options : []}
   }
 
 
   componentDidMount(){
-
     var self = this
     request
       .get('/filial/list/tipoLogradouro')
       .end(function(err, res){
-        this.options = res.body.map(function(tipo){
-
-                        return {label: tipo, value: tipo}
-                    });
-                    console.log(this.options)
+        var optionsAjax = res.body.map((tipo) => {return {label: tipo, value: tipo}});
+        self.setState({options : optionsAjax})
       });
   }
-
 
   render = () =>
   <Form horizontal>
@@ -73,7 +68,7 @@ class FilialForm extends Component {
     <FormGroup controlId="formHorizontalTipoLogradouro">
       <Col componentClass={ControlLabel} sm={3}>Tipo Logradouro</Col>
       <Col sm={9}>
-        <SimpleSelect options = {this.options} placeholder = "Select a fruit"></SimpleSelect>
+        <SimpleSelect options = {this.state.options} placeholder = "Selecione..."></SimpleSelect>
       </Col>
     </FormGroup>
     <FormGroup controlId="formHorizontalLogradouro">

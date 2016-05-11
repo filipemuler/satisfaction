@@ -9,60 +9,63 @@ import Col from 'react-bootstrap/lib/Col'
 import ControlLabel from 'react-bootstrap/lib/ControlLabel'
 import ButtonToolbar from 'react-bootstrap/lib/ButtonToolbar'
 import request from 'superagent'
-
 import SimpleSelect from 'react-selectize/src/SimpleSelect'
 
 class Movimentacao extends Component {
 
   constructor(props){
     super(props)
-    // this.handleEvent = this.handleEvent.bind(this)
-    this.logChange = this.logChange.bind(this)
+    this.state = { options : []}
   }
 
-    componentWillMount(){
-      this.setState({results : []})
-    }
+  componentDidMount(){
+    var self = this
+    request
+      .get('/movimentacao/list/contas')
+      .end(function(err, res){
+        var optionsAjax = res.body.map((tipo) => {return {label: tipo, value: tipo}});
+        self.setState({options : optionsAjax})
+      });
+  }
 
-    logChange() {
-      options = ["apple", "mango", "grapes", "melon", "strawberry"].map(function(fruit){
-                      return {label: fruit, value: fruit}
-                  });
-    }
-
-    render(){
-      var options = ["apple", "mango", "grapes", "melon", "strawberry"].map(function(fruit){
-                return {label: fruit, value: fruit}
-            });
-            return (
+    render = () =>
     <Panel header={this.props.contexto} footer={footer}>
       <Form horizontal>
-        <FormGroup controlId="valor">
-          <Col componentClass={ControlLabel} sm={2}>
-            Valor
+        <FormGroup controlId="manha">
+          <Col componentClass={ControlLabel} sm={2}>Manhã</Col>
+          <Col sm={2}>
+            <InputGroup>
+              <InputGroup.Addon>R$</InputGroup.Addon>
+              <FormControl type="text" />
+            </InputGroup>
           </Col>
-          <Col sm={10}>
-          <InputGroup>
-            <InputGroup.Addon>R$</InputGroup.Addon>
-            <FormControl type="text" />
-          </InputGroup>
-        </Col>
         </FormGroup>
-
-       <FormGroup>
-         <Col componentClass={ControlLabel} sm={2}>
-           Conta
-         </Col>
-         <Col sm={10}>
-           <SimpleSelect options = {options} placeholder = "Select a fruit"></SimpleSelect>
-         </Col>
-       </FormGroup>
+        <FormGroup controlId="tarde">
+          <Col componentClass={ControlLabel} sm={2}>Tarde</Col>
+          <Col sm={2}>
+            <InputGroup>
+              <InputGroup.Addon>R$</InputGroup.Addon>
+              <FormControl type="text" />
+            </InputGroup>
+          </Col>
+        </FormGroup>
+        <FormGroup controlId="noite">
+          <Col componentClass={ControlLabel} sm={2}>Noite</Col>
+          <Col sm={2}>
+            <InputGroup>
+              <InputGroup.Addon>R$</InputGroup.Addon>
+              <FormControl type="text" />
+            </InputGroup>
+          </Col>
+        </FormGroup>
+        <FormGroup>
+          <Col componentClass={ControlLabel} sm={2}>Conta</Col>
+          <Col sm={10}>
+            <SimpleSelect options = {this.state.options} placeholder = "Selecione..."/>
+          </Col>
+        </FormGroup>
      </Form>
-
-
-
-    </Panel>)
-  }
+    </Panel>
 }
 
 const buttonCriar = <Button bsStyle="primary">Salvar</Button>

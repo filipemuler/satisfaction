@@ -21,8 +21,16 @@ app.get('/movimentacao', function(req, res) {
     res.send({results : [{'id':'1001', 'movi': 'movi'}]});
 });
 
+app.get('/movimentacao/list/contas', function(req, res) {
+    res.send(['Despesa', 'Despesa > Supermercado', 'Despesa > Supermercado > Coca-cola']);
+});
+
 app.get('/contas', function(req, res) {
     res.send({results : [{'id':'1001', 'usuario': 'conta1'}, {'id':'1002', 'usuario': 'conta2'}]});
+});
+
+app.get('/contas/list/contas', function(req, res) {
+    res.send(['Despesa', 'Despesa > Supermercado', 'Despesa > Supermercado > Coca-cola']);
 });
 
 app.get('/filial', function(req, res) {
