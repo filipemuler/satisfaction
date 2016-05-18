@@ -15,17 +15,10 @@
 
 	<h:login>
 		<form class="form-signin" action="${app}/login/login" method="post">
-			<h3 class="form-signin-heading">Entrar</h3>
-			<div class="form-group">
-				<input type="text" class="form-control" placeholder="Email" autofocus="" name="username"/>
-			</div>
-			<div class="form-group">
-				<input type="password" class="form-control" placeholder="Senha" name="password"/>
-			</div>
-			<!--  
-			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-			--> 
-			<button class="btn btn-lg btn-primary btn-block" type="submit">Entrar</button>
+			<h3 class="form-signin">Entrar</h3>
+            <input type="text" class="form-control" placeholder="Email" autofocus="" name="username"/>
+            <input type="password" class="form-control" placeholder="Senha" name="password"/>
+            <button type="submit">Entrar</button>
 		</form>
 	</h:login>
 
