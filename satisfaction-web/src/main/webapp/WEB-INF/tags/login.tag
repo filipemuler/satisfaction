@@ -4,13 +4,6 @@
 	<jsp:output doctype-root-element="HTML"
 		doctype-system="about:legacy-compat" />
 
-	<!-- CSS -->
-	<link rel="stylesheet" href="${app}/bootstrap/css/bootstrap.css" type="text/css" />
-	<link rel="stylesheet" href="${app}/bootstrap/css/bootstrap-theme.css" type="text/css" />
-
-	<!-- JAVASCRIPTS -->
-	<script type="text/javascript" src="${app}/bootstrap/js/bootstrap.js"><!-- nada --></script>
-
 	<div class="container">
 		<img src="${app}/imgs/mbr.png" class="img-rounded" style="padding-bottom:9px"/>
 		<jsp:doBody />

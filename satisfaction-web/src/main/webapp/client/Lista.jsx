@@ -23,6 +23,8 @@ class Lista extends Component {
           for (let key of Object.keys(this.props.lista.results[0])) {
             headers.add(<ListaHeader key={key} header={key} />)
           }
+          headers.add(<ListaHeader style={{width:'50px'}} key="editar" header="Editar" />)
+          headers.add(<ListaHeader style={{width:'50px'}} key="remover" header="Remover" />)
 
           this.props.lista.results.forEach(function(obj){
             const vals = Object.keys(obj).map(key => obj[key]);

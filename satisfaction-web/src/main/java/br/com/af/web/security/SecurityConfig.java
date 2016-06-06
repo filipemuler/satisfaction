@@ -28,7 +28,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	public void configure(WebSecurity web) throws Exception {
-		web.ignoring().antMatchers("/imgs/**", "/bootstrap/**", "/jquery/**");
+		web.ignoring().antMatchers("/imgs/**", "mbr/**", "/node_modules/**");
 	}
 
 	@Autowired

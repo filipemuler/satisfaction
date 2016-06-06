@@ -9,7 +9,7 @@ class ListaHeader extends Component {
     super(props)
   }
 
-  render = () => <th>{this.props.header}</th>
+  render = () => <th style={this.props.style}>{this.props.header}</th>
 
 }
 
