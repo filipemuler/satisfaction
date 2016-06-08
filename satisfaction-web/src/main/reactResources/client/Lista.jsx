@@ -18,7 +18,7 @@ class Lista extends Component {
     render () {
       var headers = new Set();
       var lista = []
-      if(this.props.lista !== undefined){
+      if(this.props.lista !== undefined && this.props.lista != null){
         if(this.props.lista.results !== undefined){
           for (let key of Object.keys(this.props.lista.results[0])) {
             headers.add(<ListaHeader key={key} header={key} />)
