@@ -17,7 +17,7 @@ app.get('/dashboard', function(req, res) {
     res.send({dashboard : [{'id':'1001', 'dash': 'dash'}]});
 });
 
-app.get('/movimentacao', function(req, res) {
+app.get('/movimentacao/list', function(req, res) {
     res.send({results : [{'id':'1001', 'movi': 'movi'}]});
 });
 
@@ -45,7 +45,7 @@ app.get('/funcionario', function(req, res) {
     res.send({results : [{'id':'1001', 'usuario': 'funcionario1'}, {'id':'1002', 'usuario': 'funcionario2'}]});
 });
 
-app.get('/usuario', function(req, res) {
+app.get('/usuario/list', function(req, res) {
     res.send(usuarios);
 });
 

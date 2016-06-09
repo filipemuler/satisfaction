@@ -10,22 +10,24 @@ import ControlLabel from 'react-bootstrap/lib/ControlLabel'
 import ButtonToolbar from 'react-bootstrap/lib/ButtonToolbar'
 import request from 'superagent'
 import SimpleSelect from 'react-selectize/src/SimpleSelect'
+import Glyphicon from 'react-bootstrap/lib/Glyphicon'
+import MovimentacaoConta from './MovimentacaoConta'
 
 class Movimentacao extends Component {
 
   constructor(props){
     super(props)
-    this.state = { options : []}
+    this.addMovimentacao = this.addMovimentacao.bind(this)
+    this.state = { options : [], movimentacoes : []}
   }
 
   componentDidMount(){
-    var self = this
-    request
-      .get('/movimentacao/list/contas')
-      .end(function(err, res){
-        var optionsAjax = res.body.map((tipo) => {return {label: tipo, value: tipo}});
-        self.setState({options : optionsAjax})
-      });
+
+  }
+
+  addMovimentacao(){
+    movimentacoes.push(<MovimentacaoConta />)
+    this.setState({movimentacoes})
   }
 
     render = () =>
@@ -58,12 +60,18 @@ class Movimentacao extends Component {
             </InputGroup>
           </Col>
         </FormGroup>
-        <FormGroup>
-          <Col componentClass={ControlLabel} sm={2}>Conta</Col>
-          <Col sm={10}>
-            <SimpleSelect options = {this.state.options} placeholder = "Selecione..."/>
-          </Col>
+
+        {this.state.movimentacoes}
+
+        <FormGroup controlId="plus">
+            <Col smOffset={2} sm={4}>
+                <Button bsSize="small" onClick={this.addMovimentacao}>
+                    <Glyphicon glyph="plus" />
+                </Button>
+            </Col>
         </FormGroup>
+
+
      </Form>
     </Panel>
 }
@@ -71,6 +79,7 @@ class Movimentacao extends Component {
 const buttonCriar = <Button bsStyle="primary">Salvar</Button>
 const buttonCancelar = <Button>Cancelar</Button>
 const footer = <ButtonToolbar>{buttonCriar}{buttonCancelar}</ButtonToolbar>
+const movimentacoes = []
 
 
 export default Movimentacao

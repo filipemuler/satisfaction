@@ -11,10 +11,12 @@ public class Paginator<T> {
     private Long totalResults;
     private Long pages;
     private List<T> list;
+    private List<T> results;
 
     public Paginator(Long totalResults, List<T> t, Long  pages) {
         this.totalResults = totalResults;
         this.list = t;
+        this.results = t;
         this.pages = pages;
     }
 
@@ -40,5 +42,13 @@ public class Paginator<T> {
 
     public void setPages(Long pages) {
         this.pages = pages;
+    }
+
+    public List<T> getResults() {
+        return results;
+    }
+
+    public void setResults(List<T> results) {
+        this.results = results;
     }
 }

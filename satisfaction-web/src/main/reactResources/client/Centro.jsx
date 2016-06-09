@@ -23,7 +23,7 @@ class Centro extends Component {
       event.preventDefault();
       var self = this
       request
-        .get('/' + selectedKey)
+        .get(selectedKey + '/list')
         .end(function(err, res){
           var stateObject = function() {
             var returnObj = {};

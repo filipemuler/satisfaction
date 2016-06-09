@@ -1,5 +1,7 @@
 package br.com.af.web.controllers;
 
+import static br.com.caelum.vraptor.view.Results.json;
+import static javafx.scene.input.KeyCode.J;
 import static org.apache.commons.lang3.math.NumberUtils.toInt;
 
 import java.util.List;
@@ -15,6 +17,7 @@ import br.com.af.satisfaction.entidades.Usuario;
 import br.com.caelum.vraptor.Controller;
 import br.com.caelum.vraptor.Path;
 import br.com.caelum.vraptor.Result;
+import br.com.caelum.vraptor.view.Results;
 
 @Controller
 public class UsuarioController {
@@ -44,10 +47,11 @@ public class UsuarioController {
 		this.result.include("permissoes", permissoes);
 	}
 
-	@Path({"/usuario/list", "/usuario/list/{page}"})
+//	@Path({"/usuario/list", "/usuario/list/{page}"})
 	public void list(String page) {
 		Paginator<Usuario> paginator = this.usuarioService.findPaginator(Usuario.class, toInt(page));
-		this.result.include("paginator", paginator);
+		this.result.use(json()).withoutRoot().from(paginator).
+				include("results").serialize();
 	}
 	
 	@Path("/usuario/edita/{usuario.id}")
