@@ -12,74 +12,84 @@ import request from 'superagent'
 import SimpleSelect from 'react-selectize/src/SimpleSelect'
 import Glyphicon from 'react-bootstrap/lib/Glyphicon'
 import MovimentacaoConta from './MovimentacaoConta'
+import Footer from './Footer'
 
 class Movimentacao extends Component {
 
   constructor(props){
     super(props)
     this.addMovimentacao = this.addMovimentacao.bind(this)
+    this.onHandleSubmit = this.onHandleSubmit.bind(this)
     this.state = { options : [], movimentacoes : []}
   }
 
   componentDidMount(){
-
   }
 
   addMovimentacao(){
-    movimentacoes.push(<MovimentacaoConta />)
-    this.setState({movimentacoes})
+    this.setState({
+      movimentacoes: this.state.movimentacoes.concat(
+        <MovimentacaoConta key={this.state.movimentacoes.length}/>
+      )
+    })
   }
 
-    render = () =>
-    <Panel header={this.props.contexto} footer={footer}>
-      <Form horizontal>
-        <FormGroup controlId="manha">
-          <Col componentClass={ControlLabel} sm={2}>Manhã</Col>
-          <Col sm={2}>
-            <InputGroup>
-              <InputGroup.Addon>R$</InputGroup.Addon>
-              <FormControl type="text" />
-            </InputGroup>
-          </Col>
-        </FormGroup>
-        <FormGroup controlId="tarde">
-          <Col componentClass={ControlLabel} sm={2}>Tarde</Col>
-          <Col sm={2}>
-            <InputGroup>
-              <InputGroup.Addon>R$</InputGroup.Addon>
-              <FormControl type="text" />
-            </InputGroup>
-          </Col>
-        </FormGroup>
-        <FormGroup controlId="noite">
-          <Col componentClass={ControlLabel} sm={2}>Noite</Col>
-          <Col sm={2}>
-            <InputGroup>
-              <InputGroup.Addon>R$</InputGroup.Addon>
-              <FormControl type="text" />
-            </InputGroup>
-          </Col>
-        </FormGroup>
+  onHandleSubmit(){
+    var self = this
+    request
+      .post('movimentacao/salvar')
+      .end(function(err, res){
+        self.setState({options : [], movimentacoes : []})
+      });
+  }
 
-        {this.state.movimentacoes}
+    render () {
+      const footer = <Footer onSubmit={this.onHandleSubmit} />
+      return(
+        <Panel header={this.props.contexto} footer={footer}>
+          <Form horizontal>
+            <FormGroup controlId="manha">
+              <Col componentClass={ControlLabel} sm={2}>Manhã</Col>
+              <Col sm={2}>
+                <InputGroup>
+                  <InputGroup.Addon>R$</InputGroup.Addon>
+                  <FormControl type="text" />
+                </InputGroup>
+              </Col>
+            </FormGroup>
+            <FormGroup controlId="tarde">
+              <Col componentClass={ControlLabel} sm={2}>Tarde</Col>
+              <Col sm={2}>
+                <InputGroup>
+                  <InputGroup.Addon>R$</InputGroup.Addon>
+                  <FormControl type="text" />
+                </InputGroup>
+              </Col>
+            </FormGroup>
+            <FormGroup controlId="noite">
+              <Col componentClass={ControlLabel} sm={2}>Noite</Col>
+              <Col sm={2}>
+                <InputGroup>
+                  <InputGroup.Addon>R$</InputGroup.Addon>
+                  <FormControl type="text" />
+                </InputGroup>
+              </Col>
+            </FormGroup>
 
-        <FormGroup controlId="plus">
-            <Col smOffset={2} sm={4}>
-                <Button bsSize="small" onClick={this.addMovimentacao}>
-                    <Glyphicon glyph="plus" />
-                </Button>
-            </Col>
-        </FormGroup>
+            {this.state.movimentacoes}
 
-
-     </Form>
-    </Panel>
+            <FormGroup controlId="plus">
+                <Col smOffset={2} sm={4}>
+                    <Button bsSize="small" onClick={this.addMovimentacao}>
+                        <Glyphicon glyph="plus" />
+                    </Button>
+                </Col>
+            </FormGroup>
+         </Form>
+        </Panel>
+      )
+    }
 }
-
-const buttonCriar = <Button bsStyle="primary">Salvar</Button>
-const buttonCancelar = <Button>Cancelar</Button>
-const footer = <ButtonToolbar>{buttonCriar}{buttonCancelar}</ButtonToolbar>
-const movimentacoes = []
 
 
 export default Movimentacao

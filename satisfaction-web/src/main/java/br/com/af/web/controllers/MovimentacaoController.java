@@ -1,13 +1,15 @@
 package br.com.af.web.controllers;
 
+import java.util.List;
+
+import javax.inject.Inject;
+
 import br.com.af.satisfaction.config.GenericDao;
 import br.com.af.satisfaction.entidades.Conta;
 import br.com.af.satisfaction.entidades.Movimentacao;
 import br.com.caelum.vraptor.Controller;
+import br.com.caelum.vraptor.Path;
 import br.com.caelum.vraptor.Result;
-
-import javax.inject.Inject;
-import java.util.List;
 
 /**
  * Created by filipe on 01/02/16.
@@ -36,9 +38,14 @@ public class MovimentacaoController {
         this.result.include("contas", contas);
     }
 
-    public void salva(Movimentacao movimentacao) {
-        this.movimentacaoService.persist(movimentacao);
+    @Path("/movimentacao/list/contas")
+    public void listaContas(){
+      List<Conta> contas = this.contaService.findAll(Conta.class);
+      //todo: transformar em json
+    }
 
-        this.result.forwardTo(MovimentacaoController.class).form();
+    @Path("/movimentacao/salvar")
+    public void salvar(Movimentacao movimentacao) {
+        this.movimentacaoService.persist(movimentacao);
     }
 }

@@ -4,14 +4,17 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "MOVIMENTACAO")
 public class Movimentacao implements Serializable {
 
     private Long id;
-    private Conta conta;
-    private BigDecimal valor;
+    private BigDecimal valorManha;
+    private BigDecimal valorTarde;
+    private BigDecimal valorNoite;
+    private List<MovimentacaoConta> movimentacoesConta;
     private Usuario usuario;
     private Filial filial;
     private Entidade entidade;
@@ -27,22 +30,37 @@ public class Movimentacao implements Serializable {
         this.id = id;
     }
 
-    @OneToOne
-    @JoinColumn(name = "conta_id")
-    public Conta getConta() {
-        return conta;
+    public BigDecimal getValorManha() {
+        return valorManha;
     }
 
-    public void setConta(Conta conta) {
-        this.conta = conta;
+    public void setValorManha(BigDecimal valorManha) {
+        this.valorManha = valorManha;
     }
 
-    public BigDecimal getValor() {
-        return valor;
+    public BigDecimal getValorTarde() {
+        return valorTarde;
     }
 
-    public void setValor(BigDecimal valor) {
-        this.valor = valor;
+    public void setValorTarde(BigDecimal valorTarde) {
+        this.valorTarde = valorTarde;
+    }
+
+    public BigDecimal getValorNoite() {
+        return valorNoite;
+    }
+
+    public void setValorNoite(BigDecimal valorNoite) {
+        this.valorNoite = valorNoite;
+    }
+
+    @OneToMany(cascade = CascadeType.ALL)
+    public List<MovimentacaoConta> getMovimentacoesConta() {
+        return movimentacoesConta;
+    }
+
+    public void setMovimentacoesConta(List<MovimentacaoConta> movimentacoesConta) {
+        this.movimentacoesConta = movimentacoesConta;
     }
 
     @OneToOne
