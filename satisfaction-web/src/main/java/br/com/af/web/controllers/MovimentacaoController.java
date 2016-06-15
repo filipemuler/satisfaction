@@ -1,5 +1,7 @@
 package br.com.af.web.controllers;
 
+import static com.google.common.collect.FluentIterable.from;
+
 import java.util.List;
 
 import javax.inject.Inject;
@@ -10,6 +12,7 @@ import br.com.af.satisfaction.entidades.Movimentacao;
 import br.com.caelum.vraptor.Controller;
 import br.com.caelum.vraptor.Path;
 import br.com.caelum.vraptor.Result;
+import br.com.caelum.vraptor.view.Results;
 
 /**
  * Created by filipe on 01/02/16.
@@ -33,15 +36,15 @@ public class MovimentacaoController {
         this.movimentacaoService = movimentacaoService;
     }
 
-    public void form(){
+    public void form() {
         List<Conta> contas = this.contaService.findAll(Conta.class);
         this.result.include("contas", contas);
     }
 
     @Path("/movimentacao/list/contas")
-    public void listaContas(){
-      List<Conta> contas = this.contaService.findAll(Conta.class);
-      //todo: transformar em json
+    public void listaContas() {
+        List<Conta> contas = this.contaService.findAll(Conta.class);
+        this.result.use(Results.json()).withoutRoot().from(contas).serialize();
     }
 
     @Path("/movimentacao/salvar")

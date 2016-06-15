@@ -19,19 +19,13 @@ class MovimentacaoConta extends Component {
   }
 
   componentDidMount(){
-//    var self = this
-//    request
-//      .get('/movimentacao/list/contas')
-//      .end(function(err, res){
-//        var optionsAjax = res.body.map((tipo) => {return {label: tipo, value: tipo}});
-//        self.setState({options : optionsAjax})
-//      });
+
   }
 
     render = () =>
         <FormGroup>
           <Col smOffset={2} sm={4}>
-            <SimpleSelect options = {this.state.options} placeholder = "Selecione..."/>
+            <SimpleSelect options = {this.props.options} placeholder = "Selecione..."/>
           </Col>
           <Col sm={2}>
             <InputGroup>

@@ -24,12 +24,19 @@ class Movimentacao extends Component {
   }
 
   componentDidMount(){
+    var self = this
+    request
+      .get('movimentacao/list/contas')
+      .end(function(err, res){
+        var optionsAjax = res.body.map((conta) => {return {label: conta.nome, value: conta.nome}});
+        self.setState({options : optionsAjax})
+      });
   }
 
   addMovimentacao(){
     this.setState({
       movimentacoes: this.state.movimentacoes.concat(
-        <MovimentacaoConta key={this.state.movimentacoes.length}/>
+        <MovimentacaoConta key={this.state.movimentacoes.length} options={this.state.options}/>
       )
     })
   }

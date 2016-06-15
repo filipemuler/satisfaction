@@ -22,7 +22,7 @@ app.get('/movimentacao/list', function(req, res) {
 });
 
 app.get('/movimentacao/list/contas', function(req, res) {
-    res.send(['Despesa', 'Despesa > Supermercado', 'Despesa > Supermercado > Coca-cola']);
+    res.send([{nome :'Despesa'}]);
 });
 
 app.get('/contas', function(req, res) {

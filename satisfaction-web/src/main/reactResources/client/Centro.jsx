@@ -22,6 +22,7 @@ class Centro extends Component {
     handleSelect(selectedKey, event){
       event.preventDefault();
       var self = this
+      if(selectedKey != 'movimentacao'){
       request
         .get(selectedKey + '/list')
         .end(function(err, res){
@@ -33,6 +34,7 @@ class Centro extends Component {
           }.bind(event)();
           self.setState(stateObject)
         });
+        }
     }
 
     render () {
