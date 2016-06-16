@@ -20,7 +20,7 @@ class Movimentacao extends Component {
     super(props)
     this.addMovimentacao = this.addMovimentacao.bind(this)
     this.onHandleSubmit = this.onHandleSubmit.bind(this)
-    this.state = { options : [], movimentacoes : []}
+    this.state = { options : [], movimentacoes : [], groups : []}
   }
 
   componentDidMount(){
@@ -28,15 +28,16 @@ class Movimentacao extends Component {
     request
       .get('movimentacao/list/contas')
       .end(function(err, res){
-        var optionsAjax = res.body.map((conta) => {return {label: conta.nome, value: conta.nome}});
-        self.setState({options : optionsAjax})
+        var optionsAjax = res.body.contas.map((conta) => {return {groupId: conta.grupo, label: conta.nome, value: conta.nome}});
+        var grupos = res.body.grupos.map((grupo) => {return {groupId: grupo, title: grupo}});
+        self.setState({options : optionsAjax, groups : grupos})
       });
   }
 
   addMovimentacao(){
     this.setState({
       movimentacoes: this.state.movimentacoes.concat(
-        <MovimentacaoConta key={this.state.movimentacoes.length} options={this.state.options}/>
+        <MovimentacaoConta key={this.state.movimentacoes.length} options={this.state.options} groups={this.state.groups}/>
       )
     })
   }
@@ -46,7 +47,7 @@ class Movimentacao extends Component {
     request
       .post('movimentacao/salvar')
       .end(function(err, res){
-        self.setState({options : [], movimentacoes : []})
+        self.setState({options : [], movimentacoes : [], groups : []})
       });
   }
 
@@ -55,33 +56,8 @@ class Movimentacao extends Component {
       return(
         <Panel header={this.props.contexto} footer={footer}>
           <Form horizontal>
-            <FormGroup controlId="manha">
-              <Col componentClass={ControlLabel} sm={2}>Manhã</Col>
-              <Col sm={2}>
-                <InputGroup>
-                  <InputGroup.Addon>R$</InputGroup.Addon>
-                  <FormControl type="text" />
-                </InputGroup>
-              </Col>
-            </FormGroup>
-            <FormGroup controlId="tarde">
-              <Col componentClass={ControlLabel} sm={2}>Tarde</Col>
-              <Col sm={2}>
-                <InputGroup>
-                  <InputGroup.Addon>R$</InputGroup.Addon>
-                  <FormControl type="text" />
-                </InputGroup>
-              </Col>
-            </FormGroup>
-            <FormGroup controlId="noite">
-              <Col componentClass={ControlLabel} sm={2}>Noite</Col>
-              <Col sm={2}>
-                <InputGroup>
-                  <InputGroup.Addon>R$</InputGroup.Addon>
-                  <FormControl type="text" />
-                </InputGroup>
-              </Col>
-            </FormGroup>
+
+            <MovimentacaoConta options={this.state.options} groups={this.state.groups}/>
 
             {this.state.movimentacoes}
 

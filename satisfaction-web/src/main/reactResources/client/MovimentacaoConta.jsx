@@ -15,7 +15,7 @@ class MovimentacaoConta extends Component {
 
   constructor(props){
     super(props)
-    this.state = { options : []}
+    this.state = { options : [], groups : []}
   }
 
   componentDidMount(){
@@ -25,7 +25,7 @@ class MovimentacaoConta extends Component {
     render = () =>
         <FormGroup>
           <Col smOffset={2} sm={4}>
-            <SimpleSelect options = {this.props.options} placeholder = "Selecione..."/>
+            <SimpleSelect options = {this.props.options} groups={this.props.groups} placeholder = "Selecione..."/>
           </Col>
           <Col sm={2}>
             <InputGroup>

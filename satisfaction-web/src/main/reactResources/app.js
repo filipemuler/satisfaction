@@ -22,7 +22,8 @@ app.get('/movimentacao/list', function(req, res) {
 });
 
 app.get('/movimentacao/list/contas', function(req, res) {
-    res.send([{nome :'Despesa'}]);
+    res.send( {contas : [{grupo:'Despesa', nome :'Agua'}, {grupo:'Receita', nome:'Copa Manha'}, {grupo:'Receita', nome:'Copa Tarde'}, {grupo:'Receita', nome:'Copa Noite'}] ,
+              grupos : ['Despesa', 'Receita']});
 });
 
 app.get('/contas', function(req, res) {
