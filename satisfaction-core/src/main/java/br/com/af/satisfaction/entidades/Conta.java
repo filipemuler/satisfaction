@@ -17,6 +17,7 @@ public class Conta implements Serializable {
     private String descricao;
     private List<Conta> contas = Lists.newArrayList();
     private Conta referenteA;
+    private String grupo;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -60,5 +61,14 @@ public class Conta implements Serializable {
 
     public void setReferenteA(Conta referenteA) {
         this.referenteA = referenteA;
+    }
+
+    @Transient
+    public String getGrupo() {
+        return grupo;
+    }
+
+    public void setGrupo(String grupo) {
+        this.grupo = grupo;
     }
 }

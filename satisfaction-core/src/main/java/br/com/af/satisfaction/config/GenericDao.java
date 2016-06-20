@@ -7,6 +7,7 @@ import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.swing.*;
 
+import br.com.af.satisfaction.dto.MovimentadaoDTO;
 import br.com.af.satisfaction.entidades.Conta;
 import br.com.af.satisfaction.entidades.Permissao;
 import br.com.af.satisfaction.entidades.Usuario;
@@ -111,6 +112,12 @@ public class GenericDao<T> {
 
 	}
 
+	public MovimentadaoDTO findConta(){
+		Session session = (Session) this.em.getDelegate();
+		List<Conta> list = session.createCriteria(Conta.class).list();
+		return new MovimentadaoDTO(list);
+	}
+
 //	public List<Event> findEvents(long start, long end) {
 //		Session session = (Session) this.em.getDelegate();
 //
@@ -129,7 +136,4 @@ public class GenericDao<T> {
 //	}
 
 
-	public static void main(String[] args) {
-		System.out.println(Math.floorDiv(11-1, 10));
-	}
 }

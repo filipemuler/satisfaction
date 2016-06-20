@@ -20,6 +20,7 @@ class Movimentacao extends Component {
     super(props)
     this.addMovimentacao = this.addMovimentacao.bind(this)
     this.onHandleSubmit = this.onHandleSubmit.bind(this)
+    this.setValue = this.setValue.bind(this)
     this.state = { options : [], movimentacoes : [], groups : []}
   }
 
@@ -28,27 +29,46 @@ class Movimentacao extends Component {
     request
       .get('movimentacao/list/contas')
       .end(function(err, res){
-        var optionsAjax = res.body.contas.map((conta) => {return {groupId: conta.grupo, label: conta.nome, value: conta.nome}});
-        var grupos = res.body.grupos.map((grupo) => {return {groupId: grupo, title: grupo}});
+        let optionsAjax;
+        let grupos;
+        if(res.body.contas != null){
+            optionsAjax = res.body.contas.map((conta) => {return {groupId: conta.grupo, label: conta.nome, value: conta.nome}});
+        }
+        if(res.body.grupos != null){
+            grupos = res.body.grupos.map((grupo) => {return {groupId: grupo, title: grupo}});
+        }
         self.setState({options : optionsAjax, groups : grupos})
+        self.addMovimentacao();
       });
   }
 
   addMovimentacao(){
     this.setState({
       movimentacoes: this.state.movimentacoes.concat(
-        <MovimentacaoConta key={this.state.movimentacoes.length} options={this.state.options} groups={this.state.groups}/>
+        <MovimentacaoConta key={this.state.movimentacoes.length}
+          index={this.state.movimentacoes.length}
+          options={this.state.options}
+          groups={this.state.groups}
+          onValueChange={this.setValue}/>
       )
     })
   }
 
   onHandleSubmit(){
     var self = this
+    console.log(this.state)
     request
       .post('movimentacao/salvar')
+      .send(this.state)
       .end(function(err, res){
-        self.setState({options : [], movimentacoes : [], groups : []})
+        self.setState({options : [], movimentacoes : [], groups : [], movimentacao : { movimentacoesConta: []}})
       });
+  }
+
+  setValue(e){
+    var state = {};
+    state[e.target.name] = e.target.value;
+    this.setState(state);
   }
 
     render () {
@@ -56,8 +76,6 @@ class Movimentacao extends Component {
       return(
         <Panel header={this.props.contexto} footer={footer}>
           <Form horizontal>
-
-            <MovimentacaoConta options={this.state.options} groups={this.state.groups}/>
 
             {this.state.movimentacoes}
 

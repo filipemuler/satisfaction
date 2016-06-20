@@ -19,21 +19,31 @@ class MovimentacaoConta extends Component {
   }
 
   componentDidMount(){
-
   }
 
-    render = () =>
+    render () {
+      return(
         <FormGroup>
           <Col smOffset={2} sm={4}>
-            <SimpleSelect options = {this.props.options} groups={this.props.groups} placeholder = "Selecione..."/>
+            <SimpleSelect
+              options = {this.props.options}
+              groups={this.props.groups}
+              placeholder = "Selecione..."
+              onValueChange={this.props.onValueChange}
+              name="movimentacaoContaId"/>
           </Col>
           <Col sm={2}>
             <InputGroup>
               <InputGroup.Addon>R$</InputGroup.Addon>
-              <FormControl type="text" />
+              <FormControl type="text"
+                onChange={this.props.onValueChange}
+                name="movimentacaoContaValor"/>
             </InputGroup>
           </Col>
         </FormGroup>
+      )
+    }
+
 }
 
 export default MovimentacaoConta
