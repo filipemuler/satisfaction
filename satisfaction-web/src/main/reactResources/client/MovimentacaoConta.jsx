@@ -29,14 +29,12 @@ class MovimentacaoConta extends Component {
               options = {this.props.options}
               groups={this.props.groups}
               placeholder = "Selecione..."
-              onValueChange={this.props.onValueChange}
               name="movimentacaoContaId"/>
           </Col>
           <Col sm={2}>
             <InputGroup>
               <InputGroup.Addon>R$</InputGroup.Addon>
               <FormControl type="text"
-                onChange={this.props.onValueChange}
                 name="movimentacaoContaValor"/>
             </InputGroup>
           </Col>

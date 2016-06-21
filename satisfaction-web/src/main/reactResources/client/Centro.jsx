@@ -20,7 +20,6 @@ class Centro extends Component {
 
 
     handleSelect(selectedKey, event){
-      event.preventDefault();
       var self = this
       if(selectedKey != 'movimentacao'){
       request

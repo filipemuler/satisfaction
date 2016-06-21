@@ -12,13 +12,13 @@ import request from 'superagent'
 import SimpleSelect from 'react-selectize/src/SimpleSelect'
 import Glyphicon from 'react-bootstrap/lib/Glyphicon'
 import MovimentacaoConta from './MovimentacaoConta'
+import MovimentacaoAdd from './MovimentacaoAdd'
 import Footer from './Footer'
 
 class Movimentacao extends Component {
 
   constructor(props){
     super(props)
-    this.addMovimentacao = this.addMovimentacao.bind(this)
     this.onHandleSubmit = this.onHandleSubmit.bind(this)
     this.setValue = this.setValue.bind(this)
     this.state = { options : [], movimentacoes : [], groups : []}
@@ -45,23 +45,27 @@ class Movimentacao extends Component {
   addMovimentacao(){
     this.setState({
       movimentacoes: this.state.movimentacoes.concat(
-        <MovimentacaoConta key={this.state.movimentacoes.length}
+        <MovimentacaoAdd key={this.state.movimentacoes.length}
           index={this.state.movimentacoes.length}
           options={this.state.options}
           groups={this.state.groups}
-          onValueChange={this.setValue}/>
+          onValueChange={this.setValue}
+          ref={(c) => this.teste = c }/>
       )
     })
   }
 
   onHandleSubmit(){
     var self = this
-    console.log(this.state)
+    console.log(this.movimentacao)
+    console.log(this.movimentacao.refs.conta)
+
     request
       .post('movimentacao/salvar')
       .send(this.state)
       .end(function(err, res){
-        self.setState({options : [], movimentacoes : [], groups : [], movimentacao : { movimentacoesConta: []}})
+        self.setState({options : [], movimentacoes : [], groups : []})
+        self.addMovimentacao();
       });
   }
 
@@ -75,22 +79,12 @@ class Movimentacao extends Component {
       const footer = <Footer onSubmit={this.onHandleSubmit} />
       return(
         <Panel header={this.props.contexto} footer={footer}>
-          <Form horizontal>
 
-            {this.state.movimentacoes}
-
-            <FormGroup controlId="plus">
-                <Col smOffset={2} sm={4}>
-                    <Button bsSize="small" onClick={this.addMovimentacao}>
-                        <Glyphicon glyph="plus" />
-                    </Button>
-                </Col>
-            </FormGroup>
-         </Form>
         </Panel>
       )
     }
 }
 
+const referencias = [];
 
 export default Movimentacao
