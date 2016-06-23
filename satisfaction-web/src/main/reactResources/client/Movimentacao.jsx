@@ -13,15 +13,19 @@ import SimpleSelect from 'react-selectize/src/SimpleSelect'
 import Glyphicon from 'react-bootstrap/lib/Glyphicon'
 import MovimentacaoConta from './MovimentacaoConta'
 import MovimentacaoAdd from './MovimentacaoAdd'
+import MovimentacaoAdded from './MovimentacaoAdded'
 import Footer from './Footer'
+
+var i = 0;
+var key = "key" + i;
 
 class Movimentacao extends Component {
 
   constructor(props){
     super(props)
     this.onHandleSubmit = this.onHandleSubmit.bind(this)
-    this.setValue = this.setValue.bind(this)
-    this.state = { options : [], movimentacoes : [], groups : []}
+    this.addMovimentacao = this.addMovimentacao.bind(this)
+    this.state = { options : [], groups : [], addNewKey : []}
   }
 
   componentDidMount(){
@@ -37,54 +41,40 @@ class Movimentacao extends Component {
         if(res.body.grupos != null){
             grupos = res.body.grupos.map((grupo) => {return {groupId: grupo, title: grupo}});
         }
-        self.setState({options : optionsAjax, groups : grupos})
-        self.addMovimentacao();
+        key = "key" + ++i;
+        self.setState({options : optionsAjax, groups : grupos,  addNewKey: key})
       });
-  }
-
-  addMovimentacao(){
-    this.setState({
-      movimentacoes: this.state.movimentacoes.concat(
-        <MovimentacaoAdd key={this.state.movimentacoes.length}
-          index={this.state.movimentacoes.length}
-          options={this.state.options}
-          groups={this.state.groups}
-          onValueChange={this.setValue}
-          ref={(c) => this.teste = c }/>
-      )
-    })
   }
 
   onHandleSubmit(){
     var self = this
-    console.log(this.movimentacao)
-    console.log(this.movimentacao.refs.conta)
-
     request
       .post('movimentacao/salvar')
       .send(this.state)
       .end(function(err, res){
-        self.setState({options : [], movimentacoes : [], groups : []})
-        self.addMovimentacao();
+        self.setState({options : [], groups : []})
       });
-  }
+    }
 
-  setValue(e){
-    var state = {};
-    state[e.target.name] = e.target.value;
-    this.setState(state);
-  }
+    addMovimentacao(){
+      key = "key" + ++i;
+      this.setState({ addNewKey: key })
+    }
 
     render () {
       const footer = <Footer onSubmit={this.onHandleSubmit} />
       return(
         <Panel header={this.props.contexto} footer={footer}>
-
+          <Form horizontal>
+            <MovimentacaoAdded options={this.state.options}
+              groups={this.state.groups}
+              addNewKey={this.state.addNewKey}
+              ref="movimentacaoAdded"/>
+            <MovimentacaoAdd addMovimentacao={this.addMovimentacao}/>
+          </Form>
         </Panel>
       )
     }
 }
-
-const referencias = [];
 
 export default Movimentacao

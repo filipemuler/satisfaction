@@ -14,28 +14,34 @@ import Glyphicon from 'react-bootstrap/lib/Glyphicon'
 import MovimentacaoConta from './MovimentacaoConta'
 import Footer from './Footer'
 
-class MovimentacaoAdd extends Component {
+
+class MovimentacaoAdded extends Component {
 
   constructor(props){
     super(props)
+    this.state = {movimentacoes : []}
   }
 
   componentDidMount(){
   }
 
+  shouldComponentUpdate(nextProps, nextState) {
+    return nextProps.addNewKey !== this.props.addNewKey;
+  }
+
     render () {
+      if(this.props.addNewKey != ""){
+        this.state.movimentacoes.push(<MovimentacaoConta key={this.props.addNewKey}
+          options={this.props.options}
+          groups={this.props.groups}
+          ref={this.props.addNewKey}/>)
+      }
       return(
-          <FormGroup controlId="plus">
-            <Col smOffset={2} sm={4}>
-              <Button
-                bsSize="small"
-                onClick={this.props.addMovimentacao}>
-                <Glyphicon glyph="plus" />
-              </Button>
-            </Col>
-          </FormGroup>
+        <div>
+          {this.state.movimentacoes}
+        </div>
       )
     }
 }
 
-export default MovimentacaoAdd
+export default MovimentacaoAdded

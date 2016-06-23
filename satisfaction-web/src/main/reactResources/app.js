@@ -54,4 +54,8 @@ app.get('/permissao', function(req, res) {
     res.send({results : [{'id':'1001', 'usuario': 'permissao1'}, {'id':'1002', 'usuario': 'permissao2'}]});
 });
 
+app.post('/movimentacao/salvar', function(req, res){
+  res.send('post')
+});
+
 app.listen(3000);
