@@ -1,14 +1,9 @@
 import React, {Component, PropTypes} from 'react'
-import Panel from 'react-bootstrap/lib/Panel'
 import Button from 'react-bootstrap/lib/Button'
-import Form from 'react-bootstrap/lib/Form'
 import FormGroup from 'react-bootstrap/lib/FormGroup'
 import FormControl from 'react-bootstrap/lib/FormControl'
 import InputGroup from 'react-bootstrap/lib/InputGroup'
 import Col from 'react-bootstrap/lib/Col'
-import ControlLabel from 'react-bootstrap/lib/ControlLabel'
-import ButtonToolbar from 'react-bootstrap/lib/ButtonToolbar'
-import request from 'superagent'
 import SimpleSelect from 'react-selectize/src/SimpleSelect'
 
 class MovimentacaoConta extends Component {
@@ -29,13 +24,15 @@ class MovimentacaoConta extends Component {
               options = {this.props.options}
               groups={this.props.groups}
               placeholder = "Selecione..."
-              name="movimentacaoContaId"/>
+              name="movimentacaoContaId"
+              ref="conta"/>
           </Col>
           <Col sm={2}>
             <InputGroup>
               <InputGroup.Addon>R$</InputGroup.Addon>
               <FormControl type="text"
-                name="movimentacaoContaValor"/>
+                name="movimentacaoContaValor"
+                ref="valor"/>
             </InputGroup>
           </Col>
         </FormGroup>

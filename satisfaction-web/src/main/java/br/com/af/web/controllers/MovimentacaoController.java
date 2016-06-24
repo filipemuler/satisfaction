@@ -10,8 +10,10 @@ import br.com.af.satisfaction.config.GenericDao;
 import br.com.af.satisfaction.dto.MovimentadaoDTO;
 import br.com.af.satisfaction.entidades.Conta;
 import br.com.af.satisfaction.entidades.Movimentacao;
+import br.com.caelum.vraptor.Consumes;
 import br.com.caelum.vraptor.Controller;
 import br.com.caelum.vraptor.Path;
+import br.com.caelum.vraptor.Post;
 import br.com.caelum.vraptor.Result;
 import br.com.caelum.vraptor.view.Results;
 
@@ -49,7 +51,8 @@ public class MovimentacaoController {
 
     }
 
-    @Path("/movimentacao/salvar")
+    @Consumes("application/json")
+    @Post("/movimentacao/salvar")
     public void salvar(Movimentacao movimentacao) {
         this.movimentacaoService.persist(movimentacao);
     }
