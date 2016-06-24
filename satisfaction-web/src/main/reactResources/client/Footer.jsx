@@ -12,7 +12,7 @@ class Footer extends Component {
     render = () =>
       <ButtonToolbar>
         <Button bsStyle="primary" onClick={this.props.onSubmit}>Salvar</Button>
-        <Button>Cancelar</Button>
+        <Button onClick={this.props.onCancel}>Cancelar</Button>
       </ButtonToolbar>
 }
 

@@ -18,6 +18,7 @@ class Movimentacao extends Component {
   constructor(props){
     super(props)
     this.onHandleSubmit = this.onHandleSubmit.bind(this)
+    this.onCancel = this.onCancel.bind(this)
     this.addMovimentacao = this.addMovimentacao.bind(this)
     this.state = { options : [], groups : [], referencias : []}
   }
@@ -52,9 +53,12 @@ class Movimentacao extends Component {
       .post('movimentacao/salvar')
       .send(submit)
       .end(function(err, res){
-        self.setState({referencias : []})
-        self.addMovimentacao();
+        self.setState({referencias : [Math.random()]})
       });
+    }
+
+    onCancel(){
+      this.setState({referencias : [Math.random()]})
     }
 
     addMovimentacao(){
@@ -62,7 +66,7 @@ class Movimentacao extends Component {
     }
 
     render () {
-      const footer = <Footer onSubmit={this.onHandleSubmit} />
+      const footer = <Footer onSubmit={this.onHandleSubmit} onCancel={this.onCancel}/>
       var movimentacoes = this.state.referencias.map(ref =>
         <MovimentacaoConta key={ref}
           options={this.state.options}

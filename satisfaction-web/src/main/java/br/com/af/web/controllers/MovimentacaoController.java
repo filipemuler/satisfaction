@@ -2,14 +2,20 @@ package br.com.af.web.controllers;
 
 import static com.google.common.collect.FluentIterable.from;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.inject.Inject;
+
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
 
 import br.com.af.satisfaction.config.GenericDao;
 import br.com.af.satisfaction.dto.MovimentadaoDTO;
 import br.com.af.satisfaction.entidades.Conta;
 import br.com.af.satisfaction.entidades.Movimentacao;
+import br.com.af.satisfaction.entidades.Usuario;
 import br.com.caelum.vraptor.Consumes;
 import br.com.caelum.vraptor.Controller;
 import br.com.caelum.vraptor.Path;
@@ -26,6 +32,7 @@ public class MovimentacaoController {
     private Result result;
     private GenericDao<Conta> contaService;
     private GenericDao<Movimentacao> movimentacaoService;
+    private GenericDao<Usuario> usuarioService;
 
     public MovimentacaoController() {
         // nada
@@ -33,10 +40,11 @@ public class MovimentacaoController {
 
     @Inject
     public MovimentacaoController(Result result, GenericDao<Conta> contaService,
-                                  GenericDao<Movimentacao> movimentacaoService) {
+                                  GenericDao<Movimentacao> movimentacaoService, GenericDao<Usuario> usuarioService) {
         this.result = result;
         this.contaService = contaService;
         this.movimentacaoService = movimentacaoService;
+        this.usuarioService = usuarioService;
     }
 
     public void form() {
@@ -54,6 +62,14 @@ public class MovimentacaoController {
     @Consumes("application/json")
     @Post("/movimentacao/salvar")
     public void salvar(Movimentacao movimentacao) {
+        movimentacao.setDataTransacao(new Date());
+
+        //TODO: fazer um servico pra isso aqui
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String username = ((User) authentication.getPrincipal()).getUsername();
+        Usuario usuario = usuarioService.findByUserName(username);
+        movimentacao.setUsuario(usuario);
+
         this.movimentacaoService.persist(movimentacao);
     }
 
