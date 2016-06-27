@@ -13,12 +13,16 @@ import br.com.af.satisfaction.entidades.Conta;
 public class MovimentadaoDTO {
     private List<Conta> contas;
     private List<String> grupos = Lists.newArrayList();
+    private List<Conta> contasOrdem = Lists.newArrayList();
 
     public MovimentadaoDTO(List<Conta> contas) {
         this.contas = contas;
 
         for (Iterator<Conta> it = contas.iterator(); it.hasNext(); ) {
             Conta conta = it.next();
+            if(conta.getOrdem() != null){
+                this.contasOrdem.add(conta);
+            }
             if (conta.getReferenteA() == null) {
                 this.grupos.add(conta.getNome());
                 it.remove();

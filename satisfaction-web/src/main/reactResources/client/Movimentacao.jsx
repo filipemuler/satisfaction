@@ -10,6 +10,7 @@ import Col from 'react-bootstrap/lib/Col'
 import ControlLabel from 'react-bootstrap/lib/ControlLabel'
 import request from 'superagent'
 import MovimentacaoConta from './MovimentacaoConta'
+import MovimentacaoContaOrdem from './MovimentacaoContaOrdem'
 import MovimentacaoAdd from './MovimentacaoAdd'
 import Footer from './Footer'
 
@@ -20,7 +21,7 @@ class Movimentacao extends Component {
     this.onHandleSubmit = this.onHandleSubmit.bind(this)
     this.onCancel = this.onCancel.bind(this)
     this.addMovimentacao = this.addMovimentacao.bind(this)
-    this.state = { options : [], groups : [], referencias : []}
+    this.state = { options : [], groups : [], contasOrdem : [], referencias : []}
   }
 
   componentDidMount(){
@@ -30,13 +31,19 @@ class Movimentacao extends Component {
       .end(function(err, res){
         let optionsAjax;
         let grupos;
+        let contasOrdem;
         if(res.body.contas != null){
             optionsAjax = res.body.contas.map((conta) => {return {groupId: conta.grupo, label: conta.nome, value: conta.id}});
         }
         if(res.body.grupos != null){
             grupos = res.body.grupos.map((grupo) => {return {groupId: grupo, title: grupo}});
         }
-        self.setState({options : optionsAjax, groups : grupos,
+        if(res.body.contasOrdem != null){
+          //Colocando em ordem
+          res.body.contasOrdem.sort((a,b) => a.ordem > b.ordem )
+          contasOrdem = res.body.contasOrdem.map((conta) => {return {contaId: conta.id, title: conta.nome}});
+        }
+        self.setState({options : optionsAjax, groups : grupos, contasOrdem : contasOrdem,
           referencias : self.state.referencias.concat(Math.random())})
       });
   }
@@ -67,6 +74,13 @@ class Movimentacao extends Component {
 
     render () {
       const footer = <Footer onSubmit={this.onHandleSubmit} onCancel={this.onCancel}/>
+      var movimentacoesOrdem = this.state.contasOrdem.map(conta =>
+            <MovimentacaoContaOrdem key={conta.contaId}
+              contaId={conta.contaId}
+              title={conta.title}
+              ref={conta.contaId}/>
+      )
+      
       var movimentacoes = this.state.referencias.map(ref =>
         <MovimentacaoConta key={ref}
           options={this.state.options}
@@ -76,6 +90,7 @@ class Movimentacao extends Component {
       return(
         <Panel header={this.props.contexto} footer={footer}>
           <Form horizontal>
+            {movimentacoesOrdem}
             {movimentacoes}
             <MovimentacaoAdd addMovimentacao={this.addMovimentacao}/>
           </Form>

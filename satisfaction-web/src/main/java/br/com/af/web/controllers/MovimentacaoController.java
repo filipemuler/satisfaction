@@ -55,7 +55,8 @@ public class MovimentacaoController {
     @Path("/movimentacao/list/contas")
     public void listaContas() {
         MovimentadaoDTO movimentadaoDTO = this.contaService.findConta();
-        this.result.use(Results.json()).withoutRoot().from(movimentadaoDTO).include("contas", "grupos").serialize();
+        this.result.use(Results.json()).withoutRoot().
+                from(movimentadaoDTO).include("contas", "grupos", "contasOrdem").serialize();
 
     }
 

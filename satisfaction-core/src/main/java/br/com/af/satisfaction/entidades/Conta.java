@@ -15,6 +15,7 @@ public class Conta implements Serializable {
     private Long id;
     private String nome;
     private String descricao;
+    private Integer ordem;
     private List<Conta> contas = Lists.newArrayList();
     private Conta referenteA;
     private String grupo;
@@ -43,6 +44,14 @@ public class Conta implements Serializable {
 
     public void setDescricao(String descricao) {
         this.descricao = descricao;
+    }
+
+    public Integer getOrdem() {
+        return ordem;
+    }
+
+    public void setOrdem(Integer ordem) {
+        this.ordem = ordem;
     }
 
     @OneToMany(mappedBy = "referenteA", cascade = CascadeType.ALL)
