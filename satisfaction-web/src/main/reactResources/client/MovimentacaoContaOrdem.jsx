@@ -11,24 +11,34 @@ class MovimentacaoConta extends Component {
 
   constructor(props){
     super(props)
-    this.state = { options : [], groups : []}
+    this.onChange = this.onChange.bind(this);
+    this.state = {inputValue : ""}
   }
 
-  componentDidMount(){
+    componentWillReceiveProps(nextProps){
+        this.setState({inputValue : this.props.inputValue})
+    }
+
+  onChange(e){
+        this.setState({inputValue : e.target.value})
   }
 
     render () {
+
       return(
         <FormGroup>
           <Col smOffset={2} sm={4}>
             <ControlLabel>{this.props.title}</ControlLabel>
+            <input type="hidden" value={this.props.contaId} ref="conta"/>
           </Col>
           <Col sm={2}>
             <InputGroup>
               <InputGroup.Addon>R$</InputGroup.Addon>
               <FormControl type="text"
                 name="movimentacaoContaValor"
-                ref="valor"/>
+                ref="valor"
+                value={this.state.inputValue}
+                onChange={this.onChange}/>
             </InputGroup>
           </Col>
         </FormGroup>

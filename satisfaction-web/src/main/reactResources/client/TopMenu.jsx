@@ -12,7 +12,7 @@ class TopMenu extends Component {
         <NavItem eventKey={1} href="#">Dashboard</NavItem>
         <NavItem eventKey={2} href="#">Settings</NavItem>
         <NavItem eventKey={3} href="#">Profile</NavItem>
-        <NavItem eventKey={4} href="${app}/logout">Logout</NavItem>
+        <NavItem eventKey={4} href="logout">Logout</NavItem>
       </Nav>
     </Navbar>
 }

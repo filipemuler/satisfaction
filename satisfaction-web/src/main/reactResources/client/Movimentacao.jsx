@@ -21,7 +21,7 @@ class Movimentacao extends Component {
     this.onHandleSubmit = this.onHandleSubmit.bind(this)
     this.onCancel = this.onCancel.bind(this)
     this.addMovimentacao = this.addMovimentacao.bind(this)
-    this.state = { options : [], groups : [], contasOrdem : [], referencias : []}
+    this.state = { options : [], groups : [], contasOrdem : [], referencias : [], inputValue : ""}
   }
 
   componentDidMount(){
@@ -52,7 +52,13 @@ class Movimentacao extends Component {
     var self = this
     var submit = {movimentacao : { movimentacoesConta : []}}
     for (var ref in this.refs) {
-      var conta = this.refs[ref].refs.conta.value().value
+        var conta;
+      if(typeof this.refs[ref].refs.conta.value == 'function'){
+            conta = this.refs[ref].refs.conta.value().value
+         }else{
+         conta = this.refs[ref].refs.conta.value
+         }
+
       var valor = ReactDOM.findDOMNode(this.refs[ref].refs.valor).value
       submit.movimentacao.movimentacoesConta.push({conta : {id : conta }, valor : valor})
      }
@@ -60,7 +66,7 @@ class Movimentacao extends Component {
       .post('movimentacao/salvar')
       .send(submit)
       .end(function(err, res){
-        self.setState({referencias : [Math.random()]})
+        self.setState({referencias : [Math.random()], inputValue : ""})
       });
     }
 
@@ -78,6 +84,7 @@ class Movimentacao extends Component {
             <MovimentacaoContaOrdem key={conta.contaId}
               contaId={conta.contaId}
               title={conta.title}
+              inputValue={this.state.inputValue}
               ref={conta.contaId}/>
       )
       
