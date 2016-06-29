@@ -1,4 +1,5 @@
 import React, {Component, PropTypes} from 'react'
+import ReactDOM from 'react-dom'
 import Panel from 'react-bootstrap/lib/Panel'
 import Button from 'react-bootstrap/lib/Button'
 import ButtonToolbar from 'react-bootstrap/lib/ButtonToolbar'
@@ -17,6 +18,7 @@ class Cadastro extends Component {
     super(props)
     this.state = {showModal : false}
     this.clickCriar = this.clickCriar.bind(this)
+    this.onHandleSubmit = this.onHandleSubmit.bind(this)
     this.close = this.close.bind(this)
   }
 
@@ -34,6 +36,17 @@ class Cadastro extends Component {
     this.setState({showModal : false})
   }
 
+  onHandleSubmit(){
+    self = this;
+    console.log(this.refs.form.getDataForm())
+    request
+      .post(url)
+      .send(this.refs.form.getDataForm())
+      .end(function(err, res){
+        self.close();
+      });
+  }
+
   render(){
     const buttonCriar = <Button bsStyle="primary" onClick={this.clickCriar}>Criar</Button>
     const footer =  <ButtonToolbar>{buttonCriar}</ButtonToolbar>
@@ -41,19 +54,24 @@ class Cadastro extends Component {
       var cadastro;
       switch (this.props.contexto) {
         case 'contas':
-          cadastro = <ContasForm />
+          url = "conta/salva";
+          cadastro = <ContasForm ref="form"/>
           break;
         case 'usuario':
-          cadastro = <UsuarioForm />
+          url = "usuario/salva";
+          cadastro = <UsuarioForm ref="form"/>
           break;
         case 'permissao':
-          cadastro = <PermissaoForm />
+          url = "permissao/salva";
+          cadastro = <PermissaoForm ref="form"/>
           break;
         case 'filial':
-          cadastro = <FilialForm />
+          url = "filial/salva";
+          cadastro = <FilialForm ref="form"/>
           break;
         case 'funcionario':
-          cadastro = <FuncionarioForm />
+          url = "funcionario/salva";
+          cadastro = <FuncionarioForm ref="form"/>
           break;
         default:
 
@@ -70,7 +88,7 @@ class Cadastro extends Component {
             </Modal.Body>
             <Modal.Footer>
               <Button onClick={this.close}>Cancelar</Button>
-              <Button bsStyle="primary">Salvar</Button>
+              <Button bsStyle="primary" onClick={this.onHandleSubmit}>Salvar</Button>
             </Modal.Footer>
           </Modal>
         </Panel>
@@ -78,5 +96,7 @@ class Cadastro extends Component {
   }
 
 }
+
+let url = ''
 
 export default Cadastro

@@ -65,6 +65,10 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _reactDom = require('react-dom');
+
+var _reactDom2 = _interopRequireDefault(_reactDom);
+
 var _reactBootstrapLibPanel = require('react-bootstrap/lib/Panel');
 
 var _reactBootstrapLibPanel2 = _interopRequireDefault(_reactBootstrapLibPanel);
@@ -118,6 +122,7 @@ var Cadastro = (function (_Component) {
     _get(Object.getPrototypeOf(Cadastro.prototype), 'constructor', this).call(this, props);
     this.state = { showModal: false };
     this.clickCriar = this.clickCriar.bind(this);
+    this.onHandleSubmit = this.onHandleSubmit.bind(this);
     this.close = this.close.bind(this);
   }
 
@@ -138,6 +143,15 @@ var Cadastro = (function (_Component) {
       this.setState({ showModal: false });
     }
   }, {
+    key: 'onHandleSubmit',
+    value: function onHandleSubmit() {
+      self = this;
+      console.log(this.refs.form.getDataForm());
+      _superagent2['default'].post(url).send(this.refs.form.getDataForm()).end(function (err, res) {
+        self.close();
+      });
+    }
+  }, {
     key: 'render',
     value: function render() {
       var buttonCriar = _react2['default'].createElement(
@@ -154,19 +168,24 @@ var Cadastro = (function (_Component) {
       var cadastro;
       switch (this.props.contexto) {
         case 'contas':
-          cadastro = _react2['default'].createElement(_formContasForm2['default'], null);
+          url = "conta/salva";
+          cadastro = _react2['default'].createElement(_formContasForm2['default'], { ref: 'form' });
           break;
         case 'usuario':
-          cadastro = _react2['default'].createElement(_formUsuarioForm2['default'], null);
+          url = "usuario/salva";
+          cadastro = _react2['default'].createElement(_formUsuarioForm2['default'], { ref: 'form' });
           break;
         case 'permissao':
-          cadastro = _react2['default'].createElement(_formPermissaoForm2['default'], null);
+          url = "permissao/salva";
+          cadastro = _react2['default'].createElement(_formPermissaoForm2['default'], { ref: 'form' });
           break;
         case 'filial':
-          cadastro = _react2['default'].createElement(_formFilialForm2['default'], null);
+          url = "filial/salva";
+          cadastro = _react2['default'].createElement(_formFilialForm2['default'], { ref: 'form' });
           break;
         case 'funcionario':
-          cadastro = _react2['default'].createElement(_formFuncionarioForm2['default'], null);
+          url = "funcionario/salva";
+          cadastro = _react2['default'].createElement(_formFuncionarioForm2['default'], { ref: 'form' });
           break;
         default:
 
@@ -202,7 +221,7 @@ var Cadastro = (function (_Component) {
             ),
             _react2['default'].createElement(
               _reactBootstrapLibButton2['default'],
-              { bsStyle: 'primary' },
+              { bsStyle: 'primary', onClick: this.onHandleSubmit },
               'Salvar'
             )
           )
@@ -214,10 +233,12 @@ var Cadastro = (function (_Component) {
   return Cadastro;
 })(_react.Component);
 
+var url = '';
+
 exports['default'] = Cadastro;
 module.exports = exports['default'];
 
-},{"./Lista":6,"./form/ContasForm":15,"./form/FilialForm":16,"./form/FuncionarioForm":17,"./form/PermissaoForm":18,"./form/UsuarioForm":19,"react":369,"react-bootstrap/lib/Button":117,"react-bootstrap/lib/ButtonToolbar":118,"react-bootstrap/lib/Modal":135,"react-bootstrap/lib/Panel":150,"superagent":371}],3:[function(require,module,exports){
+},{"./Lista":6,"./form/ContasForm":15,"./form/FilialForm":16,"./form/FuncionarioForm":17,"./form/PermissaoForm":18,"./form/UsuarioForm":19,"react":369,"react-bootstrap/lib/Button":117,"react-bootstrap/lib/ButtonToolbar":118,"react-bootstrap/lib/Modal":135,"react-bootstrap/lib/Panel":150,"react-dom":196,"superagent":371}],3:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -1541,6 +1562,10 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _reactDom = require('react-dom');
+
+var _reactDom2 = _interopRequireDefault(_reactDom);
+
 var _reactBootstrapLibForm = require('react-bootstrap/lib/Form');
 
 var _reactBootstrapLibForm2 = _interopRequireDefault(_reactBootstrapLibForm);
@@ -1602,7 +1627,7 @@ var ContasForm = (function (_Component) {
           _react2['default'].createElement(
             _reactBootstrapLibCol2['default'],
             { sm: 9 },
-            _react2['default'].createElement(_reactBootstrapLibFormControl2['default'], { type: 'nome', placeholder: 'Nome' })
+            _react2['default'].createElement(_reactBootstrapLibFormControl2['default'], { type: 'nome', placeholder: 'Nome', ref: 'nome' })
           )
         ),
         _react2['default'].createElement(
@@ -1616,7 +1641,7 @@ var ContasForm = (function (_Component) {
           _react2['default'].createElement(
             _reactBootstrapLibCol2['default'],
             { sm: 9 },
-            _react2['default'].createElement(_reactBootstrapLibFormControl2['default'], { type: 'descricao', placeholder: 'Descrição' })
+            _react2['default'].createElement(_reactBootstrapLibFormControl2['default'], { type: 'descricao', placeholder: 'Descrição', ref: 'descricao' })
           )
         ),
         _react2['default'].createElement(
@@ -1631,12 +1656,13 @@ var ContasForm = (function (_Component) {
             _reactBootstrapLibCol2['default'],
             { sm: 9 },
             _react2['default'].createElement(_reactSelectizeSrcSimpleSelect2['default'], { options: _this.state.options, placeholder: 'Selecione...',
-              style: s.selectize })
+              ref: 'referenteA' })
           )
         )
       );
     };
 
+    this.getDataForm = this.getDataForm.bind(this);
     this.state = { options: [] };
   }
 
@@ -1644,28 +1670,36 @@ var ContasForm = (function (_Component) {
     key: 'componentDidMount',
     value: function componentDidMount() {
       var self = this;
-      _superagent2['default'].get('/contas/list/contas').end(function (err, res) {
+      _superagent2['default'].get('contas/list/contas').end(function (err, res) {
         var optionsAjax = res.body.map(function (tipo) {
-          return { label: tipo, value: tipo };
+          return { label: tipo.nome, value: tipo.id };
         });
         self.setState({ options: optionsAjax });
       });
+    }
+  }, {
+    key: 'getDataForm',
+    value: function getDataForm() {
+      var data = {
+        conta: {
+          nome: _reactDom2['default'].findDOMNode(this.refs.nome).value,
+          descricao: _reactDom2['default'].findDOMNode(this.refs.descricao).value,
+          referenteA: {
+            id: this.refs.referenteA.value().value
+          }
+        }
+      };
+      return data;
     }
   }]);
 
   return ContasForm;
 })(_react.Component);
 
-var s = {
-  selectize: {
-    'width': '418px'
-  }
-};
-
 exports['default'] = ContasForm;
 module.exports = exports['default'];
 
-},{"react":369,"react-bootstrap/lib/Checkbox":119,"react-bootstrap/lib/Col":120,"react-bootstrap/lib/ControlLabel":122,"react-bootstrap/lib/Form":124,"react-bootstrap/lib/FormControl":125,"react-bootstrap/lib/FormGroup":128,"react-bootstrap/lib/InputGroup":131,"react-selectize/src/SimpleSelect":221,"superagent":371}],16:[function(require,module,exports){
+},{"react":369,"react-bootstrap/lib/Checkbox":119,"react-bootstrap/lib/Col":120,"react-bootstrap/lib/ControlLabel":122,"react-bootstrap/lib/Form":124,"react-bootstrap/lib/FormControl":125,"react-bootstrap/lib/FormGroup":128,"react-bootstrap/lib/InputGroup":131,"react-dom":196,"react-selectize/src/SimpleSelect":221,"superagent":371}],16:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -2075,6 +2109,8 @@ Object.defineProperty(exports, '__esModule', {
   value: true
 });
 
+var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
 var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; desc = parent = undefined; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
@@ -2086,6 +2122,10 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
 var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
+
+var _reactDom = require('react-dom');
+
+var _reactDom2 = _interopRequireDefault(_reactDom);
 
 var _reactBootstrapLibForm = require('react-bootstrap/lib/Form');
 
@@ -2138,7 +2178,7 @@ var PermissaoForm = (function (_Component) {
           _react2['default'].createElement(
             _reactBootstrapLibCol2['default'],
             { sm: 9 },
-            _react2['default'].createElement(_reactBootstrapLibFormControl2['default'], { type: 'rotina', placeholder: 'Rotina', name: 'permissao.rotina' })
+            _react2['default'].createElement(_reactBootstrapLibFormControl2['default'], { type: 'rotina', placeholder: 'Rotina', ref: 'rotina' })
           )
         ),
         _react2['default'].createElement(
@@ -2152,12 +2192,25 @@ var PermissaoForm = (function (_Component) {
           _react2['default'].createElement(
             _reactBootstrapLibCol2['default'],
             { sm: 9 },
-            _react2['default'].createElement(_reactBootstrapLibFormControl2['default'], { type: 'password', placeholder: 'Tipo', name: 'permissao.tipo' })
+            _react2['default'].createElement(_reactBootstrapLibFormControl2['default'], { type: 'password', placeholder: 'Tipo', ref: 'tipo' })
           )
         )
       );
     };
   }
+
+  _createClass(PermissaoForm, [{
+    key: 'getDataForm',
+    value: function getDataForm() {
+      var data = {
+        permissao: {
+          rotina: _reactDom2['default'].findDOMNode(this.refs.rotina).value,
+          tipo: _reactDom2['default'].findDOMNode(this.refs.tipo).value
+        }
+      };
+      return data;
+    }
+  }]);
 
   return PermissaoForm;
 })(_react.Component);
@@ -2165,7 +2218,7 @@ var PermissaoForm = (function (_Component) {
 exports['default'] = PermissaoForm;
 module.exports = exports['default'];
 
-},{"react":369,"react-bootstrap/lib/Checkbox":119,"react-bootstrap/lib/Col":120,"react-bootstrap/lib/ControlLabel":122,"react-bootstrap/lib/Form":124,"react-bootstrap/lib/FormControl":125,"react-bootstrap/lib/FormGroup":128,"react-bootstrap/lib/InputGroup":131}],19:[function(require,module,exports){
+},{"react":369,"react-bootstrap/lib/Checkbox":119,"react-bootstrap/lib/Col":120,"react-bootstrap/lib/ControlLabel":122,"react-bootstrap/lib/Form":124,"react-bootstrap/lib/FormControl":125,"react-bootstrap/lib/FormGroup":128,"react-bootstrap/lib/InputGroup":131,"react-dom":196}],19:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {

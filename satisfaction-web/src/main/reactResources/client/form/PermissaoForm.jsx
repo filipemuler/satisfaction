@@ -1,4 +1,5 @@
 import React, {Component, PropTypes} from 'react'
+import ReactDOM from 'react-dom'
 import Form from 'react-bootstrap/lib/Form'
 import FormGroup from 'react-bootstrap/lib/FormGroup'
 import FormControl from 'react-bootstrap/lib/FormControl'
@@ -13,18 +14,28 @@ class PermissaoForm extends Component {
     super(props)
   }
 
+  getDataForm(){
+    var data = {
+      permissao : {
+        rotina : ReactDOM.findDOMNode(this.refs.rotina).value,
+        tipo : ReactDOM.findDOMNode(this.refs.tipo).value
+      }
+    }
+    return data;
+  }
+
   render = () =>
   <Form horizontal>
     <FormGroup controlId="formHorizontalRotina">
       <Col componentClass={ControlLabel} sm={3}>Rotina</Col>
       <Col sm={9}>
-        <FormControl type="rotina" placeholder="Rotina" name="permissao.rotina"/>
+        <FormControl type="rotina" placeholder="Rotina" ref="rotina"/>
       </Col>
     </FormGroup>
     <FormGroup controlId="formHorizontalTipo">
       <Col componentClass={ControlLabel} sm={3}>Tipo</Col>
       <Col sm={9}>
-        <FormControl type="password" placeholder="Tipo" name="permissao.tipo"/>
+        <FormControl type="password" placeholder="Tipo" ref="tipo"/>
       </Col>
     </FormGroup>
   </Form>

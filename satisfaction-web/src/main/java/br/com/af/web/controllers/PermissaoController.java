@@ -7,10 +7,13 @@ import br.com.af.satisfaction.config.Paginator;
 import br.com.af.satisfaction.entidades.Funcionario;
 import br.com.af.satisfaction.entidades.Permissao;
 import br.com.af.satisfaction.entidades.Usuario;
+import br.com.caelum.vraptor.Consumes;
 import br.com.caelum.vraptor.Controller;
 import br.com.caelum.vraptor.Path;
+import br.com.caelum.vraptor.Post;
 import br.com.caelum.vraptor.Result;
 
+import static br.com.caelum.vraptor.view.Results.json;
 import static org.apache.commons.lang3.math.NumberUtils.toInt;
 
 @Controller
@@ -33,10 +36,11 @@ public class PermissaoController {
 		//carrega o formulario
 	}
 
-	@Path({"/permissao/list", "/permissao/list/{page}"})
+//	@Path({"/permissao/list", "/permissao/list/{page}"})
 	public void list(String page) {
 		Paginator<Permissao> paginator = this.permissaoService.findPaginator(Permissao.class, toInt(page));
-		this.result.include("paginator", paginator);
+		this.result.use(json()).withoutRoot().from(paginator).
+				include("results").serialize();
 	}
 	
 	@Path("/permissao/edita/{permissao.id}")
@@ -51,7 +55,9 @@ public class PermissaoController {
 		this.permissaoService.remove(permissaoRecuperada);
 		this.result.forwardTo(this).list(null);
 	}
-	
+
+	@Consumes("application/json")
+	@Post("/permissao/salva")
 	public void salva(Permissao permissao) {
 		if(permissao.getId() != null){
 			this.permissaoService.merge(permissao);
