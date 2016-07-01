@@ -16,21 +16,13 @@ class FuncionarioForm extends Component {
 
   getDataForm(){
     var data = {
-      filial : {
+      funcionario : {
         nome : ReactDOM.findDOMNode(this.refs.nome).value,
-        tipoEstabelecimento : ReactDOM.findDOMNode(this.refs.tipoEstabelecimento).value,
-        razaoSocial : ReactDOM.findDOMNode(this.refs.razaoSocial).value,
-        cnpj : ReactDOM.findDOMNode(this.refs.cnpj).value,
-        inscricaoEstatual : ReactDOM.findDOMNode(this.refs.inscricaoEstatual).value,
-        cep : ReactDOM.findDOMNode(this.refs.cep).value,
-        tipoLogradouro : this.refs.tipoLogradouro.value().value,
-        logradouro : ReactDOM.findDOMNode(this.refs.logradouro).value,
-        numero : ReactDOM.findDOMNode(this.refs.numero).value,
-        complemento : ReactDOM.findDOMNode(this.refs.complemento).value,
-        bairro : ReactDOM.findDOMNode(this.refs.bairro).value,
-        localidade : ReactDOM.findDOMNode(this.refs.localidade).value,
-        uf : ReactDOM.findDOMNode(this.refs.uf).value,
-        pais : ReactDOM.findDOMNode(this.refs.pais).value
+        cpf : ReactDOM.findDOMNode(this.refs.cpf).value,
+        dataNascimento : ReactDOM.findDOMNode(this.refs.dataNascimento).value,
+        dataAdmissao : ReactDOM.findDOMNode(this.refs.dataAdmissao).value,
+        socio : ReactDOM.findDOMNode(this.refs.socio).value,
+        gestorFilial : ReactDOM.findDOMNode(this.refs.gestorFilial).value
       }
     }
     return data;
@@ -38,22 +30,40 @@ class FuncionarioForm extends Component {
 
   render = () =>
   <Form horizontal>
-    <FormGroup controlId="formHorizontalEmail">
-      <Col componentClass={ControlLabel} sm={3}>Email</Col>
+    <FormGroup controlId="formHorizontalNome">
+      <Col componentClass={ControlLabel} sm={3}>Nome</Col>
       <Col sm={9}>
-        <FormControl type="email" placeholder="Email" />
+        <FormControl type="nome" placeholder="Nome" ref="nome"/>
       </Col>
     </FormGroup>
-    <FormGroup controlId="formHorizontalPassword">
-      <Col componentClass={ControlLabel} sm={3}>Senha</Col>
+    <FormGroup controlId="formHorizontalCpf">
+      <Col componentClass={ControlLabel} sm={3}>CPF</Col>
       <Col sm={9}>
-        <FormControl type="password" placeholder="Senha" />
+        <FormControl type="cpf" placeholder="CPF" ref="cpf"/>
+      </Col>
+    </FormGroup>
+    <FormGroup controlId="formHorizontalDataNascimento">
+      <Col componentClass={ControlLabel} sm={3}>Data Nascimento</Col>
+      <Col sm={9}>
+        <FormControl type="date" placeholder="Data Nascimento" ref="dataNascimento"/>
+      </Col>
+    </FormGroup>
+    <FormGroup controlId="formHorizontalDataAdmissao">
+      <Col componentClass={ControlLabel} sm={3}>Data Admissão</Col>
+      <Col sm={9}>
+        <FormControl type="date" placeholder="Data Admissão" ref="dataAdmissao"/>
       </Col>
     </FormGroup>
     <FormGroup>
-      <Col componentClass={ControlLabel} sm={3}>Administrador?</Col>
+      <Col componentClass={ControlLabel} sm={3}>Socio</Col>
       <Col sm={9}>
-        <Checkbox />
+        <Checkbox ref="socio"/>
+      </Col>
+    </FormGroup>
+    <FormGroup>
+      <Col componentClass={ControlLabel} sm={3}>Gestor Filial</Col>
+      <Col sm={9}>
+        <Checkbox ref="gestorFilial"/>
       </Col>
     </FormGroup>
   </Form>

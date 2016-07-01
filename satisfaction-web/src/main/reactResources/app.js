@@ -27,15 +27,15 @@ app.get('/movimentacao/list/contas', function(req, res) {
               contasOrdem : [{id : '3', nome : 'Copa Noite', ordem : '3'},{id : '2', nome : 'Copa Tarde', ordem : '2'}, {id : '1', nome : 'Copa Manha',ordem : '1'}]});
 });
 
-app.get('/contas', function(req, res) {
+app.get('/contas/list', function(req, res) {
     res.send({results : [{'id':'1001', 'usuario': 'conta1'}, {'id':'1002', 'usuario': 'conta2'}]});
 });
 
 app.get('/contas/list/contas', function(req, res) {
-    res.send(['Despesa', 'Despesa > Supermercado', 'Despesa > Supermercado > Coca-cola']);
+    res.send([{id : '3', nome : 'Coca-cola', ordem : '3'},{id : '2', nome : 'Supermercado', ordem : '2'}, {id : '1', nome : 'Copa Manha',ordem : '1'}]);
 });
 
-app.get('/filial', function(req, res) {
+app.get('/filial/list', function(req, res) {
     res.send({results : [{'id':'1001', 'usuario': 'filial1'}, {'id':'1002', 'usuario': 'filial2'}]});
 });
 
@@ -43,7 +43,7 @@ app.get('/filial/list/tipoLogradouro', function(req, res) {
     res.send(['Rua', 'Avenida', 'Viela']);
 });
 
-app.get('/funcionario', function(req, res) {
+app.get('/funcionario/list', function(req, res) {
     res.send({results : [{'id':'1001', 'usuario': 'funcionario1'}, {'id':'1002', 'usuario': 'funcionario2'}]});
 });
 
@@ -51,7 +51,7 @@ app.get('/usuario/list', function(req, res) {
     res.send(usuarios);
 });
 
-app.get('/permissao', function(req, res) {
+app.get('/permissao/list', function(req, res) {
     res.send({results : [{'id':'1001', 'usuario': 'permissao1'}, {'id':'1002', 'usuario': 'permissao2'}]});
 });
 
