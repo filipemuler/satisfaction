@@ -11,10 +11,8 @@ import java.util.List;
 public class Movimentacao implements Serializable {
 
     private Long id;
-    private BigDecimal valorManha;
-    private BigDecimal valorTarde;
-    private BigDecimal valorNoite;
     private List<MovimentacaoConta> movimentacoesConta;
+    private List<MovimentacaoFluxo> movimentacoesFluxo;
     private Usuario usuario;
     private Filial filial;
     private Entidade entidade;
@@ -30,30 +28,6 @@ public class Movimentacao implements Serializable {
         this.id = id;
     }
 
-    public BigDecimal getValorManha() {
-        return valorManha;
-    }
-
-    public void setValorManha(BigDecimal valorManha) {
-        this.valorManha = valorManha;
-    }
-
-    public BigDecimal getValorTarde() {
-        return valorTarde;
-    }
-
-    public void setValorTarde(BigDecimal valorTarde) {
-        this.valorTarde = valorTarde;
-    }
-
-    public BigDecimal getValorNoite() {
-        return valorNoite;
-    }
-
-    public void setValorNoite(BigDecimal valorNoite) {
-        this.valorNoite = valorNoite;
-    }
-
     @OneToMany(cascade = CascadeType.ALL)
     public List<MovimentacaoConta> getMovimentacoesConta() {
         return movimentacoesConta;
@@ -61,6 +35,15 @@ public class Movimentacao implements Serializable {
 
     public void setMovimentacoesConta(List<MovimentacaoConta> movimentacoesConta) {
         this.movimentacoesConta = movimentacoesConta;
+    }
+
+    @OneToMany(cascade = CascadeType.ALL)
+    public List<MovimentacaoFluxo> getMovimentacoesFluxo() {
+        return movimentacoesFluxo;
+    }
+
+    public void setMovimentacoesFluxo(List<MovimentacaoFluxo> movimentacoesFluxo) {
+        this.movimentacoesFluxo = movimentacoesFluxo;
     }
 
     @OneToOne

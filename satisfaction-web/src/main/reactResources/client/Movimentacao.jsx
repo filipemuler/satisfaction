@@ -21,7 +21,8 @@ class Movimentacao extends Component {
     this.onHandleSubmit = this.onHandleSubmit.bind(this)
     this.onCancel = this.onCancel.bind(this)
     this.addMovimentacao = this.addMovimentacao.bind(this)
-    this.state = { options : [], groups : [], contasOrdem : [], referencias : [], inputValue : ""}
+    this.state = { options : [], groups : [], contasOrdem : [], referencias : [],
+      inputValue : "", movimentacoesAdded : []}
   }
 
   componentDidMount(){
@@ -59,8 +60,8 @@ class Movimentacao extends Component {
          conta = this.refs[ref].refs.conta.value
          }
 
-      var valor = ReactDOM.findDOMNode(this.refs[ref].refs.valor).value
-      submit.movimentacao.movimentacoesConta.push({conta : {id : conta }, valor : valor})
+      var quantidade = ReactDOM.findDOMNode(this.refs[ref].refs.quantidade).value
+      submit.movimentacao.movimentacoesConta.push({conta : {id : conta }, quantidade : quantidade})
      }
     request
       .post('movimentacao/salvar')
@@ -75,7 +76,8 @@ class Movimentacao extends Component {
     }
 
     addMovimentacao(){
-      this.setState({referencias : this.state.referencias.concat(Math.random())})
+      this.setState({referencias : this.state.referencias.concat(Math.random()),
+      movimentacoesAdded : this.state.movimentacoesAdded.concat({contaId : Math.random(), title : 'teste', value : Math.random()})})
     }
 
     render () {
@@ -87,19 +89,23 @@ class Movimentacao extends Component {
               inputValue={this.state.inputValue}
               ref={conta.contaId}/>
       )
-      
-      var movimentacoes = this.state.referencias.map(ref =>
-        <MovimentacaoConta key={ref}
-          options={this.state.options}
-          groups={this.state.groups}
-          ref={ref}/>
+      var movimentacoesAdded = this.state.movimentacoesAdded.map(conta =>
+        <MovimentacaoContaOrdem key={conta.contaId}
+          contaId={conta.contaId}
+          title={conta.title}
+          inputValue={conta.value}
+          ref={conta.contaId}/>
       )
       return(
         <Panel header={this.props.contexto} footer={footer}>
           <Form horizontal>
             {movimentacoesOrdem}
-            {movimentacoes}
-            <MovimentacaoAdd addMovimentacao={this.addMovimentacao}/>
+            {movimentacoesAdded}
+            <MovimentacaoAdd
+              options={this.state.options}
+              groups={this.state.groups}
+              addMovimentacao={this.addMovimentacao}
+              refs="add"/>
           </Form>
         </Panel>
       )

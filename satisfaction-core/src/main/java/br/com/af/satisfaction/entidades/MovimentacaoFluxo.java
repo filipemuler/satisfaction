@@ -1,7 +1,6 @@
 package br.com.af.satisfaction.entidades;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -12,15 +11,15 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 /**
- * Created by filipe on 10/06/16.
+ * Created by filipe on 06/07/16.
  */
 @Entity
-@Table(name = "MOVIMENTACAO_CONTA")
-public class MovimentacaoConta implements Serializable {
+@Table(name =  "MOVIMENTACAO_FLUXO")
+public class MovimentacaoFluxo implements Serializable {
 
     private Long id;
-    private Conta conta;
-    private BigDecimal valor;
+    private Fluxo fluxo;
+    private Integer quantidade;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -33,20 +32,20 @@ public class MovimentacaoConta implements Serializable {
     }
 
     @OneToOne
-    @JoinColumn(name = "conta_id")
-    public Conta getConta() {
-        return conta;
+    @JoinColumn(name = "fluxo_id")
+    public Fluxo getFluxo() {
+        return fluxo;
     }
 
-    public void setConta(Conta conta) {
-        this.conta = conta;
+    public void setFluxo(Fluxo fluxo) {
+        this.fluxo = fluxo;
     }
 
-    public BigDecimal getValor() {
-        return valor;
+    public Integer getQuantidade() {
+        return quantidade;
     }
 
-    public void setValor(BigDecimal valor) {
-        this.valor = valor;
+    public void setQuantidade(Integer quantidade) {
+        this.quantidade = quantidade;
     }
 }

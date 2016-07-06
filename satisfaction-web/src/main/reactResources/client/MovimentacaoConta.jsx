@@ -32,7 +32,7 @@ class MovimentacaoConta extends Component {
               <InputGroup.Addon>R$</InputGroup.Addon>
               <FormControl type="text"
                 name="movimentacaoContaValor"
-                ref="valor"/>
+                ref="quantidade"/>
             </InputGroup>
           </Col>
         </FormGroup>
