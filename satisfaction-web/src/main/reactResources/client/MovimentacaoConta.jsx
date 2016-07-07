@@ -18,24 +18,7 @@ class MovimentacaoConta extends Component {
 
     render () {
       return(
-        <FormGroup>
-          <Col smOffset={2} sm={4}>
-            <SimpleSelect
-              options = {this.props.options}
-              groups={this.props.groups}
-              placeholder = "Selecione..."
-              name="movimentacaoContaId"
-              ref="conta"/>
-          </Col>
-          <Col sm={2}>
-            <InputGroup>
-              <InputGroup.Addon>R$</InputGroup.Addon>
-              <FormControl type="text"
-                name="movimentacaoContaValor"
-                ref="quantidade"/>
-            </InputGroup>
-          </Col>
-        </FormGroup>
+
       )
     }
 
