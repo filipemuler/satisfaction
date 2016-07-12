@@ -9,8 +9,7 @@ import InputGroup from 'react-bootstrap/lib/InputGroup'
 import Col from 'react-bootstrap/lib/Col'
 import ControlLabel from 'react-bootstrap/lib/ControlLabel'
 import request from 'superagent'
-import MovimentacaoConta from './MovimentacaoConta'
-import MovimentacaoContaOrdem from './MovimentacaoContaOrdem'
+import MovimentacaoAdded from './MovimentacaoAdded'
 import MovimentacaoAdd from './MovimentacaoAdd'
 import Footer from './Footer'
 
@@ -44,8 +43,8 @@ class Movimentacao extends Component {
           res.body.contasOrdem.sort((a,b) => a.ordem > b.ordem )
           contasOrdem = res.body.contasOrdem.map((conta) => {return {contaId: conta.id, title: conta.nome}});
         }
-        self.setState({options : optionsAjax, groups : grupos, contasOrdem : contasOrdem,
-          referencias : self.state.referencias.concat(Math.random())})
+        self.setState({options : optionsAjax, groups : grupos,
+          movimentacoesAdded : self.state.movimentacoesAdded.concat(contasOrdem)})
       });
   }
 
@@ -67,30 +66,23 @@ class Movimentacao extends Component {
       .post('movimentacao/salvar')
       .send(submit)
       .end(function(err, res){
-        self.setState({referencias : [Math.random()], inputValue : ""})
+        self.setState({movimentacoesAdded : [], inputValue : ""})
       });
     }
 
     onCancel(){
-      this.setState({referencias : [Math.random()]})
+      this.setState({movimentacoesAdded : []})
     }
 
-    addMovimentacao(){
-      this.setState({referencias : this.state.referencias.concat(Math.random()),
-      movimentacoesAdded : this.state.movimentacoesAdded.concat({contaId : Math.random(), title : 'teste', value : Math.random()})})
+    addMovimentacao(contaId, label, value){
+      this.setState({
+      movimentacoesAdded : this.state.movimentacoesAdded.concat({contaId : contaId, title : label, value : value})})
     }
 
     render () {
       const footer = <Footer onSubmit={this.onHandleSubmit} onCancel={this.onCancel}/>
-      var movimentacoesOrdem = this.state.contasOrdem.map(conta =>
-            <MovimentacaoContaOrdem key={conta.contaId}
-              contaId={conta.contaId}
-              title={conta.title}
-              inputValue={this.state.inputValue}
-              ref={conta.contaId}/>
-      )
       var movimentacoesAdded = this.state.movimentacoesAdded.map(conta =>
-        <MovimentacaoContaOrdem key={conta.contaId}
+        <MovimentacaoAdded key={conta.contaId}
           contaId={conta.contaId}
           title={conta.title}
           inputValue={conta.value}
@@ -99,13 +91,12 @@ class Movimentacao extends Component {
       return(
         <Panel header={this.props.contexto} footer={footer}>
           <Form horizontal>
-            {movimentacoesOrdem}
             {movimentacoesAdded}
             <MovimentacaoAdd
               options={this.state.options}
               groups={this.state.groups}
-              addMovimentacao={this.addMovimentacao}
-              refs="add"/>
+              onAdded={this.addMovimentacao}
+              refs="testando"/>
           </Form>
         </Panel>
       )

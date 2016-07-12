@@ -1,4 +1,5 @@
 import React, {Component, PropTypes} from 'react'
+import ReactDOM from 'react-dom'
 import Button from 'react-bootstrap/lib/Button'
 import FormGroup from 'react-bootstrap/lib/FormGroup'
 import Col from 'react-bootstrap/lib/Col'
@@ -12,9 +13,18 @@ class MovimentacaoAdd extends Component {
   constructor(props){
     super(props)
     this.state = { options : [], groups : []}
+    this.handleChange = this.handleChange.bind(this);
   }
 
   componentDidMount(){
+  }
+
+  handleChange() {
+    this.props.onAdded(
+      this.refs.conta.value().value,
+      this.refs.conta.value().label,
+      ReactDOM.findDOMNode(this.refs.quantidade).value
+    )
   }
 
     render () {
@@ -38,7 +48,7 @@ class MovimentacaoAdd extends Component {
           </Col>
           <Col sm={2}>
             <Button
-              onClick={this.props.addMovimentacao}>
+              onClick={this.handleChange}>
               <Glyphicon glyph="plus" />
             </Button>
           </Col>

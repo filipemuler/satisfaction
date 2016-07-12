@@ -7,7 +7,7 @@ import InputGroup from 'react-bootstrap/lib/InputGroup'
 import Col from 'react-bootstrap/lib/Col'
 import SimpleSelect from 'react-selectize/src/SimpleSelect'
 
-class MovimentacaoConta extends Component {
+class MovimentacaoAdded extends Component {
 
   constructor(props){
     super(props)
@@ -37,7 +37,7 @@ class MovimentacaoConta extends Component {
               <FormControl type="text"
                 name="movimentacaoContaValor"
                 ref="quantidade"
-                value={this.state.inputValue}
+                value={this.props.inputValue}
                 onChange={this.onChange}/>
             </InputGroup>
           </Col>
@@ -47,4 +47,4 @@ class MovimentacaoConta extends Component {
 
 }
 
-export default MovimentacaoConta
+export default MovimentacaoAdded
