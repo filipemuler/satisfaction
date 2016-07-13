@@ -12,7 +12,7 @@ class MovimentacaoAdd extends Component {
 
   constructor(props){
     super(props)
-    this.state = { options : [], groups : []}
+    this.state = { options : [], groups : [], conta : null, quantidade : ""}
     this.handleChange = this.handleChange.bind(this);
   }
 
@@ -25,9 +25,11 @@ class MovimentacaoAdd extends Component {
       this.refs.conta.value().label,
       ReactDOM.findDOMNode(this.refs.quantidade).value
     )
+    this.setState({conta : null, quantidade : ""})
   }
 
     render () {
+      var self = this
       return(
         <FormGroup>
           <Col smOffset={2} sm={4}>
@@ -35,14 +37,20 @@ class MovimentacaoAdd extends Component {
               options = {this.props.options}
               groups={this.props.groups}
               placeholder = "Selecione..."
-              name="movimentacaoContaId"
+              value={this.state.conta}
+              onValueChange = {function(value) {
+                    self.setState({conta: value});
+              }}
               ref="conta"/>
           </Col>
           <Col sm={2}>
             <InputGroup>
               <InputGroup.Addon>R$</InputGroup.Addon>
               <FormControl type="text"
-                name="movimentacaoContaValor"
+                value={this.state.quantidade}
+                onChange = {function(e){
+                  self.setState({quantidade : e.target.value})
+                }}
                 ref="quantidade"/>
             </InputGroup>
           </Col>

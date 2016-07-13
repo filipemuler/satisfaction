@@ -1,4 +1,5 @@
 import React, {Component, PropTypes} from 'react'
+import ReactDOM from 'react-dom'
 import Button from 'react-bootstrap/lib/Button'
 import ControlLabel from 'react-bootstrap/lib/ControlLabel'
 import FormGroup from 'react-bootstrap/lib/FormGroup'
@@ -20,7 +21,16 @@ class MovimentacaoAdded extends Component {
     }
 
   onChange(e){
-        this.setState({inputValue : e.target.value})
+    this.setState({inputValue : e.target.value})
+  }
+
+  getFormData(){
+    var data = { conta : {
+          id : ReactDOM.findDOMNode(this.refs.conta).value
+        },
+        quantidade : ReactDOM.findDOMNode(this.refs.quantidade).value
+    }
+    return data;
   }
 
     render () {
@@ -35,7 +45,6 @@ class MovimentacaoAdded extends Component {
             <InputGroup>
               <InputGroup.Addon>R$</InputGroup.Addon>
               <FormControl type="text"
-                name="movimentacaoContaValor"
                 ref="quantidade"
                 value={this.props.inputValue}
                 onChange={this.onChange}/>

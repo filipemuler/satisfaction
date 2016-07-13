@@ -7,6 +7,7 @@ var router = express.Router();
 var path = require('path');
 
 var usuarios = require('./public/usuarios.json')
+var contas = require('./public/contas.json')
 
 app.use(express.static(__dirname));
 app.get('/', function(req, res) {
@@ -22,9 +23,7 @@ app.get('/movimentacao/list', function(req, res) {
 });
 
 app.get('/movimentacao/list/contas', function(req, res) {
-    res.send( {contas : [{id : 4, grupo:'Despesa', nome :'Agua'}, {id : 5, grupo:'Receita', nome:'Copa Manha'}, {id : 6, grupo:'Receita', nome:'Copa Tarde'}, {id : 7, grupo:'Receita', nome:'Copa Noite'}] ,
-              grupos : ['Despesa', 'Receita'],
-              contasOrdem : [{id : '3', nome : 'Copa Noite', ordem : '3'},{id : '2', nome : 'Copa Tarde', ordem : '2'}, {id : '1', nome : 'Copa Manha',ordem : '1'}]});
+    res.send(contas);
 });
 
 app.get('/contas/list', function(req, res) {

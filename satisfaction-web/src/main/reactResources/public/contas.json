@@ -1,0 +1,20 @@
+{ "contas" :
+  [
+    {"value" : "4", "groupId":"Despesa", "label" :"Agua"},
+    {"value" : "5", "groupId":"Receita", "label":"Copa Manha"},
+    {"value" : "6", "groupId":"Receita", "label":"Copa Tarde"},
+    {"value" : "7", "groupId":"Receita", "label":"Copa Noite"},
+    {"value" : "8", "groupId":"Receita", "label":"Dinheiro"}
+  ] ,
+  "grupos" :
+  [
+    {"groupId" : "Despesa", "title" : "Despesa"},
+    {"groupId" : "Receita", "title" : "Receita"}
+  ] ,
+  "receitasFixas" :
+  [
+    {"id" : "3", "label" : "Copa Noite", "ordem" : "3"},
+    {"id" : "2", "label" : "Copa Tarde", "ordem" : "2"},
+    {"id" : "1", "label" : "Copa Manha", "ordem" : "1"}
+  ]
+}
