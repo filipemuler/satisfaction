@@ -57,7 +57,7 @@ class MovimentacaoAdd extends Component {
           <Col sm={2}>
             <Button
               onClick={this.handleChange}>
-              <Glyphicon glyph="plus" />
+              <Glyphicon glyph="ok" />
             </Button>
           </Col>
         </FormGroup>

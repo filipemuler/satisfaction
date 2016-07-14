@@ -34,6 +34,6 @@ class ListaItemColuna extends Component {
 
 const botoes = {
     centro: {
-        "text-align" : "center"
+        "textAlign" : "center"
     }
 }

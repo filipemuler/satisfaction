@@ -13,8 +13,6 @@ import MovimentacaoAdded from './MovimentacaoAdded'
 import MovimentacaoAdd from './MovimentacaoAdd'
 import Footer from './Footer'
 
-var index;
-
 class Movimentacao extends Component {
 
   constructor(props){
@@ -25,15 +23,12 @@ class Movimentacao extends Component {
     this.addRecebimento = this.addRecebimento.bind(this)
     this.state = { contas : [],
       grupos : [],
-      movimentacoesAdded : [],
       receitasFixas : [],
       despesas : [],
       recebimentos : [],
       cartoesSaida : [],
       cartoesEntrada : [],
-      fluxos : [],
-      referencias : 0}
-      index = 0;
+      fluxos : []}
   }
 
   componentDidMount(){
@@ -49,21 +44,26 @@ class Movimentacao extends Component {
     var self = this
     var submit = {movimentacao : { movimentacoesConta : []}}
     for (var ref in this.refs) {
-        var conta;
-      submit.movimentacao.movimentacoesConta.push({conta : {id : conta }, quantidade : quantidade})
+      if(ref.startsWith('submit')){
+        submit.movimentacao.movimentacoesConta.push(this.refs[ref].getFormData())
+      }
      }
     request
       .post('movimentacao/salvar')
       .send(submit)
       .end(function(err, res){
-        self.setState({despesas : []})
+        self.setState({
+        despesas : [],
+        recebimentos : [],
+        cartoesSaida : [],
+        cartoesEntrada : [],
+        fluxos : []})
       });
     }
 
     onCancel(){
       this.setState({despesas : [],
-        recebimentos : [],
-        referencias : 0})
+        recebimentos : []})
     }
 
     addDespesa(id, label, value){
@@ -72,7 +72,6 @@ class Movimentacao extends Component {
           {id : id, label : label, value : value}
         )}
       )
-      index++;
     }
     addRecebimento(id, label, value){
       this.setState({ recebimentos :
@@ -80,7 +79,6 @@ class Movimentacao extends Component {
           {id : id, label : label, value : value}
         )}
       )
-      index++
     }
 
     render () {
@@ -90,21 +88,21 @@ class Movimentacao extends Component {
           contaId={conta.id}
           title={conta.label}
           inputValue={conta.value}
-          ref={index++}/>
+          ref={"submit-" + conta.id}/>
       )
       var despesas = this.state.despesas.map(conta =>
         <MovimentacaoAdded key={conta.id}
           contaId={conta.id}
           title={conta.label}
           inputValue={conta.value}
-          ref={index}/>
+          ref={"submit-" + conta.id}/>
       )
       var recebimentos = this.state.recebimentos.map(conta =>
         <MovimentacaoAdded key={conta.id}
           contaId={conta.id}
           title={conta.label}
           inputValue={conta.value}
-          ref={index}/>
+          ref={"submit-" + conta.id}/>
       )
       return(
         <Panel header={this.props.contexto} footer={footer}>
