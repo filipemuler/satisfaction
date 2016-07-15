@@ -13,8 +13,8 @@
   ] ,
   "receitasFixas" :
   [
-    {"id" : "3", "label" : "Copa Noite", "ordem" : "3"},
-    {"id" : "2", "label" : "Copa Tarde", "ordem" : "2"},
-    {"id" : "1", "label" : "Copa Manha", "ordem" : "1"}
+    {"id" : "3", "nome" : "Copa Noite", "ordem" : "3"},
+    {"id" : "2", "nome" : "Copa Tarde", "ordem" : "2"},
+    {"id" : "1", "nome" : "Copa Manha", "ordem" : "1"}
   ]
 }

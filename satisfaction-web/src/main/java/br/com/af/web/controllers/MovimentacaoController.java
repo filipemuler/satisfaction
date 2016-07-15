@@ -56,7 +56,7 @@ public class MovimentacaoController {
     public void listaContas() {
         MovimentadaoDTO movimentadaoDTO = this.contaService.findConta();
         this.result.use(Results.json()).withoutRoot().
-                from(movimentadaoDTO).include("contas", "grupos", "contasOrdem").serialize();
+                from(movimentadaoDTO).include("contas", "grupos", "receitasFixas").serialize();
 
     }
 

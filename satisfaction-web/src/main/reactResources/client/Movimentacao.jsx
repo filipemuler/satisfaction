@@ -69,14 +69,14 @@ class Movimentacao extends Component {
     addDespesa(id, label, value){
       this.setState({ despesas :
         this.state.despesas.concat(
-          {id : id, label : label, value : value}
+          {id : id, nome : label, value : value}
         )}
       )
     }
     addRecebimento(id, label, value){
       this.setState({ recebimentos :
         this.state.recebimentos.concat(
-          {id : id, label : label, value : value}
+          {id : id, nome : label, value : value}
         )}
       )
     }
@@ -86,21 +86,21 @@ class Movimentacao extends Component {
       var receitasFixas = this.state.receitasFixas.map(conta =>
         <MovimentacaoAdded key={conta.id}
           contaId={conta.id}
-          title={conta.label}
+          title={conta.nome}
           inputValue={conta.value}
           ref={"submit-" + conta.id}/>
       )
       var despesas = this.state.despesas.map(conta =>
         <MovimentacaoAdded key={conta.id}
           contaId={conta.id}
-          title={conta.label}
+          title={conta.nome}
           inputValue={conta.value}
           ref={"submit-" + conta.id}/>
       )
       var recebimentos = this.state.recebimentos.map(conta =>
         <MovimentacaoAdded key={conta.id}
           contaId={conta.id}
-          title={conta.label}
+          title={conta.nome}
           inputValue={conta.value}
           ref={"submit-" + conta.id}/>
       )

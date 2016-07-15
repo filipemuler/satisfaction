@@ -80,4 +80,9 @@ public class Conta implements Serializable {
     public void setGrupo(String grupo) {
         this.grupo = grupo;
     }
+
+    @Transient
+    public String getLabel(){
+        return this.nome;
+    }
 }
