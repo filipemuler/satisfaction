@@ -5,18 +5,16 @@ import java.util.List;
 import javax.enterprise.context.Dependent;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
-import javax.swing.*;
-
-import br.com.af.satisfaction.dto.MovimentadaoDTO;
-import br.com.af.satisfaction.entidades.Conta;
-import br.com.af.satisfaction.entidades.Permissao;
-import br.com.af.satisfaction.entidades.Usuario;
 
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
+
+import br.com.af.satisfaction.entidades.Conta;
+import br.com.af.satisfaction.entidades.Permissao;
+import br.com.af.satisfaction.entidades.Usuario;
 
 @Dependent
 public class GenericDao<T> {
@@ -110,12 +108,6 @@ public class GenericDao<T> {
 		}
 		this.em.persist(conta);
 
-	}
-
-	public MovimentadaoDTO findConta(){
-		Session session = (Session) this.em.getDelegate();
-		List<Conta> list = session.createCriteria(Conta.class).list();
-		return new MovimentadaoDTO(list);
 	}
 
 //	public List<Event> findEvents(long start, long end) {

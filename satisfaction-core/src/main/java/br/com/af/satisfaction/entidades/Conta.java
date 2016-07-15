@@ -15,10 +15,20 @@ public class Conta implements Serializable {
     private Long id;
     private String nome;
     private String descricao;
-    private Integer ordem;
+
     private List<Conta> contas = Lists.newArrayList();
     private Conta referenteA;
+
+    //o pai da arvore, exemplo Despesa > coca-cola
+    // grupo será Despesa
     private String grupo;
+
+    //para ordenação na tela
+    private Integer ordem;
+
+    //indica de é entrada ou saida, para fazer as contas depois
+    //como a despesa é generico preciso disso.
+    private boolean entrada = true;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -70,6 +80,14 @@ public class Conta implements Serializable {
 
     public void setReferenteA(Conta referenteA) {
         this.referenteA = referenteA;
+    }
+
+    public boolean isEntrada() {
+        return entrada;
+    }
+
+    public void setEntrada(boolean entrada) {
+        this.entrada = entrada;
     }
 
     @Transient

@@ -16,6 +16,7 @@ import br.com.af.satisfaction.dto.MovimentadaoDTO;
 import br.com.af.satisfaction.entidades.Conta;
 import br.com.af.satisfaction.entidades.Movimentacao;
 import br.com.af.satisfaction.entidades.Usuario;
+import br.com.af.satisfaction.entidades.bi.BiConsolidadoFinal;
 import br.com.caelum.vraptor.Consumes;
 import br.com.caelum.vraptor.Controller;
 import br.com.caelum.vraptor.Path;
@@ -54,7 +55,8 @@ public class MovimentacaoController {
 
     @Path("/movimentacao/list/contas")
     public void listaContas() {
-        MovimentadaoDTO movimentadaoDTO = this.contaService.findConta();
+        List<Conta> contas = this.contaService.findAll(Conta.class);
+        MovimentadaoDTO movimentadaoDTO = new MovimentadaoDTO(contas);
         this.result.use(Results.json()).withoutRoot().
                 from(movimentadaoDTO).include("contas", "grupos", "receitasFixas").serialize();
 
@@ -72,6 +74,9 @@ public class MovimentacaoController {
         movimentacao.setUsuario(usuario);
 
         this.movimentacaoService.persist(movimentacao);
+
+        System.out.println(movimentacao.getId());
+
     }
 
 }
