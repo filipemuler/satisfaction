@@ -1,0 +1,55 @@
+{ "filiais" :
+  [{"nome" : "Motel X",
+  "dados" : [{
+            "value": "5.5",
+            "color":"#F7464A",
+            "highlight": "#FF5A5E",
+            "label": "Red"
+        },
+        {
+            "value": "5",
+            "color": "#46BFBD",
+            "highlight": "#5AD3D1",
+            "label": "Green"
+        }]},
+        {"nome" : "Motel Y",
+        "dados" : [{
+                  "value": "3",
+                  "color":"#F7464A",
+                  "highlight": "#FF5A5E",
+                  "label": "Red"
+              },
+              {
+                  "value": "6",
+                  "color": "#46BFBD",
+                  "highlight": "#5AD3D1",
+                  "label": "Green"
+              }]},
+              {"nome" : "Motel Z",
+              "dados" : [{
+                        "value": "7",
+                        "color":"#F7464A",
+                        "highlight": "#FF5A5E",
+                        "label": "Red"
+                    },
+                    {
+                        "value": "2",
+                        "color": "#46BFBD",
+                        "highlight": "#5AD3D1",
+                        "label": "Green"
+                    }]},
+                    {"nome" : "Motel W",
+                    "dados" : [{
+                              "value": "5",
+                              "color":"#F7464A",
+                              "highlight": "#FF5A5E",
+                              "label": "Red"
+                          },
+                          {
+                              "value": "7",
+                              "color": "#46BFBD",
+                              "highlight": "#5AD3D1",
+                              "label": "Green"
+                          }]}
+  ]
+}

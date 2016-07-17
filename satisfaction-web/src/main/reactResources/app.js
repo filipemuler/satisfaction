@@ -8,6 +8,7 @@ var path = require('path');
 
 var usuarios = require('./public/usuarios.json')
 var contas = require('./public/contas.json')
+var dashboard = require('./public/dashboard.json')
 
 app.use(express.static(__dirname));
 app.get('/', function(req, res) {
@@ -15,7 +16,7 @@ app.get('/', function(req, res) {
 });
 
 app.get('/dashboard', function(req, res) {
-    res.send({dashboard : [{'id':'1001', 'dash': 'dash'}]});
+    res.send(dashboard);
 });
 
 app.get('/movimentacao/list', function(req, res) {
