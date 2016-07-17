@@ -7,13 +7,41 @@ import java.io.Serializable;
  * Created by filipe on 17/07/16.
  */
 public class DadosGraficoDTO implements Serializable {
+
     private Long value;
     private String label;
+    private String color;
+    private String highlight;
 
+    public Long getValue() {
+        return value;
+    }
 
-    public static void main(String[] args) {
-        Color cor = Color.black;
-        System.out.println(cor.getAlpha());
+    public void setValue(Long value) {
+        this.value = value;
+    }
 
+    public String getLabel() {
+        return label;
+    }
+
+    public void setLabel(String label) {
+        this.label = label;
+    }
+
+    public String getColor() {
+        return color;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
+    }
+
+    public String getHighlight() {
+        return highlight;
+    }
+
+    public void setHighlight(String highlight) {
+        this.highlight = highlight;
     }
 }
