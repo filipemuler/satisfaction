@@ -1,4 +1,4 @@
-package br.com.af.web.x;
+package br.com.af.web.dto;
 
 import br.com.af.satisfaction.entidades.Filial;
 import com.google.common.collect.Lists;
@@ -15,7 +15,7 @@ public class DashboardDTO implements Serializable {
 
     public DashboardDTO(List<Filial> filiais) {
         for(Filial filial : filiais){
-            FilialDashboardDTO filialDashboardDTO = new FilialDashboardDTO();
+//            FilialDashboardDTO filialDashboardDTO = new FilialDashboardDTO();
 
         }
     }

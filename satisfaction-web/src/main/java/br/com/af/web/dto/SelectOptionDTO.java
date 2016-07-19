@@ -1,4 +1,4 @@
-package br.com.af.satisfaction.dto;
+package br.com.af.web.dto;
 
 /**
  * Created by filipe on 14/07/16.

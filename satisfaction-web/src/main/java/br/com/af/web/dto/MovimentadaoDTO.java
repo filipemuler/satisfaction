@@ -1,10 +1,9 @@
-package br.com.af.satisfaction.dto;
+package br.com.af.web.dto;
 
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
-import java.util.stream.Stream;
 
 import com.google.common.collect.Lists;
 

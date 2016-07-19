@@ -1,4 +1,4 @@
-package br.com.af.web.x;
+package br.com.af.web.dto;
 
 import java.awt.*;
 import java.io.Serializable;

@@ -1,4 +1,4 @@
-package br.com.af.web.x;
+package br.com.af.web.dto;
 
 import br.com.af.satisfaction.entidades.Filial;
 
