@@ -28,7 +28,7 @@ class MovimentacaoAdded extends Component {
     var data = { conta : {
           id : ReactDOM.findDOMNode(this.refs.conta).value
         },
-        quantidade : ReactDOM.findDOMNode(this.refs.quantidade).value
+        valor : ReactDOM.findDOMNode(this.refs.valor).value
     }
     return data;
   }
@@ -45,7 +45,7 @@ class MovimentacaoAdded extends Component {
             <InputGroup>
               <InputGroup.Addon>R$</InputGroup.Addon>
               <FormControl type="text"
-                ref="quantidade"
+                ref="valor"
                 value={this.props.inputValue}
                 onChange={this.onChange}/>
             </InputGroup>

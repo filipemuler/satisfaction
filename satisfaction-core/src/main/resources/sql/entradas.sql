@@ -16,5 +16,12 @@ INSERT INTO "public"."conta" (id,descricao,nome,referentea_id, ordem, entrada) V
 INSERT INTO "public"."conta" (id,descricao,nome,referentea_id, ordem, entrada) VALUES (15,'Diaria Tarde','Diaria Tarde', 10, 4, true);
 INSERT INTO "public"."conta" (id,descricao,nome,referentea_id, ordem, entrada) VALUES (16,'Diaria Noite','Diaria Noite', 10, 6, true);
 
+#Filial
+INSERT INTO "public"."filial" (id,nome) VALUES (1000, 'Motel X');
+INSERT INTO "public"."filial" (id,nome) VALUES (1001, 'Motel A');
+INSERT INTO "public"."filial" (id,nome) VALUES (1002, 'Motel B');
+INSERT INTO "public"."filial" (id,nome) VALUES (1003, 'Motel C');
+INSERT INTO "public"."filial" (id,nome) VALUES (1004, 'Motel D');
+
 #Consolidado Final
-INSERT INTO "public"."biconsolidadofinal" (id,filialid,filialnome, porcentagem,receita,despesa,data) VALUES (100,1000, "Motel X", 50.0, 1000, 1000, CURRENT_TIMESTAMP);
+INSERT INTO "public"."biconsolidadofinal" (id,filialid,filialnome, porcentagem,receita,despesa,data) VALUES (100,1000, 'Motel X', 50.0, 1000, 1000, CURRENT_TIMESTAMP);

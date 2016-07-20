@@ -12,6 +12,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 
 import br.com.af.satisfaction.config.GenericDao;
+import br.com.af.satisfaction.service.MovimentacaoService;
 import br.com.af.web.dto.MovimentadaoDTO;
 import br.com.af.satisfaction.entidades.Conta;
 import br.com.af.satisfaction.entidades.Movimentacao;
@@ -31,20 +32,17 @@ public class MovimentacaoController {
 
     private Result result;
     private GenericDao<Conta> contaService;
-    private GenericDao<Movimentacao> movimentacaoService;
-    private GenericDao<Usuario> usuarioService;
+    private MovimentacaoService movimentacaoService;
 
     public MovimentacaoController() {
         // nada
     }
 
     @Inject
-    public MovimentacaoController(Result result, GenericDao<Conta> contaService,
-                                  GenericDao<Movimentacao> movimentacaoService, GenericDao<Usuario> usuarioService) {
+    public MovimentacaoController(Result result, GenericDao<Conta> contaService, MovimentacaoService movimentacaoService) {
         this.result = result;
         this.contaService = contaService;
         this.movimentacaoService = movimentacaoService;
-        this.usuarioService = usuarioService;
     }
 
     public void form() {
@@ -64,16 +62,7 @@ public class MovimentacaoController {
     @Consumes("application/json")
     @Post("/movimentacao/salvar")
     public void salvar(Movimentacao movimentacao) {
-        movimentacao.setDataTransacao(new Date());
-
-        //TODO: fazer um servico pra isso aqui
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        String username = ((User) authentication.getPrincipal()).getUsername();
-        Usuario usuario = usuarioService.findByUserName(username);
-        movimentacao.setUsuario(usuario);
-
-        this.movimentacaoService.persist(movimentacao);
-
+        this.movimentacaoService.criarConsolidados(movimentacao);
         System.out.println(movimentacao.getId());
 
     }

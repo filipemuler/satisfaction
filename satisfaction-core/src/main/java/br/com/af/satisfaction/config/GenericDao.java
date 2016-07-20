@@ -32,6 +32,7 @@ public class GenericDao<T> {
 
 	public void persist(T entity) {
 		this.em.persist(entity);
+		this.em.flush();
 	}
 
 	public T merge(T entity) {
@@ -68,20 +69,6 @@ public class GenericDao<T> {
 		return true;
 	}
 
-	// public List<Autocomplete> autoCompletePaciente(String nome) {
-	// Session session = (Session) this.em.getDelegate();
-	// List<Autocomplete> list = session
-	// .createCriteria(Paciente.class)
-	// .setProjection(
-	// Projections.projectionList()
-	// .add(Projections.property("id"), "value")
-	// .add(Projections.property("nome"), "label"))
-	// .add(Restrictions.ilike("nome", nome, MatchMode.START))
-	// .setResultTransformer(
-	// Transformers.aliasToBean(Autocomplete.class)).list();
-	// return list;
-	// }
-
 	public T findById(Long id, Class klass) {
 		Session session = (Session) this.em.getDelegate();
 		T paciente = (T) session.createCriteria(klass).add(Restrictions.eq("id", id)).uniqueResult();
@@ -109,23 +96,6 @@ public class GenericDao<T> {
 		this.em.persist(conta);
 
 	}
-
-//	public List<Event> findEvents(long start, long end) {
-//		Session session = (Session) this.em.getDelegate();
-//
-//		Date dateStart = new LocalDate().withDayOfMonth(1).toDate();
-//		Date dateEnd = new LocalDate().withPeriodAdded(Period.months(1), 1).toDate();
-//
-//		List<Event> list = session.createCriteria(Consulta.class, "consulta").createCriteria("paciente", "paciente")
-//				.setProjection(Projections.projectionList().add(Projections.property("consulta.id"), "id")
-//						.add(Projections.property("paciente.nome"), "title")
-//						.add(Projections.property("consulta.dataStart"), "start")
-//						.add(Projections.property("consulta.dataEnd"), "end"))
-//				.add(Restrictions.ge("consulta.dataStart", dateStart))
-//				.add(Restrictions.le("consulta.dataStart", dateEnd))
-//				.setResultTransformer(Transformers.aliasToBean(Event.class)).list();
-//		return list;
-//	}
 
 
 }
