@@ -15,7 +15,7 @@ app.get('/', function(req, res) {
     res.sendFile(path.join(__dirname, 'index.html'));
 });
 
-app.get('/dashboard', function(req, res) {
+app.get('/dashboard/consolidadofinal', function(req, res) {
     res.send(dashboard);
 });
 

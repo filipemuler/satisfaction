@@ -13,6 +13,13 @@ public class DadosGraficoDTO implements Serializable {
     private String color;
     private String highlight;
 
+    public DadosGraficoDTO(Long value, String label, String color, String highlight) {
+        this.value = value;
+        this.label = label;
+        this.color = color;
+        this.highlight = highlight;
+    }
+
     public Long getValue() {
         return value;
     }

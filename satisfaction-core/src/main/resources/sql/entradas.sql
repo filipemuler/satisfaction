@@ -17,4 +17,4 @@ INSERT INTO "public"."conta" (id,descricao,nome,referentea_id, ordem, entrada) V
 INSERT INTO "public"."conta" (id,descricao,nome,referentea_id, ordem, entrada) VALUES (16,'Diaria Noite','Diaria Noite', 10, 6, true);
 
 #Consolidado Final
-INSERT INTO "public"."biconsolidadofinal" (id,filialid,filialnome, porcentagem,receita,despesa) VALUES (100,);
+INSERT INTO "public"."biconsolidadofinal" (id,filialid,filialnome, porcentagem,receita,despesa,data) VALUES (100,1000, "Motel X", 50.0, 1000, 1000, CURRENT_TIMESTAMP);

@@ -19,7 +19,7 @@ class Dashboard extends Component {
   componentDidMount(){
     var self = this
     request
-      .get('dashboard')
+      .get('dashboard/consolidadofinal')
       .end(function(err, res){
         self.setState(res.body);
       });

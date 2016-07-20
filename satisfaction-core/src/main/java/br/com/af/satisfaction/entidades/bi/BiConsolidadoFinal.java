@@ -2,6 +2,7 @@ package br.com.af.satisfaction.entidades.bi;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -17,6 +18,7 @@ public class BiConsolidadoFinal implements Serializable{
     private Long id;
     private Long filialId;
     private String filialNome;
+    private Date data;
     private BigDecimal despesa;
     private BigDecimal receita;
     private float porcentagem;
@@ -69,5 +71,13 @@ public class BiConsolidadoFinal implements Serializable{
 
     public void setPorcentagem(float porcentagem) {
         this.porcentagem = porcentagem;
+    }
+
+    public Date getData() {
+        return data;
+    }
+
+    public void setData(Date data) {
+        this.data = data;
     }
 }
