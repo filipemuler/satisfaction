@@ -4,13 +4,14 @@ import com.google.common.collect.Lists;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Comparator;
 import java.util.List;
 
 /**
  * Created by filipe on 01/02/16.
  */
 @Entity
-public class Conta implements Serializable {
+public class Conta implements Serializable, Comparable<Conta> {
 
     private Long id;
     private String nome;
@@ -29,6 +30,9 @@ public class Conta implements Serializable {
     //indica de é entrada ou saida, para fazer as contas depois
     //como a despesa é generico preciso disso.
     private boolean entrada = true;
+
+    //indica se a conta é para cartão
+    private boolean cartao = false;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -99,8 +103,40 @@ public class Conta implements Serializable {
         this.grupo = grupo;
     }
 
+    public boolean isCartao() {
+        return cartao;
+    }
+
+    public void setCartao(boolean cartao) {
+        this.cartao = cartao;
+    }
+
     @Transient
     public String getLabel(){
         return this.nome;
+    }
+
+    @Override
+    public int compareTo(Conta o) {
+        if(this == null){
+            return -1;
+        }
+        if(o == null){
+            return 1;
+        }
+        if(this.getOrdem() == null && o.getOrdem() == null){
+            return this.getNome().compareTo(o.getNome());
+        }
+        if(this.getOrdem() != null){
+            if(o.getOrdem() == null){
+                return 1;
+            }
+        }
+        if(o.getOrdem() != null){
+            if(this.getOrdem() == null){
+                return -1;
+            }
+        }
+        return this.getOrdem().compareTo(o.getOrdem());
     }
 }

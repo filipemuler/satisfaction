@@ -5,21 +5,21 @@ package br.com.af.web.dto;
  */
 public class SelectOptionDTO {
 
-    private Long value;
+    private String value;
     private String groupId;
     private String label;
 
-    public SelectOptionDTO(Long value, String groupId, String label) {
+    public SelectOptionDTO(String value, String groupId, String label) {
         this.value = value;
         this.groupId = groupId;
         this.label = label;
     }
 
-    public Long getValue() {
+    public String getValue() {
         return value;
     }
 
-    public void setValue(Long value) {
+    public void setValue(String value) {
         this.value = value;
     }
 

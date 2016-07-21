@@ -1,20 +1,84 @@
-{ "contas" :
-  [
-    {"value" : "4", "groupId":"Despesa", "label" :"Agua"},
-    {"value" : "5", "groupId":"Receita", "label":"Copa Manha"},
-    {"value" : "6", "groupId":"Receita", "label":"Copa Tarde"},
-    {"value" : "7", "groupId":"Receita", "label":"Copa Noite"},
-    {"value" : "8", "groupId":"Receita", "label":"Dinheiro"}
-  ] ,
-  "grupos" :
-  [
-    {"groupId" : "Despesa", "title" : "Despesa"},
-    {"groupId" : "Receita", "title" : "Receita"}
-  ] ,
-  "receitasFixas" :
-  [
-    {"id" : "3", "nome" : "Copa Noite", "ordem" : "3"},
-    {"id" : "2", "nome" : "Copa Tarde", "ordem" : "2"},
-    {"id" : "1", "nome" : "Copa Manha", "ordem" : "1"}
+{
+  "despesas": [
+    {
+      "value": "10",
+      "label": "Agua"
+    },
+    {
+      "value": "11",
+      "label": "Coca Cola"
+    },
+    {
+      "value": "12",
+      "label": "Supermercado"
+    },
+    {
+      "value": "13",
+      "label": "Luz"
+    },
+    {
+      "value": "14",
+      "label": "Aluguel"
+    }
+  ],
+  "recebimentos" : [
+    {
+      "value": "100",
+      "label": "Doação"
+    },
+    {
+      "value": "101",
+      "label": "Dinheiro Recebido"
+    }
+  ],
+  "grupos": [
+    {
+      "groupId": "Despesa",
+      "title": "Despesa"
+    },
+    {
+      "groupId": "Receita",
+      "title": "Receita"
+    }
+  ],
+  "receitasFixas": [
+    {
+      "value": "1",
+      "label": "Copa Noite"
+    },
+    {
+      "value": "2",
+      "label": "Copa Tarde"
+    },
+    {
+      "value": "3",
+      "label": "Copa Manha"
+    },
+    {
+      "value": "4",
+      "label": "Diaria Manha"
+    },
+    {
+      "value": "5",
+      "label": "Diaria Tarde"
+    },
+    {
+      "value": "6",
+      "label": "Diaria Noite"
+    }
+  ],
+  "filiais" : [
+    {
+      "value" : "1",
+      "label" : "Motel Prestige"
+    },
+    {
+      "value" : "2",
+      "label" : "Motel L'amour"
+    },
+    {
+      "value" : "3",
+      "label" : "Motel VemNiMim"
+    }
   ]
 }

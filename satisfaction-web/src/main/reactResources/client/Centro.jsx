@@ -20,27 +20,42 @@ class Centro extends Component {
 
 
     handleSelect(selectedKey, event){
-      var self = this
-      if(selectedKey != 'movimentacao' && selectedKey != 'dashboard'){
-        request
-          .get(selectedKey + '/list')
-          .end(function(err, res){
-            var stateObject = function() {
-              var returnObj = {};
-              returnObj[selectedKey] = res.body;
-              returnObj['contexto'] = selectedKey;
-              return returnObj;
-            }.bind(event)();
-            self.setState(stateObject)
-          });
-        }else{
-          if(selectedKey == 'dashboard'){
-            this.setState({update : true})
-          }
-        }
+      this.setState({contexto : selectedKey})
     }
 
     render () {
+
+      var dashboard = null;
+      var movimentacao = null;
+      var contas = null;
+      var filial = null;
+      var funcionario = null;
+      var usuario = null;
+      var permissao = null;
+
+      switch(this.state.contexto){
+        case 'dashboard':
+          dashboard = <Dashboard  contexto="Dashboard"/>
+          break
+        case 'movimentacao':
+          movimentacao = <Movimentacao contexto="Movimentacao"/>
+          break
+        case 'contas':
+          contas = <Cadastro contexto="contas"/>
+          break
+        case 'filial':
+          filial = <Cadastro contexto="filial"/>
+          break
+        case 'funcionario':
+          funcionario = <Cadastro contexto="funcionario"/>
+          break
+        case 'usuario':
+          usuario = <Cadastro contexto="usuario"/>
+          break
+        case 'permissao':
+          permissao = <Cadastro contexto="permissao"/>
+          break
+      }
       return (
         <Tab.Container id="left-tabs-example" defaultActiveKey="dashboard" onSelect={this.handleSelect}>
           <Row className="clearfix">
@@ -59,26 +74,25 @@ class Centro extends Component {
             <Col sm={10}>
               <Tab.Content>
                 <Tab.Pane eventKey="dashboard">
-                  <Dashboard  contexto={this.state.contexto} ajax={this.state.dashboard}
-                    update={this.state.update}/>
+                  {dashboard}
                 </Tab.Pane>
                 <Tab.Pane eventKey="movimentacao">
-                  <Movimentacao contexto={this.state.contexto} ajax={this.state.movimentacao}/>
+                  {movimentacao}
                 </Tab.Pane>
                 <Tab.Pane eventKey="contas">
-                  <Cadastro key="contas" contexto={this.state.contexto} ajax={this.state.contas}/>
+                  {contas}
                 </Tab.Pane>
                 <Tab.Pane eventKey="filial">
-                  <Cadastro contexto={this.state.contexto} ajax={this.state.filial}/>
+                  {filial}
                 </Tab.Pane>
                 <Tab.Pane eventKey="funcionario">
-                  <Cadastro contexto={this.state.contexto} ajax={this.state.funcionario}/>
+                  {funcionario}
                 </Tab.Pane>
                 <Tab.Pane eventKey="usuario">
-                  <Cadastro contexto={this.state.contexto} ajax={this.state.usuario}/>
+                  {usuario}
                 </Tab.Pane>
                 <Tab.Pane eventKey="permissao">
-                  <Cadastro contexto={this.state.contexto} ajax={this.state.permissao}/>
+                  {permissao}
                 </Tab.Pane>
               </Tab.Content>
             </Col>

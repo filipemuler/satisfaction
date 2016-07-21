@@ -12,6 +12,7 @@ import request from 'superagent'
 import MovimentacaoAdded from './MovimentacaoAdded'
 import MovimentacaoAdd from './MovimentacaoAdd'
 import Footer from './Footer'
+import SimpleSelect from 'react-selectize/src/SimpleSelect'
 
 class Movimentacao extends Component {
 
@@ -21,14 +22,16 @@ class Movimentacao extends Component {
     this.onCancel = this.onCancel.bind(this)
     this.addDespesa = this.addDespesa.bind(this)
     this.addRecebimento = this.addRecebimento.bind(this)
-    this.state = { contas : [],
+    this.state = {
       grupos : [],
       receitasFixas : [],
-      despesas : [],
-      recebimentos : [],
-      cartoesSaida : [],
-      cartoesEntrada : [],
-      fluxos : []}
+      despesasAdded : [],
+      recebimentosAdded : [],
+      cartoesSaidaAdded : [],
+      cartoesEntradaAdded : [],
+      fluxosAdded : [],
+      filiais : []
+    }
   }
 
   componentDidMount(){
@@ -42,7 +45,9 @@ class Movimentacao extends Component {
 
   onHandleSubmit(){
     var self = this
-    var submit = {movimentacao : { movimentacoesConta : []}}
+    var submit = {movimentacao : { movimentacoesConta : [], filial : {}}}
+    submit.movimentacao.filial.id = this.refs.filial.value().value
+    submit.movimentacao.filial.nome = this.refs.filial.value().label
     for (var ref in this.refs) {
       if(ref.startsWith('submit')){
         submit.movimentacao.movimentacoesConta.push(this.refs[ref].getFormData())
@@ -53,11 +58,11 @@ class Movimentacao extends Component {
       .send(submit)
       .end(function(err, res){
         self.setState({
-        despesas : [],
-        recebimentos : [],
-        cartoesSaida : [],
-        cartoesEntrada : [],
-        fluxos : []})
+        despesasAdded : [],
+        recebimentosAdded : [],
+        cartoesSaidaAdded : [],
+        cartoesEntradaAdded : [],
+        fluxosAdded : []})
       });
     }
 
@@ -67,53 +72,65 @@ class Movimentacao extends Component {
     }
 
     addDespesa(id, label, value){
-      this.setState({ despesas :
-        this.state.despesas.concat(
-          {id : id, nome : label, value : value}
+      this.setState({ despesasAdded :
+        this.state.despesasAdded.concat(
+          {id : id, label : label, value : value}
         )}
       )
     }
     addRecebimento(id, label, value){
-      this.setState({ recebimentos :
-        this.state.recebimentos.concat(
-          {id : id, nome : label, value : value}
+      this.setState({ recebimentosAdded :
+        this.state.recebimentosAdded.concat(
+          {id : id, label : label, value : value}
         )}
       )
     }
 
     render () {
+      var self = this
       const footer = <Footer onSubmit={this.onHandleSubmit} onCancel={this.onCancel}/>
       var receitasFixas = this.state.receitasFixas.map(conta =>
+        <MovimentacaoAdded key={conta.value}
+          contaId={conta.value}
+          title={conta.label}
+          ref={"submit-" + conta.value}/>
+      )
+      var despesas = this.state.despesasAdded.map(conta =>
         <MovimentacaoAdded key={conta.id}
           contaId={conta.id}
-          title={conta.nome}
+          title={conta.label}
           inputValue={conta.value}
           ref={"submit-" + conta.id}/>
       )
-      var despesas = this.state.despesas.map(conta =>
+      var recebimentos = this.state.recebimentosAdded.map(conta =>
         <MovimentacaoAdded key={conta.id}
           contaId={conta.id}
-          title={conta.nome}
-          inputValue={conta.value}
-          ref={"submit-" + conta.id}/>
-      )
-      var recebimentos = this.state.recebimentos.map(conta =>
-        <MovimentacaoAdded key={conta.id}
-          contaId={conta.id}
-          title={conta.nome}
+          title={conta.label}
           inputValue={conta.value}
           ref={"submit-" + conta.id}/>
       )
       return(
         <Panel header={this.props.contexto} footer={footer}>
           <Form horizontal>
+            <FormGroup>
+              <Col componentClass={ControlLabel} sm={3}>Filial</Col>
+              <Col smOffset={1} sm={4}>
+                <SimpleSelect
+                  options = {this.state.filiais}
+                  placeholder = "Selecione..."
+                  value={this.state.filial}
+                  onValueChange = {function(value) {
+                        self.setState({filial: value});
+                  }}
+                  ref="filial"/>
+              </Col>
+            </FormGroup>
             {receitasFixas}
             <Panel>
               Despesas
               {despesas}
               <MovimentacaoAdd
-                options={this.state.contas}
-                groups={this.state.grupos}
+                options={this.state.despesas}
                 onAdded={this.addDespesa}
                 ref="adicionaDespesa"/>
             </Panel>
@@ -121,8 +138,7 @@ class Movimentacao extends Component {
               Recebimentos
               {recebimentos}
               <MovimentacaoAdd
-                options={this.state.contas}
-                groups={this.state.grupos}
+                options={this.state.recebimentos}
                 onAdded={this.addRecebimento}
                 ref="adicionaRecebimento"/>
             </Panel>

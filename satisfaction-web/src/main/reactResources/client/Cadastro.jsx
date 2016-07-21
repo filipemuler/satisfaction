@@ -16,7 +16,7 @@ class Cadastro extends Component {
 
   constructor(props){
     super(props)
-    this.state = {showModal : false}
+    this.state = {showModal : false, lista : []}
     this.clickCriar = this.clickCriar.bind(this)
     this.onHandleSubmit = this.onHandleSubmit.bind(this)
     this.close = this.close.bind(this)
@@ -26,6 +26,12 @@ class Cadastro extends Component {
   }
 
   componentDidMount(){
+    var self = this
+    request
+      .get(this.props.contexto + "/list")
+      .end(function(err, res){
+        self.setState({lista : res.body});
+      });
   }
 
   clickCriar(){
@@ -37,7 +43,7 @@ class Cadastro extends Component {
   }
 
   onHandleSubmit(){
-    self = this;
+    var self = this;
     console.log(this.refs.form.getDataForm())
     request
       .post(url)
@@ -78,7 +84,7 @@ class Cadastro extends Component {
       }
       return(
         <Panel header={this.props.contexto} footer={footer}>
-          <Lista lista={this.props.ajax}></Lista>
+          <Lista lista={this.state.lista}></Lista>
           <Modal show={this.state.showModal} onHide={this.close}>
             <Modal.Header closeButton>
               <Modal.Title>Criar</Modal.Title>

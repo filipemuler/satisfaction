@@ -19,7 +19,7 @@ public class MovimentacaoService {
         this.handlerProducer = handlerProducer;
     }
 
-    public void criarConsolidados(Movimentacao movimentacao){
+    public void criarMovimentacoes(Movimentacao movimentacao){
         for(MovimentacaoChainHandler handler : handlerProducer.getMovimentacoesHandlers()){
             handler.handleMovimentacao(movimentacao);
         }

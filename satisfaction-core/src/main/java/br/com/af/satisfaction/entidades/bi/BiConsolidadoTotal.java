@@ -12,13 +12,14 @@ import java.util.Date;
  * Created by filipe on 14/07/16.
  */
 @Entity
-public class BiMovimentacao implements Serializable{
+public class BiConsolidadoTotal implements Serializable{
 
     private Long id;
 
     private Date data;
 
-    private String filial;
+    private Long filialId;
+    private String filialNome;
 
     private Long contaId;
     private String conta;
@@ -45,12 +46,20 @@ public class BiMovimentacao implements Serializable{
         this.data = data;
     }
 
-    public String getFilial() {
-        return filial;
+    public Long getFilialId() {
+        return filialId;
     }
 
-    public void setFilial(String filial) {
-        this.filial = filial;
+    public void setFilialId(Long filialId) {
+        this.filialId = filialId;
+    }
+
+    public String getFilialNome() {
+        return filialNome;
+    }
+
+    public void setFilialNome(String filialNome) {
+        this.filialNome = filialNome;
     }
 
     public Long getContaId() {

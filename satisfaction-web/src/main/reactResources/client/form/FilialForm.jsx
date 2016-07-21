@@ -21,10 +21,9 @@ class FilialForm extends Component {
   componentDidMount(){
     var self = this
     request
-      .get('/filial/list/tipoLogradouro')
+      .get('filial/tipoLogradouro')
       .end(function(err, res){
-        var optionsAjax = res.body.map((tipo) => {return {label: tipo, value: tipo}});
-        self.setState({options : optionsAjax})
+        self.setState({options : res.body})
       });
   }
 
@@ -37,7 +36,7 @@ class FilialForm extends Component {
         cnpj : ReactDOM.findDOMNode(this.refs.cnpj).value,
         inscricaoEstatual : ReactDOM.findDOMNode(this.refs.inscricaoEstatual).value,
         cep : ReactDOM.findDOMNode(this.refs.cep).value,
-        tipoLogradouro : this.refs.tipoLogradouro.value().value,
+        tipoLogradouro : this.refs.tipoLogradouro.value()!=null ? this.refs.tipoLogradouro.value().value : null,
         logradouro : ReactDOM.findDOMNode(this.refs.logradouro).value,
         numero : ReactDOM.findDOMNode(this.refs.numero).value,
         complemento : ReactDOM.findDOMNode(this.refs.complemento).value,
@@ -91,7 +90,7 @@ class FilialForm extends Component {
     <FormGroup controlId="formHorizontalTipoLogradouro">
       <Col componentClass={ControlLabel} sm={3}>Tipo Logradouro</Col>
       <Col sm={9}>
-        <SimpleSelect options = {this.state.options} placeholder = "Selecione..." ref="tipoLogradouro"></SimpleSelect>
+        <SimpleSelect options={this.state.options} placeholder = "Selecione..." ref="tipoLogradouro"></SimpleSelect>
       </Col>
     </FormGroup>
     <FormGroup controlId="formHorizontalLogradouro">

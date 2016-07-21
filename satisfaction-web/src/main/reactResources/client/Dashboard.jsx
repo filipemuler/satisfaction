@@ -31,19 +31,19 @@ class Dashboard extends Component {
 
     render(){
     var options = {
-      animateRotate :false
+      animateRotate :true
     };
 
     var type = 'Pie'
     var filiais = this.state.filiais.map(filial =>
-      <Col md={3}>
-        <Thumbnail style={style.thumbnail}>
-          {filial.nome}
-
-            <DoughnutChart data={filial.dados} width="150" height="150" style={style.centro}/>
-            <h3 style={style.porcentagem}>65%</h3>
-
-        </Thumbnail>
+      <Col md={3} key={Math.random()}>
+          <div style={style.tituloFilial}>
+            {filial.nome}
+          </div>
+          <div style={style.centroLinha}>
+            <DoughnutChart data={filial.dados} options={options} width="150" height="150" style={style.centro}/>
+            <h4 style={style.centro}>{filial.porcentagem}%</h4>
+          </div>
       </Col>
     )
 return(
@@ -56,10 +56,13 @@ return(
 }
 
 const style = {
-  thumbnail : {
+  tituloFilial : {
+    textAlign : 'center'
+  },
+  centroLinha : {
     width : 200,
     height :200,
-    position : 'relative'
+    position : 'relative',
     marginLeft : 'auto',
     marginRight : 'auto'
   },

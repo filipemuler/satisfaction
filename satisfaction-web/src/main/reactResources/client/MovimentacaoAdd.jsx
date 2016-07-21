@@ -12,7 +12,7 @@ class MovimentacaoAdd extends Component {
 
   constructor(props){
     super(props)
-    this.state = { options : [], groups : [], conta : null, quantidade : ""}
+    this.state = { options : [], conta : null, quantidade : ""}
     this.handleChange = this.handleChange.bind(this);
   }
 
@@ -20,12 +20,16 @@ class MovimentacaoAdd extends Component {
   }
 
   handleChange() {
-    this.props.onAdded(
-      this.refs.conta.value().value,
-      this.refs.conta.value().label,
-      ReactDOM.findDOMNode(this.refs.quantidade).value
-    )
-    this.setState({conta : null, quantidade : ""})
+    if(this.refs.conta.value()!=null){
+      this.props.onAdded(
+        this.refs.conta.value().value,
+        this.refs.conta.value().label,
+        ReactDOM.findDOMNode(this.refs.quantidade).value
+      )
+      this.setState({conta : null, quantidade : ""})
+    }else{
+      alert("Selecione um valor");
+    }
   }
 
     render () {
@@ -35,7 +39,6 @@ class MovimentacaoAdd extends Component {
           <Col smOffset={2} sm={4}>
             <SimpleSelect
               options = {this.props.options}
-              groups={this.props.groups}
               placeholder = "Selecione..."
               value={this.state.conta}
               onValueChange = {function(value) {
