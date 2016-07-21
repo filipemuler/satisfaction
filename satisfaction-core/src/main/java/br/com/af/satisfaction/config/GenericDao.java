@@ -32,7 +32,6 @@ public class GenericDao<T> {
 
 	public void persist(T entity) {
 		this.em.persist(entity);
-		this.em.flush();
 	}
 
 	public T merge(T entity) {

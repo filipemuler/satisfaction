@@ -37,10 +37,12 @@ class Dashboard extends Component {
     var type = 'Pie'
     var filiais = this.state.filiais.map(filial =>
       <Col md={3}>
-        <Thumbnail>
+        <Thumbnail style={style.thumbnail}>
           {filial.nome}
-        <DoughnutChart data={filial.dados} />
-        <h3 style={t}>65%</h3>
+
+            <DoughnutChart data={filial.dados} width="150" height="150" style={style.centro}/>
+            <h3 style={style.porcentagem}>65%</h3>
+
         </Thumbnail>
       </Col>
     )
@@ -53,12 +55,22 @@ return(
 }
 }
 
-const t = {
-  "margin": "0 -50% 0 0",
-  "position": "absolute",
-"top": "45%",
-"left": "48%",
-"transform": "translate(-50%, -50%)"
+const style = {
+  thumbnail : {
+    width : 200,
+    height :200,
+    position : 'relative'
+    marginLeft : 'auto',
+    marginRight : 'auto'
+  },
+  centro : {
+    position: 'absolute',
+    margin: '0 -50% 0 0',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)'
+  }
+
 }
 
 export default Dashboard

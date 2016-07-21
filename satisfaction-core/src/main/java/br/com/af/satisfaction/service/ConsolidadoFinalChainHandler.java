@@ -9,6 +9,7 @@ import javax.inject.Inject;
 import javax.transaction.Transactional;
 
 import br.com.af.satisfaction.config.GenericDao;
+import br.com.af.satisfaction.entidades.Conta;
 import br.com.af.satisfaction.entidades.Movimentacao;
 import br.com.af.satisfaction.entidades.MovimentacaoConta;
 import br.com.af.satisfaction.entidades.bi.BiConsolidadoFinal;
@@ -21,14 +22,16 @@ public class ConsolidadoFinalChainHandler implements MovimentacaoChainHandler {
 
     private GenericDao<BiConsolidadoFinal> service;
     private GenericDao<Movimentacao> movimentacaoService;
+    private GenericDao<Conta> contaService;
 
     public ConsolidadoFinalChainHandler() {
     }
 
     @Inject
-    public ConsolidadoFinalChainHandler(GenericDao<BiConsolidadoFinal> service, GenericDao<Movimentacao> movimentacaoService) {
+    public ConsolidadoFinalChainHandler(GenericDao<BiConsolidadoFinal> service, GenericDao<Movimentacao> movimentacaoService, GenericDao<Conta> contaService) {
         this.service = service;
         this.movimentacaoService = movimentacaoService;
+        this.contaService = contaService;
     }
 
     @Override
@@ -43,7 +46,8 @@ public class ConsolidadoFinalChainHandler implements MovimentacaoChainHandler {
         BigDecimal despesa = BigDecimal.ZERO;
         BigDecimal receita = BigDecimal.ZERO;
         for(MovimentacaoConta conta : movimentacao.getMovimentacoesConta()){
-            if(conta.getConta().isEntrada()){
+            Conta contaRecuperada = this.contaService.findById(conta.getConta().getId(), Conta.class);
+            if(contaRecuperada.isEntrada()){
                 receita = receita.add(conta.getValor());
             }else{
                 despesa = despesa.add(conta.getValor());

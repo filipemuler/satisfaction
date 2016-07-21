@@ -14,25 +14,29 @@ class Centro extends Component {
 
     constructor(props){
       super(props)
-      this.state = {dashboard : [], contexto : 'dashboard'}
+      this.state = {dashboard : [], contexto : 'dashboard', update : false}
       this.handleSelect = this.handleSelect.bind(this)
     }
 
 
     handleSelect(selectedKey, event){
       var self = this
-      if(selectedKey != 'movimentacao'){
-      request
-        .get(selectedKey + '/list')
-        .end(function(err, res){
-          var stateObject = function() {
-            var returnObj = {};
-            returnObj[selectedKey] = res.body;
-            returnObj['contexto'] = selectedKey;
-            return returnObj;
-          }.bind(event)();
-          self.setState(stateObject)
-        });
+      if(selectedKey != 'movimentacao' && selectedKey != 'dashboard'){
+        request
+          .get(selectedKey + '/list')
+          .end(function(err, res){
+            var stateObject = function() {
+              var returnObj = {};
+              returnObj[selectedKey] = res.body;
+              returnObj['contexto'] = selectedKey;
+              return returnObj;
+            }.bind(event)();
+            self.setState(stateObject)
+          });
+        }else{
+          if(selectedKey == 'dashboard'){
+            this.setState({update : true})
+          }
         }
     }
 
@@ -55,7 +59,8 @@ class Centro extends Component {
             <Col sm={10}>
               <Tab.Content>
                 <Tab.Pane eventKey="dashboard">
-                  <Dashboard  contexto={this.state.contexto} ajax={this.state.dashboard}/>
+                  <Dashboard  contexto={this.state.contexto} ajax={this.state.dashboard}
+                    update={this.state.update}/>
                 </Tab.Pane>
                 <Tab.Pane eventKey="movimentacao">
                   <Movimentacao contexto={this.state.contexto} ajax={this.state.movimentacao}/>
