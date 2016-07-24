@@ -8,10 +8,15 @@ import InputGroup from 'react-bootstrap/lib/InputGroup'
 import Col from 'react-bootstrap/lib/Col'
 import SimpleSelect from 'react-selectize/src/SimpleSelect'
 
-class MovimentacaoAdded extends Component {
+class MovimentacaoFixa extends Component {
 
   constructor(props){
     super(props)
+    this.state = {value : ""}
+  }
+
+  reset(){
+    this.setState({value : ""})
   }
 
   getFormData(){
@@ -36,8 +41,10 @@ class MovimentacaoAdded extends Component {
               <InputGroup.Addon>R$</InputGroup.Addon>
               <FormControl type="text"
                 ref="valor"
-                value={this.props.inputValue}
-                disabled={this.props.disabled}/>
+                value={this.state.value}
+                onChange = {function(e){
+                  self.setState({value : e.target.value})
+                }}/>
             </InputGroup>
           </Col>
         </FormGroup>
@@ -46,4 +53,4 @@ class MovimentacaoAdded extends Component {
 
 }
 
-export default MovimentacaoAdded
+export default MovimentacaoFixa

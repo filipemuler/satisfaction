@@ -1,14 +1,11 @@
 package br.com.af.satisfaction.service;
 
-import static java.math.BigDecimal.ROUND_DOWN;
 import static java.math.RoundingMode.HALF_UP;
 
 import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.util.Date;
 
 import javax.inject.Inject;
-import javax.transaction.Transactional;
 
 import br.com.af.satisfaction.config.GenericDao;
 import br.com.af.satisfaction.entidades.Conta;
@@ -40,8 +37,8 @@ public class ConsolidadoFinalChainHandler implements MovimentacaoChainHandler {
 
         BiConsolidadoFinal consolidadoFinal = new BiConsolidadoFinal();
         consolidadoFinal.setData(new Date());
-        consolidadoFinal.setFilialId(movimentacao.getFilial().getId());
-        consolidadoFinal.setFilialNome(movimentacao.getFilial().getNome());
+        consolidadoFinal.setFilialid(movimentacao.getFilial().getId().intValue());
+        consolidadoFinal.setFilialnome(movimentacao.getFilial().getNome());
 
         BigDecimal despesa = BigDecimal.ZERO;
         BigDecimal receita = BigDecimal.ZERO;
@@ -58,7 +55,7 @@ public class ConsolidadoFinalChainHandler implements MovimentacaoChainHandler {
         if(!despesa.equals(BigDecimal.ZERO)) {
             BigDecimal divide = receita.divide(despesa, 4, HALF_UP);
             BigDecimal porcento = divide.multiply(new BigDecimal(100));
-            consolidadoFinal.setPorcentagem(porcento.setScale(2, HALF_UP).floatValue());
+            consolidadoFinal.setPorcentagem(porcento.setScale(2, HALF_UP));
         }
 
         this.service.persist(consolidadoFinal);

@@ -10,6 +10,7 @@ import Col from 'react-bootstrap/lib/Col'
 import ControlLabel from 'react-bootstrap/lib/ControlLabel'
 import request from 'superagent'
 import MovimentacaoAdded from './MovimentacaoAdded'
+import MovimentacaoFixa from './MovimentacaoFixa'
 import MovimentacaoAdd from './MovimentacaoAdd'
 import Footer from './Footer'
 import SimpleSelect from 'react-selectize/src/SimpleSelect'
@@ -30,7 +31,8 @@ class Movimentacao extends Component {
       cartoesSaidaAdded : [],
       cartoesEntradaAdded : [],
       fluxosAdded : [],
-      filiais : []
+      filiais : [],
+      inputValue : ''
     }
   }
 
@@ -62,7 +64,16 @@ class Movimentacao extends Component {
         recebimentosAdded : [],
         cartoesSaidaAdded : [],
         cartoesEntradaAdded : [],
-        fluxosAdded : []})
+        fluxosAdded : [],
+        filial : null,
+        inputValue : ''})
+        for (var ref in self.refs) {
+          if(ref.startsWith('submit')){
+            if (typeof self.refs[ref].reset === "function") {
+              self.refs[ref].reset();
+            }
+          }
+         }
       });
     }
 
@@ -79,6 +90,7 @@ class Movimentacao extends Component {
       )
     }
     addRecebimento(id, label, value){
+
       this.setState({ recebimentosAdded :
         this.state.recebimentosAdded.concat(
           {id : id, label : label, value : value}
@@ -90,7 +102,7 @@ class Movimentacao extends Component {
       var self = this
       const footer = <Footer onSubmit={this.onHandleSubmit} onCancel={this.onCancel}/>
       var receitasFixas = this.state.receitasFixas.map(conta =>
-        <MovimentacaoAdded key={conta.value}
+        <MovimentacaoFixa key={conta.value}
           contaId={conta.value}
           title={conta.label}
           ref={"submit-" + conta.value}/>
@@ -100,6 +112,7 @@ class Movimentacao extends Component {
           contaId={conta.id}
           title={conta.label}
           inputValue={conta.value}
+          disabled="true"
           ref={"submit-" + conta.id}/>
       )
       var recebimentos = this.state.recebimentosAdded.map(conta =>
@@ -107,6 +120,7 @@ class Movimentacao extends Component {
           contaId={conta.id}
           title={conta.label}
           inputValue={conta.value}
+          disabled="true"
           ref={"submit-" + conta.id}/>
       )
       return(

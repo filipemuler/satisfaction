@@ -16,12 +16,12 @@ import javax.persistence.Id;
 public class BiConsolidadoFinal implements Serializable{
 
     private Long id;
-    private Long filialId;
-    private String filialNome;
+    private Number filialid;
+    private String filialnome;
     private Date data;
     private BigDecimal despesa;
     private BigDecimal receita;
-    private float porcentagem;
+    private BigDecimal porcentagem;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -33,20 +33,20 @@ public class BiConsolidadoFinal implements Serializable{
         this.id = id;
     }
 
-    public Long getFilialId() {
-        return filialId;
+    public Long getFilialid() {
+        return filialid.longValue();
     }
 
-    public void setFilialId(Long filialId) {
-        this.filialId = filialId;
+    public void setFilialid(Number filialid) {
+        this.filialid = filialid;
     }
 
-    public String getFilialNome() {
-        return filialNome;
+    public String getFilialnome() {
+        return filialnome;
     }
 
-    public void setFilialNome(String filialNome) {
-        this.filialNome = filialNome;
+    public void setFilialnome(String filialnome) {
+        this.filialnome = filialnome;
     }
 
     public BigDecimal getDespesa() {
@@ -65,11 +65,11 @@ public class BiConsolidadoFinal implements Serializable{
         this.receita = receita;
     }
 
-    public float getPorcentagem() {
+    public BigDecimal getPorcentagem() {
         return porcentagem;
     }
 
-    public void setPorcentagem(float porcentagem) {
+    public void setPorcentagem(BigDecimal porcentagem) {
         this.porcentagem = porcentagem;
     }
 

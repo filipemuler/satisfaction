@@ -1,8 +1,10 @@
 {
   "filiais": [
     {
+      "id" : "1",
       "nome": "Motel X",
-      "porcentagem": "70%",
+      "porcentagem": "70",
+      "data" : "22/07",
       "dados": [
         {
           "value": "5.5",
@@ -19,8 +21,10 @@
       ]
     },
     {
+      "id" : "2",
       "nome": "Motel Y",
-      "porcentagem": "35%",
+      "porcentagem": "35",
+      "data" : "22/07",
       "dados": [
         {
           "value": "3",
@@ -37,8 +41,10 @@
       ]
     },
     {
+      "id" : "3",
       "nome": "Motel Z",
-      "porcentagem": "22%",
+      "porcentagem": "22",
+      "data" : "22/07",
       "dados": [
         {
           "value": "7",
@@ -55,8 +61,30 @@
       ]
     },
     {
+      "id" : "4",
       "nome": "Motel W",
-      "porcentagem": "85%",
+      "porcentagem": "85",
+      "data" : "22/07",
+      "dados": [
+        {
+          "value": "5",
+          "color": "#F7464A",
+          "highlight": "#FF5A5E",
+          "label": "Red"
+        },
+        {
+          "value": "7",
+          "color": "#46BFBD",
+          "highlight": "#5AD3D1",
+          "label": "Green"
+        }
+      ]
+    },
+    {
+      "id" : "5",
+      "nome": "Motel Bla",
+      "porcentagem": "32",
+      "data" : "22/07",
       "dados": [
         {
           "value": "5",

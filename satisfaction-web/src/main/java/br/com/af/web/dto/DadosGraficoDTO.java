@@ -2,29 +2,30 @@ package br.com.af.web.dto;
 
 import java.awt.*;
 import java.io.Serializable;
+import java.math.BigDecimal;
 
 /**
  * Created by filipe on 17/07/16.
  */
 public class DadosGraficoDTO implements Serializable {
 
-    private Long value;
+    private BigDecimal value;
     private String label;
     private String color;
     private String highlight;
 
-    public DadosGraficoDTO(Long value, String label, String color, String highlight) {
+    public DadosGraficoDTO(BigDecimal value, String label, String color, String highlight) {
         this.value = value;
         this.label = label;
         this.color = color;
         this.highlight = highlight;
     }
 
-    public Long getValue() {
+    public BigDecimal getValue() {
         return value;
     }
 
-    public void setValue(Long value) {
+    public void setValue(BigDecimal value) {
         this.value = value;
     }
 

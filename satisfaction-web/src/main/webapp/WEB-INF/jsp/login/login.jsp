@@ -7,18 +7,40 @@
 
 	<style>
 	.form-signin {
-		max-width: 330px;
-		padding: 15px;
-		margin: 0 auto;
+		text-align: center;
+
+	}
+	.bla{
+		width: 250px;
+		height: 300px;
+		        max-width: 330px;
+                padding: 15px;
+                margin: 0 auto;
+	}
+	.input{
+		display: block;
+width: 250px;
+height: 40px;
+margin-bottom: 10px;
+border-radius: 10px;
+border-width: 1px;
+	}
+	.botao{
+		display: block;
+width: 250px;
+height: 40px;
+border-radius: 10px;
+background-color: steelblue;
+border-width: 1px;
 	}
 	</style>
 
 	<h:login>
-		<form class="form-signin" action="${app}/login/login" method="post">
+		<form class="bla" action="${app}/login/login" method="post">
 			<h3 class="form-signin">Entrar</h3>
-            <input type="text" class="form-control" placeholder="Email" autofocus="" name="username"/>
-            <input type="password" class="form-control" placeholder="Senha" name="password"/>
-            <button type="submit">Entrar</button>
+            <input type="text" class="form-control input" placeholder="Email" autofocus="" name="username"/>
+            <input type="password" class="form-control input" placeholder="Senha" name="password"/>
+            <button class="botao" type="submit">Entrar</button>
 		</form>
 	</h:login>
 

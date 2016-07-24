@@ -23,8 +23,7 @@ class ContasForm extends Component {
     request
       .get('contas/list/contas')
       .end(function(err, res){
-        var optionsAjax = res.body.map((tipo) => {return {label: tipo.nome, value: tipo.id}});
-        self.setState({options : optionsAjax})
+        self.setState({options : res.body})
       });
   }
 
@@ -33,6 +32,8 @@ class ContasForm extends Component {
       conta : {
         nome : ReactDOM.findDOMNode(this.refs.nome).value,
         descricao : ReactDOM.findDOMNode(this.refs.descricao).value,
+        entrada : ReactDOM.findDOMNode(this.refs.entrada).value,
+        cartao : ReactDOM.findDOMNode(this.refs.cartao).value,
         referenteA : {
           id : this.refs.referenteA.value().value
         }
@@ -60,6 +61,18 @@ class ContasForm extends Component {
       <Col sm={9}>
         <SimpleSelect options = {this.state.options} placeholder = "Selecione..."
           ref="referenteA"/>
+      </Col>
+    </FormGroup>
+    <FormGroup controlId="formHorizontalEntrada">
+      <Col componentClass={ControlLabel} sm={3}>Entrada?</Col>
+      <Col sm={9}>
+        <Checkbox ref="entrada"/>
+      </Col>
+    </FormGroup>
+    <FormGroup controlId="formHorizontalCartao">
+      <Col componentClass={ControlLabel} sm={3}>Cartão?</Col>
+      <Col sm={9}>
+        <Checkbox ref="cartao"/>
       </Col>
     </FormGroup>
   </Form>

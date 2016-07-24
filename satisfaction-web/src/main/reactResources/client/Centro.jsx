@@ -14,7 +14,7 @@ class Centro extends Component {
 
     constructor(props){
       super(props)
-      this.state = {dashboard : [], contexto : 'dashboard', update : false}
+      this.state = {contexto : 'dashboard'}
       this.handleSelect = this.handleSelect.bind(this)
     }
 

@@ -13,7 +13,6 @@ class Dashboard extends Component {
   constructor(props){
     super(props)
     this.state = {filiais : []}
-    // this.handleEvent = this.handleEvent.bind(this)
   }
 
   componentDidMount(){
@@ -31,19 +30,24 @@ class Dashboard extends Component {
 
     render(){
     var options = {
-      animateRotate :true
+      animateRotate :false
     };
 
     var type = 'Pie'
     var filiais = this.state.filiais.map(filial =>
-      <Col md={3} key={Math.random()}>
-          <div style={style.tituloFilial}>
-            {filial.nome}
-          </div>
-          <div style={style.centroLinha}>
-            <DoughnutChart data={filial.dados} options={options} width="150" height="150" style={style.centro}/>
-            <h4 style={style.centro}>{filial.porcentagem}%</h4>
-          </div>
+      <Col md={3} key={filial.id}>
+          <Thumbnail>
+            <div style={style.tituloFilial}>
+              {filial.nome}
+            </div>
+            <div style={style.centroLinha}>
+              <DoughnutChart data={filial.dados} options={options} width="150" height="150" style={style.centro}/>
+              <h4 style={style.centro}>{filial.porcentagem}%</h4>
+            </div>
+            <div style={style.data}>
+              {filial.data}
+            </div>
+          </Thumbnail>
       </Col>
     )
 return(
@@ -56,6 +60,9 @@ return(
 }
 
 const style = {
+  data : {
+    textAlign : 'center'
+  },
   tituloFilial : {
     textAlign : 'center'
   },

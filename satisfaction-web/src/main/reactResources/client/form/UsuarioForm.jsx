@@ -17,9 +17,9 @@ class UsuarioForm extends Component {
   getDataForm(){
     var data = {
       usuario : {
-        email : ReactDOM.findDOMNode(this.refs.nome).value,
-        senha : ReactDOM.findDOMNode(this.refs.tipoEstabelecimento).value,
-        admin : ReactDOM.findDOMNode(this.refs.razaoSocial).value
+        email : ReactDOM.findDOMNode(this.refs.email).value,
+        senha : ReactDOM.findDOMNode(this.refs.senha).value,
+        admin : ReactDOM.findDOMNode(this.refs.admin).value
       }
     }
     return data;
