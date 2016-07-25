@@ -4,6 +4,10 @@
 	<jsp:output doctype-root-element="HTML"
 		doctype-system="about:legacy-compat" />
 
+	<!-- CSS -->
+	<link rel="stylesheet" href="${app}/oldLibs/bootstrap/css/bootstrap.min.css" type="text/css" />
+	<link rel="stylesheet" href="${app}/oldLibs/bootstrap/css/bootstrap-theme.min.css" type="text/css" />
+
 	<div class="container">
 		<img src="${app}/imgs/mbr.png" class="img-rounded" style="padding-bottom:9px"/>
 		<jsp:doBody />

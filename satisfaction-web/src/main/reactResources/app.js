@@ -35,6 +35,10 @@ app.get('/contas/list/contas', function(req, res) {
     res.send([{id : '3', nome : 'Coca-cola', ordem : '3'},{id : '2', nome : 'Supermercado', ordem : '2'}, {id : '1', nome : 'Copa Manha',ordem : '1'}]);
 });
 
+app.get('/fluxo/list', function(req, res) {
+    res.send({results : [{'id':'1001', 'nome': 'fluxo1'}, {'id':'1002', 'nome': 'fluxo2'}]});
+});
+
 app.get('/filial/list', function(req, res) {
     res.send({results : [{'id':'1001', 'usuario': 'filial1'}, {'id':'1002', 'usuario': 'filial2'}]});
 });

@@ -27,6 +27,7 @@ class MovimentacaoAdd extends Component {
         ReactDOM.findDOMNode(this.refs.quantidade).value
       )
       this.setState({conta : null, quantidade : ""})
+      this.refs.conta.focus()
     }else{
       alert("Selecione um valor");
     }

@@ -23,6 +23,8 @@ class Movimentacao extends Component {
     this.onCancel = this.onCancel.bind(this)
     this.addDespesa = this.addDespesa.bind(this)
     this.addRecebimento = this.addRecebimento.bind(this)
+    this.addCartaoEntrada = this.addCartaoEntrada.bind(this)
+    this.addCartaoSaida = this.addCartaoSaida.bind(this)
     this.state = {
       grupos : [],
       receitasFixas : [],
@@ -30,7 +32,7 @@ class Movimentacao extends Component {
       recebimentosAdded : [],
       cartoesSaidaAdded : [],
       cartoesEntradaAdded : [],
-      fluxosAdded : [],
+      fluxos : [],
       filiais : [],
       inputValue : ''
     }
@@ -47,12 +49,15 @@ class Movimentacao extends Component {
 
   onHandleSubmit(){
     var self = this
-    var submit = {movimentacao : { movimentacoesConta : [], filial : {}}}
+    var submit = {movimentacao : { movimentacoesConta : [], filial : {}, movimentacoesFluxo : []}}
     submit.movimentacao.filial.id = this.refs.filial.value().value
     submit.movimentacao.filial.nome = this.refs.filial.value().label
     for (var ref in this.refs) {
-      if(ref.startsWith('submit')){
+      if(ref.startsWith('conta-')){
         submit.movimentacao.movimentacoesConta.push(this.refs[ref].getFormData())
+      }
+      if(ref.startsWith('fluxo-')){
+        submit.movimentacao.movimentacoesFluxo.push(this.refs[ref].getFormData())
       }
      }
     request
@@ -64,11 +69,10 @@ class Movimentacao extends Component {
         recebimentosAdded : [],
         cartoesSaidaAdded : [],
         cartoesEntradaAdded : [],
-        fluxosAdded : [],
         filial : null,
         inputValue : ''})
         for (var ref in self.refs) {
-          if(ref.startsWith('submit')){
+          if(ref.startsWith('conta-') || ref.startsWith('fluxo-')){
             if (typeof self.refs[ref].reset === "function") {
               self.refs[ref].reset();
             }
@@ -78,8 +82,20 @@ class Movimentacao extends Component {
     }
 
     onCancel(){
-      this.setState({despesas : [],
-        recebimentos : []})
+      this.setState({
+      despesasAdded : [],
+      recebimentosAdded : [],
+      cartoesSaidaAdded : [],
+      cartoesEntradaAdded : [],
+      filial : null,
+      inputValue : ''})
+      for (var ref in this.refs) {
+        if(ref.startsWith('conta-') || ref.startsWith('fluxo-')){
+          if (typeof this.refs[ref].reset === "function") {
+            this.refs[ref].reset();
+          }
+        }
+       }
     }
 
     addDespesa(id, label, value){
@@ -97,7 +113,22 @@ class Movimentacao extends Component {
         )}
       )
     }
+    addCartaoEntrada(id, label, value){
 
+      this.setState({ cartoesEntradaAdded :
+        this.state.cartoesEntradaAdded.concat(
+          {id : id, label : label, value : value}
+        )}
+      )
+    }
+    addCartaoSaida(id, label, value){
+
+      this.setState({ cartoesSaidaAdded :
+        this.state.cartoesSaidaAdded.concat(
+          {id : id, label : label, value : value}
+        )}
+      )
+    }
     render () {
       var self = this
       const footer = <Footer onSubmit={this.onHandleSubmit} onCancel={this.onCancel}/>
@@ -105,7 +136,8 @@ class Movimentacao extends Component {
         <MovimentacaoFixa key={conta.value}
           contaId={conta.value}
           title={conta.label}
-          ref={"submit-" + conta.value}/>
+          money="true"
+          ref={"conta-" + conta.value}/>
       )
       var despesas = this.state.despesasAdded.map(conta =>
         <MovimentacaoAdded key={conta.id}
@@ -113,7 +145,7 @@ class Movimentacao extends Component {
           title={conta.label}
           inputValue={conta.value}
           disabled="true"
-          ref={"submit-" + conta.id}/>
+          ref={"conta-" + conta.id}/>
       )
       var recebimentos = this.state.recebimentosAdded.map(conta =>
         <MovimentacaoAdded key={conta.id}
@@ -121,7 +153,29 @@ class Movimentacao extends Component {
           title={conta.label}
           inputValue={conta.value}
           disabled="true"
-          ref={"submit-" + conta.id}/>
+          ref={"conta-" + conta.id}/>
+      )
+      var cartoesEntrada = this.state.cartoesEntradaAdded.map(conta =>
+        <MovimentacaoAdded key={conta.id}
+          contaId={conta.id}
+          title={conta.label}
+          inputValue={conta.value}
+          disabled="true"
+          ref={"conta-" + conta.id}/>
+      )
+      var cartoesSaida = this.state.cartoesSaidaAdded.map(conta =>
+        <MovimentacaoAdded key={conta.id}
+          contaId={conta.id}
+          title={conta.label}
+          inputValue={conta.value}
+          disabled="true"
+          ref={"conta-" + conta.id}/>
+      )
+      var fluxos = this.state.fluxos.map(fluxo =>
+        <MovimentacaoFixa key={fluxo.value}
+          contaId={fluxo.value}
+          title={fluxo.label}
+          ref={"fluxo-" + fluxo.value}/>
       )
       return(
         <Panel header={this.props.contexto} footer={footer}>
@@ -155,6 +209,26 @@ class Movimentacao extends Component {
                 options={this.state.recebimentos}
                 onAdded={this.addRecebimento}
                 ref="adicionaRecebimento"/>
+            </Panel>
+            <Panel>
+              Cartões Entrada
+              {cartoesEntrada}
+              <MovimentacaoAdd
+                options={this.state.cartoesEntrada}
+                onAdded={this.addCartaoEntrada}
+                ref="adicionaCartaoEntrada"/>
+            </Panel>
+            <Panel>
+              Cartões Saida
+              {cartoesSaida}
+              <MovimentacaoAdd
+                options={this.state.cartoesSaida}
+                onAdded={this.addCartaoSaida}
+                ref="adicionaCartaoSaida"/>
+            </Panel>
+            <Panel>
+              Fluxos
+              {fluxos}
             </Panel>
           </Form>
         </Panel>

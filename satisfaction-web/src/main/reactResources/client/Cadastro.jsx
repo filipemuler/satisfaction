@@ -7,10 +7,12 @@ import request from 'superagent'
 import Lista from './Lista'
 import Modal from 'react-bootstrap/lib/Modal'
 import ContasForm from './form/ContasForm'
+import FluxoForm from './form/FluxoForm'
 import UsuarioForm from './form/UsuarioForm'
 import PermissaoForm from './form/PermissaoForm'
 import FilialForm from './form/FilialForm'
 import FuncionarioForm from './form/FuncionarioForm'
+
 
 class Cadastro extends Component {
 
@@ -62,6 +64,10 @@ class Cadastro extends Component {
         case 'contas':
           url = "conta/salva";
           cadastro = <ContasForm ref="form"/>
+          break;
+        case 'fluxo':
+          url = "fluxo/salva";
+          cadastro = <FluxoForm ref="form"/>
           break;
         case 'usuario':
           url = "usuario/salva";

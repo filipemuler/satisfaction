@@ -30,6 +30,10 @@ class MovimentacaoFixa extends Component {
 
     render () {
       var self = this
+      var money
+      if(this.props.money == 'true'){
+        money = <InputGroup.Addon>R$</InputGroup.Addon>
+      }
       return(
         <FormGroup>
           <Col smOffset={2} sm={4}>
@@ -38,7 +42,7 @@ class MovimentacaoFixa extends Component {
           </Col>
           <Col sm={2}>
             <InputGroup>
-              <InputGroup.Addon>R$</InputGroup.Addon>
+              {money}
               <FormControl type="text"
                 ref="valor"
                 value={this.state.value}

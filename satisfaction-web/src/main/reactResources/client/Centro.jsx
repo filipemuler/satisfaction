@@ -28,6 +28,7 @@ class Centro extends Component {
       var dashboard = null;
       var movimentacao = null;
       var contas = null;
+      var fluxo = null;
       var filial = null;
       var funcionario = null;
       var usuario = null;
@@ -42,6 +43,9 @@ class Centro extends Component {
           break
         case 'contas':
           contas = <Cadastro contexto="contas"/>
+          break
+        case 'fluxo':
+          fluxo = <Cadastro contexto="fluxo"/>
           break
         case 'filial':
           filial = <Cadastro contexto="filial"/>
@@ -65,6 +69,7 @@ class Centro extends Component {
                 <NavItem eventKey="movimentacao" title="Item">Movimentação</NavItem>
                 <NavItem eventKey="cadastros" disabled>Cadastros</NavItem>
                 <NavItem eventKey="contas" title="Item">Contas</NavItem>
+                <NavItem eventKey="fluxo" title="Item">Fluxo</NavItem>
                 <NavItem eventKey="filial" title="Item">Filial</NavItem>
                 <NavItem eventKey="funcionario" title="Item">Funcionario</NavItem>
                 <NavItem eventKey="usuario" title="Item">Usuario</NavItem>
@@ -81,6 +86,9 @@ class Centro extends Component {
                 </Tab.Pane>
                 <Tab.Pane eventKey="contas">
                   {contas}
+                </Tab.Pane>
+                <Tab.Pane eventKey="fluxo">
+                  {fluxo}
                 </Tab.Pane>
                 <Tab.Pane eventKey="filial">
                   {filial}

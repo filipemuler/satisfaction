@@ -5,6 +5,7 @@ import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 
+import br.com.af.satisfaction.entidades.Fluxo;
 import com.google.common.collect.Lists;
 
 import br.com.af.satisfaction.entidades.Conta;
@@ -20,20 +21,32 @@ public class MovimentadaoDTO {
     private List<SelectOptionDTO> despesas = Lists.newArrayList();
     private List<SelectOptionDTO> recebimentos = Lists.newArrayList();
     private List<SelectOptionDTO> filiais = Lists.newArrayList();
+    private List<SelectOptionDTO> cartoesEntrada = Lists.newArrayList();
+    private List<SelectOptionDTO> cartoesSaida = Lists.newArrayList();
+    private List<SelectOptionDTO> fluxos = Lists.newArrayList();
 
-    public MovimentadaoDTO(List<Conta> contas, List<Filial> filiais) {
+    public MovimentadaoDTO(List<Conta> contas, List<Filial> filiais, List<Fluxo> fluxos) {
 
         Collections.sort(contas);
         for(Conta conta : contas){
             if (conta.getReferenteA() == null) {
                 this.grupos.add(new SelectGroupDTO(conta.getNome(), conta.getNome()));
-            } else if(conta.getOrdem() != null){
+            } else if (conta.isCartao()){
+                if(conta.isEntrada()){
+                    this.cartoesEntrada.add(this.getOption(conta));
+                }else{
+                    this.cartoesSaida.add(this.getOption(conta));
+                }
+            }  else if(conta.getOrdem() != null){
                 this.receitasFixas.add(this.getOption(conta));
             }else if(conta.isEntrada()){
                 this.recebimentos.add(this.getOption(conta));
             }else{
                 this.despesas.add(this.getOption(conta));
             }
+        }
+        for(Fluxo fluxo : fluxos){
+            this.fluxos.add(new SelectOptionDTO(Long.toString(fluxo.getId()), null, fluxo.getNome()));
         }
 
         for(Filial filial : filiais){
@@ -90,5 +103,29 @@ public class MovimentadaoDTO {
 
     public void setRecebimentos(List<SelectOptionDTO> recebimentos) {
         this.recebimentos = recebimentos;
+    }
+
+    public List<SelectOptionDTO> getCartoesEntrada() {
+        return cartoesEntrada;
+    }
+
+    public void setCartoesEntrada(List<SelectOptionDTO> cartoesEntrada) {
+        this.cartoesEntrada = cartoesEntrada;
+    }
+
+    public List<SelectOptionDTO> getCartoesSaida() {
+        return cartoesSaida;
+    }
+
+    public void setCartoesSaida(List<SelectOptionDTO> cartoesSaida) {
+        this.cartoesSaida = cartoesSaida;
+    }
+
+    public List<SelectOptionDTO> getFluxos() {
+        return fluxos;
+    }
+
+    public void setFluxos(List<SelectOptionDTO> fluxos) {
+        this.fluxos = fluxos;
     }
 }

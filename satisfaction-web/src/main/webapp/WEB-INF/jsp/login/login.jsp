@@ -7,40 +7,25 @@
 
 	<style>
 	.form-signin {
-		text-align: center;
-
-	}
-	.bla{
-		width: 250px;
-		height: 300px;
-		        max-width: 330px;
-                padding: 15px;
-                margin: 0 auto;
-	}
-	.input{
-		display: block;
-width: 250px;
-height: 40px;
-margin-bottom: 10px;
-border-radius: 10px;
-border-width: 1px;
-	}
-	.botao{
-		display: block;
-width: 250px;
-height: 40px;
-border-radius: 10px;
-background-color: steelblue;
-border-width: 1px;
+		max-width: 330px;
+		padding: 15px;
+		margin: 0 auto;
 	}
 	</style>
 
 	<h:login>
-		<form class="bla" action="${app}/login/login" method="post">
-			<h3 class="form-signin">Entrar</h3>
-            <input type="text" class="form-control input" placeholder="Email" autofocus="" name="username"/>
-            <input type="password" class="form-control input" placeholder="Senha" name="password"/>
-            <button class="botao" type="submit">Entrar</button>
+		<form class="form-signin" action="${app}/login/login" method="post">
+			<h3 class="form-signin-heading">Entrar</h3>
+			<div class="form-group">
+				<input type="text" class="form-control" placeholder="Email" autofocus="" name="username"/>
+			</div>
+			<div class="form-group">
+				<input type="password" class="form-control" placeholder="Senha" name="password"/>
+			</div>
+			<!--
+			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+			-->
+			<button class="btn btn-lg btn-primary btn-block" type="submit">Entrar</button>
 		</form>
 	</h:login>
 

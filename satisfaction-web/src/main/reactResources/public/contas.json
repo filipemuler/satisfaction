@@ -80,5 +80,39 @@
       "value" : "3",
       "label" : "Motel VemNiMim"
     }
+  ],
+  "cartoesEntrada" : [
+    {
+      "value": "1000",
+      "label": "Visa"
+    },
+    {
+      "value": "1001",
+      "label": "Master"
+    }
+  ],
+  "cartoesSaida" : [
+    {
+      "value": "1010",
+      "label": "Visa"
+    },
+    {
+      "value": "1011",
+      "label": "Master"
+    }
+  ],
+  "fluxos" : [
+    {
+      "value": "2000",
+      "label": "Carro Manhã"
+    },
+    {
+      "value": "2001",
+      "label": "Carro Tarde"
+    },
+    {
+      "value": "2002",
+      "label": "Carro Noite"
+    }
   ]
 }

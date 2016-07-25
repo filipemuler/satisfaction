@@ -7,12 +7,13 @@ import Col from 'react-bootstrap/lib/Col'
 import Thumbnail from 'react-bootstrap/lib/Thumbnail'
 import DoughnutChart from 'react-chartjs/lib/doughnut'
 import request from 'superagent'
+import Loading from './Loading'
 
 class Dashboard extends Component {
 
   constructor(props){
     super(props)
-    this.state = {filiais : []}
+    this.state = {filiais : [], loading : true}
   }
 
   componentDidMount(){
@@ -21,21 +22,21 @@ class Dashboard extends Component {
       .get('dashboard/consolidadofinal')
       .end(function(err, res){
         self.setState(res.body);
+        self.setState({loading : false})
       });
   }
 
-    componentWillMount(){
-      this.setState({results : []})
-    }
-
     render(){
     var options = {
-      animateRotate :false
+      animateRotate :true
     };
-
+    var loading
+    if(this.state.loading == true){
+      loading = <Loading />
+    }
     var type = 'Pie'
     var filiais = this.state.filiais.map(filial =>
-      <Col md={3} key={filial.id}>
+      <Col md={3} key={Math.random()}>
           <Thumbnail>
             <div style={style.tituloFilial}>
               {filial.nome}
@@ -52,6 +53,7 @@ class Dashboard extends Component {
     )
 return(
     <Panel header={this.props.contexto} >
+      {loading}
       <Row className="clearfix">
         {filiais}
       </Row>

@@ -8,6 +8,7 @@ import javax.inject.Inject;
 
 import br.com.af.satisfaction.config.GenericDao;
 import br.com.af.satisfaction.entidades.Filial;
+import br.com.af.satisfaction.entidades.Fluxo;
 import br.com.af.satisfaction.service.MovimentacaoService;
 import br.com.af.web.dto.MovimentadaoDTO;
 import br.com.af.satisfaction.entidades.Conta;
@@ -29,17 +30,20 @@ public class MovimentacaoController {
     private GenericDao<Conta> contaService;
     private GenericDao<Filial> filialService;
     private MovimentacaoService movimentacaoService;
+    private GenericDao<Fluxo> fluxoService;
 
     public MovimentacaoController() {
         // nada
     }
 
     @Inject
-    public MovimentacaoController(Result result, GenericDao<Conta> contaService, GenericDao<Filial> filialService, MovimentacaoService movimentacaoService) {
+    public MovimentacaoController(Result result, GenericDao<Conta> contaService, GenericDao<Filial> filialService,
+                                  MovimentacaoService movimentacaoService, GenericDao<Fluxo> fluxoService) {
         this.result = result;
         this.contaService = contaService;
         this.filialService = filialService;
         this.movimentacaoService = movimentacaoService;
+        this.fluxoService = fluxoService;
     }
 
     public void form() {
@@ -51,9 +55,11 @@ public class MovimentacaoController {
     public void listaContas() {
         List<Conta> contas = this.contaService.findAll(Conta.class);
         List<Filial> filiais = this.filialService.findAll(Filial.class);
-        MovimentadaoDTO movimentadaoDTO = new MovimentadaoDTO(contas, filiais);
+        List<Fluxo> fluxos = this.fluxoService.findAll(Fluxo.class);
+        MovimentadaoDTO movimentadaoDTO = new MovimentadaoDTO(contas, filiais, fluxos);
         this.result.use(Results.json()).withoutRoot().
-                from(movimentadaoDTO).include("grupos", "receitasFixas", "filiais", "despesas", "recebimentos").serialize();
+                from(movimentadaoDTO).include("grupos", "receitasFixas", "filiais",
+                "despesas", "recebimentos", "cartoesEntrada", "cartoesSaida", "fluxos").serialize();
 
     }
 

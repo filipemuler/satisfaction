@@ -8,6 +8,11 @@
 	/* bring your own prefixes */
 	transform: translate(-50%, -50%);
 }
+
+.loading {
+	background-image: url(../imgs/ajax-loader.gif);
+	background-repeat: no-repeat;
+}
 .react-selectize {
   color: #000;
 }
