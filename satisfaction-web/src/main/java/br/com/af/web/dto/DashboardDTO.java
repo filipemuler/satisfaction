@@ -1,7 +1,6 @@
 package br.com.af.web.dto;
 
-import br.com.af.satisfaction.entidades.Filial;
-import br.com.af.satisfaction.entidades.bi.BiConsolidadoFinal;
+import br.com.af.satisfaction.entidades.bi.ConsolidadoDia;
 import com.google.common.collect.Lists;
 
 import java.io.Serializable;
@@ -14,8 +13,8 @@ public class DashboardDTO implements Serializable {
 
     private List<FilialDashboardDTO> filiais = Lists.newArrayList();
 
-    public DashboardDTO(List<BiConsolidadoFinal> finais) {
-        for(BiConsolidadoFinal consolidadoFinal : finais){
+    public DashboardDTO(List<ConsolidadoDia> finais) {
+        for(ConsolidadoDia consolidadoFinal : finais){
             this.filiais.add(new FilialDashboardDTO(consolidadoFinal));
         }
     }

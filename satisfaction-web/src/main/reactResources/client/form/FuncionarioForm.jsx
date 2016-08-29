@@ -21,8 +21,8 @@ class FuncionarioForm extends Component {
         cpf : ReactDOM.findDOMNode(this.refs.cpf).value,
         dataNascimento : ReactDOM.findDOMNode(this.refs.dataNascimento).value,
         dataAdmissao : ReactDOM.findDOMNode(this.refs.dataAdmissao).value,
-        socio : ReactDOM.findDOMNode(this.refs.socio).value,
-        gestorFilial : ReactDOM.findDOMNode(this.refs.gestorFilial).value
+        socio : this.socio.checked,
+        gestorFilial : this.gestorFilial.checked
       }
     }
     return data;
@@ -57,13 +57,13 @@ class FuncionarioForm extends Component {
     <FormGroup>
       <Col componentClass={ControlLabel} sm={3}>Socio</Col>
       <Col sm={9}>
-        <Checkbox ref="socio"/>
+        <Checkbox inputRef={ref => { this.socio = ref; }}/>
       </Col>
     </FormGroup>
     <FormGroup>
       <Col componentClass={ControlLabel} sm={3}>Gestor Filial</Col>
       <Col sm={9}>
-        <Checkbox ref="gestorFilial"/>
+        <Checkbox inputRef={ref => { this.gestorFilial = ref; }}/>
       </Col>
     </FormGroup>
   </Form>

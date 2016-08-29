@@ -15,10 +15,12 @@ class MovimentacaoAdded extends Component {
   }
 
   getFormData(){
+    let id = ReactDOM.findDOMNode(this.refs.conta).value;
+    let valor = ReactDOM.findDOMNode(this.refs.valor).value;
     var data = { conta : {
-          id : ReactDOM.findDOMNode(this.refs.conta).value
+          id : id
         },
-        valor : ReactDOM.findDOMNode(this.refs.valor).value
+        valor : (valor == '') ? 0 : valor
     }
     return data;
   }
@@ -27,7 +29,7 @@ class MovimentacaoAdded extends Component {
       var self = this
       return(
         <FormGroup>
-          <Col smOffset={2} sm={4}>
+          <Col sm={3}>
             <ControlLabel>{this.props.title}</ControlLabel>
             <input type="hidden" value={this.props.contaId} ref="conta"/>
           </Col>

@@ -1,7 +1,6 @@
 package br.com.af.satisfaction.service;
 
-import br.com.af.satisfaction.config.GenericDao;
-import br.com.af.satisfaction.entidades.bi.BiConsolidadoFinal;
+import br.com.af.satisfaction.entidades.bi.ConsolidadoDia;
 import org.hibernate.Session;
 import org.hibernate.transform.Transformers;
 
@@ -10,7 +9,6 @@ import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import java.time.LocalDate;
 import java.time.ZoneId;
-import java.time.ZoneOffset;
 import java.time.temporal.TemporalAdjusters;
 import java.util.Date;
 import java.util.List;
@@ -33,23 +31,23 @@ public class ConsolidadoService {
     }
 
     @SuppressWarnings("unchecked")
-    public List<BiConsolidadoFinal> getConsolidadoDoMes(){
+    public List<ConsolidadoDia> getConsolidadoDoMes(){
 
         LocalDate date = LocalDate.now();
 
         Session session = (Session) this.em.getDelegate();
-        List<BiConsolidadoFinal> result = session.createSQLQuery(
+        List<ConsolidadoDia> result = session.createSQLQuery(
                 "select max(data) as data, " +
                         "sum(despesa) as despesa, " +
                         "sum(receita) as receita, " +
                         "round((sum(despesa)/ sum(receita))*100, 2) as porcentagem, " +
                         "filialid, " +
                         "filialnome " +
-                "from biconsolidadofinal where " +
+                "from consolidadodia where " +
                         "filialid in (select id from filial) " +
                         "and data between :dataInicio and CURRENT_TIMESTAMP " +
                         "group by filialid, filialnome;")
-                .setResultTransformer(Transformers.aliasToBean(BiConsolidadoFinal.class))
+                .setResultTransformer(Transformers.aliasToBean(ConsolidadoDia.class))
                 .setDate("dataInicio", Date.from(date.with(TemporalAdjusters.firstDayOfMonth()).atStartOfDay(ZoneId.systemDefault()).toInstant()))
                 .list();
 

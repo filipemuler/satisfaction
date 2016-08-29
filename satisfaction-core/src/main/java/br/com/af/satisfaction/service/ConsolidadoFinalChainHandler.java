@@ -11,14 +11,14 @@ import br.com.af.satisfaction.config.GenericDao;
 import br.com.af.satisfaction.entidades.Conta;
 import br.com.af.satisfaction.entidades.Movimentacao;
 import br.com.af.satisfaction.entidades.MovimentacaoConta;
-import br.com.af.satisfaction.entidades.bi.BiConsolidadoFinal;
+import br.com.af.satisfaction.entidades.bi.ConsolidadoDia;
 
 /**
  * Created by filipe on 20/07/16.
  */
 public class ConsolidadoFinalChainHandler implements MovimentacaoChainHandler {
 
-    private GenericDao<BiConsolidadoFinal> service;
+    private GenericDao<ConsolidadoDia> service;
     private GenericDao<Movimentacao> movimentacaoService;
     private GenericDao<Conta> contaService;
 
@@ -26,7 +26,7 @@ public class ConsolidadoFinalChainHandler implements MovimentacaoChainHandler {
     }
 
     @Inject
-    public ConsolidadoFinalChainHandler(GenericDao<BiConsolidadoFinal> service, GenericDao<Movimentacao> movimentacaoService, GenericDao<Conta> contaService) {
+    public ConsolidadoFinalChainHandler(GenericDao<ConsolidadoDia> service, GenericDao<Movimentacao> movimentacaoService, GenericDao<Conta> contaService) {
         this.service = service;
         this.movimentacaoService = movimentacaoService;
         this.contaService = contaService;
@@ -35,7 +35,7 @@ public class ConsolidadoFinalChainHandler implements MovimentacaoChainHandler {
     @Override
     public void handleMovimentacao(Movimentacao movimentacao) {
 
-        BiConsolidadoFinal consolidadoFinal = new BiConsolidadoFinal();
+        ConsolidadoDia consolidadoFinal = new ConsolidadoDia();
         consolidadoFinal.setData(new Date());
         consolidadoFinal.setFilialid(movimentacao.getFilial().getId().intValue());
         consolidadoFinal.setFilialnome(movimentacao.getFilial().getNome());

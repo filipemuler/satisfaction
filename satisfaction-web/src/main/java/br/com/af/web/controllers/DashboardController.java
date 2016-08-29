@@ -2,8 +2,7 @@ package br.com.af.web.controllers;
 
 import javax.inject.Inject;
 
-import br.com.af.satisfaction.config.GenericDao;
-import br.com.af.satisfaction.entidades.bi.BiConsolidadoFinal;
+import br.com.af.satisfaction.entidades.bi.ConsolidadoDia;
 import br.com.af.satisfaction.service.ConsolidadoService;
 import br.com.af.web.dto.DashboardDTO;
 import br.com.caelum.vraptor.Controller;
@@ -33,7 +32,7 @@ public class DashboardController {
 
 	@Get("/dashboard/consolidadofinal")
 	public void consolidadoFinal(){
-		List<BiConsolidadoFinal> consolidadoDoMes = this.service.getConsolidadoDoMes();
+		List<ConsolidadoDia> consolidadoDoMes = this.service.getConsolidadoDoMes();
 		DashboardDTO dto = new DashboardDTO(consolidadoDoMes);
 		this.result.use(Results.json()).withoutRoot().from(dto).include("filiais", "filiais.dados").serialize();
 	}

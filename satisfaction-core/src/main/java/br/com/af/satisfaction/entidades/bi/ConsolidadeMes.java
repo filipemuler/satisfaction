@@ -12,7 +12,7 @@ import java.util.Date;
  * Created by filipe on 14/07/16.
  */
 @Entity
-public class BiConsolidadoTotal implements Serializable{
+public class ConsolidadeMes implements Serializable{
 
     private Long id;
 

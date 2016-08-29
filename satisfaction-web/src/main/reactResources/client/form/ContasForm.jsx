@@ -28,14 +28,16 @@ class ContasForm extends Component {
   }
 
   getDataForm(){
+    let referente = this.refs.referenteA.value();
+    let referente_id = (referente == null) ? null : referente.value;
     var data = {
       conta : {
         nome : ReactDOM.findDOMNode(this.refs.nome).value,
         descricao : ReactDOM.findDOMNode(this.refs.descricao).value,
-        entrada : ReactDOM.findDOMNode(this.refs.entrada).value,
-        cartao : ReactDOM.findDOMNode(this.refs.cartao).value,
+        entrada : this.entrada.checked,
+        cartao : this.cartao.checked,
         referenteA : {
-          id : this.refs.referenteA.value().value
+          id : referente_id
         }
       }
     }
@@ -66,13 +68,13 @@ class ContasForm extends Component {
     <FormGroup controlId="formHorizontalEntrada">
       <Col componentClass={ControlLabel} sm={3}>Entrada?</Col>
       <Col sm={9}>
-        <Checkbox ref="entrada"/>
+        <Checkbox inputRef={ref => { this.entrada = ref; }}/>
       </Col>
     </FormGroup>
     <FormGroup controlId="formHorizontalCartao">
       <Col componentClass={ControlLabel} sm={3}>Cartão?</Col>
       <Col sm={9}>
-        <Checkbox ref="cartao"/>
+        <Checkbox inputRef={ref => { this.cartao = ref; }}/>
       </Col>
     </FormGroup>
   </Form>

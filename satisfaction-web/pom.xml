@@ -138,6 +138,16 @@
 					</arguments>
 				</configuration>
 			</plugin>
+			<plugin>
+				<groupId>com.heroku.sdk</groupId>
+				<artifactId>heroku-maven-plugin</artifactId>
+				<version>1.0.3</version>
+				<configuration>
+					<appName>mighty-journey-76010</appName>
+					<jdkVersion>1.8</jdkVersion>
+					<warFile>${project.basedir}/target/satisfaction-web.war</warFile>
+				</configuration>
+			</plugin>
 		</plugins>
 	</build>
 

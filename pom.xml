@@ -12,7 +12,7 @@
     </modules>
 
     <properties>
-        <vraptor.version>4.2.0-RC3</vraptor.version>
+        <vraptor.version>4.2.0-RC4</vraptor.version>
         <vraptor.java8.version>4.0.0.Final</vraptor.java8.version>
         <vraptor.jpa.version>4.0.4</vraptor.jpa.version>
         <weld.version>2.3.2.Final</weld.version>
@@ -85,6 +85,11 @@
                 <version>4.0.4.RELEASE</version>
             </dependency>
             <dependency>
+                <groupId>org.springframework.security</groupId>
+                <artifactId>spring-security-core</artifactId>
+                <version>4.0.4.RELEASE</version>
+            </dependency>
+            <dependency>
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-orm</artifactId>
                 <version>4.2.5.RELEASE</version>
@@ -101,6 +106,26 @@
                 <artifactId>commons-logging</artifactId>
                 <version>1.1.1</version>
             </dependency>
+
+            <!-- JSON -->
+            <dependency>
+                <groupId>org.codehaus.jackson</groupId>
+                <artifactId>jackson-core-asl</artifactId>
+                <version>1.7.1</version>
+            </dependency>
+
+            <!-- TESTES -->
+            <dependency>
+                <groupId>junit</groupId>
+                <artifactId>junit</artifactId>
+                <version>4.12</version>
+            </dependency>
+            <dependency>
+                <groupId>org.hsqldb</groupId>
+                <artifactId>hsqldb</artifactId>
+                <version>2.3.2</version>
+            </dependency>
+
 
         </dependencies>
     </dependencyManagement>

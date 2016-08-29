@@ -19,8 +19,9 @@
 			<!--<property name="hibernate.connection.username" value="gvtaekyfepvayf" />-->
 			<!--<property name="hibernate.connection.password" value="w0IUUfum8SFc8KkpFXwLSNRuk9" />-->
 			<!--<property name="hibernate.connection.url" value="jdbc:postgresql://ec2-107-22-197-152.compute-1.amazonaws.com:5432/d6nrnbj0rmhkhi" />-->
-			<property name="hibernate.show_sql" value="true" />
-			<property name="hibernate.format_sql" value="true"/>
+
+			<property name="hibernate.show_sql" value="false" />
+			<property name="hibernate.format_sql" value="false"/>
 			<property name="hibernate.max_fetch_depth" value="3" />
 		</properties>
 

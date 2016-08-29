@@ -9,6 +9,7 @@ var path = require('path');
 var usuarios = require('./public/usuarios.json')
 var contas = require('./public/contas.json')
 var dashboard = require('./public/dashboard.json')
+var dashboard = require('./public/consolidadoDetalhado.json')
 
 app.use(express.static(__dirname));
 app.get('/', function(req, res) {
@@ -17,6 +18,10 @@ app.get('/', function(req, res) {
 
 app.get('/dashboard/consolidadofinal', function(req, res) {
     res.send(dashboard);
+});
+
+app.get('/dashboard/consolidadoDetalhado', function(req, res) {
+    res.send(consolidadoDetalhado);
 });
 
 app.get('/movimentacao/list', function(req, res) {
@@ -32,7 +37,7 @@ app.get('/contas/list', function(req, res) {
 });
 
 app.get('/contas/list/contas', function(req, res) {
-    res.send([{id : '3', nome : 'Coca-cola', ordem : '3'},{id : '2', nome : 'Supermercado', ordem : '2'}, {id : '1', nome : 'Copa Manha',ordem : '1'}]);
+    res.send([{value : '3', label : 'Coca-cola'},{value : '2', label : 'Supermercado'}, {value : '1', label : 'Copa Manha'}]);
 });
 
 app.get('/fluxo/list', function(req, res) {

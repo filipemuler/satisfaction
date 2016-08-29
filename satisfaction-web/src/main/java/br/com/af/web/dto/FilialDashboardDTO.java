@@ -1,13 +1,11 @@
 package br.com.af.web.dto;
 
-import br.com.af.satisfaction.entidades.bi.BiConsolidadoFinal;
+import br.com.af.satisfaction.entidades.bi.ConsolidadoDia;
 import com.google.common.collect.Lists;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 /**
@@ -21,7 +19,7 @@ public class FilialDashboardDTO implements Serializable {
     private String data;
     private List<DadosGraficoDTO> dados = Lists.newArrayList();
 
-    public FilialDashboardDTO(BiConsolidadoFinal consolidadoFinal) {
+    public FilialDashboardDTO(ConsolidadoDia consolidadoFinal) {
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM");
         this.id = consolidadoFinal.getFilialid().longValue();
         this.nome = consolidadoFinal.getFilialnome();

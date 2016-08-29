@@ -19,7 +19,7 @@ class UsuarioForm extends Component {
       usuario : {
         email : ReactDOM.findDOMNode(this.refs.email).value,
         senha : ReactDOM.findDOMNode(this.refs.senha).value,
-        admin : ReactDOM.findDOMNode(this.refs.admin).value
+        admin : this.admin.checked
       }
     }
     return data;
@@ -42,7 +42,7 @@ class UsuarioForm extends Component {
     <FormGroup>
       <Col componentClass={ControlLabel} sm={3}>Administrador?</Col>
       <Col sm={9}>
-        <Checkbox ref="admin"/>
+        <Checkbox inputRef={ref => { this.admin = ref; }}/>
       </Col>
     </FormGroup>
   </Form>

@@ -4,16 +4,13 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 /**
  * Created by filipe on 15/07/16.
  */
 @Entity
-public class BiConsolidadoFinal implements Serializable{
+public class ConsolidadoDia implements Serializable{
 
     private Long id;
     private Number filialid;

@@ -37,7 +37,7 @@ class MovimentacaoAdd extends Component {
       var self = this
       return(
         <FormGroup>
-          <Col smOffset={2} sm={4}>
+          <Col sm={3}>
             <SimpleSelect
               options = {this.props.options}
               placeholder = "Selecione..."
@@ -58,7 +58,7 @@ class MovimentacaoAdd extends Component {
                 ref="quantidade"/>
             </InputGroup>
           </Col>
-          <Col sm={2}>
+          <Col sm={1}>
             <Button
               onClick={this.handleChange}>
               <Glyphicon glyph="ok" />

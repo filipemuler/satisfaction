@@ -12,8 +12,10 @@ import request from 'superagent'
 import MovimentacaoAdded from './MovimentacaoAdded'
 import MovimentacaoFixa from './MovimentacaoFixa'
 import MovimentacaoAdd from './MovimentacaoAdd'
+import MovimentacaoTotal from './MovimentacaoTotal'
 import Footer from './Footer'
 import SimpleSelect from 'react-selectize/src/SimpleSelect'
+import DatePicker from 'react-bootstrap-date-picker'
 
 class Movimentacao extends Component {
 
@@ -25,6 +27,12 @@ class Movimentacao extends Component {
     this.addRecebimento = this.addRecebimento.bind(this)
     this.addCartaoEntrada = this.addCartaoEntrada.bind(this)
     this.addCartaoSaida = this.addCartaoSaida.bind(this)
+    this.calculaTotalReceita = this.calculaTotalReceita.bind(this)
+    this.calculaTotalDespesa = this.calculaTotalDespesa.bind(this)
+    this.calculaTotalRecebimento = this.calculaTotalRecebimento.bind(this)
+    this.calculaTotalCartaoEntrada = this.calculaTotalCartaoEntrada.bind(this)
+    this.calculaTotalCartaoSaida = this.calculaTotalCartaoSaida.bind(this)
+    this.calculaTotalFluxo = this.calculaTotalFluxo.bind(this)
     this.state = {
       grupos : [],
       receitasFixas : [],
@@ -34,7 +42,14 @@ class Movimentacao extends Component {
       cartoesEntradaAdded : [],
       fluxos : [],
       filiais : [],
-      inputValue : ''
+      totalDespesa : 0,
+      totalRecebimento : 0,
+      totalCartaoEntrada : 0,
+      totalCartaoSaida : 0,
+      totalReceita : 0,
+      totalFluxo : 0,
+      inputValue : '',
+      dataTransacao : new Date().toISOString()
     }
   }
 
@@ -52,8 +67,11 @@ class Movimentacao extends Component {
     var submit = {movimentacao : { movimentacoesConta : [], filial : {}, movimentacoesFluxo : []}}
     submit.movimentacao.filial.id = this.refs.filial.value().value
     submit.movimentacao.filial.nome = this.refs.filial.value().label
+    submit.movimentacao.dataTransacao = this.state.dataTransacao.substring(0,19) + 'Z'
     for (var ref in this.refs) {
-      if(ref.startsWith('conta-')){
+      if(ref.startsWith('receita-') || ref.startsWith('despesa-') ||
+      ref.startsWith('recebimento-') || ref.startsWith('cartaoEntrada-') ||
+      ref.startsWith('cartaoSaida-')){
         submit.movimentacao.movimentacoesConta.push(this.refs[ref].getFormData())
       }
       if(ref.startsWith('fluxo-')){
@@ -70,9 +88,17 @@ class Movimentacao extends Component {
         cartoesSaidaAdded : [],
         cartoesEntradaAdded : [],
         filial : null,
+        totalDespesa : 0,
+        totalRecebimento : 0,
+        totalCartaoEntrada : 0,
+        totalCartaoSaida : 0,
+        totalReceita : 0,
+        totalFluxo : 0,
         inputValue : ''})
         for (var ref in self.refs) {
-          if(ref.startsWith('conta-') || ref.startsWith('fluxo-')){
+          if(ref.startsWith('receita-') || ref.startsWith('despesa-') ||
+          ref.startsWith('recebimento-') || ref.startsWith('cartaoEntrada-') ||
+          ref.startsWith('cartaoSaida-') ||ref.startsWith('fluxo-')){
             if (typeof self.refs[ref].reset === "function") {
               self.refs[ref].reset();
             }
@@ -88,9 +114,17 @@ class Movimentacao extends Component {
       cartoesSaidaAdded : [],
       cartoesEntradaAdded : [],
       filial : null,
+      totalDespesa : 0,
+      totalRecebimento : 0,
+      totalCartaoEntrada : 0,
+      totalCartaoSaida : 0,
+      totalReceita : 0,
+      totalFluxo : 0,
       inputValue : ''})
       for (var ref in this.refs) {
-        if(ref.startsWith('conta-') || ref.startsWith('fluxo-')){
+        if(ref.startsWith('receita-') || ref.startsWith('despesa-') ||
+          ref.startsWith('recebimento-') || ref.startsWith('cartaoEntrada-') ||
+          ref.startsWith('cartaoSaida-') ||ref.startsWith('fluxo-')){
           if (typeof this.refs[ref].reset === "function") {
             this.refs[ref].reset();
           }
@@ -104,6 +138,7 @@ class Movimentacao extends Component {
           {id : id, label : label, value : value}
         )}
       )
+      this.calculaTotalDespesa(value);
     }
     addRecebimento(id, label, value){
 
@@ -112,6 +147,7 @@ class Movimentacao extends Component {
           {id : id, label : label, value : value}
         )}
       )
+      this.calculaTotalRecebimento(value)
     }
     addCartaoEntrada(id, label, value){
 
@@ -120,6 +156,7 @@ class Movimentacao extends Component {
           {id : id, label : label, value : value}
         )}
       )
+      this.calculaTotalCartaoEntrada(value)
     }
     addCartaoSaida(id, label, value){
 
@@ -128,7 +165,45 @@ class Movimentacao extends Component {
           {id : id, label : label, value : value}
         )}
       )
+      this.calculaTotalCartaoSaida(value)
     }
+
+    calculaTotalReceita(){
+      let total = 0;
+      for (var ref in this.refs) {
+        if(ref.startsWith('receita-')){
+          total += Number(this.refs[ref].getFormData().valor) ;
+        }
+       }
+       this.setState({totalReceita : total})
+    }
+
+    calculaTotalDespesa(value){
+       this.setState({totalDespesa : this.state.totalDespesa + Number(value)})
+    }
+
+    calculaTotalRecebimento(value){
+      this.setState({totalRecebimento : this.state.totalRecebimento + Number(value)})
+    }
+
+    calculaTotalCartaoEntrada(value){
+      this.setState({totalCartaoEntrada : this.state.totalCartaoEntrada + Number(value)})
+    }
+
+    calculaTotalCartaoSaida(value){
+      this.setState({totalCartaoSaida : this.state.totalCartaoSaida + Number(value)})
+    }
+
+    calculaTotalFluxo(){
+      let total = 0;
+      for (var ref in this.refs) {
+        if(ref.startsWith('fluxo-')){
+          total += Number(this.refs[ref].getFormData().valor) ;
+        }
+       }
+       this.setState({totalFluxo : total})
+    }
+
     render () {
       var self = this
       const footer = <Footer onSubmit={this.onHandleSubmit} onCancel={this.onCancel}/>
@@ -137,7 +212,8 @@ class Movimentacao extends Component {
           contaId={conta.value}
           title={conta.label}
           money="true"
-          ref={"conta-" + conta.value}/>
+          calculaTotal={this.calculaTotalReceita}
+          ref={"receita-" + conta.value}/>
       )
       var despesas = this.state.despesasAdded.map(conta =>
         <MovimentacaoAdded key={conta.id}
@@ -145,7 +221,7 @@ class Movimentacao extends Component {
           title={conta.label}
           inputValue={conta.value}
           disabled="true"
-          ref={"conta-" + conta.id}/>
+          ref={"despesa-" + conta.id}/>
       )
       var recebimentos = this.state.recebimentosAdded.map(conta =>
         <MovimentacaoAdded key={conta.id}
@@ -153,7 +229,7 @@ class Movimentacao extends Component {
           title={conta.label}
           inputValue={conta.value}
           disabled="true"
-          ref={"conta-" + conta.id}/>
+          ref={"recebimento-" + conta.id}/>
       )
       var cartoesEntrada = this.state.cartoesEntradaAdded.map(conta =>
         <MovimentacaoAdded key={conta.id}
@@ -161,7 +237,7 @@ class Movimentacao extends Component {
           title={conta.label}
           inputValue={conta.value}
           disabled="true"
-          ref={"conta-" + conta.id}/>
+          ref={"cartaoEntrada-" + conta.id}/>
       )
       var cartoesSaida = this.state.cartoesSaidaAdded.map(conta =>
         <MovimentacaoAdded key={conta.id}
@@ -169,20 +245,24 @@ class Movimentacao extends Component {
           title={conta.label}
           inputValue={conta.value}
           disabled="true"
-          ref={"conta-" + conta.id}/>
+          ref={"cartaoSaida-" + conta.id}/>
       )
       var fluxos = this.state.fluxos.map(fluxo =>
         <MovimentacaoFixa key={fluxo.value}
           contaId={fluxo.value}
           title={fluxo.label}
+          calculaTotal={this.calculaTotalFluxo}
           ref={"fluxo-" + fluxo.value}/>
       )
+
       return(
         <Panel header={this.props.contexto} footer={footer}>
           <Form horizontal>
             <FormGroup>
-              <Col componentClass={ControlLabel} sm={3}>Filial</Col>
-              <Col smOffset={1} sm={4}>
+              <Col sm={2}>
+                <ControlLabel>Filial</ControlLabel>
+              </Col>
+              <Col sm={4}>
                 <SimpleSelect
                   options = {this.state.filiais}
                   placeholder = "Selecione..."
@@ -193,6 +273,20 @@ class Movimentacao extends Component {
                   ref="filial"/>
               </Col>
             </FormGroup>
+            <FormGroup>
+              <Col sm={2}>
+                <ControlLabel>Data</ControlLabel>
+              </Col>
+              <Col sm={4}>
+                <DatePicker value={this.state.dataTransacao}
+                  dateFormat="DD/MM/YYYY"
+                  onChange = {function(value) {
+                      self.setState({dataTransacao: value});
+                    }}
+                  ref="dataTransacao"/>
+              </Col>
+            </FormGroup>
+
             {receitasFixas}
             <Panel>
               Despesas
@@ -200,6 +294,7 @@ class Movimentacao extends Component {
               <MovimentacaoAdd
                 options={this.state.despesas}
                 onAdded={this.addDespesa}
+                calculaTotal={this.calculaTotalDespesa}
                 ref="adicionaDespesa"/>
             </Panel>
             <Panel>
@@ -229,7 +324,10 @@ class Movimentacao extends Component {
             <Panel>
               Fluxos
               {fluxos}
+              <MovimentacaoTotal total={this.state.totalFluxo}/>
             </Panel>
+            <MovimentacaoTotal total={this.state.totalReceita + this.state.totalRecebimento - this.state.totalDespesa
+              + this.state.totalCartaoEntrada  - this.state.totalCartaoSaida}/>
           </Form>
         </Panel>
       )
