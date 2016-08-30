@@ -7,6 +7,9 @@ import Glyphicon from 'react-bootstrap/lib/Glyphicon'
 import SimpleSelect from 'react-selectize/src/SimpleSelect'
 import InputGroup from 'react-bootstrap/lib/InputGroup'
 import FormControl from 'react-bootstrap/lib/FormControl'
+import ReactToastr, {ToastContainer, ToastMessage} from 'react-toastr'
+
+let ToastMessageFactory = React.createFactory(ToastMessage.animation);
 
 class MovimentacaoAdd extends Component {
 
@@ -29,7 +32,10 @@ class MovimentacaoAdd extends Component {
       this.setState({conta : null, quantidade : ""})
       this.refs.conta.focus()
     }else{
-      alert("Selecione um valor");
+      this.refs.container.error("Selecione uma conta!!","", {
+          timeOut: 5000,
+          extendedTimeOut: 10000
+      });
     }
   }
 
@@ -64,6 +70,10 @@ class MovimentacaoAdd extends Component {
               <Glyphicon glyph="ok" />
             </Button>
           </Col>
+
+          <ToastContainer ref="container"
+                                  toastMessageFactory={ToastMessageFactory}
+                                  className="toast-top-right" />
         </FormGroup>
       )
     }

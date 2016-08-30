@@ -40,7 +40,7 @@ public class ConsolidadoService {
                 "select max(data) as data, " +
                         "sum(despesa) as despesa, " +
                         "sum(receita) as receita, " +
-                        "round((sum(despesa)/ sum(receita))*100, 2) as porcentagem, " +
+                        "round((sum(despesa)/ (sum(receita)+sum(despesa)))*100, 2) as porcentagem, " +
                         "filialid, " +
                         "filialnome " +
                 "from consolidadodia where " +

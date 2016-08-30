@@ -1,12 +1,10 @@
 package br.com.af.satisfaction.service;
 
-import java.util.List;
 import java.util.Set;
 
 import javax.enterprise.inject.Produces;
 import javax.inject.Inject;
 
-import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 
 /**
@@ -15,14 +13,14 @@ import com.google.common.collect.Sets;
 public class HandlerProducer {
 
     private MovimentacaoHandler movimentacao;
-    private ConsolidadoTotalChainHandler consolidadoTotal;
-    private ConsolidadoFinalChainHandler consolidadoFinal;
+    private ConsolidadoMesChainHandler consolidadoTotal;
+    private ConsolidadoDiaChainHandler consolidadoFinal;
 
     public HandlerProducer() {
     }
 
     @Inject
-    public HandlerProducer(MovimentacaoHandler movimentacao, ConsolidadoTotalChainHandler consolidadoTotal, ConsolidadoFinalChainHandler consolidadoFinal) {
+    public HandlerProducer(MovimentacaoHandler movimentacao, ConsolidadoMesChainHandler consolidadoTotal, ConsolidadoDiaChainHandler consolidadoFinal) {
         this.movimentacao = movimentacao;
         this.consolidadoTotal = consolidadoTotal;
         this.consolidadoFinal = consolidadoFinal;

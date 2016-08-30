@@ -16,17 +16,17 @@ import br.com.af.satisfaction.entidades.bi.ConsolidadoDia;
 /**
  * Created by filipe on 20/07/16.
  */
-public class ConsolidadoFinalChainHandler implements MovimentacaoChainHandler {
+public class ConsolidadoDiaChainHandler implements MovimentacaoChainHandler {
 
     private GenericDao<ConsolidadoDia> service;
     private GenericDao<Movimentacao> movimentacaoService;
     private GenericDao<Conta> contaService;
 
-    public ConsolidadoFinalChainHandler() {
+    public ConsolidadoDiaChainHandler() {
     }
 
     @Inject
-    public ConsolidadoFinalChainHandler(GenericDao<ConsolidadoDia> service, GenericDao<Movimentacao> movimentacaoService, GenericDao<Conta> contaService) {
+    public ConsolidadoDiaChainHandler(GenericDao<ConsolidadoDia> service, GenericDao<Movimentacao> movimentacaoService, GenericDao<Conta> contaService) {
         this.service = service;
         this.movimentacaoService = movimentacaoService;
         this.contaService = contaService;
@@ -52,8 +52,9 @@ public class ConsolidadoFinalChainHandler implements MovimentacaoChainHandler {
         }
         consolidadoFinal.setReceita(receita);
         consolidadoFinal.setDespesa(despesa);
+        BigDecimal receitaMaisDespesa = consolidadoFinal.getReceita().add(consolidadoFinal.getDespesa());
         if(!despesa.equals(BigDecimal.ZERO)) {
-            BigDecimal divide = receita.divide(despesa, 4, HALF_UP);
+            BigDecimal divide = receitaMaisDespesa.divide(despesa, 4, HALF_UP);
             BigDecimal porcento = divide.multiply(new BigDecimal(100));
             consolidadoFinal.setPorcentagem(porcento.setScale(2, HALF_UP));
         }

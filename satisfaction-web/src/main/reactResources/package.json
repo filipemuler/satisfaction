@@ -18,6 +18,7 @@
     "react-chartjs": "~0.7.3",
     "react-dom": "^15.0.0",
     "react-selectize": "^2.0.1",
+    "react-toastr": "^2.8.0",
     "superagent": "^1.8.3"
   },
   "devDependencies": {
@@ -35,6 +36,7 @@
     "jest-cli": "~0.4.0",
     "nodemon": "^1.9.1",
     "parallelshell": "^2.0.0",
+    "react-scripts": "^0.2.3",
     "watchify": "^3.6.0"
   },
   "scripts": {
@@ -56,6 +58,9 @@
         }
       ]
     ]
+  },
+  "eslintConfig": {
+   "extends": "./node_modules/react-scripts/config/eslint.js"
   },
   "author": "Filipe/Andre",
   "license": "ISC"

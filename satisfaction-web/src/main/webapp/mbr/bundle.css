@@ -13,6 +13,10 @@
 	background-image: url(../imgs/ajax-loader.gif);
 	background-repeat: no-repeat;
 }
+
+.react-selectize.root-node {
+    width: auto !important;
+}
 .react-selectize {
   color: #000;
 }

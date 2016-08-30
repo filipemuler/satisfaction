@@ -16,6 +16,9 @@ import MovimentacaoTotal from './MovimentacaoTotal'
 import Footer from './Footer'
 import SimpleSelect from 'react-selectize/src/SimpleSelect'
 import DatePicker from 'react-bootstrap-date-picker'
+import ReactToastr, {ToastContainer, ToastMessage} from 'react-toastr'
+
+let ToastMessageFactory = React.createFactory(ToastMessage.animation);
 
 class Movimentacao extends Component {
 
@@ -33,6 +36,7 @@ class Movimentacao extends Component {
     this.calculaTotalCartaoEntrada = this.calculaTotalCartaoEntrada.bind(this)
     this.calculaTotalCartaoSaida = this.calculaTotalCartaoSaida.bind(this)
     this.calculaTotalFluxo = this.calculaTotalFluxo.bind(this)
+    this.addAlert = this.addAlert.bind(this)
     this.state = {
       grupos : [],
       receitasFixas : [],
@@ -65,8 +69,16 @@ class Movimentacao extends Component {
   onHandleSubmit(){
     var self = this
     var submit = {movimentacao : { movimentacoesConta : [], filial : {}, movimentacoesFluxo : []}}
-    submit.movimentacao.filial.id = this.refs.filial.value().value
-    submit.movimentacao.filial.nome = this.refs.filial.value().label
+    try{
+      submit.movimentacao.filial.id = this.refs.filial.value().value
+      submit.movimentacao.filial.nome = this.refs.filial.value().label
+    }catch(err){
+      self.refs.container.error("Selecione uma filial!!","", {
+          timeOut: 5000,
+          extendedTimeOut: 10000
+      });
+      throw err;
+    }
     submit.movimentacao.dataTransacao = this.state.dataTransacao.substring(0,19) + 'Z'
     for (var ref in this.refs) {
       if(ref.startsWith('receita-') || ref.startsWith('despesa-') ||
@@ -104,6 +116,11 @@ class Movimentacao extends Component {
             }
           }
          }
+         self.refs.container.success(
+           "Salvo com sucesso!!","", {
+             timeOut: 5000,
+             extendedTimeOut: 10000
+         });
       });
     }
 
@@ -204,6 +221,11 @@ class Movimentacao extends Component {
        this.setState({totalFluxo : total})
     }
 
+    addAlert () {
+
+      //  window.open("http://youtu.be/3SR75k7Oggg");
+      }
+
     render () {
       var self = this
       const footer = <Footer onSubmit={this.onHandleSubmit} onCancel={this.onCancel}/>
@@ -254,6 +276,8 @@ class Movimentacao extends Component {
           calculaTotal={this.calculaTotalFluxo}
           ref={"fluxo-" + fluxo.value}/>
       )
+
+
 
       return(
         <Panel header={this.props.contexto} footer={footer}>
@@ -329,7 +353,11 @@ class Movimentacao extends Component {
             <MovimentacaoTotal total={this.state.totalReceita + this.state.totalRecebimento - this.state.totalDespesa
               + this.state.totalCartaoEntrada  - this.state.totalCartaoSaida}/>
           </Form>
+          <ToastContainer ref="container"
+                                  toastMessageFactory={ToastMessageFactory}
+                                  className="toast-top-right" />
         </Panel>
+
       )
     }
 }
