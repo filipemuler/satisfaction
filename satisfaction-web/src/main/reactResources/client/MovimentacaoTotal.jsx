@@ -22,15 +22,6 @@ class MovimentacaoTotal extends Component {
     this.state = {total : 0}
   }
 
-  componentDidMount(){
-    // var self = this
-    // request
-    //   .get('movimentacao/list/contas')
-    //   .end(function(err, res){
-    //     self.setState(res.body);
-    //   });
-  }
-
 
     render () {
       var self = this
@@ -38,7 +29,7 @@ class MovimentacaoTotal extends Component {
       return(
             <FormGroup>
               <Col sm={2}>
-                <ControlLabel>Total</ControlLabel>
+                <ControlLabel>{this.props.label}</ControlLabel>
               </Col>
               <Col sm={2}>
                 <InputGroup>

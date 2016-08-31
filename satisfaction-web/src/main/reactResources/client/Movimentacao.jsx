@@ -312,6 +312,7 @@ class Movimentacao extends Component {
             </FormGroup>
 
             {receitasFixas}
+            <MovimentacaoTotal label="Total Receita" total={this.state.totalReceita}/>
             <Panel>
               Despesas
               {despesas}
@@ -320,6 +321,7 @@ class Movimentacao extends Component {
                 onAdded={this.addDespesa}
                 calculaTotal={this.calculaTotalDespesa}
                 ref="adicionaDespesa"/>
+              <MovimentacaoTotal label="Total Despesa" total={this.state.totalDespesa}/>
             </Panel>
             <Panel>
               Recebimentos
@@ -328,6 +330,7 @@ class Movimentacao extends Component {
                 options={this.state.recebimentos}
                 onAdded={this.addRecebimento}
                 ref="adicionaRecebimento"/>
+              <MovimentacaoTotal label="Total Recebimento" total={this.state.totalRecebimento}/>
             </Panel>
             <Panel>
               Cartões Entrada
@@ -336,6 +339,7 @@ class Movimentacao extends Component {
                 options={this.state.cartoesEntrada}
                 onAdded={this.addCartaoEntrada}
                 ref="adicionaCartaoEntrada"/>
+              <MovimentacaoTotal label="Total Cartões Entrada" total={this.state.totalCartaoEntrada}/>
             </Panel>
             <Panel>
               Cartões Saida
@@ -344,13 +348,14 @@ class Movimentacao extends Component {
                 options={this.state.cartoesSaida}
                 onAdded={this.addCartaoSaida}
                 ref="adicionaCartaoSaida"/>
+              <MovimentacaoTotal label="Total Cartões Saida" total={this.state.totalCartaoSaida}/>
             </Panel>
             <Panel>
               Fluxos
               {fluxos}
-              <MovimentacaoTotal total={this.state.totalFluxo}/>
+              <MovimentacaoTotal label="Total Fluxo" total={this.state.totalFluxo}/>
             </Panel>
-            <MovimentacaoTotal total={this.state.totalReceita + this.state.totalRecebimento - this.state.totalDespesa
+            <MovimentacaoTotal label="Total Geral" total={this.state.totalReceita + this.state.totalRecebimento - this.state.totalDespesa
               + this.state.totalCartaoEntrada  - this.state.totalCartaoSaida}/>
           </Form>
           <ToastContainer ref="container"
