@@ -13,25 +13,28 @@ import com.google.common.collect.Sets;
 public class HandlerProducer {
 
     private MovimentacaoHandler movimentacao;
-    private ConsolidadoMesChainHandler consolidadoTotal;
-    private ConsolidadoDiaChainHandler consolidadoFinal;
+    private ConsolidadoMesChainHandler mes;
+    private ConsolidadoContaDiaChainHandler contaDia;
+    private ConsolidadoFluxoDiaChainHandler fluxoDia;
 
     public HandlerProducer() {
     }
 
     @Inject
-    public HandlerProducer(MovimentacaoHandler movimentacao, ConsolidadoMesChainHandler consolidadoTotal, ConsolidadoDiaChainHandler consolidadoFinal) {
+    public HandlerProducer(MovimentacaoHandler movimentacao, ConsolidadoMesChainHandler mes, ConsolidadoContaDiaChainHandler contaDia, ConsolidadoFluxoDiaChainHandler fluxoDia) {
         this.movimentacao = movimentacao;
-        this.consolidadoTotal = consolidadoTotal;
-        this.consolidadoFinal = consolidadoFinal;
+        this.mes = mes;
+        this.contaDia = contaDia;
+        this.fluxoDia = fluxoDia;
     }
 
     @Produces
     public Set<MovimentacaoChainHandler> getMovimentacoesHandlers(){
         Set<MovimentacaoChainHandler> handlers = Sets.newHashSet();
         handlers.add(this.movimentacao);
-        handlers.add(this.consolidadoFinal);
-        handlers.add(this.consolidadoTotal);
+        handlers.add(this.mes);
+        handlers.add(this.contaDia);
+        handlers.add(this.fluxoDia);
         return handlers;
     }
 }

@@ -10,7 +10,7 @@ import javax.persistence.*;
  * Created by filipe on 15/07/16.
  */
 @Entity
-public class ConsolidadoDia implements Serializable{
+public class ConsolidadoMes implements Serializable{
 
     private Long id;
     private Number filialid;

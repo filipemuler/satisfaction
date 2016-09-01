@@ -1,10 +1,22 @@
 {
-  "detalhado": [
+  "lista": [
     {
       "id": "1",
       "data": "01/07",
-      "descricao": "Copa Manha",
+      "conta": "Copa Manha",
       "valor": "100"
+    },
+    {
+      "id": "2",
+      "data": "01/07",
+      "conta": "Copa Tarde",
+      "valor": "200"
+    },
+    {
+      "id": "3",
+      "data": "01/07",
+      "conta": "Copa Noite",
+      "valor": "150"
     }
   ]
 }

@@ -1,18 +1,19 @@
 package br.com.af.satisfaction.entidades.bi;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
 /**
- * Created by filipe on 14/07/16.
+ * Created by filipe on 01/09/16.
  */
 @Entity
-public class ConsolidadeMes implements Serializable{
+public class ConsolidadoFluxoDia implements Serializable {
 
     private Long id;
 
@@ -21,11 +22,8 @@ public class ConsolidadeMes implements Serializable{
     private Long filialId;
     private String filialNome;
 
-    private Long contaId;
-    private String conta;
-    private BigDecimal contaValor;
-
-    private String fluxo;
+    private Long fluxoId;
+    private String fluxoNome;
     private Integer fluxoQuantidade;
 
     @Id
@@ -62,36 +60,20 @@ public class ConsolidadeMes implements Serializable{
         this.filialNome = filialNome;
     }
 
-    public Long getContaId() {
-        return contaId;
+    public Long getFluxoId() {
+        return fluxoId;
     }
 
-    public void setContaId(Long contaId) {
-        this.contaId = contaId;
+    public void setFluxoId(Long fluxoId) {
+        this.fluxoId = fluxoId;
     }
 
-    public String getConta() {
-        return conta;
+    public String getFluxoNome() {
+        return fluxoNome;
     }
 
-    public void setConta(String conta) {
-        this.conta = conta;
-    }
-
-    public BigDecimal getContaValor() {
-        return contaValor;
-    }
-
-    public void setContaValor(BigDecimal contaValor) {
-        this.contaValor = contaValor;
-    }
-
-    public String getFluxo() {
-        return fluxo;
-    }
-
-    public void setFluxo(String fluxo) {
-        this.fluxo = fluxo;
+    public void setFluxoNome(String fluxoNome) {
+        this.fluxoNome = fluxoNome;
     }
 
     public Integer getFluxoQuantidade() {

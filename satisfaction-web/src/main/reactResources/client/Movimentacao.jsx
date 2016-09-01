@@ -215,7 +215,7 @@ class Movimentacao extends Component {
       let total = 0;
       for (var ref in this.refs) {
         if(ref.startsWith('fluxo-')){
-          total += Number(this.refs[ref].getFormData().valor) ;
+          total += Number(this.refs[ref].getFormData().quantidade) ;
         }
        }
        this.setState({totalFluxo : total})

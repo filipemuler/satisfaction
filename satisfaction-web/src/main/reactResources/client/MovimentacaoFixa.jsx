@@ -20,12 +20,24 @@ class MovimentacaoFixa extends Component {
   }
 
   getFormData(){
-    let id = ReactDOM.findDOMNode(this.refs.conta).value;
+    let id = ReactDOM.findDOMNode(this.refs.id).value;
+    let nome = ReactDOM.findDOMNode(this.refs.nome).value;
     let valor = ReactDOM.findDOMNode(this.refs.valor).value;
-    var data = { conta : {
-          id : id
-        },
-        valor : (valor == '') ? 0 : valor
+    let data;
+    if(this.props.money == 'true'){
+      data = { conta : {
+            id : id,
+            nome : nome
+          },
+          valor : (valor == '') ? 0 : valor
+      }
+    }else{
+      data = { fluxo : {
+            id : id,
+            nome : nome
+          },
+          quantidade : (valor == '') ? 0 : valor
+      }
     }
     return data;
   }
@@ -40,7 +52,8 @@ class MovimentacaoFixa extends Component {
         <FormGroup>
           <Col sm={2}>
             <ControlLabel>{this.props.title}</ControlLabel>
-            <input type="hidden" value={this.props.contaId} ref="conta"/>
+            <input type="hidden" value={this.props.title} ref="nome"/>
+            <input type="hidden" value={this.props.contaId} ref="id"/>
           </Col>
           <Col sm={2}>
             <InputGroup>

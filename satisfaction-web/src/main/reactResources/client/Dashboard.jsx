@@ -9,12 +9,13 @@ import DoughnutChart from 'react-chartjs/lib/doughnut'
 import request from 'superagent'
 import Loading from './Loading'
 import DashboardConsolidado from './DashboardConsolidado'
+import {BootstrapTable, TableHeaderColumn} from 'react-bootstrap-table';
 
 class Dashboard extends Component {
 
   constructor(props){
     super(props)
-    this.state = {filiais : [], loading : true, consolidadoFinal : true, consolidadoDetalhado : false}
+    this.state = {filiais : [], loading : true, consolidadoFinal : true, consolidadoDetalhado : false, lista : []}
     this.detalhaConsolidado = this.detalhaConsolidado.bind(this)
   }
 
@@ -29,6 +30,12 @@ class Dashboard extends Component {
   }
 
   detalhaConsolidado(id){
+    var self = this
+    request
+      .get('dashboard/consolidadoDetalhado/'+id)
+      .end(function(err, res){
+        self.setState(res.body);
+      });
     this.setState({consolidadoFinal : false, consolidadoDetalhado : true})
   }
 
@@ -42,7 +49,14 @@ class Dashboard extends Component {
       contexto = <DashboardConsolidado filiais={this.state.filiais} onConsolidadoDetalhado={this.detalhaConsolidado}/>
     }
     if(this.state.consolidadoDetalhado == true){
-      contexto = <div>Construindo...</div>
+      contexto = <div>
+        <BootstrapTable data={this.state.lista} condensed={true} hover={true} exportCSV={true} options={{exportCSVText:'Exportar para CSV'}}>
+          <TableHeaderColumn isKey={true} dataField="id" hidden={true}>ID</TableHeaderColumn>
+          <TableHeaderColumn dataField="data">Data</TableHeaderColumn>
+          <TableHeaderColumn dataField="conta">Conta</TableHeaderColumn>
+          <TableHeaderColumn dataField="contaValor">Preço</TableHeaderColumn>
+        </BootstrapTable>
+      </div>
     }
     return(
         <Panel header={this.props.contexto} >
