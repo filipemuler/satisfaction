@@ -50,8 +50,8 @@ class Dashboard extends Component {
     }
     if(this.state.consolidadoDetalhado == true){
       contexto = <div>
-        <BootstrapTable data={this.state.lista} condensed={true} hover={true} exportCSV={true} options={{exportCSVText:'Exportar para CSV'}}>
-          <TableHeaderColumn isKey={true} dataField="id" hidden={true}>ID</TableHeaderColumn>
+        <BootstrapTable data={this.state.lista} condensed={true} hover={true} exportCSV={true} options={{exportCSVText:'Exportar para CSV'}} pagination={true}>
+          <TableHeaderColumn isKey={true} dataField="contaId" hidden={true}>ID</TableHeaderColumn>
           <TableHeaderColumn dataField="conta">Conta</TableHeaderColumn>
           <TableHeaderColumn dataField="contaValor">Preço</TableHeaderColumn>
         </BootstrapTable>

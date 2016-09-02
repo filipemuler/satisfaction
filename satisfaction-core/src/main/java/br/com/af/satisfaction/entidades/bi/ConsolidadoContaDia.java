@@ -59,11 +59,11 @@ public class ConsolidadoContaDia implements Serializable{
         this.filialNome = filialNome;
     }
 
-    public Long getContaId() {
+    public Long getContaid() {
         return contaId;
     }
 
-    public void setContaId(Long contaId) {
+    public void setContaid(Long contaId) {
         this.contaId = contaId;
     }
 
@@ -75,11 +75,11 @@ public class ConsolidadoContaDia implements Serializable{
         this.conta = conta;
     }
 
-    public BigDecimal getContaValor() {
+    public BigDecimal getContavalor() {
         return contaValor;
     }
 
-    public void setContaValor(BigDecimal contaValor) {
+    public void setContavalor(BigDecimal contaValor) {
         this.contaValor = contaValor;
     }
 

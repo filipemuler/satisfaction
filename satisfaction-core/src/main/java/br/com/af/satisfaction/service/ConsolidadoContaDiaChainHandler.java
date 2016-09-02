@@ -5,11 +5,9 @@ import java.util.Date;
 import javax.inject.Inject;
 
 import br.com.af.satisfaction.config.GenericDao;
-import br.com.af.satisfaction.entidades.Conta;
 import br.com.af.satisfaction.entidades.Movimentacao;
 import br.com.af.satisfaction.entidades.MovimentacaoConta;
 import br.com.af.satisfaction.entidades.bi.ConsolidadoContaDia;
-import br.com.af.satisfaction.entidades.bi.ConsolidadoMes;
 
 /**
  * Created by filipe on 20/07/16.
@@ -36,8 +34,8 @@ public class ConsolidadoContaDiaChainHandler implements MovimentacaoChainHandler
             consolidadoDia.setFilialId(movimentacao.getFilial().getId());
             consolidadoDia.setFilialNome(movimentacao.getFilial().getNome());
             consolidadoDia.setConta(conta.getConta().getNome());
-            consolidadoDia.setContaId(conta.getConta().getId());
-            consolidadoDia.setContaValor(conta.getValor());
+            consolidadoDia.setContaid(conta.getConta().getId());
+            consolidadoDia.setContavalor(conta.getValor());
 
             this.service.persist(consolidadoDia);
         }

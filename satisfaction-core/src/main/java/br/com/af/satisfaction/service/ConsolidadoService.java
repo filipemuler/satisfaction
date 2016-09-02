@@ -7,6 +7,7 @@ import br.com.af.satisfaction.entidades.bi.ConsolidadoContaDia;
 import br.com.af.satisfaction.entidades.bi.ConsolidadoMes;
 import org.hibernate.Session;
 import org.hibernate.transform.Transformers;
+import org.hibernate.type.StandardBasicTypes;
 
 import javax.enterprise.context.Dependent;
 import javax.inject.Inject;
@@ -71,17 +72,20 @@ public class ConsolidadoService {
 
         Session session = (Session) this.em.getDelegate();
         List<ConsolidadoContaDia> result = session.createSQLQuery(
-                "select conta as conta, contaId, sum(contavalor) as contaValor from consolidadocontadia where " +
+                "select ccd.conta as conta, ccd.contaid as contaId, sum(ccd.contavalor) as contaValor from consolidadocontadia ccd where " +
                         ":filialid in (select id from filial) " +
-                        "and data between :dataInicio and CURRENT_TIMESTAMP " +
-                        "and contavalor != 0 " +
+                        "and ccd.data between :dataInicio and CURRENT_TIMESTAMP " +
+                        "and ccd.contavalor != 0 " +
                         "group by conta, contaId")
-                .setResultTransformer(Transformers.aliasToBean(ConsolidadoContaDia.class))
+                .addScalar("conta", StandardBasicTypes.STRING)
+                .addScalar("contaid", StandardBasicTypes.LONG)
+                .addScalar("contaValor", StandardBasicTypes.BIG_DECIMAL)
                 .setLong("filialid", id)
                 .setDate("dataInicio",
                         Date.from(
                                 date.with(
                                         firstDayOfMonth()).atStartOfDay(systemDefault()).toInstant()))
+                .setResultTransformer(Transformers.aliasToBean(ConsolidadoContaDia.class))
                 .list();
         return result;
     }
