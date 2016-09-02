@@ -43,7 +43,7 @@ public class DashboardController {
 	@Get("/dashboard/consolidadoDetalhado/{id}")
 	public void consolidadoDetalhado(Long id){
 		List<ConsolidadoContaDia> contas = this.service.getConsolidadoContasDiaByFilial(id);
-		ListaDTO<ConsolidadoContaDia> lista = new ListaDTO<>(contas);
+		ListaDTO<ConsolidadoContaDia> lista = new ListaDTO(contas);
 		this.result.use(Results.json()).withoutRoot().from(lista).include("lista").serialize();
 	}
 }

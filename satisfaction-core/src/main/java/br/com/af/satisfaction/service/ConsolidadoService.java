@@ -71,9 +71,12 @@ public class ConsolidadoService {
 
         Session session = (Session) this.em.getDelegate();
         List<ConsolidadoContaDia> result = session.createSQLQuery(
-                "select * from consolidadocontadia where " +
+                "select conta as conta, contaId, sum(contavalor) as contaValor from consolidadocontadia where " +
                         ":filialid in (select id from filial) " +
-                        "and data between :dataInicio and CURRENT_TIMESTAMP ")
+                        "and data between :dataInicio and CURRENT_TIMESTAMP " +
+                        "and contavalor != 0 " +
+                        "group by conta, contaId")
+                .setResultTransformer(Transformers.aliasToBean(ConsolidadoContaDia.class))
                 .setLong("filialid", id)
                 .setDate("dataInicio",
                         Date.from(

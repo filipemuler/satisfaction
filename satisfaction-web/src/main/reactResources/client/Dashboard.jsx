@@ -52,7 +52,6 @@ class Dashboard extends Component {
       contexto = <div>
         <BootstrapTable data={this.state.lista} condensed={true} hover={true} exportCSV={true} options={{exportCSVText:'Exportar para CSV'}}>
           <TableHeaderColumn isKey={true} dataField="id" hidden={true}>ID</TableHeaderColumn>
-          <TableHeaderColumn dataField="data">Data</TableHeaderColumn>
           <TableHeaderColumn dataField="conta">Conta</TableHeaderColumn>
           <TableHeaderColumn dataField="contaValor">Preço</TableHeaderColumn>
         </BootstrapTable>
