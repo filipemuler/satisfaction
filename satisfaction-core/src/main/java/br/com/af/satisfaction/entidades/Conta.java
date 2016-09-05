@@ -20,7 +20,7 @@ public class Conta implements Serializable, Comparable<Conta> {
     private List<Conta> contas = Lists.newArrayList();
     private Conta referenteA;
 
-    //o pai da arvore, exemplo Despesa > coca-cola
+    //o pai da arvore, exemplo Despesa > supermercado > coca-cola
     // grupo será Despesa
     private String grupo;
 

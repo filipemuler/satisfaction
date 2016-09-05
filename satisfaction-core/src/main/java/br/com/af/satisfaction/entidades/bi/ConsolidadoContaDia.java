@@ -21,6 +21,9 @@ public class ConsolidadoContaDia implements Serializable{
     private Long filialId;
     private String filialNome;
 
+    private Long agrupadorContaId;
+    private String agrupadorConta;
+
     private Long contaId;
     private String conta;
     private BigDecimal contaValor;
@@ -59,11 +62,11 @@ public class ConsolidadoContaDia implements Serializable{
         this.filialNome = filialNome;
     }
 
-    public Long getContaid() {
+    public Long getContaId() {
         return contaId;
     }
 
-    public void setContaid(Long contaId) {
+    public void setContaId(Long contaId) {
         this.contaId = contaId;
     }
 
@@ -75,12 +78,27 @@ public class ConsolidadoContaDia implements Serializable{
         this.conta = conta;
     }
 
-    public BigDecimal getContavalor() {
+    public BigDecimal getContaValor() {
         return contaValor;
     }
 
-    public void setContavalor(BigDecimal contaValor) {
+    public void setContaValor(BigDecimal contaValor) {
         this.contaValor = contaValor;
     }
 
+    public Long getAgrupadorContaId() {
+        return agrupadorContaId;
+    }
+
+    public void setAgrupadorContaId(Long agrupadorContaId) {
+        this.agrupadorContaId = agrupadorContaId;
+    }
+
+    public String getAgrupadorConta() {
+        return agrupadorConta;
+    }
+
+    public void setAgrupadorConta(String agrupadorConta) {
+        this.agrupadorConta = agrupadorConta;
+    }
 }

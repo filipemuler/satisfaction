@@ -34,8 +34,8 @@ public class ConsolidadoContaDiaChainHandler implements MovimentacaoChainHandler
             consolidadoDia.setFilialId(movimentacao.getFilial().getId());
             consolidadoDia.setFilialNome(movimentacao.getFilial().getNome());
             consolidadoDia.setConta(conta.getConta().getNome());
-            consolidadoDia.setContaid(conta.getConta().getId());
-            consolidadoDia.setContavalor(conta.getValor());
+            consolidadoDia.setContaId(conta.getConta().getId());
+            consolidadoDia.setContaValor(conta.getValor());
 
             this.service.persist(consolidadoDia);
         }

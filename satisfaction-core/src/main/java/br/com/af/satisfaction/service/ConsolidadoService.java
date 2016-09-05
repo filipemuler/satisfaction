@@ -67,6 +67,7 @@ public class ConsolidadoService {
      * @param id o ID da filial
      * @return
      */
+    @SuppressWarnings("unchecked")
     public List<ConsolidadoContaDia> getConsolidadoContasDiaByFilial(Long id){
         LocalDate date = LocalDate.now();
 
