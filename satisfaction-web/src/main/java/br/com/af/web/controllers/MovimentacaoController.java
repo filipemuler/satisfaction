@@ -67,6 +67,7 @@ public class MovimentacaoController {
     @Post("/movimentacao/salvar")
     public void salvar(Movimentacao movimentacao) {
         this.movimentacaoService.criarMovimentacoes(movimentacao);
+//        this.result.nothing();
     }
 
 }

@@ -29,6 +29,8 @@ public class MovimentadaoDTO {
 
         Collections.sort(contas);
         for(Conta conta : contas){
+            if(conta.isAgrupador()) continue;
+
             if (conta.getReferenteA() == null) {
                 this.grupos.add(new SelectGroupDTO(conta.getNome(), conta.getNome()));
             } else if (conta.isCartao()){

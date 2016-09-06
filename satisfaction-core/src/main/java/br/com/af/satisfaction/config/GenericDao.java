@@ -87,6 +87,27 @@ public class GenericDao<T> {
 		return new Paginator<>(count, list, Math.floorDiv(count-1, 10));
 	}
 
+
+	/**
+	 *
+	 * @param id da conta
+	 * @return
+	 */
+	public Conta findAgrupadorConta(Long id){
+		Conta conta = (Conta) this.findById(id, Conta.class);
+		return this.getAgrupador(conta);
+	}
+
+	private Conta getAgrupador(Conta conta){
+		if(conta.getReferenteA() != null){
+			if(conta.getReferenteA().isAgrupador()){
+				return conta.getReferenteA();
+			}
+			this.getAgrupador(conta.getReferenteA());
+		}
+		return null;
+	}
+
 	public void salvarConta(Conta conta){
 		if(conta.getReferenteA() != null && conta.getReferenteA().getId() != null) {
 			Conta pai = this.em.find(Conta.class, conta.getReferenteA().getId());

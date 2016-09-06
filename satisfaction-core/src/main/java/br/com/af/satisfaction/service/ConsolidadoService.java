@@ -73,14 +73,18 @@ public class ConsolidadoService {
 
         Session session = (Session) this.em.getDelegate();
         List<ConsolidadoContaDia> result = session.createSQLQuery(
-                "select ccd.conta as conta, ccd.contaid as contaId, sum(ccd.contavalor) as contaValor from consolidadocontadia ccd where " +
+                "select ccd.conta as conta, ccd.contaid as contaId, sum(ccd.contavalor) as contaValor, " +
+                        "ccd.agrupadorcontaid as agrupadorContaId, agrupadorconta as agrupadorConta " +
+                        "from consolidadocontadia ccd where " +
                         ":filialid in (select id from filial) " +
                         "and ccd.data between :dataInicio and CURRENT_TIMESTAMP " +
                         "and ccd.contavalor != 0 " +
-                        "group by conta, contaId")
+                        "group by conta, contaId, agrupadorContaId, agrupadorConta")
                 .addScalar("conta", StandardBasicTypes.STRING)
-                .addScalar("contaid", StandardBasicTypes.LONG)
+                .addScalar("contaId", StandardBasicTypes.LONG)
                 .addScalar("contaValor", StandardBasicTypes.BIG_DECIMAL)
+                .addScalar("agrupadorConta", StandardBasicTypes.STRING)
+                .addScalar("agrupadorContaId", StandardBasicTypes.LONG)
                 .setLong("filialid", id)
                 .setDate("dataInicio",
                         Date.from(

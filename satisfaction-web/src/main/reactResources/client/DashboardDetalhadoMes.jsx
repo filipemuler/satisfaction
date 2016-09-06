@@ -9,28 +9,42 @@ import Table from 'react-bootstrap/lib/Table'
 import DoughnutChart from 'react-chartjs/lib/doughnut'
 import request from 'superagent'
 import Loading from './Loading'
+import {BootstrapTable, TableHeaderColumn} from 'react-bootstrap-table';
 
 class DashboardDetalhadoMes extends Component {
 
   constructor(props){
     super(props)
-    this.state = {filiais : [], loading : true}
+    this.columnClassNameFormat = this.columnClassNameFormat.bind(this)
+    this.trClassFormat = this.trClassFormat.bind(this)
   }
 
   componentDidMount(){
   }
 
+  columnClassNameFormat(fieldValue,row,rowIdx,colIdx){
+    //fieldValue is column value
+    //row is whole row object
+    //rowIdx is index of row
+    //colIdx is index of column
+    return rowIdx % 2 == 0?'td-column-function-even-example':'td-column-function-odd-example';
+  }
+
+  trClassFormat(rowData,rIndex){
+    console.log(rowData)
+    return rIndex%3==0?'tr-function-example':'';
+  }
 
   render(){
   return(
-        <Table responsive>
-          <tbody>
-            <tr>
-              <td>asd</td>
-              <td>asd2</td>
-            </tr>
-          </tbody>
-        </Table>
+    <BootstrapTable data={this.props.lista} condensed={true} exportCSV={true} options={{exportCSVText:'Exportar para CSV'}} pagination={true}
+      trClassName={this.trClassFormat}>
+      <TableHeaderColumn isKey={true} dataField="contaId" hidden={true}>ID</TableHeaderColumn>
+      <TableHeaderColumn dataField="conta" columnClassName={this.columnClassNameFormat}>Conta</TableHeaderColumn>
+      <TableHeaderColumn dataField="contaValor">Preço</TableHeaderColumn>
+      <TableHeaderColumn dataField="agrupadorConta" hidden={true}>AgrupadorConta</TableHeaderColumn>
+      <TableHeaderColumn dataField="agrupadorContaId" hidden={true}>Agrupador ID</TableHeaderColumn>
+    </BootstrapTable>
       )
   }
 }

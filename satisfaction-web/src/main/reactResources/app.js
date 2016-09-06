@@ -20,7 +20,7 @@ app.get('/dashboard/consolidadofinal', function(req, res) {
     res.send(dashboard);
 });
 
-app.get('/dashboard/consolidadoDetalhado', function(req, res) {
+app.get('/dashboard/consolidadoDetalhado/*', function(req, res) {
     res.send(consolidadoDetalhado);
 });
 

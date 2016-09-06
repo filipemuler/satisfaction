@@ -1,22 +1,26 @@
 {
   "lista": [
     {
-      "id": "1",
-      "data": "01/07",
+      "contaId": "1",
       "conta": "Copa Manha",
-      "valor": "100"
+      "contaValor": "100",
+      "agrupadorConta":"agrup1",
+      "agrupadorContaId" : 1
+
     },
     {
-      "id": "2",
-      "data": "01/07",
+      "contaId": "2",
       "conta": "Copa Tarde",
-      "valor": "200"
+      "contaValor": "200",
+      "agrupadorConta":"agrup1",
+      "agrupadorContaId" : 1
     },
     {
-      "id": "3",
-      "data": "01/07",
+      "contaId": "3",
       "conta": "Copa Noite",
-      "valor": "150"
+      "contaValor": "201",
+      "agrupadorConta":"agrup2",
+      "agrupadorContaId" : 2      
     }
   ]
 }

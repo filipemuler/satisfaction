@@ -9,6 +9,7 @@ import DoughnutChart from 'react-chartjs/lib/doughnut'
 import request from 'superagent'
 import Loading from './Loading'
 import DashboardConsolidado from './DashboardConsolidado'
+import DashboardDetalhadoMes from './DashboardDetalhadoMes'
 import {BootstrapTable, TableHeaderColumn} from 'react-bootstrap-table';
 
 class Dashboard extends Component {
@@ -49,13 +50,7 @@ class Dashboard extends Component {
       contexto = <DashboardConsolidado filiais={this.state.filiais} onConsolidadoDetalhado={this.detalhaConsolidado}/>
     }
     if(this.state.consolidadoDetalhado == true){
-      contexto = <div>
-        <BootstrapTable data={this.state.lista} condensed={true} hover={true} exportCSV={true} options={{exportCSVText:'Exportar para CSV'}} pagination={true}>
-          <TableHeaderColumn isKey={true} dataField="contaId" hidden={true}>ID</TableHeaderColumn>
-          <TableHeaderColumn dataField="conta">Conta</TableHeaderColumn>
-          <TableHeaderColumn dataField="contaValor">Preço</TableHeaderColumn>
-        </BootstrapTable>
-      </div>
+      contexto = <DashboardDetalhadoMes lista={this.state.lista}/>
     }
     return(
         <Panel header={this.props.contexto} >

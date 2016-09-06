@@ -34,6 +34,12 @@ public class Conta implements Serializable, Comparable<Conta> {
     //indica se a conta é para cartão
     private boolean cartao = false;
 
+    //se a conta é usada como agrupador
+    //ex: Despesa > supermercado > coca-cola
+    // Despesa > supermercado > leite
+    // queremos marcar supermercado como agrupador dos itens de supermercado.
+    private boolean agrupador = false;
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     public Long getId() {
@@ -109,6 +115,14 @@ public class Conta implements Serializable, Comparable<Conta> {
 
     public void setCartao(boolean cartao) {
         this.cartao = cartao;
+    }
+
+    public boolean isAgrupador() {
+        return agrupador;
+    }
+
+    public void setAgrupador(boolean agrupador) {
+        this.agrupador = agrupador;
     }
 
     @Transient
