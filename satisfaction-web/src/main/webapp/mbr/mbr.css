@@ -14,8 +14,12 @@
 	background-repeat: no-repeat;
 }
 
-.tr-function-example {
-	background-color: red;
+.tr-agrupador-color-1 {
+	background-color: #5AD19B;
+}
+
+.tr-agrupador-color-2 {
+	background-color: #8765BA;
 }
 
 .react-selectize.root-node {

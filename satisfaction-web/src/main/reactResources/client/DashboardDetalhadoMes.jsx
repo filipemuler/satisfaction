@@ -32,7 +32,7 @@ class DashboardDetalhadoMes extends Component {
 
   trClassFormat(rowData,rIndex){
     console.log(rowData)
-    return rIndex%3==0?'tr-function-example':'';
+    return 'tr-agrupador-color-' + rowData.agrupadorContaId;
   }
 
   render(){
