@@ -40,6 +40,8 @@ public class Conta implements Serializable, Comparable<Conta> {
     // queremos marcar supermercado como agrupador dos itens de supermercado.
     private boolean agrupador = false;
 
+    private Turno turno;
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     public Long getId() {
@@ -125,10 +127,20 @@ public class Conta implements Serializable, Comparable<Conta> {
         this.agrupador = agrupador;
     }
 
+    @Enumerated(EnumType.STRING)
+    public Turno getTurno() {
+        return turno;
+    }
+
+    public void setTurno(Turno turno) {
+        this.turno = turno;
+    }
+
     @Transient
     public String getLabel(){
         return this.nome;
     }
+
 
     @Override
     public int compareTo(Conta o) {

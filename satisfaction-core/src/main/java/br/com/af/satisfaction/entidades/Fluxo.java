@@ -16,6 +16,7 @@ public class Fluxo implements Serializable {
     private Long id;
     private String nome;
     private String descricao;
+    private Turno turno;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -41,5 +42,13 @@ public class Fluxo implements Serializable {
 
     public void setDescricao(String descricao) {
         this.descricao = descricao;
+    }
+
+    public Turno getTurno() {
+        return turno;
+    }
+
+    public void setTurno(Turno turno) {
+        this.turno = turno;
     }
 }

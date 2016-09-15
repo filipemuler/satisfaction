@@ -3,15 +3,7 @@ package br.com.af.satisfaction.entidades;
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 import org.codehaus.jackson.annotate.JsonIgnore;
 
@@ -27,6 +19,7 @@ public class Usuario {
 	private Filial filial;
 	private Funcionario funcionario;
 	private List<Permissao> permissoes;
+	private List<Turno> turnos;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -101,5 +94,16 @@ public class Usuario {
 
 	public void setPermissoes(List<Permissao> permissao) {
 		this.permissoes = permissao;
+	}
+
+	@ElementCollection
+	@CollectionTable(name="usuario_turno", joinColumns=@JoinColumn(name="usuario_id"))
+	@Column(name="turno")
+	public List<Turno> getTurnos() {
+		return turnos;
+	}
+
+	public void setTurnos(List<Turno> turnos) {
+		this.turnos = turnos;
 	}
 }

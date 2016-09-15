@@ -19,7 +19,7 @@
     </category>
     
     <category name="org.springframework">
-        <priority value="DEBUG" />
+        <priority value="INFO" />
         <appender-ref ref="stdout" />
     </category>
 </log4j:configuration>
