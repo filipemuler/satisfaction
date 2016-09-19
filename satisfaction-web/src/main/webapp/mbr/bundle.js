@@ -1774,17 +1774,6 @@ var Movimentacao = (function (_Component) {
           _react2['default'].createElement(
             _reactBootstrapLibPanel2['default'],
             null,
-            'Cartões Entrada',
-            cartoesEntrada,
-            _react2['default'].createElement(_MovimentacaoAdd2['default'], {
-              options: this.state.cartoesEntrada,
-              onAdded: this.addCartaoEntrada,
-              ref: 'adicionaCartaoEntrada' }),
-            _react2['default'].createElement(_MovimentacaoTotal2['default'], { label: 'Total Cartões Entrada', total: this.state.totalCartaoEntrada })
-          ),
-          _react2['default'].createElement(
-            _reactBootstrapLibPanel2['default'],
-            null,
             'Cartões Saida',
             cartoesSaida,
             _react2['default'].createElement(_MovimentacaoAdd2['default'], {
@@ -1792,6 +1781,17 @@ var Movimentacao = (function (_Component) {
               onAdded: this.addCartaoSaida,
               ref: 'adicionaCartaoSaida' }),
             _react2['default'].createElement(_MovimentacaoTotal2['default'], { label: 'Total Cartões Saida', total: this.state.totalCartaoSaida })
+          ),
+          _react2['default'].createElement(
+            _reactBootstrapLibPanel2['default'],
+            null,
+            'Cartões Entrada',
+            cartoesEntrada,
+            _react2['default'].createElement(_MovimentacaoAdd2['default'], {
+              options: this.state.cartoesEntrada,
+              onAdded: this.addCartaoEntrada,
+              ref: 'adicionaCartaoEntrada' }),
+            _react2['default'].createElement(_MovimentacaoTotal2['default'], { label: 'Total Cartões Entrada', total: this.state.totalCartaoEntrada })
           ),
           _react2['default'].createElement(
             _reactBootstrapLibPanel2['default'],

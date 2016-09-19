@@ -333,15 +333,6 @@ class Movimentacao extends Component {
               <MovimentacaoTotal label="Total Recebimento" total={this.state.totalRecebimento}/>
             </Panel>
             <Panel>
-              Cartões Entrada
-              {cartoesEntrada}
-              <MovimentacaoAdd
-                options={this.state.cartoesEntrada}
-                onAdded={this.addCartaoEntrada}
-                ref="adicionaCartaoEntrada"/>
-              <MovimentacaoTotal label="Total Cartões Entrada" total={this.state.totalCartaoEntrada}/>
-            </Panel>
-            <Panel>
               Cartões Saida
               {cartoesSaida}
               <MovimentacaoAdd
@@ -349,6 +340,15 @@ class Movimentacao extends Component {
                 onAdded={this.addCartaoSaida}
                 ref="adicionaCartaoSaida"/>
               <MovimentacaoTotal label="Total Cartões Saida" total={this.state.totalCartaoSaida}/>
+            </Panel>
+            <Panel>
+              Cartões Entrada
+              {cartoesEntrada}
+              <MovimentacaoAdd
+                options={this.state.cartoesEntrada}
+                onAdded={this.addCartaoEntrada}
+                ref="adicionaCartaoEntrada"/>
+              <MovimentacaoTotal label="Total Cartões Entrada" total={this.state.totalCartaoEntrada}/>
             </Panel>
             <Panel>
               Fluxos

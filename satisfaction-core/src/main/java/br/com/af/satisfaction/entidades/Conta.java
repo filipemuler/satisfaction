@@ -42,6 +42,20 @@ public class Conta implements Serializable, Comparable<Conta> {
 
     private Turno turno;
 
+    public Conta() {
+    }
+
+    public Conta(String nome, String descricao, Conta referenteA, Integer ordem, boolean entrada, boolean cartao, boolean agrupador, Turno turno) {
+        this.nome = nome;
+        this.descricao = descricao;
+        this.referenteA = referenteA;
+        this.ordem = ordem;
+        this.entrada = entrada;
+        this.cartao = cartao;
+        this.agrupador = agrupador;
+        this.turno = turno;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     public Long getId() {
@@ -164,5 +178,36 @@ public class Conta implements Serializable, Comparable<Conta> {
             }
         }
         return this.getOrdem().compareTo(o.getOrdem());
+    }
+
+    public static Conta criarDespesa(String nome, Turno turno, Conta referentea){
+        Conta conta = new Conta(nome, nome, referentea, null, false, false, false, turno);
+        return conta;
+    }
+
+    public static Conta criarDespesaAgrupador(String nome, Turno turno, Conta referentea){
+        Conta conta = Conta.criarDespesa(nome, turno, referentea);
+        conta.setAgrupador(true);
+        return conta;
+    }
+
+    public static Conta criarReceitaFixa(String nome, Turno turno, Integer ordem, Conta referentea){
+        Conta conta = new Conta(nome, nome, referentea, ordem, true, false, false, turno);
+        return conta;
+    }
+
+    public static Conta criarRecebimento(String nome, Conta referentea){
+        Conta conta = new Conta(nome, nome, referentea, null, true, false, false, null);
+        return conta;
+    }
+
+    public static Conta criarCartaoEntrada(String nome, Conta referentea){
+        Conta conta = new Conta(nome, nome, referentea, null, true, true, false, null);
+        return conta;
+    }
+
+    public static Conta criarCartaoSaida(String nome, Conta referentea){
+        Conta conta = new Conta(nome, nome, referentea, null, false, true, false, null);
+        return conta;
     }
 }
