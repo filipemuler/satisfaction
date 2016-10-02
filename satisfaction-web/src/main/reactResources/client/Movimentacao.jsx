@@ -53,7 +53,8 @@ class Movimentacao extends Component {
       totalReceita : 0,
       totalFluxo : 0,
       inputValue : '',
-      dataTransacao : new Date().toISOString()
+      dataTransacao : new Date().toISOString(),
+      usuario : { admin : false}
     }
   }
 
@@ -276,9 +277,7 @@ class Movimentacao extends Component {
           calculaTotal={this.calculaTotalFluxo}
           ref={"fluxo-" + fluxo.value}/>
       )
-
-
-
+      var admin = (this.state.usuario.admin === 'true');
       return(
         <Panel header={this.props.contexto} footer={footer}>
           <Form horizontal>
@@ -303,6 +302,7 @@ class Movimentacao extends Component {
               </Col>
               <Col sm={4}>
                 <DatePicker value={this.state.dataTransacao}
+                  disabled={!admin}
                   dateFormat="DD/MM/YYYY"
                   onChange = {function(value) {
                       self.setState({dataTransacao: value});
@@ -310,6 +310,7 @@ class Movimentacao extends Component {
                   ref="dataTransacao"/>
               </Col>
             </FormGroup>
+
 
             {receitasFixas}
             <MovimentacaoTotal label="Total Receita" total={this.state.totalReceita}/>

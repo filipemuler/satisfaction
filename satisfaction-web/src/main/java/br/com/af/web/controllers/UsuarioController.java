@@ -8,15 +8,13 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import br.com.caelum.vraptor.*;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import br.com.af.satisfaction.config.GenericDao;
 import br.com.af.satisfaction.config.Paginator;
 import br.com.af.satisfaction.entidades.Permissao;
 import br.com.af.satisfaction.entidades.Usuario;
-import br.com.caelum.vraptor.Controller;
-import br.com.caelum.vraptor.Path;
-import br.com.caelum.vraptor.Result;
 import br.com.caelum.vraptor.view.Results;
 
 @Controller
@@ -66,7 +64,9 @@ public class UsuarioController {
 		this.usuarioService.remove(usuarioRecuperado);
 		this.result.forwardTo(this).list(null);
 	}
-	
+
+	@Consumes("application/json")
+	@Post("/usuario/salva")
 	public void salva(Usuario usuario){
 		if(usuario.getId()!=null){
 			this.usuarioService.merge(usuario);

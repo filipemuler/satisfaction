@@ -1,11 +1,10 @@
 package br.com.af.web.dto;
 
 import java.util.Collections;
-import java.util.Comparator;
-import java.util.Iterator;
 import java.util.List;
 
 import br.com.af.satisfaction.entidades.Fluxo;
+import br.com.af.satisfaction.entidades.Usuario;
 import com.google.common.collect.Lists;
 
 import br.com.af.satisfaction.entidades.Conta;
@@ -24,8 +23,10 @@ public class MovimentadaoDTO {
     private List<SelectOptionDTO> cartoesEntrada = Lists.newArrayList();
     private List<SelectOptionDTO> cartoesSaida = Lists.newArrayList();
     private List<SelectOptionDTO> fluxos = Lists.newArrayList();
+    private Usuario usuario;
 
-    public MovimentadaoDTO(List<Conta> contas, List<Filial> filiais, List<Fluxo> fluxos) {
+    public MovimentadaoDTO(List<Conta> contas, List<Filial> filiais, List<Fluxo> fluxos, Usuario usuario) {
+        this.usuario = usuario;
 
         Collections.sort(contas);
         for(Conta conta : contas){

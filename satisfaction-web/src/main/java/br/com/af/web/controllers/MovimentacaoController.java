@@ -7,12 +7,10 @@ import java.util.List;
 import javax.inject.Inject;
 
 import br.com.af.satisfaction.config.GenericDao;
-import br.com.af.satisfaction.entidades.Filial;
-import br.com.af.satisfaction.entidades.Fluxo;
+import br.com.af.satisfaction.entidades.*;
 import br.com.af.satisfaction.service.MovimentacaoService;
+import br.com.af.satisfaction.service.UsuarioService;
 import br.com.af.web.dto.MovimentadaoDTO;
-import br.com.af.satisfaction.entidades.Conta;
-import br.com.af.satisfaction.entidades.Movimentacao;
 import br.com.caelum.vraptor.Consumes;
 import br.com.caelum.vraptor.Controller;
 import br.com.caelum.vraptor.Path;
@@ -31,6 +29,7 @@ public class MovimentacaoController {
     private GenericDao<Filial> filialService;
     private MovimentacaoService movimentacaoService;
     private GenericDao<Fluxo> fluxoService;
+    private UsuarioService usuarioService;
 
     public MovimentacaoController() {
         // nada
@@ -38,12 +37,13 @@ public class MovimentacaoController {
 
     @Inject
     public MovimentacaoController(Result result, GenericDao<Conta> contaService, GenericDao<Filial> filialService,
-                                  MovimentacaoService movimentacaoService, GenericDao<Fluxo> fluxoService) {
+                                  MovimentacaoService movimentacaoService, GenericDao<Fluxo> fluxoService, UsuarioService usuarioService) {
         this.result = result;
         this.contaService = contaService;
         this.filialService = filialService;
         this.movimentacaoService = movimentacaoService;
         this.fluxoService = fluxoService;
+        this.usuarioService = usuarioService;
     }
 
     public void form() {
@@ -56,7 +56,8 @@ public class MovimentacaoController {
         List<Conta> contas = this.contaService.findAll(Conta.class);
         List<Filial> filiais = this.filialService.findAll(Filial.class);
         List<Fluxo> fluxos = this.fluxoService.findAll(Fluxo.class);
-        MovimentadaoDTO movimentadaoDTO = new MovimentadaoDTO(contas, filiais, fluxos);
+        Usuario usuario = usuarioService.getUsuarioLogado();
+        MovimentadaoDTO movimentadaoDTO = new MovimentadaoDTO(contas, filiais, fluxos, usuario);
         this.result.use(Results.json()).withoutRoot().
                 from(movimentadaoDTO).include("grupos", "receitasFixas", "filiais",
                 "despesas", "recebimentos", "cartoesEntrada", "cartoesSaida", "fluxos").serialize();

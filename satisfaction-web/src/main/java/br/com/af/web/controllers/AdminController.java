@@ -1,7 +1,5 @@
 package br.com.af.web.controllers;
 
-import br.com.af.satisfaction.config.GenericDao;
-import br.com.af.satisfaction.entidades.Conta;
 import br.com.af.satisfaction.service.AdminService;
 import br.com.caelum.vraptor.Result;
 

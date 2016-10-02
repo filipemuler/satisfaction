@@ -114,5 +114,8 @@
       "value": "2002",
       "label": "Carro Noite"
     }
-  ]
+  ],
+  "usuario" : {
+    "admin" : "true"
+  }
 }

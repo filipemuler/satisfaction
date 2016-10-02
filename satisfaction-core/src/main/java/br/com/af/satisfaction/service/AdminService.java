@@ -2,7 +2,6 @@ package br.com.af.satisfaction.service;
 
 import br.com.af.satisfaction.config.GenericDao;
 import br.com.af.satisfaction.entidades.Conta;
-import br.com.caelum.vraptor.Result;
 
 import javax.inject.Inject;
 

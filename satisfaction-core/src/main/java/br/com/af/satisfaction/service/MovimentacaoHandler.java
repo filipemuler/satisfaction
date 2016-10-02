@@ -18,13 +18,13 @@ import br.com.af.satisfaction.entidades.Usuario;
 public class MovimentacaoHandler implements MovimentacaoChainHandler{
 
     private GenericDao<Movimentacao> service;
-    private GenericDao<Usuario> usuarioService;
+    private UsuarioService usuarioService;
 
     public MovimentacaoHandler() {
     }
 
     @Inject
-    public MovimentacaoHandler(GenericDao<Movimentacao> service, GenericDao<Usuario> usuarioService) {
+    public MovimentacaoHandler(GenericDao<Movimentacao> service, UsuarioService usuarioService) {
         this.service = service;
         this.usuarioService = usuarioService;
     }
@@ -32,11 +32,7 @@ public class MovimentacaoHandler implements MovimentacaoChainHandler{
     @Override
     public void handleMovimentacao(Movimentacao movimentacao) {
         movimentacao.setDataTransacao(new Date());
-
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        String username = ((User) authentication.getPrincipal()).getUsername();
-        Usuario usuario = usuarioService.findByUserName(username);
-        movimentacao.setUsuario(usuario);
+        movimentacao.setUsuario(usuarioService.getUsuarioLogado());
 
         this.service.persist(movimentacao);
     }
