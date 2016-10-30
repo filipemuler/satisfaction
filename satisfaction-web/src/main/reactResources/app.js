@@ -10,6 +10,7 @@ var usuarios = require('./public/usuarios.json')
 var contas = require('./public/contas.json')
 var dashboard = require('./public/dashboard.json')
 var consolidadoDetalhado = require('./public/consolidadoDetalhado.json')
+var cadastroConta = require('./public/cadastroConta.json')
 
 app.use(express.static(__dirname));
 app.get('/', function(req, res) {
@@ -32,12 +33,17 @@ app.get('/movimentacao/list/contas', function(req, res) {
     res.send(contas);
 });
 
-app.get('/contas/list', function(req, res) {
-    res.send({results : [{'id':'1001', 'usuario': 'conta1'}, {'id':'1002', 'usuario': 'conta2'}]});
+app.get('/movimentacao/saldos/*', function(req, res) {
+    res.send({'saldoAnterior' : '200'});
 });
 
-app.get('/contas/list/contas', function(req, res) {
-    res.send([{value : '3', label : 'Coca-cola'},{value : '2', label : 'Supermercado'}, {value : '1', label : 'Copa Manha'}]);
+app.get('/contas/list', function(req, res) {
+    res.send({lista : [{'id':'1001', 'nome': 'conta1', 'entrada':'false', 'saida':'true', 'agrupador':'true', 'ordem':'1'},
+    {'id':'1002', 'nome': 'conta2','entrada':'false', 'saida':'true', 'agrupador':'true', 'ordem':'2'}]});
+});
+
+app.get('/contas/form', function(req, res) {
+    res.send(cadastroConta);
 });
 
 app.get('/fluxo/list', function(req, res) {

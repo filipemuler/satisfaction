@@ -14,6 +14,7 @@ public class Usuario {
 	private Long id;
 	private Date dataCadastro;
 	private String email;
+	@JsonIgnore
 	private String senha;
 	private boolean admin;
 	private Filial filial;
@@ -47,7 +48,7 @@ public class Usuario {
 		this.email = email;
 	}
 
-	@JsonIgnore
+
 	public String getSenha() {
 		return senha;
 	}

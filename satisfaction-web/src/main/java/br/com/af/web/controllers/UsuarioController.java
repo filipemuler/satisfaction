@@ -1,21 +1,15 @@
 package br.com.af.web.controllers;
 
-import static br.com.caelum.vraptor.view.Results.json;
-import static javafx.scene.input.KeyCode.J;
-import static org.apache.commons.lang3.math.NumberUtils.toInt;
-
-import java.util.List;
-
-import javax.inject.Inject;
-
-import br.com.caelum.vraptor.*;
-import org.springframework.security.crypto.password.PasswordEncoder;
-
 import br.com.af.satisfaction.config.GenericDao;
-import br.com.af.satisfaction.config.Paginator;
 import br.com.af.satisfaction.entidades.Permissao;
 import br.com.af.satisfaction.entidades.Usuario;
+import br.com.af.web.dto.ListaDTO;
+import br.com.caelum.vraptor.*;
 import br.com.caelum.vraptor.view.Results;
+import org.springframework.security.crypto.password.PasswordEncoder;
+
+import javax.inject.Inject;
+import java.util.List;
 
 @Controller
 public class UsuarioController {
@@ -47,9 +41,12 @@ public class UsuarioController {
 
 //	@Path({"/usuario/list", "/usuario/list/{page}"})
 	public void list(String page) {
-		Paginator<Usuario> paginator = this.usuarioService.findPaginator(Usuario.class, toInt(page));
-		this.result.use(json()).withoutRoot().from(paginator).
-				include("results").serialize();
+//		Paginator<Usuario> paginator = this.usuarioService.findPaginator(Usuario.class, toInt(page));
+//		this.result.use(json()).withoutRoot().from(paginator).
+//				include("results").serialize();
+		List<Usuario> usuarios = this.usuarioService.findAll(Usuario.class);
+		ListaDTO<Usuario> lista = new ListaDTO<>(usuarios);
+		this.result.use(Results.json()).withoutRoot().from(lista).recursive().serialize();
 	}
 	
 	@Path("/usuario/edita/{usuario.id}")

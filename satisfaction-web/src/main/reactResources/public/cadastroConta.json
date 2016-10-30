@@ -1,0 +1,30 @@
+{
+  "contas": [
+    {
+      "value": "3",
+      "label": "Coca-cola"
+    },
+    {
+      "value": "2",
+      "label": "Supermercado"
+    },
+    {
+      "value": "1",
+      "label": "Copa Manha"
+    }
+  ],
+  "turnos": [
+    {
+      "value" : "MANHA",
+      "label" : "Manhã"
+    },
+    {
+      "value" : "TARDE",
+      "label" : "Tarde"
+    },
+    {
+      "value" : "NOITE",
+      "label" : "Noite"
+    }
+  ]
+}

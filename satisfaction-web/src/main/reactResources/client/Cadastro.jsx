@@ -12,6 +12,8 @@ import UsuarioForm from './form/UsuarioForm'
 import PermissaoForm from './form/PermissaoForm'
 import FilialForm from './form/FilialForm'
 import FuncionarioForm from './form/FuncionarioForm'
+import TabelaConta from './cadastro/tabela/TabelaConta'
+import TabelaUsuario from './cadastro/tabela/TabelaUsuario'
 
 
 class Cadastro extends Component {
@@ -32,7 +34,7 @@ class Cadastro extends Component {
     request
       .get(this.props.contexto + "/list")
       .end(function(err, res){
-        self.setState({lista : res.body});
+        self.setState(res.body);
       });
   }
 
@@ -59,11 +61,13 @@ class Cadastro extends Component {
     const buttonCriar = <Button bsStyle="primary" onClick={this.clickCriar}>Criar</Button>
     const footer =  <ButtonToolbar>{buttonCriar}</ButtonToolbar>
 
-      var cadastro;
+      let cadastro;
+      let tabela;
       switch (this.props.contexto) {
         case 'contas':
           url = "conta/salva";
           cadastro = <ContasForm ref="form"/>
+          tabela = <TabelaConta lista={this.state.lista}/>
           break;
         case 'fluxo':
           url = "fluxo/salva";
@@ -72,6 +76,7 @@ class Cadastro extends Component {
         case 'usuario':
           url = "usuario/salva";
           cadastro = <UsuarioForm ref="form"/>
+          tabela = <TabelaUsuario lista={this.state.lista}/>
           break;
         case 'permissao':
           url = "permissao/salva";
@@ -90,7 +95,7 @@ class Cadastro extends Component {
       }
       return(
         <Panel header={this.props.contexto} footer={footer}>
-          <Lista lista={this.state.lista}></Lista>
+          {tabela}
           <Modal show={this.state.showModal} onHide={this.close}>
             <Modal.Header closeButton>
               <Modal.Title>Criar</Modal.Title>

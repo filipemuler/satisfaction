@@ -35,7 +35,7 @@ public class DashboardController {
 
 	@Get("/dashboard/consolidadofinal")
 	public void consolidadoFinal(){
-		List<ConsolidadoMes> consolidadoDoMes = this.service.getConsolidadoDoMes();
+		List<ConsolidadoMes> consolidadoDoMes = this.service.getConsolidadosDashboard();
 		DashboardDTO dto = new DashboardDTO(consolidadoDoMes);
 		this.result.use(Results.json()).withoutRoot().from(dto).include("filiais", "filiais.dados").serialize();
 	}

@@ -1,6 +1,7 @@
 package br.com.af.satisfaction.entidades;
 
 import com.google.common.collect.Lists;
+import org.codehaus.jackson.annotate.JsonIgnore;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -17,6 +18,7 @@ public class Conta implements Serializable, Comparable<Conta> {
     private String nome;
     private String descricao;
 
+    @JsonIgnore
     private List<Conta> contas = Lists.newArrayList();
     private Conta referenteA;
 

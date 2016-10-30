@@ -2,20 +2,19 @@ package br.com.af.web.controllers;
 
 import static com.google.common.collect.FluentIterable.from;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import javax.inject.Inject;
 
 import br.com.af.satisfaction.config.GenericDao;
 import br.com.af.satisfaction.entidades.*;
+import br.com.af.satisfaction.service.ConsolidadoService;
 import br.com.af.satisfaction.service.MovimentacaoService;
 import br.com.af.satisfaction.service.UsuarioService;
 import br.com.af.web.dto.MovimentadaoDTO;
-import br.com.caelum.vraptor.Consumes;
-import br.com.caelum.vraptor.Controller;
-import br.com.caelum.vraptor.Path;
-import br.com.caelum.vraptor.Post;
-import br.com.caelum.vraptor.Result;
+import br.com.af.web.dto.SaldoAnteriorDTO;
+import br.com.caelum.vraptor.*;
 import br.com.caelum.vraptor.view.Results;
 
 /**
@@ -30,6 +29,7 @@ public class MovimentacaoController {
     private MovimentacaoService movimentacaoService;
     private GenericDao<Fluxo> fluxoService;
     private UsuarioService usuarioService;
+    private ConsolidadoService consolidadoService;
 
     public MovimentacaoController() {
         // nada
@@ -37,13 +37,14 @@ public class MovimentacaoController {
 
     @Inject
     public MovimentacaoController(Result result, GenericDao<Conta> contaService, GenericDao<Filial> filialService,
-                                  MovimentacaoService movimentacaoService, GenericDao<Fluxo> fluxoService, UsuarioService usuarioService) {
+                                  MovimentacaoService movimentacaoService, GenericDao<Fluxo> fluxoService, UsuarioService usuarioService, ConsolidadoService consolidadoService) {
         this.result = result;
         this.contaService = contaService;
         this.filialService = filialService;
         this.movimentacaoService = movimentacaoService;
         this.fluxoService = fluxoService;
         this.usuarioService = usuarioService;
+        this.consolidadoService = consolidadoService;
     }
 
     public void form() {
@@ -58,9 +59,14 @@ public class MovimentacaoController {
         List<Fluxo> fluxos = this.fluxoService.findAll(Fluxo.class);
         Usuario usuario = usuarioService.getUsuarioLogado();
         MovimentadaoDTO movimentadaoDTO = new MovimentadaoDTO(contas, filiais, fluxos, usuario);
-        this.result.use(Results.json()).withoutRoot().
-                from(movimentadaoDTO).include("grupos", "receitasFixas", "filiais",
-                "despesas", "recebimentos", "cartoesEntrada", "cartoesSaida", "fluxos").serialize();
+        this.result.use(Results.json()).withoutRoot().from(movimentadaoDTO).recursive().serialize();
+    }
+
+    @Get("/movimentacao/saldos/{filialId}")
+    public void getSaldos(Long filialId){
+        BigDecimal saldoAnterior = this.consolidadoService.getSaldoAnterior(filialId);
+        SaldoAnteriorDTO dto = new SaldoAnteriorDTO(saldoAnterior);
+        this.result.use(Results.json()).withoutRoot().from(dto).serialize();
 
     }
 

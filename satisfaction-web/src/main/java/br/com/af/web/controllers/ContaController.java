@@ -1,13 +1,17 @@
 package br.com.af.web.controllers;
 
 import static br.com.caelum.vraptor.view.Results.json;
+import static com.google.common.collect.Lists.newArrayList;
 import static org.apache.commons.lang3.math.NumberUtils.toInt;
 
 import br.com.af.satisfaction.config.GenericDao;
 import br.com.af.satisfaction.config.Paginator;
 import br.com.af.satisfaction.entidades.Conta;
 import br.com.af.satisfaction.entidades.Filial;
+import br.com.af.satisfaction.entidades.Turno;
 import br.com.af.satisfaction.entidades.Usuario;
+import br.com.af.web.dto.ContaFormDTO;
+import br.com.af.web.dto.ListaDTO;
 import br.com.af.web.dto.SelectOptionDTO;
 import br.com.caelum.vraptor.Consumes;
 import br.com.caelum.vraptor.Controller;
@@ -38,35 +42,25 @@ public class ContaController {
         this.contaService = contaService;
     }
 
+    @Get("/contas/form")
     public void form(){
         List<Conta> contas = this.contaService.findAll(Conta.class);
-        this.result.include("contas", contas);
+        ContaFormDTO dto = new ContaFormDTO(contas, newArrayList(Turno.values()));
+        this.result.use(json()).withoutRoot().from(dto).include("contas", "turnos").serialize();
     }
 
     @Get("/contas/list")
     public void list(String page) {
-        Paginator<Conta> paginator = this.contaService.findPaginator(Conta.class, toInt(page));
-        this.result.use(json()).withoutRoot().from(paginator).
-                include("results").serialize();
-    }
-
-    @Get("/contas/list/contas")
-    public void listContas() {
+//        Paginator<Conta> paginator = this.contaService.findPaginator(Conta.class, toInt(page));
         List<Conta> contas = this.contaService.findAll(Conta.class);
-        List<SelectOptionDTO> dto = Lists.newArrayList();
-        for(Conta conta : contas){
-            dto.add(new SelectOptionDTO(Long.toString(conta.getId()), null, conta.getNome()));
-        }
-        this.result.use(json()).withoutRoot().from(dto).serialize();
+        ListaDTO<Conta> lista = new ListaDTO<>(contas);
+        this.result.use(json()).withoutRoot().from(lista).recursive().serialize();
     }
 
     @Consumes("application/json")
     @Post("/conta/salva")
     public void salva(Conta conta) {
-        System.out.println(conta.getNome());
-        System.out.println(conta.getReferenteA());
         this.contaService.salvarConta(conta);
-
-        this.result.forwardTo(ContaController.class).form();
+//        this.result.forwardTo(ContaController.class).form();
     }
 }

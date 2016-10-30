@@ -54,6 +54,7 @@ class Movimentacao extends Component {
       totalFluxo : 0,
       inputValue : '',
       dataTransacao : new Date().toISOString(),
+      saldoAnterior : null,
       usuario : { admin : false}
     }
   }
@@ -64,6 +65,15 @@ class Movimentacao extends Component {
       .get('movimentacao/list/contas')
       .end(function(err, res){
         self.setState(res.body);
+      });
+  }
+
+  atualizaSaldo(filialid){
+    var self = this
+    request
+      .get('movimentacao/saldos/' + filialid)
+      .end(function(err, res){
+        self.setState(res.body)
       });
   }
 
@@ -107,6 +117,7 @@ class Movimentacao extends Component {
         totalCartaoSaida : 0,
         totalReceita : 0,
         totalFluxo : 0,
+        saldoAnterior : null,
         inputValue : ''})
         for (var ref in self.refs) {
           if(ref.startsWith('receita-') || ref.startsWith('despesa-') ||
@@ -138,6 +149,7 @@ class Movimentacao extends Component {
       totalCartaoSaida : 0,
       totalReceita : 0,
       totalFluxo : 0,
+      saldoAnterior : null,
       inputValue : ''})
       for (var ref in this.refs) {
         if(ref.startsWith('receita-') || ref.startsWith('despesa-') ||
@@ -277,7 +289,25 @@ class Movimentacao extends Component {
           calculaTotal={this.calculaTotalFluxo}
           ref={"fluxo-" + fluxo.value}/>
       )
-      var admin = (this.state.usuario.admin === 'true');
+
+      let saldoAnterior;
+      if(this.state.saldoAnterior != null){
+        saldoAnterior =  <FormGroup>
+                  <Col sm={2}>
+                    <ControlLabel>Saldo Anterior</ControlLabel>
+                  </Col>
+                  <Col sm={2}>
+                    <InputGroup>
+                      <InputGroup.Addon>R$</InputGroup.Addon>
+                      <FormControl type="text"
+                        ref="saldoAnterior"
+                        value={this.state.saldoAnterior}/>
+                    </InputGroup>
+                  </Col>
+                </FormGroup>
+      }
+
+      var admin = JSON.parse(this.state.usuario.admin)
       return(
         <Panel header={this.props.contexto} footer={footer}>
           <Form horizontal>
@@ -292,10 +322,14 @@ class Movimentacao extends Component {
                   value={this.state.filial}
                   onValueChange = {function(value) {
                         self.setState({filial: value});
+                        self.atualizaSaldo(value)
                   }}
                   ref="filial"/>
               </Col>
             </FormGroup>
+
+            {saldoAnterior}
+
             <FormGroup>
               <Col sm={2}>
                 <ControlLabel>Data</ControlLabel>
@@ -360,8 +394,8 @@ class Movimentacao extends Component {
               + this.state.totalCartaoEntrada  - this.state.totalCartaoSaida}/>
           </Form>
           <ToastContainer ref="container"
-                                  toastMessageFactory={ToastMessageFactory}
-                                  className="toast-top-right" />
+            toastMessageFactory={ToastMessageFactory}
+            className="toast-top-right" />
         </Panel>
 
       )
