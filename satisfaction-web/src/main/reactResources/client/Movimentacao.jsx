@@ -322,7 +322,8 @@ class Movimentacao extends Component {
                   value={this.state.filial}
                   onValueChange = {function(value) {
                         self.setState({filial: value});
-                        self.atualizaSaldo(value)
+                        console.log(value.value)
+                        self.atualizaSaldo(value.value)
                   }}
                   ref="filial"/>
               </Col>

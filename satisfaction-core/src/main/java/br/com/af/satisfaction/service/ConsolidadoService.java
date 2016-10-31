@@ -13,6 +13,9 @@ import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.ZoneOffset;
 import java.time.temporal.TemporalAdjusters;
 import java.util.Date;
 import java.util.List;
@@ -107,8 +110,10 @@ public class ConsolidadoService {
 
         for(Filial filial : filiais){
             //primeiro tentamos pegar do mes corrente
-            LocalDate inicio = LocalDate.now().with(TemporalAdjusters.firstDayOfMonth());
-            LocalDate fim = LocalDate.now();
+//            LocalDate inicio = LocalDate.now().with(TemporalAdjusters.firstDayOfMonth());
+//            LocalDate fim = LocalDate.now();
+            LocalDateTime inicio = LocalDateTime.now().with(TemporalAdjusters.firstDayOfMonth()).with(LocalTime.MIN);
+            LocalDateTime fim = LocalDateTime.now().with(LocalTime.MAX);
             ConsolidadoMes consolidadoMes = this.getConsolidadoPeridoPorFilial(filial.getId(), inicio, fim);
             if(consolidadoMes == null){
                 //caso não ache nada pegamos do mes passado
@@ -125,7 +130,7 @@ public class ConsolidadoService {
     }
 
     @SuppressWarnings("unchecked")
-    public ConsolidadoMes getConsolidadoPeridoPorFilial(Long filialid, LocalDate inicio, LocalDate fim){
+    public ConsolidadoMes getConsolidadoPeridoPorFilial(Long filialid, LocalDateTime inicio, LocalDateTime fim){
 
         Session session = (Session) this.em.getDelegate();
         ConsolidadoMes result = (ConsolidadoMes) session.createSQLQuery(
@@ -141,31 +146,28 @@ public class ConsolidadoService {
                         "group by filialid, filialnome;")
                 .setResultTransformer(Transformers.aliasToBean(ConsolidadoMes.class))
                 .setLong("filialid", filialid)
-                .setDate("dataInicio",
-                        Date.from(inicio.atStartOfDay(systemDefault()).toInstant()))
-                .setDate("dataFim",
-                        Date.from(fim.atStartOfDay(systemDefault()).toInstant()))
+                .setParameter("dataInicio", Date.from(inicio.atZone(systemDefault()).toInstant()))
+                .setParameter("dataFim", Date.from(fim.atZone(systemDefault()).toInstant()))
                 .uniqueResult();
         return result;
     }
 
     public BigDecimal getSaldoAnterior(Long filialid){
 
-        LocalDate date = LocalDate.now();
+        LocalDateTime inicio = LocalDateTime.now().with(TemporalAdjusters.firstDayOfMonth()).with(LocalTime.MIN);
+        LocalDateTime fim = LocalDateTime.now().with(LocalTime.MAX);
+
         Session session = (Session) this.em.getDelegate();
-        ConsolidadoMes result = (ConsolidadoMes) session.createSQLQuery(
-                "select (sum(despesa)+sum(receita)) " +
+        BigDecimal result = (BigDecimal) session.createSQLQuery(
+                "select (sum(receita)-sum(despesa)) " +
                         "from consolidadomes where " +
                         "filialid = :filialid " +
-                        "and data between :dataInicio and CURRENT_TIMESTAMP ")
-                .setResultTransformer(Transformers.aliasToBean(ConsolidadoMes.class))
+                        "and data between :dataInicio and :dataFim ")
                 .setLong("filialid", filialid)
-                .setDate("dataInicio",
-                        Date.from(
-                                date.with(
-                                        firstDayOfMonth()).atStartOfDay(systemDefault()).toInstant()))
+                .setParameter("dataInicio", Date.from(inicio.atZone(systemDefault()).toInstant()))
+                .setParameter("dataFim", Date.from(fim.atZone(systemDefault()).toInstant()))
                 .uniqueResult();
-        return null;
+        return result;
     }
 
     public static void main(String[] args) {
@@ -178,6 +180,13 @@ public class ConsolidadoService {
             inicio = inicio.minusMonths(1);
         System.out.println(inicio);
             fim = fim.minusMonths(1).with(TemporalAdjusters.lastDayOfMonth());
+
         System.out.println(fim);
+
+
+        LocalDateTime time = LocalDateTime.now().with(TemporalAdjusters.firstDayOfMonth()).with(LocalTime.MIN);
+        LocalDateTime timeFim = LocalDateTime.now().with(TemporalAdjusters.lastDayOfMonth()).with(LocalTime.MAX);
+        System.out.println(Date.from(time.atZone(systemDefault()).toInstant()));
+        System.out.println(Date.from(timeFim.atZone(systemDefault()).toInstant()));
     }
 }
