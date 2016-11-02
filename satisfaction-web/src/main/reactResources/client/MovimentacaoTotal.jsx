@@ -33,6 +33,7 @@ class MovimentacaoTotal extends Component {
               </Col>
               <Col sm={2}>
                 <InputGroup>
+                  <InputGroup.Addon>R$</InputGroup.Addon>
                   <FormControl type="text"
                     value={this.props.total}
                     ref="total" readOnly/>

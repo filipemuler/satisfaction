@@ -51,10 +51,9 @@ public class ContaController {
 
     @Get("/contas/list")
     public void list(String page) {
-//        Paginator<Conta> paginator = this.contaService.findPaginator(Conta.class, toInt(page));
         List<Conta> contas = this.contaService.findAll(Conta.class);
         ListaDTO<Conta> lista = new ListaDTO<>(contas);
-        this.result.use(json()).withoutRoot().from(lista).recursive().serialize();
+        this.result.use(json()).withoutRoot().from(lista).include("lista").serialize();
     }
 
     @Consumes("application/json")

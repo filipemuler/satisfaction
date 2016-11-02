@@ -3,9 +3,12 @@ package br.com.af.web.controllers;
 import br.com.af.satisfaction.config.GenericDao;
 import br.com.af.satisfaction.config.Paginator;
 import br.com.af.satisfaction.entidades.Fluxo;
+import br.com.af.web.dto.ListaDTO;
 import br.com.caelum.vraptor.*;
 
 import javax.inject.Inject;
+
+import java.util.List;
 
 import static br.com.caelum.vraptor.view.Results.json;
 import static org.apache.commons.lang3.math.NumberUtils.toInt;
@@ -32,9 +35,9 @@ public class FluxoController {
 
     @Get("/fluxo/list")
     public void list(String page) {
-        Paginator<Fluxo> paginator = this.fluxoService.findPaginator(Fluxo.class, toInt(page));
-        this.result.use(json()).withoutRoot().from(paginator).
-                include("results").serialize();
+        List<Fluxo> fluxos = this.fluxoService.findAll(Fluxo.class);
+        ListaDTO<Fluxo> lista = new ListaDTO<>(fluxos);
+        this.result.use(json()).withoutRoot().from(lista).recursive().serialize();
     }
 
     @Consumes("application/json")

@@ -1,9 +1,5 @@
 import React, {Component, PropTypes} from 'react'
 import ReactDOM from 'react-dom'
-import Panel from 'react-bootstrap/lib/Panel'
-import Button from 'react-bootstrap/lib/Button'
-import ButtonToolbar from 'react-bootstrap/lib/ButtonToolbar'
-import request from 'superagent'
 import {BootstrapTable, TableHeaderColumn} from 'react-bootstrap-table';
 
 

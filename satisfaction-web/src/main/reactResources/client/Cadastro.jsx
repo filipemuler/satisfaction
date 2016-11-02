@@ -14,6 +14,10 @@ import FilialForm from './form/FilialForm'
 import FuncionarioForm from './form/FuncionarioForm'
 import TabelaConta from './cadastro/tabela/TabelaConta'
 import TabelaUsuario from './cadastro/tabela/TabelaUsuario'
+import TabelaPermissao from './cadastro/tabela/TabelaPermissao'
+import TabelaFluxo from './cadastro/tabela/TabelaFluxo'
+import TabelaFilial from './cadastro/tabela/TabelaFilial'
+import TabelaFuncionario from './cadastro/tabela/TabelaFuncionario'
 
 
 class Cadastro extends Component {
@@ -72,6 +76,7 @@ class Cadastro extends Component {
         case 'fluxo':
           url = "fluxo/salva";
           cadastro = <FluxoForm ref="form"/>
+          tabela = <TabelaFluxo lista={this.state.lista}/>
           break;
         case 'usuario':
           url = "usuario/salva";
@@ -81,21 +86,26 @@ class Cadastro extends Component {
         case 'permissao':
           url = "permissao/salva";
           cadastro = <PermissaoForm ref="form"/>
+          tabela = <TabelaPermissao lista={this.state.lista}/>
           break;
         case 'filial':
           url = "filial/salva";
           cadastro = <FilialForm ref="form"/>
+          tabela = <TabelaFilial lista={this.state.lista}/>
           break;
         case 'funcionario':
           url = "funcionario/salva";
           cadastro = <FuncionarioForm ref="form"/>
+          tabela = <TabelaFuncionario lista={this.state.lista}/>
           break;
         default:
 
       }
       return(
         <Panel header={this.props.contexto} footer={footer}>
-          {tabela}
+          <div style={style.panel}>
+            {tabela}
+          </div>
           <Modal show={this.state.showModal} onHide={this.close}>
             <Modal.Header closeButton>
               <Modal.Title>Criar</Modal.Title>
@@ -115,5 +125,11 @@ class Cadastro extends Component {
 }
 
 let url = ''
+
+const style = {
+  panel : {
+    height : '375px'
+  }
+}
 
 export default Cadastro

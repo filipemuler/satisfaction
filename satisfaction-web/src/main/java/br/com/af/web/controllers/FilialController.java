@@ -4,6 +4,7 @@ import br.com.af.satisfaction.config.GenericDao;
 import br.com.af.satisfaction.config.Paginator;
 import br.com.af.satisfaction.entidades.Filial;
 import br.com.af.satisfaction.entidades.TipoLogradouro;
+import br.com.af.web.dto.ListaDTO;
 import br.com.af.web.dto.SelectOptionDTO;
 import br.com.caelum.vraptor.Consumes;
 import br.com.caelum.vraptor.Controller;
@@ -60,9 +61,9 @@ public class FilialController {
 
 	@Path({"/filial/list", "/filial/list/{page}"})
 	public void list(String page) {
-		Paginator<Filial> paginator = this.filialService.findPaginator(Filial.class, toInt(page));
-		this.result.use(json()).withoutRoot().from(paginator).include("results").serialize();
-
+		List<Filial> filiais = this.filialService.findAll(Filial.class);
+		ListaDTO<Filial> lista = new ListaDTO<>(filiais);
+		this.result.use(json()).withoutRoot().from(lista).recursive().serialize();
 	}
 	
 	@Path("/filial/edita/{filial.id}")

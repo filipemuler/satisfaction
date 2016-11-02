@@ -4,11 +4,15 @@ import br.com.af.satisfaction.config.GenericDao;
 import br.com.af.satisfaction.config.Paginator;
 import br.com.af.satisfaction.entidades.Filial;
 import br.com.af.satisfaction.entidades.Funcionario;
+import br.com.af.web.dto.ListaDTO;
 import br.com.caelum.vraptor.Controller;
 import br.com.caelum.vraptor.Path;
 import br.com.caelum.vraptor.Result;
+import br.com.caelum.vraptor.view.Results;
 
 import javax.inject.Inject;
+
+import java.util.List;
 
 import static org.apache.commons.lang3.math.NumberUtils.toInt;
 
@@ -34,8 +38,10 @@ public class FuncionarioController {
 
 	@Path({"/funcionario/list", "/funcionario/list/{page}"})
 	public void list(String page) {
-		Paginator<Funcionario> paginator = this.funcionarioService.findPaginator(Funcionario.class, toInt(page));
-		this.result.include("paginator", paginator);
+//		Paginator<Funcionario> paginator = this.funcionarioService.findPaginator(Funcionario.class, toInt(page));
+		List<Funcionario> funcionarios = this.funcionarioService.findAll(Funcionario.class);
+		ListaDTO<Funcionario> lista = new ListaDTO<>(funcionarios);
+		this.result.use(Results.json()).withoutRoot().from(lista).recursive().serialize();
 	}
 	
 	@Path("/funcionario/edita/{funcionario.id}")

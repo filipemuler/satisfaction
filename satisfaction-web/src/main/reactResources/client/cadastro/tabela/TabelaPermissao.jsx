@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom'
 import {BootstrapTable, TableHeaderColumn} from 'react-bootstrap-table';
 
 
-class TabelaConta extends Component {
+class TabelaPermissao extends Component {
 
   constructor(props){
     super(props)
@@ -19,15 +19,12 @@ class TabelaConta extends Component {
       return(
         <BootstrapTable data={this.props.lista} condensed={true} pagination={true}>
           <TableHeaderColumn isKey={true} dataField="id" hidden={true}>ID</TableHeaderColumn>
-          <TableHeaderColumn dataField="nome">Nome</TableHeaderColumn>
-          <TableHeaderColumn dataField="entrada">Entrada</TableHeaderColumn>
-          <TableHeaderColumn dataField="saida">Saida</TableHeaderColumn>
-          <TableHeaderColumn dataField="agrupador">Agrupador</TableHeaderColumn>
-          <TableHeaderColumn dataField="ordem">Ordem</TableHeaderColumn>
+          <TableHeaderColumn dataField="rotina">Rotina</TableHeaderColumn>
+          <TableHeaderColumn dataField="tipo">Tipo</TableHeaderColumn>
         </BootstrapTable>
       )
   }
 
 }
 
-export default TabelaConta
+export default TabelaPermissao

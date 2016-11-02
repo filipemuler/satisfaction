@@ -7,11 +7,14 @@ import br.com.af.satisfaction.config.Paginator;
 import br.com.af.satisfaction.entidades.Funcionario;
 import br.com.af.satisfaction.entidades.Permissao;
 import br.com.af.satisfaction.entidades.Usuario;
+import br.com.af.web.dto.ListaDTO;
 import br.com.caelum.vraptor.Consumes;
 import br.com.caelum.vraptor.Controller;
 import br.com.caelum.vraptor.Path;
 import br.com.caelum.vraptor.Post;
 import br.com.caelum.vraptor.Result;
+
+import java.util.List;
 
 import static br.com.caelum.vraptor.view.Results.json;
 import static org.apache.commons.lang3.math.NumberUtils.toInt;
@@ -38,9 +41,9 @@ public class PermissaoController {
 
 //	@Path({"/permissao/list", "/permissao/list/{page}"})
 	public void list(String page) {
-		Paginator<Permissao> paginator = this.permissaoService.findPaginator(Permissao.class, toInt(page));
-		this.result.use(json()).withoutRoot().from(paginator).
-				include("results").serialize();
+		List<Permissao> permissoes = this.permissaoService.findAll(Permissao.class);
+		ListaDTO<Permissao> lista = new ListaDTO<>(permissoes);
+		this.result.use(json()).withoutRoot().from(lista).recursive().serialize();
 	}
 	
 	@Path("/permissao/edita/{permissao.id}")

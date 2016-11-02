@@ -290,22 +290,15 @@ class Movimentacao extends Component {
           ref={"fluxo-" + fluxo.value}/>
       )
 
-      let saldoAnterior;
+      let saldoAnterior = 0;
+      let saldoTransportar = 0;
+      let saldoDia = 0;
       if(this.state.saldoAnterior != null){
-        saldoAnterior =  <FormGroup>
-                  <Col sm={2}>
-                    <ControlLabel>Saldo Anterior</ControlLabel>
-                  </Col>
-                  <Col sm={2}>
-                    <InputGroup>
-                      <InputGroup.Addon>R$</InputGroup.Addon>
-                      <FormControl type="text"
-                        ref="saldoAnterior"
-                        value={this.state.saldoAnterior}/>
-                    </InputGroup>
-                  </Col>
-                </FormGroup>
+        saldoAnterior =  this.state.saldoAnterior
       }
+      saldoDia = this.state.totalReceita + this.state.totalRecebimento - this.state.totalDespesa
+                + this.state.totalCartaoEntrada  - this.state.totalCartaoSaida
+      saldoTransportar = saldoAnterior + saldoDia
 
       var admin = JSON.parse(this.state.usuario.admin)
       return(
@@ -329,8 +322,6 @@ class Movimentacao extends Component {
               </Col>
             </FormGroup>
 
-            {saldoAnterior}
-
             <FormGroup>
               <Col sm={2}>
                 <ControlLabel>Data</ControlLabel>
@@ -345,7 +336,6 @@ class Movimentacao extends Component {
                   ref="dataTransacao"/>
               </Col>
             </FormGroup>
-
 
             {receitasFixas}
             <MovimentacaoTotal label="Total Receita" total={this.state.totalReceita}/>
@@ -391,8 +381,10 @@ class Movimentacao extends Component {
               {fluxos}
               <MovimentacaoTotal label="Total Fluxo" total={this.state.totalFluxo}/>
             </Panel>
-            <MovimentacaoTotal label="Total Geral" total={this.state.totalReceita + this.state.totalRecebimento - this.state.totalDespesa
-              + this.state.totalCartaoEntrada  - this.state.totalCartaoSaida}/>
+
+            <MovimentacaoTotal label="saldoAnterior" total={saldoAnterior}/>
+            <MovimentacaoTotal label="Saldo Dia" total={saldoDia}/>
+            <MovimentacaoTotal label="Saldo a Transportar" total={saldoTransportar}/>
           </Form>
           <ToastContainer ref="container"
             toastMessageFactory={ToastMessageFactory}

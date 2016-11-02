@@ -20,6 +20,7 @@ public class Conta implements Serializable, Comparable<Conta> {
 
     @JsonIgnore
     private List<Conta> contas = Lists.newArrayList();
+    @JsonIgnore
     private Conta referenteA;
 
     //o pai da arvore, exemplo Despesa > supermercado > coca-cola

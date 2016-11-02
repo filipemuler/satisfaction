@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom'
 import {BootstrapTable, TableHeaderColumn} from 'react-bootstrap-table';
 
 
-class TabelaConta extends Component {
+class TabelaFluxo extends Component {
 
   constructor(props){
     super(props)
@@ -20,14 +20,12 @@ class TabelaConta extends Component {
         <BootstrapTable data={this.props.lista} condensed={true} pagination={true}>
           <TableHeaderColumn isKey={true} dataField="id" hidden={true}>ID</TableHeaderColumn>
           <TableHeaderColumn dataField="nome">Nome</TableHeaderColumn>
-          <TableHeaderColumn dataField="entrada">Entrada</TableHeaderColumn>
-          <TableHeaderColumn dataField="saida">Saida</TableHeaderColumn>
-          <TableHeaderColumn dataField="agrupador">Agrupador</TableHeaderColumn>
-          <TableHeaderColumn dataField="ordem">Ordem</TableHeaderColumn>
+          <TableHeaderColumn dataField="descricao">Descrição</TableHeaderColumn>
+          <TableHeaderColumn dataField="turno">Turno</TableHeaderColumn>
         </BootstrapTable>
       )
   }
 
 }
 
-export default TabelaConta
+export default TabelaFluxo
