@@ -10,15 +10,28 @@ import Checkbox from 'react-bootstrap/lib/Checkbox'
 
 class UsuarioForm extends Component {
 
+
+  componentDidMount(){
+    var self = this
+    request
+      .get('usuario/form')
+      .end(function(err, res){
+        self.setState(res.body)
+      });
+  }
+
   constructor(props){
     super(props)
   }
 
   getDataForm(){
+    let turno = (this.refs.turno.value() == null) ? null : this.refs.turno.value().value;
+
     var data = {
       usuario : {
         email : ReactDOM.findDOMNode(this.refs.email).value,
         senha : ReactDOM.findDOMNode(this.refs.senha).value,
+        turno : turno,
         admin : this.admin.checked
       }
     }
@@ -37,6 +50,13 @@ class UsuarioForm extends Component {
       <Col componentClass={ControlLabel} sm={3}>Senha</Col>
       <Col sm={9}>
         <FormControl type="password" placeholder="Senha" ref="senha"/>
+      </Col>
+    </FormGroup>
+    <FormGroup controlId="formHorizontalTurno">
+      <Col componentClass={ControlLabel} sm={3}>Turno</Col>
+      <Col sm={9}>
+        <SimpleSelect options = {this.state.turnos} placeholder = "Selecione..."
+          ref="turno"/>
       </Col>
     </FormGroup>
     <FormGroup>
