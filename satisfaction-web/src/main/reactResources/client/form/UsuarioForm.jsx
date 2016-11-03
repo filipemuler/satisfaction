@@ -7,9 +7,16 @@ import InputGroup from 'react-bootstrap/lib/InputGroup'
 import Col from 'react-bootstrap/lib/Col'
 import ControlLabel from 'react-bootstrap/lib/ControlLabel'
 import Checkbox from 'react-bootstrap/lib/Checkbox'
+import MultiSelect from 'react-selectize/src/MultiSelect'
+import request from 'superagent'
 
 class UsuarioForm extends Component {
 
+  constructor(props){
+    super(props)
+    this.getDataForm = this.getDataForm.bind(this)
+    this.state = { turnos : []}
+  }
 
   componentDidMount(){
     var self = this
@@ -20,18 +27,14 @@ class UsuarioForm extends Component {
       });
   }
 
-  constructor(props){
-    super(props)
-  }
 
   getDataForm(){
-    let turno = (this.refs.turno.value() == null) ? null : this.refs.turno.value().value;
+    //let turno = (this.refs.turno.value() == null) ? null : this.refs.turno.value().value;
 
     var data = {
       usuario : {
         email : ReactDOM.findDOMNode(this.refs.email).value,
         senha : ReactDOM.findDOMNode(this.refs.senha).value,
-        turno : turno,
         admin : this.admin.checked
       }
     }
@@ -55,7 +58,7 @@ class UsuarioForm extends Component {
     <FormGroup controlId="formHorizontalTurno">
       <Col componentClass={ControlLabel} sm={3}>Turno</Col>
       <Col sm={9}>
-        <SimpleSelect options = {this.state.turnos} placeholder = "Selecione..."
+        <MultiSelect options = {this.state.turnos} placeholder = "Selecione..."
           ref="turno"/>
       </Col>
     </FormGroup>

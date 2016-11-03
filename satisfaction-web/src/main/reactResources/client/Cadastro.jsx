@@ -103,7 +103,7 @@ class Cadastro extends Component {
       }
       return(
         <Panel header={this.props.contexto} footer={footer}>
-          <div style={style.panel}>
+          <div>
             {tabela}
           </div>
           <Modal show={this.state.showModal} onHide={this.close}>

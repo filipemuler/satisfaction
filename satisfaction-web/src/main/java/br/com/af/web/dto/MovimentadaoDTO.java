@@ -131,4 +131,12 @@ public class MovimentadaoDTO {
     public void setFluxos(List<SelectOptionDTO> fluxos) {
         this.fluxos = fluxos;
     }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
 }

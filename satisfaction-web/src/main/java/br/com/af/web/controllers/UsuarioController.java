@@ -1,15 +1,20 @@
 package br.com.af.web.controllers;
 
 import br.com.af.satisfaction.config.GenericDao;
+import br.com.af.satisfaction.entidades.Conta;
 import br.com.af.satisfaction.entidades.Permissao;
+import br.com.af.satisfaction.entidades.Turno;
 import br.com.af.satisfaction.entidades.Usuario;
 import br.com.af.web.dto.ListaDTO;
+import br.com.af.web.dto.UsuarioFormDTO;
 import br.com.caelum.vraptor.*;
 import br.com.caelum.vraptor.view.Results;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.inject.Inject;
 import java.util.List;
+
+import com.google.common.collect.Lists;
 
 @Controller
 public class UsuarioController {
@@ -35,8 +40,10 @@ public class UsuarioController {
 	
 	public void form(){
 		//carrega o formulario de cadastro
-		List<Permissao> permissoes = this.permissaoService.findAll(Permissao.class);
-		this.result.include("permissoes", permissoes);
+//		List<Permissao> permissoes = this.permissaoService.findAll(Permissao.class);
+//		this.result.include("permissoes", permissoes);
+		UsuarioFormDTO form = new UsuarioFormDTO(Lists.newArrayList(Turno.values()));
+		this.result.use(Results.json()).withoutRoot().from(form).include("turnos").serialize();
 	}
 
 //	@Path({"/usuario/list", "/usuario/list/{page}"})
