@@ -116,6 +116,6 @@
     }
   ],
   "usuario" : {
-    "admin" : true
+    "admin" : false
   }
 }

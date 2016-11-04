@@ -300,7 +300,11 @@ class Movimentacao extends Component {
                 + this.state.totalCartaoEntrada  - this.state.totalCartaoSaida
       saldoTransportar = saldoAnterior + saldoDia
 
-      var admin = JSON.parse(this.state.usuario.admin)
+      let admin = false;
+      if(this.state.usuario != null){
+         admin = JSON.parse(this.state.usuario.admin)
+      }
+      
       return(
         <Panel header={this.props.contexto} footer={footer}>
           <Form horizontal>

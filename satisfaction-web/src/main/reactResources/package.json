@@ -19,7 +19,7 @@
     "react-chartjs": "~0.7.3",
     "react-dom": "^15.0.0",
     "react-selectize": "^2.0.1",
-    "react-toastr": "^2.8.0",
+    "react-toastr": "^2.8.1",
     "superagent": "^1.8.3"
   },
   "devDependencies": {
