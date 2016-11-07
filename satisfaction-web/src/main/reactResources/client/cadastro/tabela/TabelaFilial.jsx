@@ -17,7 +17,7 @@ class TabelaFilial extends Component {
 
   render(){
       return(
-        <BootstrapTable data={this.props.lista} condensed={true} pagination={true}>
+        <BootstrapTable data={this.props.lista} condensed={true} pagination={true} height="344">
           <TableHeaderColumn isKey={true} dataField="id" hidden={true}>ID</TableHeaderColumn>
           <TableHeaderColumn dataField="nome">Nome</TableHeaderColumn>
         </BootstrapTable>

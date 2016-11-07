@@ -1,89 +1,92 @@
 {
-  "results": [
+  "lista": [
     {
       "id": "1001",
-      "login": "filipe",
-      "usuario": "filipe"
+      "funcionario" : {
+        "nome" : "Filipe"
+      },
+      "email": "filipe",
+      "admin" : true
     },
     {
       "id": "1002",
-      "login": "filipe",
-      "usuario": "andre"
+      "funcionario" : {
+        "nome" : "Filipe 2"
+      },
+      "email": "filipe2",
+      "admin" : true
     },
     {
       "id": "1003",
-      "login": "filipe",
-      "usuario": "andre1"
+      "funcionario" : {
+        "nome" : "Filipe 3"
+      },
+      "email": "filipe3",
+      "admin" : true
     },
     {
       "id": "1004",
-      "login": "filipe",
-      "usuario": "andre2"
+      "funcionario" : {
+        "nome" : "Filipe 4"
+      },
+      "email": "filipe4",
+      "admin" : true
     },
     {
       "id": "1005",
-      "login": "filipe",
-      "usuario": "andre3"
+      "funcionario" : {
+        "nome" : "Filipe 5"
+      },
+      "email": "filipe5",
+      "admin" : true
     },
     {
       "id": "1006",
-      "login": "filipe",
-      "usuario": "andre4"
+      "funcionario" : {
+        "nome" : "Filipe 6"
+      },
+      "email": "filipe6",
+      "admin" : true
     },
     {
       "id": "1007",
-      "login": "filipe",
-      "usuario": "andre5"
+      "funcionario" : {
+        "nome" : "Filipe 7"
+      },
+      "email": "filipe7",
+      "admin" : true
     },
     {
       "id": "1008",
-      "login": "filipe",
-      "usuario": "andre6"
+      "funcionario" : {
+        "nome" : "Filipe 8"
+      },
+      "email": "filipe8",
+      "admin" : true
     },
     {
       "id": "1009",
-      "login": "filipe",
-      "usuario": "andre7"
+      "funcionario" : {
+        "nome" : "Filipe 9"
+      },
+      "email": "filipe9",
+      "admin" : true
     },
     {
       "id": "1010",
-      "login": "filipe",
-      "usuario": "andre8"
+      "funcionario" : {
+        "nome" : "Filipe 10"
+      },
+      "email": "filipe10",
+      "admin" : true
     },
     {
       "id": "1011",
-      "login": "filipe",
-      "usuario": "andre9"
-    },
-    {
-      "id": "1012",
-      "login": "filipe",
-      "usuario": "andre10"
-    },
-    {
-      "id": "1013",
-      "login": "filipe",
-      "usuario": "andre11"
-    },
-    {
-      "id": "1014",
-      "login": "filipe",
-      "usuario": "andre12"
-    },
-    {
-      "id": "1015",
-      "login": "filipe",
-      "usuario": "andre13"
-    },
-    {
-      "id": "1016",
-      "login": "filipe",
-      "usuario": "andre14"
-    },
-    {
-      "id": "1017",
-      "login": "filipe",
-      "usuario": "andre15"
+      "funcionario" : {
+        "nome" : "Filipe 11"
+      },
+      "email": "filipe11",
+      "admin" : true
     }
   ]
 }

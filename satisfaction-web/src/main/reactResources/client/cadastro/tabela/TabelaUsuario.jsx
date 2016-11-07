@@ -7,6 +7,7 @@ class TabelaUsuario extends Component {
 
   constructor(props){
     super(props)
+    this.getNome = this.getNome.bind(this)
   }
 
   componentWillMount(){
@@ -15,11 +16,15 @@ class TabelaUsuario extends Component {
   componentDidMount(){
   }
 
+  getNome(cell, row){
+    return cell.nome
+  }
+
   render(){
       return(
-        <BootstrapTable data={this.props.lista} condensed={true} pagination={true}>
+        <BootstrapTable data={this.props.lista} condensed={true} pagination={true} height="344">
           <TableHeaderColumn isKey={true} dataField="id" hidden={true}>ID</TableHeaderColumn>
-          <TableHeaderColumn dataField="funcionario.nome">Nome</TableHeaderColumn>
+          <TableHeaderColumn dataField="funcionario" dataFormat={this.getNome}>Nome</TableHeaderColumn>
           <TableHeaderColumn dataField="email">Email</TableHeaderColumn>
           <TableHeaderColumn dataField="admin">Administrador</TableHeaderColumn>
         </BootstrapTable>
