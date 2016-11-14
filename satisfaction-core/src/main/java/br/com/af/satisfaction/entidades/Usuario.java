@@ -19,7 +19,9 @@ public class Usuario {
 	private boolean admin;
 	private Filial filial;
 	private Funcionario funcionario;
-	private List<Permissao> permissoes;
+
+	private PerfilUsuario perfil;
+
 	private List<Turno> turnos;
 
 	@Id
@@ -85,18 +87,6 @@ public class Usuario {
 		this.funcionario = funcionario;
 	}
 
-	@ManyToMany
-	@JoinTable(name = "USUARIO_PERMISSAO", 
-		joinColumns = @JoinColumn(name = "USUARIO_ID") , 
-		inverseJoinColumns = @JoinColumn(name = "PERMISSAO_ID"))
-	public List<Permissao> getPermissoes() {
-		return permissoes;
-	}
-
-	public void setPermissoes(List<Permissao> permissao) {
-		this.permissoes = permissao;
-	}
-
 	@ElementCollection
 	@CollectionTable(name="usuario_turno", joinColumns=@JoinColumn(name="usuario_id"))
 	@Column(name="turno")
@@ -106,5 +96,15 @@ public class Usuario {
 
 	public void setTurnos(List<Turno> turnos) {
 		this.turnos = turnos;
+	}
+
+	@OneToOne
+	@JoinColumn(name = "PERFIL_ID")
+	public PerfilUsuario getPerfil() {
+		return perfil;
+	}
+
+	public void setPerfil(PerfilUsuario perfil) {
+		this.perfil = perfil;
 	}
 }

@@ -33,6 +33,8 @@ class Centro extends Component {
       var funcionario = null;
       var usuario = null;
       var permissao = null;
+      var grupoconta = null;
+      var perfilusuario = null;
 
       switch(this.state.contexto){
         case 'dashboard':
@@ -59,6 +61,12 @@ class Centro extends Component {
         case 'permissao':
           permissao = <Cadastro contexto="permissao"/>
           break
+        case 'grupoconta':
+          grupoconta = <Cadastro contexto="grupoconta"/>
+          break
+        case 'perfilusuario':
+          perfilusuario = <Cadastro contexto="perfilusuario"/>
+          break
       }
       return (
         <Tab.Container id="left-tabs-example" defaultActiveKey="dashboard" onSelect={this.handleSelect}>
@@ -69,10 +77,12 @@ class Centro extends Component {
                 <NavItem eventKey="movimentacao" title="Item">Movimentação</NavItem>
                 <NavItem eventKey="cadastros" disabled>Cadastros</NavItem>
                 <NavItem eventKey="contas" title="Item">Contas</NavItem>
+                <NavItem eventKey="grupoconta" title="Item">Grupo Conta</NavItem>
                 <NavItem eventKey="fluxo" title="Item">Fluxo</NavItem>
                 <NavItem eventKey="filial" title="Item">Filial</NavItem>
                 <NavItem eventKey="funcionario" title="Item">Funcionario</NavItem>
                 <NavItem eventKey="usuario" title="Item">Usuario</NavItem>
+                <NavItem eventKey="perfilusuario" title="Item">Perfil Usuario</NavItem>
                 <NavItem eventKey="permissao" title="Item">Permissão</NavItem>
               </Nav>
             </Col>
@@ -87,6 +97,9 @@ class Centro extends Component {
                 <Tab.Pane eventKey="contas">
                   {contas}
                 </Tab.Pane>
+                <Tab.Pane eventKey="grupoconta">
+                  {grupoconta}
+                </Tab.Pane>
                 <Tab.Pane eventKey="fluxo">
                   {fluxo}
                 </Tab.Pane>
@@ -98,6 +111,9 @@ class Centro extends Component {
                 </Tab.Pane>
                 <Tab.Pane eventKey="usuario">
                   {usuario}
+                </Tab.Pane>
+                <Tab.Pane eventKey="perfilusuario">
+                  {perfilusuario}
                 </Tab.Pane>
                 <Tab.Pane eventKey="permissao">
                   {permissao}

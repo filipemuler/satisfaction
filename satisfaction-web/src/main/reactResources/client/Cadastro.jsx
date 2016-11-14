@@ -9,11 +9,15 @@ import Modal from 'react-bootstrap/lib/Modal'
 import ContasForm from './form/ContasForm'
 import FluxoForm from './form/FluxoForm'
 import UsuarioForm from './form/UsuarioForm'
+import PerfilUsuarioForm from './form/PerfilUsuarioForm'
+import GrupoContaForm from './form/GrupoContaForm'
 import PermissaoForm from './form/PermissaoForm'
 import FilialForm from './form/FilialForm'
 import FuncionarioForm from './form/FuncionarioForm'
 import TabelaConta from './cadastro/tabela/TabelaConta'
 import TabelaUsuario from './cadastro/tabela/TabelaUsuario'
+import TabelaPerfilUsuario from './cadastro/tabela/TabelaPerfilUsuario'
+import TabelaGrupoConta from './cadastro/tabela/TabelaGrupoConta'
 import TabelaPermissao from './cadastro/tabela/TabelaPermissao'
 import TabelaFluxo from './cadastro/tabela/TabelaFluxo'
 import TabelaFilial from './cadastro/tabela/TabelaFilial'
@@ -73,6 +77,11 @@ class Cadastro extends Component {
           cadastro = <ContasForm ref="form"/>
           tabela = <TabelaConta lista={this.state.lista}/>
           break;
+        case 'grupoconta':
+          url = "grupoconta/salva";
+          cadastro = <GrupoContaForm ref="form"/>
+          tabela = <TabelaGrupoConta lista={this.state.lista}/>
+          break;
         case 'fluxo':
           url = "fluxo/salva";
           cadastro = <FluxoForm ref="form"/>
@@ -82,6 +91,11 @@ class Cadastro extends Component {
           url = "usuario/salva";
           cadastro = <UsuarioForm ref="form"/>
           tabela = <TabelaUsuario lista={this.state.lista}/>
+          break;
+        case 'perfilusuario':
+          url = "perfilusuario/salva";
+          cadastro = <PerfilUsuarioForm ref="form"/>
+          tabela = <TabelaPerfilUsuario lista={this.state.lista}/>
           break;
         case 'permissao':
           url = "permissao/salva";

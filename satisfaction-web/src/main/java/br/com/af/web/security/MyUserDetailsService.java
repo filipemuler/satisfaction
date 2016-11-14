@@ -32,7 +32,7 @@ public class MyUserDetailsService implements UserDetailsService {
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		Usuario user = (Usuario) em.createQuery("select u from Usuario u where u.email = :email")
 				.setParameter("email", username).getSingleResult();
-		List<GrantedAuthority> authorities = buildUserAuthority(user.getPermissoes());
+		List<GrantedAuthority> authorities = buildUserAuthority(user.getPerfil().getPermissoes());
 		return this.buildUserForAuthentication(user, authorities);
 	}
 

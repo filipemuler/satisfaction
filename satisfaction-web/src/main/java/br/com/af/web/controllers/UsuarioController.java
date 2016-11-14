@@ -39,18 +39,12 @@ public class UsuarioController {
 	}
 	
 	public void form(){
-		//carrega o formulario de cadastro
-//		List<Permissao> permissoes = this.permissaoService.findAll(Permissao.class);
-//		this.result.include("permissoes", permissoes);
 		UsuarioFormDTO form = new UsuarioFormDTO(Lists.newArrayList(Turno.values()));
 		this.result.use(Results.json()).withoutRoot().from(form).include("turnos").serialize();
 	}
 
 //	@Path({"/usuario/list", "/usuario/list/{page}"})
 	public void list(String page) {
-//		Paginator<Usuario> paginator = this.usuarioService.findPaginator(Usuario.class, toInt(page));
-//		this.result.use(json()).withoutRoot().from(paginator).
-//				include("results").serialize();
 		List<Usuario> usuarios = this.usuarioService.findAll(Usuario.class);
 		ListaDTO<Usuario> lista = new ListaDTO<>(usuarios);
 		this.result.use(Results.json()).withoutRoot().from(lista).recursive().serialize();
