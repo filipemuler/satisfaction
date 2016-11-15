@@ -1,0 +1,24 @@
+{
+  "contas": [
+    {
+      "value": "10",
+      "label": "Agua"
+    },
+    {
+      "value": "11",
+      "label": "Coca Cola"
+    },
+    {
+      "value": "12",
+      "label": "Supermercado"
+    },
+    {
+      "value": "13",
+      "label": "Luz"
+    },
+    {
+      "value": "14",
+      "label": "Aluguel"
+    }
+  ]
+}

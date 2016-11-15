@@ -47,6 +47,10 @@ public class PerfilUsuarioController {
         this.result.use(json()).withoutRoot().from(dto).include("grupos", "permissoes").serialize();
     }
 
+    public void list(){
+
+    }
+
     @Consumes("application/json")
     @Post("/perfilusuario/salva")
     public void salva(PerfilUsuario perfil){

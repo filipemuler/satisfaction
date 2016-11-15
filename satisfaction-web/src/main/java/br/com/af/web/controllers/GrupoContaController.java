@@ -10,12 +10,15 @@ import javax.inject.Inject;
 import br.com.af.satisfaction.config.GenericDao;
 import br.com.af.satisfaction.entidades.Conta;
 import br.com.af.satisfaction.entidades.GrupoConta;
+import br.com.af.satisfaction.entidades.Usuario;
 import br.com.af.web.dto.ContaFormDTO;
+import br.com.af.web.dto.ListaDTO;
 import br.com.caelum.vraptor.Consumes;
 import br.com.caelum.vraptor.Controller;
 import br.com.caelum.vraptor.Get;
 import br.com.caelum.vraptor.Post;
 import br.com.caelum.vraptor.Result;
+import br.com.caelum.vraptor.view.Results;
 
 /**
  * Created by filipe on 14/11/16.
@@ -44,13 +47,20 @@ public class GrupoContaController {
         this.result.use(json()).withoutRoot().from(dto).recursive().serialize();
     }
 
+    @Get("/grupoconta/list")
+    public void list(String page) {
+        List<GrupoConta> grupos = this.grupoService.findAll(GrupoConta.class);
+        ListaDTO<GrupoConta> lista = new ListaDTO<>(grupos);
+        this.result.use(Results.json()).withoutRoot().from(lista).include("lista").serialize();
+    }
+
     @Consumes("application/json")
     @Post("/grupoconta/salva")
-    public void salva(GrupoConta grupo){
-        if(grupo.getId()!=null){
-            this.grupoService.merge(grupo);
+    public void salva(GrupoConta grupoconta){
+        if(grupoconta.getId()!=null){
+            this.grupoService.merge(grupoconta);
         }else{
-            this.grupoService.persist(grupo);
+            this.grupoService.persist(grupoconta);
         }
     }
 }

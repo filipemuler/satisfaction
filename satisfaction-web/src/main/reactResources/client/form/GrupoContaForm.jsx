@@ -31,10 +31,14 @@ class GrupoContaForm extends Component {
 
   getDataForm(){
 
+    let contas = []
+    for(let t of this.refs.contas.values()){
+      contas.push({id : t.value})
+    }
     var data = {
       grupoconta : {
-        nome : '',
-        contas : ''
+        nome : ReactDOM.findDOMNode(this.refs.nome).value,
+        contas : contas
       }
     }
     return data;

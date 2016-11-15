@@ -16,7 +16,7 @@ class PerfilUsuarioForm extends Component {
   constructor(props){
     super(props)
     this.getDataForm = this.getDataForm.bind(this)
-    this.state = { turnos : []}
+    this.state = { grupos : [], permissoes : []}
   }
 
   componentDidMount(){
@@ -33,7 +33,7 @@ class PerfilUsuarioForm extends Component {
 
     var data = {
       perfilusuario : {
-        nome : '',
+        nome : ReactDOM.findDOMNode(this.refs.nome).value,
         grupoConta : '',
         permissoes : ''
       }

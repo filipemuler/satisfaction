@@ -17,19 +17,21 @@ class TabelaUsuario extends Component {
   }
 
   getNome(cell, row){
-    return cell.nome
+    if(cell != null)
+      return cell.nome
+    else
+      return ""
   }
 
-  render(){
-      return(
-        <BootstrapTable data={this.props.lista} condensed={true} pagination={true} height="344">
-          <TableHeaderColumn isKey={true} dataField="id" hidden={true}>ID</TableHeaderColumn>
-          <TableHeaderColumn dataField="funcionario" dataFormat={this.getNome}>Nome</TableHeaderColumn>
-          <TableHeaderColumn dataField="email">Email</TableHeaderColumn>
-          <TableHeaderColumn dataField="admin">Administrador</TableHeaderColumn>
-        </BootstrapTable>
-      )
-  }
+  render = () =>
+    <div>
+      <BootstrapTable data={this.props.lista} condensed={true} pagination={true}>
+        <TableHeaderColumn isKey={true} dataField="id" hidden={true}>ID</TableHeaderColumn>
+        <TableHeaderColumn dataField="funcionario" dataFormat={this.getNome}>Nome</TableHeaderColumn>
+        <TableHeaderColumn dataField="email">Email</TableHeaderColumn>
+        <TableHeaderColumn dataField="admin">Administrador</TableHeaderColumn>
+      </BootstrapTable>
+    </div>
 
 }
 

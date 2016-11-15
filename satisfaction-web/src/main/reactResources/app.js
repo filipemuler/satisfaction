@@ -11,6 +11,7 @@ var contas = require('./public/contas.json')
 var dashboard = require('./public/dashboard.json')
 var consolidadoDetalhado = require('./public/consolidadoDetalhado.json')
 var cadastroConta = require('./public/cadastroConta.json')
+var contasGrupoConta = require('./public/contasGrupoConta.json')
 
 app.use(express.static(__dirname));
 app.get('/', function(req, res) {
@@ -45,6 +46,10 @@ app.get('/contas/list', function(req, res) {
 app.get('/contas/form', function(req, res) {
     res.send(cadastroConta);
 });
+
+app.get('/grupoconta/form', function(req, res) {
+  res.send(contasGrupoConta);
+})
 
 app.get('/fluxo/list', function(req, res) {
     res.send({results : [{'id':'1001', 'nome': 'fluxo1'}, {'id':'1002', 'nome': 'fluxo2'}]});

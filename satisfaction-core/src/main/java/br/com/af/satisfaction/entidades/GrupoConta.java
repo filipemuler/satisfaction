@@ -2,13 +2,7 @@ package br.com.af.satisfaction.entidades;
 
 import java.util.List;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 /**
  * Created by filipe on 14/11/16.
@@ -39,7 +33,10 @@ public class GrupoConta {
         this.nome = nome;
     }
 
-    @OneToMany
+    @ManyToMany
+    @JoinTable(name = "GRUPOCONTA_CONTA",
+            joinColumns = @JoinColumn(name = "GRUPOCONTA_ID") ,
+            inverseJoinColumns = @JoinColumn(name = "CONTA_ID"))
     public List<Conta> getContas() {
         return contas;
     }

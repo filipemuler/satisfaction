@@ -35,7 +35,7 @@ class PermissaoForm extends Component {
     <FormGroup controlId="formHorizontalTipo">
       <Col componentClass={ControlLabel} sm={3}>Tipo</Col>
       <Col sm={9}>
-        <FormControl type="password" placeholder="Tipo" ref="tipo"/>
+        <FormControl type="tipo" placeholder="Tipo" ref="tipo"/>
       </Col>
     </FormGroup>
   </Form>
