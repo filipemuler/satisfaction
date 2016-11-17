@@ -31,11 +31,21 @@ class PerfilUsuarioForm extends Component {
 
   getDataForm(){
 
+    let grupoConta = {}
+    if(this.refs.grupoConta.value()!=null){
+      grupoConta.id = this.refs.grupoConta.value().value
+    }
+
+    let permissoes = []
+    for(let t of this.refs.permissoes.values()){
+      permissoes.push({id : t.value})
+    }
+
     var data = {
       perfilusuario : {
         nome : ReactDOM.findDOMNode(this.refs.nome).value,
-        grupoConta : '',
-        permissoes : ''
+        grupoConta : grupoConta,
+        permissoes : permissoes
       }
     }
     return data;
