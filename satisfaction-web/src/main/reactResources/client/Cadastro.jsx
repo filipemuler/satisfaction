@@ -32,18 +32,20 @@ class Cadastro extends Component {
     this.clickCriar = this.clickCriar.bind(this)
     this.onHandleSubmit = this.onHandleSubmit.bind(this)
     this.close = this.close.bind(this)
+    this.listar = this.listar.bind(this)
   }
 
   componentWillMount(){
   }
 
   componentDidMount(){
-    var self = this
-    request
-      .get(this.props.contexto + "/list")
-      .end(function(err, res){
-        self.setState(res.body);
-      });
+    this.listar();
+    // var self = this
+    // request
+    //   .get(this.props.contexto + "/list")
+    //   .end(function(err, res){
+    //     self.setState(res.body);
+    //   });
   }
 
   clickCriar(){
@@ -62,6 +64,16 @@ class Cadastro extends Component {
       .send(this.refs.form.getDataForm())
       .end(function(err, res){
         self.close();
+        self.listar()
+      });
+  }
+
+  listar(){
+    var self = this
+    request
+      .get(this.props.contexto + "/list")
+      .end(function(err, res){
+        self.setState(res.body);
       });
   }
 
@@ -117,7 +129,7 @@ class Cadastro extends Component {
       }
       return(
         <Panel header={this.props.contexto} footer={footer}>
-          <div>
+          <div style={style.panel}>
             {tabela}
           </div>
           <Modal show={this.state.showModal} onHide={this.close}>
@@ -142,7 +154,8 @@ let url = ''
 
 const style = {
   panel : {
-    height : '375px'
+    height : 'auto',
+    display:'table-cell'
   }
 }
 

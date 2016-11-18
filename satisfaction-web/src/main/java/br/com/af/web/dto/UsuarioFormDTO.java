@@ -1,5 +1,6 @@
 package br.com.af.web.dto;
 
+import br.com.af.satisfaction.entidades.PerfilUsuario;
 import br.com.af.satisfaction.entidades.Turno;
 import com.google.common.collect.Lists;
 
@@ -10,19 +11,19 @@ import java.util.List;
  */
 public class UsuarioFormDTO {
 
-    private List<SelectOptionDTO> turnos = Lists.newArrayList();
+    private List<SelectOptionDTO> perfis = Lists.newArrayList();
 
-    public UsuarioFormDTO(List<Turno> turnos) {
-        for(Turno turno : turnos){
-            this.getTurnos().add(new SelectOptionDTO(turno.name(), null, turno.name()));
+    public UsuarioFormDTO(List<PerfilUsuario> turnos) {
+        for(PerfilUsuario perfil : turnos){
+            this.perfis.add(new SelectOptionDTO(String.valueOf(perfil.getId()), null, perfil.getNome()));
         }
     }
 
-    public List<SelectOptionDTO> getTurnos() {
-        return turnos;
+    public List<SelectOptionDTO> getPerfis() {
+        return perfis;
     }
 
-    public void setTurnos(List<SelectOptionDTO> turnos) {
-        this.turnos = turnos;
+    public void setPerfis(List<SelectOptionDTO> perfis) {
+        this.perfis = perfis;
     }
 }

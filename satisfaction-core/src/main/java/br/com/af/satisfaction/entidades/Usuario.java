@@ -22,8 +22,6 @@ public class Usuario {
 
 	private PerfilUsuario perfil;
 
-	private List<Turno> turnos;
-
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	public Long getId() {
@@ -85,17 +83,6 @@ public class Usuario {
 
 	public void setFuncionario(Funcionario funcionario) {
 		this.funcionario = funcionario;
-	}
-
-	@ElementCollection
-	@CollectionTable(name="usuario_turno", joinColumns=@JoinColumn(name="usuario_id"))
-	@Column(name="turno")
-	public List<Turno> getTurnos() {
-		return turnos;
-	}
-
-	public void setTurnos(List<Turno> turnos) {
-		this.turnos = turnos;
 	}
 
 	@OneToOne

@@ -10,12 +10,14 @@ import br.com.af.satisfaction.config.GenericDao;
 import br.com.af.satisfaction.entidades.GrupoConta;
 import br.com.af.satisfaction.entidades.PerfilUsuario;
 import br.com.af.satisfaction.entidades.Permissao;
+import br.com.af.web.dto.ListaDTO;
 import br.com.af.web.dto.PerfilUsuarioFormDTO;
 import br.com.caelum.vraptor.Consumes;
 import br.com.caelum.vraptor.Controller;
 import br.com.caelum.vraptor.Get;
 import br.com.caelum.vraptor.Post;
 import br.com.caelum.vraptor.Result;
+import br.com.caelum.vraptor.view.Results;
 
 /**
  * Created by filipe on 14/11/16.
@@ -47,17 +49,20 @@ public class PerfilUsuarioController {
         this.result.use(json()).withoutRoot().from(dto).include("grupos", "permissoes").serialize();
     }
 
+    @Get("/perfilusuario/list")
     public void list(){
-
+        List<PerfilUsuario> perfils = this.perfilService.findAll(PerfilUsuario.class);
+        ListaDTO<PerfilUsuario> lista = new ListaDTO<>(perfils);
+        this.result.use(Results.json()).withoutRoot().from(lista).include("lista").serialize();
     }
 
     @Consumes("application/json")
     @Post("/perfilusuario/salva")
-    public void salva(PerfilUsuario perfil){
-        if(perfil.getId()!=null){
-            this.perfilService.merge(perfil);
+    public void salva(PerfilUsuario perfilusuario){
+        if(perfilusuario.getId()!=null){
+            this.perfilService.merge(perfilusuario);
         }else{
-            this.perfilService.persist(perfil);
+            this.perfilService.persist(perfilusuario);
         }
     }
 }

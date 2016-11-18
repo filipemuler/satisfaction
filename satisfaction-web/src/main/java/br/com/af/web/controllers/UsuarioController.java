@@ -1,10 +1,7 @@
 package br.com.af.web.controllers;
 
 import br.com.af.satisfaction.config.GenericDao;
-import br.com.af.satisfaction.entidades.Conta;
-import br.com.af.satisfaction.entidades.Permissao;
-import br.com.af.satisfaction.entidades.Turno;
-import br.com.af.satisfaction.entidades.Usuario;
+import br.com.af.satisfaction.entidades.*;
 import br.com.af.web.dto.ListaDTO;
 import br.com.af.web.dto.UsuarioFormDTO;
 import br.com.caelum.vraptor.*;
@@ -14,8 +11,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import javax.inject.Inject;
 import java.util.List;
 
-import com.google.common.collect.Lists;
-
 @Controller
 public class UsuarioController {
 
@@ -23,6 +18,7 @@ public class UsuarioController {
 	private Result result;
 	private GenericDao<Usuario> usuarioService;
 	private GenericDao<Permissao> permissaoService;
+	private GenericDao<PerfilUsuario> perfilService;
 	private PasswordEncoder encoder;
 	
 	public UsuarioController() {
@@ -30,20 +26,21 @@ public class UsuarioController {
 	}
 	
 	@Inject
-	public UsuarioController(Result result, GenericDao<Usuario> usuarioService, GenericDao<Permissao> permissaoService, 
-			PasswordEncoder encoder) {
+	public UsuarioController(Result result, GenericDao<Usuario> usuarioService, GenericDao<Permissao> permissaoService,
+							 GenericDao<PerfilUsuario> perfilService, PasswordEncoder encoder) {
 		this.result = result;
 		this.usuarioService = usuarioService;
 		this.permissaoService = permissaoService;
+		this.perfilService = perfilService;
 		this.encoder = encoder;
 	}
 	
 	public void form(){
-		UsuarioFormDTO form = new UsuarioFormDTO(Lists.newArrayList(Turno.values()));
-		this.result.use(Results.json()).withoutRoot().from(form).include("turnos").serialize();
+		List<PerfilUsuario> perfis = this.perfilService.findAll(PerfilUsuario.class);
+		UsuarioFormDTO form = new UsuarioFormDTO(perfis);
+		this.result.use(Results.json()).withoutRoot().from(form).include("perfis").serialize();
 	}
 
-//	@Path({"/usuario/list", "/usuario/list/{page}"})
 	public void list(String page) {
 		List<Usuario> usuarios = this.usuarioService.findAll(Usuario.class);
 		ListaDTO<Usuario> lista = new ListaDTO<>(usuarios);
@@ -72,7 +69,6 @@ public class UsuarioController {
 			usuario.setSenha(this.encoder.encode(usuario.getSenha()));
 			this.usuarioService.persist(usuario);	
 		}
-		
-		this.result.forwardTo(this).list(null);
+		this.result.nothing();
 	}
 }

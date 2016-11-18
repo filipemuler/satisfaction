@@ -17,7 +17,7 @@ class TabelaConta extends Component {
 
   render(){
       return(
-        <BootstrapTable data={this.props.lista} condensed={true} pagination={true} height="344">
+        <BootstrapTable data={this.props.lista} condensed={true} pagination={true}>
           <TableHeaderColumn isKey={true} dataField="id" hidden={true}>ID</TableHeaderColumn>
           <TableHeaderColumn dataField="nome">Nome</TableHeaderColumn>
           <TableHeaderColumn dataField="entrada">Entrada</TableHeaderColumn>

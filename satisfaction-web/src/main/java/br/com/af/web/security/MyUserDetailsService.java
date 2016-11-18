@@ -3,10 +3,13 @@ package br.com.af.web.security;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 
+import br.com.af.satisfaction.config.GenericDao;
+import org.hibernate.Hibernate;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
@@ -17,6 +20,9 @@ import org.springframework.stereotype.Service;
 
 import br.com.af.satisfaction.entidades.Permissao;
 import br.com.af.satisfaction.entidades.Usuario;
+import org.springframework.transaction.PlatformTransactionManager;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
+import org.springframework.transaction.annotation.Propagation;
 
 /**
  * Created by filipe on 15/03/16.
@@ -28,10 +34,15 @@ public class MyUserDetailsService implements UserDetailsService {
 	@PersistenceContext
 	private EntityManager em;
 
+
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+
+
 		Usuario user = (Usuario) em.createQuery("select u from Usuario u where u.email = :email")
 				.setParameter("email", username).getSingleResult();
+		Hibernate.initialize(user.getPerfil());
+		Hibernate.initialize(user.getPerfil().getPermissoes());
 		List<GrantedAuthority> authorities = buildUserAuthority(user.getPerfil().getPermissoes());
 		return this.buildUserForAuthentication(user, authorities);
 	}

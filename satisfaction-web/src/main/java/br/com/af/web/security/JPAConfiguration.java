@@ -10,10 +10,12 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
+import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
+import org.springframework.transaction.annotation.TransactionManagementConfigurer;
 
 @Configuration
 @ComponentScan("br.com.af.web.security.*")
@@ -24,6 +26,7 @@ public class JPAConfiguration {
 	public LocalContainerEntityManagerFactoryBean emf() {
 		LocalContainerEntityManagerFactoryBean managerFactoryBean = new LocalContainerEntityManagerFactoryBean();
 		managerFactoryBean.setPersistenceUnitName("default");
+		managerFactoryBean.setJpaVendorAdapter(new HibernateJpaVendorAdapter());
 		return managerFactoryBean;
 	}
 
@@ -41,6 +44,5 @@ public class JPAConfiguration {
 		PasswordEncoder encoder = new BCryptPasswordEncoder();
 		return encoder;
 	}
-
 
 }

@@ -7,7 +7,7 @@ import InputGroup from 'react-bootstrap/lib/InputGroup'
 import Col from 'react-bootstrap/lib/Col'
 import ControlLabel from 'react-bootstrap/lib/ControlLabel'
 import Checkbox from 'react-bootstrap/lib/Checkbox'
-import MultiSelect from 'react-selectize/src/MultiSelect'
+import SimpleSelect from 'react-selectize/src/SimpleSelect'
 import request from 'superagent'
 
 class UsuarioForm extends Component {
@@ -15,7 +15,7 @@ class UsuarioForm extends Component {
   constructor(props){
     super(props)
     this.getDataForm = this.getDataForm.bind(this)
-    this.state = { turnos : []}
+    this.state = { perfis : []}
   }
 
   componentDidMount(){
@@ -29,12 +29,17 @@ class UsuarioForm extends Component {
 
 
   getDataForm(){
-    //let turno = (this.refs.turno.value() == null) ? null : this.refs.turno.value().value;
+
+    let perfil = {}
+    if(this.refs.perfil.value()!=null){
+      perfil.id = this.refs.perfil.value().value
+    }
 
     var data = {
       usuario : {
         email : ReactDOM.findDOMNode(this.refs.email).value,
         senha : ReactDOM.findDOMNode(this.refs.senha).value,
+        perfilUsuario : perfil,
         admin : this.admin.checked
       }
     }
@@ -56,10 +61,10 @@ class UsuarioForm extends Component {
       </Col>
     </FormGroup>
     <FormGroup controlId="formHorizontalTurno">
-      <Col componentClass={ControlLabel} sm={3}>Turno</Col>
+      <Col componentClass={ControlLabel} sm={3}>Perfil</Col>
       <Col sm={9}>
-        <MultiSelect options = {this.state.turnos} placeholder = "Selecione..."
-          ref="turno"/>
+        <SimpleSelect options = {this.state.perfis} placeholder = "Selecione..."
+          ref="perfil"/>
       </Col>
     </FormGroup>
     <FormGroup>

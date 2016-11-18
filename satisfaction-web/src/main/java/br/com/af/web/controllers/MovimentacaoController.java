@@ -16,6 +16,7 @@ import br.com.af.web.dto.MovimentadaoDTO;
 import br.com.af.web.dto.SaldoAnteriorDTO;
 import br.com.caelum.vraptor.*;
 import br.com.caelum.vraptor.view.Results;
+import com.google.common.collect.Lists;
 
 /**
  * Created by filipe on 01/02/16.
@@ -54,11 +55,18 @@ public class MovimentacaoController {
 
     @Path("/movimentacao/list/contas")
     public void listaContas() {
-        List<Conta> contas = this.contaService.findAll(Conta.class);
-        List<Filial> filiais = this.filialService.findAll(Filial.class);
-        List<Fluxo> fluxos = this.fluxoService.findAll(Fluxo.class);
-        Usuario usuario = usuarioService.getUsuarioLogado();
-        MovimentadaoDTO movimentadaoDTO = new MovimentadaoDTO(contas, filiais, fluxos, usuario);
+        Usuario usuarioLogado = this.usuarioService.getUsuarioLogado();
+        MovimentadaoDTO movimentadaoDTO = null;
+        if(!usuarioLogado.isAdmin()){
+            List<Conta> contas = usuarioLogado.getPerfil().getGrupoConta().getContas();
+            movimentadaoDTO = new MovimentadaoDTO(contas, Lists.newArrayList(), Lists.newArrayList(), usuarioLogado);
+        }else {
+            List<Conta> contas = this.contaService.findAll(Conta.class);
+            List<Filial> filiais = this.filialService.findAll(Filial.class);
+            List<Fluxo> fluxos = this.fluxoService.findAll(Fluxo.class);
+            Usuario usuario = usuarioService.getUsuarioLogado();
+            movimentadaoDTO = new MovimentadaoDTO(contas, filiais, fluxos, usuario);
+        }
         this.result.use(Results.json()).withoutRoot().from(movimentadaoDTO).recursive().serialize();
     }
 
