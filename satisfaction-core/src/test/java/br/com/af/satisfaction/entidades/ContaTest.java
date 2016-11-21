@@ -50,6 +50,12 @@ public class ContaTest {
 
 	}
 
+	@Test
+	public void recursividade(){
+		Conta conta = this.criaConta();
+		System.out.println(conta);
+	}
+
 	private Conta criaConta(){
 		Conta conta = new Conta();
 		conta.setNome("conta1");

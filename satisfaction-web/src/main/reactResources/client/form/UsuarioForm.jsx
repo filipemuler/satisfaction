@@ -15,7 +15,7 @@ class UsuarioForm extends Component {
   constructor(props){
     super(props)
     this.getDataForm = this.getDataForm.bind(this)
-    this.state = { perfis : []}
+    this.state = { perfis : [], filiais : []}
   }
 
   componentDidMount(){
@@ -35,11 +35,17 @@ class UsuarioForm extends Component {
       perfil.id = this.refs.perfil.value().value
     }
 
+    let filial = {}
+    if(this.refs.filial.value()!=null){
+      filial.id = this.refs.filial.value().value
+    }
+
     var data = {
       usuario : {
         email : ReactDOM.findDOMNode(this.refs.email).value,
         senha : ReactDOM.findDOMNode(this.refs.senha).value,
-        perfilUsuario : perfil,
+        filial : filial,
+        perfil : perfil,
         admin : this.admin.checked
       }
     }
@@ -60,7 +66,14 @@ class UsuarioForm extends Component {
         <FormControl type="password" placeholder="Senha" ref="senha"/>
       </Col>
     </FormGroup>
-    <FormGroup controlId="formHorizontalTurno">
+    <FormGroup controlId="formHorizontalFilial">
+      <Col componentClass={ControlLabel} sm={3}>Filial</Col>
+      <Col sm={9}>
+        <SimpleSelect options = {this.state.filiais} placeholder = "Selecione..."
+          ref="filial"/>
+      </Col>
+    </FormGroup>
+    <FormGroup controlId="formHorizontalPerfil">
       <Col componentClass={ControlLabel} sm={3}>Perfil</Col>
       <Col sm={9}>
         <SimpleSelect options = {this.state.perfis} placeholder = "Selecione..."

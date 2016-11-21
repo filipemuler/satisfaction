@@ -19,6 +19,7 @@ public class UsuarioController {
 	private GenericDao<Usuario> usuarioService;
 	private GenericDao<Permissao> permissaoService;
 	private GenericDao<PerfilUsuario> perfilService;
+	private GenericDao<Filial> filialService;
 	private PasswordEncoder encoder;
 	
 	public UsuarioController() {
@@ -27,24 +28,26 @@ public class UsuarioController {
 	
 	@Inject
 	public UsuarioController(Result result, GenericDao<Usuario> usuarioService, GenericDao<Permissao> permissaoService,
-							 GenericDao<PerfilUsuario> perfilService, PasswordEncoder encoder) {
+							 GenericDao<PerfilUsuario> perfilService, GenericDao<Filial> filialService, PasswordEncoder encoder) {
 		this.result = result;
 		this.usuarioService = usuarioService;
 		this.permissaoService = permissaoService;
 		this.perfilService = perfilService;
+		this.filialService = filialService;
 		this.encoder = encoder;
 	}
 	
 	public void form(){
 		List<PerfilUsuario> perfis = this.perfilService.findAll(PerfilUsuario.class);
-		UsuarioFormDTO form = new UsuarioFormDTO(perfis);
-		this.result.use(Results.json()).withoutRoot().from(form).include("perfis").serialize();
+		List<Filial> filiais = this.filialService.findAll(Filial.class);
+		UsuarioFormDTO form = new UsuarioFormDTO(perfis, filiais);
+		this.result.use(Results.json()).withoutRoot().from(form).include("perfis", "filiais").serialize();
 	}
 
 	public void list(String page) {
 		List<Usuario> usuarios = this.usuarioService.findAll(Usuario.class);
 		ListaDTO<Usuario> lista = new ListaDTO<>(usuarios);
-		this.result.use(Results.json()).withoutRoot().from(lista).recursive().serialize();
+		this.result.use(Results.json()).withoutRoot().from(lista).include("lista").serialize();
 	}
 	
 	@Path("/usuario/edita/{usuario.id}")

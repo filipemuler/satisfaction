@@ -1,7 +1,9 @@
 package br.com.af.satisfaction.entidades;
 
 import com.google.common.collect.Lists;
+import org.codehaus.jackson.annotate.JsonBackReference;
 import org.codehaus.jackson.annotate.JsonIgnore;
+import org.codehaus.jackson.annotate.JsonManagedReference;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -18,9 +20,7 @@ public class Conta implements Serializable, Comparable<Conta> {
     private String nome;
     private String descricao;
 
-    @JsonIgnore
     private List<Conta> contas = Lists.newArrayList();
-    @JsonIgnore
     private Conta referenteA;
 
     //o pai da arvore, exemplo Despesa > supermercado > coca-cola
@@ -94,6 +94,7 @@ public class Conta implements Serializable, Comparable<Conta> {
     }
 
     @OneToMany(mappedBy = "referenteA", cascade = CascadeType.ALL)
+    @JsonBackReference
     public List<Conta> getContas() {
         return contas;
     }
@@ -103,6 +104,7 @@ public class Conta implements Serializable, Comparable<Conta> {
     }
 
     @ManyToOne
+    @JsonManagedReference
     public Conta getReferenteA() {
         return referenteA;
     }

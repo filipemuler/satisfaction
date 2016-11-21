@@ -1851,7 +1851,9 @@ var Movimentacao = (function (_Component) {
               _react2['default'].createElement(_reactSelectizeSrcSimpleSelect2['default'], {
                 options: this.state.filiais,
                 placeholder: 'Selecione...',
+                defaultValue: this.state.filial,
                 value: this.state.filial,
+                disabled: !admin,
                 onValueChange: function (value) {
                   self.setState({ filial: value });
                   console.log(value.value);
@@ -4644,7 +4646,22 @@ var UsuarioForm = (function (_Component) {
         ),
         _react2['default'].createElement(
           _reactBootstrapLibFormGroup2['default'],
-          { controlId: 'formHorizontalTurno' },
+          { controlId: 'formHorizontalFilial' },
+          _react2['default'].createElement(
+            _reactBootstrapLibCol2['default'],
+            { componentClass: _reactBootstrapLibControlLabel2['default'], sm: 3 },
+            'Filial'
+          ),
+          _react2['default'].createElement(
+            _reactBootstrapLibCol2['default'],
+            { sm: 9 },
+            _react2['default'].createElement(_reactSelectizeSrcSimpleSelect2['default'], { options: _this.state.filiais, placeholder: 'Selecione...',
+              ref: 'filial' })
+          )
+        ),
+        _react2['default'].createElement(
+          _reactBootstrapLibFormGroup2['default'],
+          { controlId: 'formHorizontalPerfil' },
           _react2['default'].createElement(
             _reactBootstrapLibCol2['default'],
             { componentClass: _reactBootstrapLibControlLabel2['default'], sm: 3 },
@@ -4677,7 +4694,7 @@ var UsuarioForm = (function (_Component) {
     };
 
     this.getDataForm = this.getDataForm.bind(this);
-    this.state = { perfis: [] };
+    this.state = { perfis: [], filiais: [] };
   }
 
   _createClass(UsuarioForm, [{
@@ -4697,11 +4714,17 @@ var UsuarioForm = (function (_Component) {
         perfil.id = this.refs.perfil.value().value;
       }
 
+      var filial = {};
+      if (this.refs.filial.value() != null) {
+        filial.id = this.refs.filial.value().value;
+      }
+
       var data = {
         usuario: {
           email: _reactDom2['default'].findDOMNode(this.refs.email).value,
           senha: _reactDom2['default'].findDOMNode(this.refs.senha).value,
-          perfilUsuario: perfil,
+          filial: filial,
+          perfil: perfil,
           admin: this.admin.checked
         }
       };

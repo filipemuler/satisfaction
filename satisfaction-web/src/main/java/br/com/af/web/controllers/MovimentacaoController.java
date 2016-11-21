@@ -67,7 +67,9 @@ public class MovimentacaoController {
             Usuario usuario = usuarioService.getUsuarioLogado();
             movimentadaoDTO = new MovimentadaoDTO(contas, filiais, fluxos, usuario);
         }
-        this.result.use(Results.json()).withoutRoot().from(movimentadaoDTO).recursive().serialize();
+        this.result.use(Results.json()).withoutRoot().from(movimentadaoDTO)
+                .include("receitasFixas", "despesas", "recebimentos", "filiais", "fluxos", "usuario", "filial")
+                .serialize();
     }
 
     @Get("/movimentacao/saldos/{filialId}")
@@ -82,7 +84,7 @@ public class MovimentacaoController {
     @Post("/movimentacao/salvar")
     public void salvar(Movimentacao movimentacao) {
         this.movimentacaoService.criarMovimentacoes(movimentacao);
-//        this.result.nothing();
+        this.result.nothing();
     }
 
 }

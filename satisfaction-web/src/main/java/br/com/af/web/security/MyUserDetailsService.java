@@ -9,6 +9,7 @@ import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 
 import br.com.af.satisfaction.config.GenericDao;
+import com.google.common.collect.Lists;
 import org.hibernate.Hibernate;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -38,12 +39,13 @@ public class MyUserDetailsService implements UserDetailsService {
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
-
 		Usuario user = (Usuario) em.createQuery("select u from Usuario u where u.email = :email")
 				.setParameter("email", username).getSingleResult();
-		Hibernate.initialize(user.getPerfil());
-		Hibernate.initialize(user.getPerfil().getPermissoes());
-		List<GrantedAuthority> authorities = buildUserAuthority(user.getPerfil().getPermissoes());
+		List<GrantedAuthority> authorities = Lists.newArrayList();
+		if(user.getPerfil() != null){
+			authorities.addAll(buildUserAuthority(user.getPerfil().getPermissoes()));
+		}
+
 		return this.buildUserForAuthentication(user, authorities);
 	}
 

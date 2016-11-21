@@ -304,7 +304,7 @@ class Movimentacao extends Component {
       if(this.state.usuario != null){
          admin = JSON.parse(this.state.usuario.admin)
       }
-      
+
       return(
         <Panel header={this.props.contexto} footer={footer}>
           <Form horizontal>
@@ -316,7 +316,9 @@ class Movimentacao extends Component {
                 <SimpleSelect
                   options = {this.state.filiais}
                   placeholder = "Selecione..."
+                  defaultValue={this.state.filial}
                   value={this.state.filial}
+                  disabled={!admin}
                   onValueChange = {function(value) {
                         self.setState({filial: value});
                         console.log(value.value)

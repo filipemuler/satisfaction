@@ -8,6 +8,16 @@
 		<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
 		
 		<class>br.com.af.satisfaction.entidades.Conta</class>
+		<!--<class>br.com.af.satisfaction.entidades.GrupoConta</class>-->
+		<!--<class>br.com.af.satisfaction.entidades.PerfilUsuario</class>-->
+		<!--<class>br.com.af.satisfaction.entidades.Permissao</class>-->
+		<!--<class>br.com.af.satisfaction.entidades.Usuario</class>-->
+		<!--<class>br.com.af.satisfaction.entidades.Empresa</class>-->
+		<!--<class>br.com.af.satisfaction.entidades.Filial</class>-->
+		<!--<class>br.com.af.satisfaction.entidades.Funcionario</class>-->
+		<!--<class>br.com.af.satisfaction.entidades.Endereco</class>-->
+		<!--<class>br.com.af.satisfaction.entidades.Entidade</class>-->
+		<!--<class>br.com.af.satisfaction.entidades.TipoEntidade</class>-->
 
 		<properties>
 			<property name="hibernate.hbm2ddl.auto" value="create-drop" />

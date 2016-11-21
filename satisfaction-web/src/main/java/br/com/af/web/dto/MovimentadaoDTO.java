@@ -24,6 +24,7 @@ public class MovimentadaoDTO {
     private List<SelectOptionDTO> cartoesSaida = Lists.newArrayList();
     private List<SelectOptionDTO> fluxos = Lists.newArrayList();
     private Usuario usuario;
+    private SelectOptionDTO filial;
 
     public MovimentadaoDTO(List<Conta> contas, List<Filial> filiais, List<Fluxo> fluxos, Usuario usuario) {
         this.usuario = usuario;
@@ -54,6 +55,12 @@ public class MovimentadaoDTO {
 
         for(Filial filial : filiais){
             this.filiais.add(new SelectOptionDTO(Long.toString(filial.getId()), null, filial.getNome()));
+        }
+
+        if(!usuario.isAdmin()){
+            if(usuario.getFilial() != null) {
+                this.filial = new SelectOptionDTO(String.valueOf(usuario.getFilial().getId()), null, usuario.getFilial().getNome());
+            }
         }
     }
 
@@ -138,5 +145,13 @@ public class MovimentadaoDTO {
 
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
+    }
+
+    public SelectOptionDTO getFilial() {
+        return filial;
+    }
+
+    public void setFilial(SelectOptionDTO filial) {
+        this.filial = filial;
     }
 }
