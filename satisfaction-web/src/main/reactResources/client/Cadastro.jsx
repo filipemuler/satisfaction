@@ -40,12 +40,6 @@ class Cadastro extends Component {
 
   componentDidMount(){
     this.listar();
-    // var self = this
-    // request
-    //   .get(this.props.contexto + "/list")
-    //   .end(function(err, res){
-    //     self.setState(res.body);
-    //   });
   }
 
   clickCriar(){
@@ -69,7 +63,7 @@ class Cadastro extends Component {
   }
 
   listar(){
-    var self = this
+    let self = this
     request
       .get(this.props.contexto + "/list")
       .end(function(err, res){

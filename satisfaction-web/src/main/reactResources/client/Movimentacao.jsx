@@ -240,9 +240,9 @@ class Movimentacao extends Component {
       }
 
     render () {
-      var self = this
+      let self = this
       const footer = <Footer onSubmit={this.onHandleSubmit} onCancel={this.onCancel}/>
-      var receitasFixas = this.state.receitasFixas.map(conta =>
+      let receitasFixas = this.state.receitasFixas.map(conta =>
         <MovimentacaoFixa key={conta.value}
           contaId={conta.value}
           title={conta.label}
@@ -250,7 +250,7 @@ class Movimentacao extends Component {
           calculaTotal={this.calculaTotalReceita}
           ref={"receita-" + conta.value}/>
       )
-      var despesas = this.state.despesasAdded.map(conta =>
+      let despesas = this.state.despesasAdded.map(conta =>
         <MovimentacaoAdded key={conta.id}
           contaId={conta.id}
           title={conta.label}
@@ -258,7 +258,7 @@ class Movimentacao extends Component {
           disabled="true"
           ref={"despesa-" + conta.id}/>
       )
-      var recebimentos = this.state.recebimentosAdded.map(conta =>
+      let recebimentos = this.state.recebimentosAdded.map(conta =>
         <MovimentacaoAdded key={conta.id}
           contaId={conta.id}
           title={conta.label}
@@ -266,7 +266,7 @@ class Movimentacao extends Component {
           disabled="true"
           ref={"recebimento-" + conta.id}/>
       )
-      var cartoesEntrada = this.state.cartoesEntradaAdded.map(conta =>
+      let cartoesEntrada = this.state.cartoesEntradaAdded.map(conta =>
         <MovimentacaoAdded key={conta.id}
           contaId={conta.id}
           title={conta.label}
@@ -274,7 +274,7 @@ class Movimentacao extends Component {
           disabled="true"
           ref={"cartaoEntrada-" + conta.id}/>
       )
-      var cartoesSaida = this.state.cartoesSaidaAdded.map(conta =>
+      let cartoesSaida = this.state.cartoesSaidaAdded.map(conta =>
         <MovimentacaoAdded key={conta.id}
           contaId={conta.id}
           title={conta.label}
@@ -282,7 +282,7 @@ class Movimentacao extends Component {
           disabled="true"
           ref={"cartaoSaida-" + conta.id}/>
       )
-      var fluxos = this.state.fluxos.map(fluxo =>
+      let fluxos = this.state.fluxos.map(fluxo =>
         <MovimentacaoFixa key={fluxo.value}
           contaId={fluxo.value}
           title={fluxo.label}
