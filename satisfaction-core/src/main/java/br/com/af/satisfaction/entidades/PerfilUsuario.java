@@ -26,6 +26,7 @@ public class PerfilUsuario {
     private GrupoConta grupoConta;
     private List<Permissao> permissoes;
 
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     public Long getId() {

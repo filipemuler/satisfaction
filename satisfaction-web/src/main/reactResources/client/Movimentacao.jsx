@@ -28,13 +28,9 @@ class Movimentacao extends Component {
     this.onCancel = this.onCancel.bind(this)
     this.addDespesa = this.addDespesa.bind(this)
     this.addRecebimento = this.addRecebimento.bind(this)
-    this.addCartaoEntrada = this.addCartaoEntrada.bind(this)
-    this.addCartaoSaida = this.addCartaoSaida.bind(this)
     this.calculaTotalReceita = this.calculaTotalReceita.bind(this)
     this.calculaTotalDespesa = this.calculaTotalDespesa.bind(this)
     this.calculaTotalRecebimento = this.calculaTotalRecebimento.bind(this)
-    this.calculaTotalCartaoEntrada = this.calculaTotalCartaoEntrada.bind(this)
-    this.calculaTotalCartaoSaida = this.calculaTotalCartaoSaida.bind(this)
     this.calculaTotalFluxo = this.calculaTotalFluxo.bind(this)
     this.addAlert = this.addAlert.bind(this)
     this.state = {
@@ -42,14 +38,10 @@ class Movimentacao extends Component {
       receitasFixas : [],
       despesasAdded : [],
       recebimentosAdded : [],
-      cartoesSaidaAdded : [],
-      cartoesEntradaAdded : [],
       fluxos : [],
       filiais : [],
       totalDespesa : 0,
       totalRecebimento : 0,
-      totalCartaoEntrada : 0,
-      totalCartaoSaida : 0,
       totalReceita : 0,
       totalFluxo : 0,
       inputValue : '',
@@ -93,8 +85,7 @@ class Movimentacao extends Component {
     submit.movimentacao.dataTransacao = this.state.dataTransacao.substring(0,19) + 'Z'
     for (var ref in this.refs) {
       if(ref.startsWith('receita-') || ref.startsWith('despesa-') ||
-      ref.startsWith('recebimento-') || ref.startsWith('cartaoEntrada-') ||
-      ref.startsWith('cartaoSaida-')){
+      ref.startsWith('recebimento-')){
         submit.movimentacao.movimentacoesConta.push(this.refs[ref].getFormData())
       }
       if(ref.startsWith('fluxo-')){
@@ -113,16 +104,13 @@ class Movimentacao extends Component {
         filial : null,
         totalDespesa : 0,
         totalRecebimento : 0,
-        totalCartaoEntrada : 0,
-        totalCartaoSaida : 0,
         totalReceita : 0,
         totalFluxo : 0,
         saldoAnterior : null,
         inputValue : ''})
         for (var ref in self.refs) {
           if(ref.startsWith('receita-') || ref.startsWith('despesa-') ||
-          ref.startsWith('recebimento-') || ref.startsWith('cartaoEntrada-') ||
-          ref.startsWith('cartaoSaida-') ||ref.startsWith('fluxo-')){
+          ref.startsWith('recebimento-') ||ref.startsWith('fluxo-')){
             if (typeof self.refs[ref].reset === "function") {
               self.refs[ref].reset();
             }
@@ -145,16 +133,13 @@ class Movimentacao extends Component {
       filial : null,
       totalDespesa : 0,
       totalRecebimento : 0,
-      totalCartaoEntrada : 0,
-      totalCartaoSaida : 0,
       totalReceita : 0,
       totalFluxo : 0,
       saldoAnterior : null,
       inputValue : ''})
       for (var ref in this.refs) {
         if(ref.startsWith('receita-') || ref.startsWith('despesa-') ||
-          ref.startsWith('recebimento-') || ref.startsWith('cartaoEntrada-') ||
-          ref.startsWith('cartaoSaida-') ||ref.startsWith('fluxo-')){
+          ref.startsWith('recebimento-') ||ref.startsWith('fluxo-')){
           if (typeof this.refs[ref].reset === "function") {
             this.refs[ref].reset();
           }
@@ -179,24 +164,6 @@ class Movimentacao extends Component {
       )
       this.calculaTotalRecebimento(value)
     }
-    addCartaoEntrada(id, label, value){
-
-      this.setState({ cartoesEntradaAdded :
-        this.state.cartoesEntradaAdded.concat(
-          {id : id, label : label, value : value}
-        )}
-      )
-      this.calculaTotalCartaoEntrada(value)
-    }
-    addCartaoSaida(id, label, value){
-
-      this.setState({ cartoesSaidaAdded :
-        this.state.cartoesSaidaAdded.concat(
-          {id : id, label : label, value : value}
-        )}
-      )
-      this.calculaTotalCartaoSaida(value)
-    }
 
     calculaTotalReceita(){
       let total = 0;
@@ -214,14 +181,6 @@ class Movimentacao extends Component {
 
     calculaTotalRecebimento(value){
       this.setState({totalRecebimento : this.state.totalRecebimento + Number(value)})
-    }
-
-    calculaTotalCartaoEntrada(value){
-      this.setState({totalCartaoEntrada : this.state.totalCartaoEntrada + Number(value)})
-    }
-
-    calculaTotalCartaoSaida(value){
-      this.setState({totalCartaoSaida : this.state.totalCartaoSaida + Number(value)})
     }
 
     calculaTotalFluxo(){
@@ -266,22 +225,6 @@ class Movimentacao extends Component {
           disabled="true"
           ref={"recebimento-" + conta.id}/>
       )
-      let cartoesEntrada = this.state.cartoesEntradaAdded.map(conta =>
-        <MovimentacaoAdded key={conta.id}
-          contaId={conta.id}
-          title={conta.label}
-          inputValue={conta.value}
-          disabled="true"
-          ref={"cartaoEntrada-" + conta.id}/>
-      )
-      let cartoesSaida = this.state.cartoesSaidaAdded.map(conta =>
-        <MovimentacaoAdded key={conta.id}
-          contaId={conta.id}
-          title={conta.label}
-          inputValue={conta.value}
-          disabled="true"
-          ref={"cartaoSaida-" + conta.id}/>
-      )
       let fluxos = this.state.fluxos.map(fluxo =>
         <MovimentacaoFixa key={fluxo.value}
           contaId={fluxo.value}
@@ -297,7 +240,6 @@ class Movimentacao extends Component {
         saldoAnterior =  this.state.saldoAnterior
       }
       saldoDia = this.state.totalReceita + this.state.totalRecebimento - this.state.totalDespesa
-                + this.state.totalCartaoEntrada  - this.state.totalCartaoSaida
       saldoTransportar = saldoAnterior + saldoDia
 
       let admin = false;
@@ -363,24 +305,6 @@ class Movimentacao extends Component {
                 onAdded={this.addRecebimento}
                 ref="adicionaRecebimento"/>
               <MovimentacaoTotal label="Total Recebimento" total={this.state.totalRecebimento}/>
-            </Panel>
-            <Panel>
-              Cartões Saida
-              {cartoesSaida}
-              <MovimentacaoAdd
-                options={this.state.cartoesSaida}
-                onAdded={this.addCartaoSaida}
-                ref="adicionaCartaoSaida"/>
-              <MovimentacaoTotal label="Total Cartões Saida" total={this.state.totalCartaoSaida}/>
-            </Panel>
-            <Panel>
-              Cartões Entrada
-              {cartoesEntrada}
-              <MovimentacaoAdd
-                options={this.state.cartoesEntrada}
-                onAdded={this.addCartaoEntrada}
-                ref="adicionaCartaoEntrada"/>
-              <MovimentacaoTotal label="Total Cartões Entrada" total={this.state.totalCartaoEntrada}/>
             </Panel>
             <Panel>
               Fluxos

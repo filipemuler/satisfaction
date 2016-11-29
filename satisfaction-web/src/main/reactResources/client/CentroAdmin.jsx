@@ -10,23 +10,12 @@ import Dashboard from './Dashboard'
 import Movimentacao from './Movimentacao'
 import request from 'superagent'
 
-class Centro extends Component {
+class CentroAdmin extends Component {
 
     constructor(props){
       super(props)
       this.state = {contexto : 'dashboard'}
       this.handleSelect = this.handleSelect.bind(this)
-    }
-
-    componentDidMount(){
-      let self = this;
-      request
-        .post(url)
-        .send(this.refs.form.getDataForm())
-        .end(function(err, res){
-          self.close();
-          self.listar()
-        });
     }
 
     handleSelect(selectedKey, event){
@@ -86,7 +75,7 @@ class Centro extends Component {
                 <NavItem eventKey="dashboard" href="/home">Dashboard</NavItem>
                 <NavItem eventKey="movimentacao" title="Item">Movimentação</NavItem>
                 <NavItem eventKey="cadastros" disabled>Cadastros</NavItem>
-                <NavItem eventKey="contas" title="Item"  style={{display : 'none'}}>Contas</NavItem>
+                <NavItem eventKey="contas" title="Item">Contas</NavItem>
                 <NavItem eventKey="grupoconta" title="Item">Grupo Conta</NavItem>
                 <NavItem eventKey="fluxo" title="Item">Fluxo</NavItem>
                 <NavItem eventKey="filial" title="Item">Filial</NavItem>
@@ -136,4 +125,4 @@ class Centro extends Component {
     }
 }
 
-export default Centro
+export default CentroAdmin

@@ -14,7 +14,6 @@ public class Usuario {
 	private Long id;
 	private Date dataCadastro;
 	private String email;
-	@JsonIgnore
 	private String senha;
 	private boolean admin;
 	private Filial filial;

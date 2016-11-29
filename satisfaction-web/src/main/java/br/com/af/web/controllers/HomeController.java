@@ -6,6 +6,7 @@ import br.com.caelum.vraptor.Controller;
 import br.com.caelum.vraptor.Get;
 import br.com.caelum.vraptor.Path;
 import br.com.caelum.vraptor.Result;
+import br.com.caelum.vraptor.view.Results;
 
 import javax.inject.Inject;
 
@@ -19,8 +20,9 @@ public class HomeController {
 	}
 
 	@Inject
-	public HomeController(Result result) {
+	public HomeController(Result result, UsuarioService usuarioService) {
 		this.result = result;
+		this.usuarioService = usuarioService;
 	}
 
 	@Path("/")
@@ -29,6 +31,23 @@ public class HomeController {
 	@Get("/home/usuario")
 	public void getUsuario(){
 		Usuario usuarioLogado = this.usuarioService.getUsuarioLogado();
+		AdminDTO adminDTO = new AdminDTO(usuarioLogado.isAdmin());
+		this.result.use(Results.json()).withoutRoot().from(adminDTO).recursive().serialize();
+	}
 
+	public class AdminDTO {
+		private boolean admin;
+
+		public AdminDTO(boolean admin) {
+			this.admin = admin;
+		}
+
+		public boolean isAdmin() {
+			return admin;
+		}
+
+		public void setAdmin(boolean admin) {
+			this.admin = admin;
+		}
 	}
 }
