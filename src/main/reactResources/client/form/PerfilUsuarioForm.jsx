@@ -45,7 +45,9 @@ class PerfilUsuarioForm extends Component {
       perfilusuario : {
         nome : ReactDOM.findDOMNode(this.refs.nome).value,
         grupoConta : grupoConta,
-        permissoes : permissoes
+        permissoes : permissoes,
+        horaAcesso : ReactDOM.findDOMNode(this.refs.horaAcesso).value,
+        intervaloAcesso : ReactDOM.findDOMNode(this.refs.intervalo).value
       }
     }
     return data;
@@ -71,6 +73,18 @@ class PerfilUsuarioForm extends Component {
       <Col sm={9}>
         <MultiSelect options = {this.state.permissoes} placeholder = "Selecione..."
           ref="permissoes"/>
+      </Col>
+    </FormGroup>
+    <FormGroup controlId="formHorizontalHoraAcesso">
+      <Col componentClass={ControlLabel} sm={3}>Hora Acesso</Col>
+      <Col sm={9}>
+        <FormControl type="hora" placeholder="Ex: 14:00" ref="horaAcesso"/>
+      </Col>
+    </FormGroup>
+    <FormGroup controlId="formHorizontalIntervalo">
+      <Col componentClass={ControlLabel} sm={3}>Intervalo</Col>
+      <Col sm={9}>
+        <FormControl type="integer" placeholder="Ex: 30" ref="intervalo"/>
       </Col>
     </FormGroup>
   </Form>

@@ -247,6 +247,42 @@ class Movimentacao extends Component {
          admin = JSON.parse(this.state.usuario.admin)
       }
 
+      let panelDespesa
+      if(this.state.despesas != undefined && this.state.despesas.length > 0){
+        panelDespesa =  <Panel>
+                      Despesas
+                      {despesas}
+                      <MovimentacaoAdd
+                        options={this.state.despesas}
+                        onAdded={this.addDespesa}
+                        calculaTotal={this.calculaTotalDespesa}
+                        ref="adicionaDespesa"/>
+                      <MovimentacaoTotal label="Total Despesa" total={this.state.totalDespesa}/>
+                    </Panel>
+      }
+
+      let panelRecebimentos
+      if(this.state.recebimentos != undefined && this.state.recebimentos.length > 0){
+        panelRecebimentos = <Panel>
+          Recebimentos
+          {recebimentos}
+          <MovimentacaoAdd
+            options={this.state.recebimentos}
+            onAdded={this.addRecebimento}
+            ref="adicionaRecebimento"/>
+          <MovimentacaoTotal label="Total Recebimento" total={this.state.totalRecebimento}/>
+        </Panel>
+      }
+
+      let panelFluxos
+      if(this.state.fluxos != undefined && this.state.fluxos.length > 0){
+        panelFluxos = <Panel>
+          Fluxos
+          {fluxos}
+          <MovimentacaoTotal label="Total Fluxo" total={this.state.totalFluxo}/>
+        </Panel>
+      }
+
       return(
         <Panel header={this.props.contexto} footer={footer}>
           <Form horizontal>
@@ -287,30 +323,12 @@ class Movimentacao extends Component {
 
             {receitasFixas}
             <MovimentacaoTotal label="Total Receita" total={this.state.totalReceita}/>
-            <Panel>
-              Despesas
-              {despesas}
-              <MovimentacaoAdd
-                options={this.state.despesas}
-                onAdded={this.addDespesa}
-                calculaTotal={this.calculaTotalDespesa}
-                ref="adicionaDespesa"/>
-              <MovimentacaoTotal label="Total Despesa" total={this.state.totalDespesa}/>
-            </Panel>
-            <Panel>
-              Recebimentos
-              {recebimentos}
-              <MovimentacaoAdd
-                options={this.state.recebimentos}
-                onAdded={this.addRecebimento}
-                ref="adicionaRecebimento"/>
-              <MovimentacaoTotal label="Total Recebimento" total={this.state.totalRecebimento}/>
-            </Panel>
-            <Panel>
-              Fluxos
-              {fluxos}
-              <MovimentacaoTotal label="Total Fluxo" total={this.state.totalFluxo}/>
-            </Panel>
+
+            {panelDespesa}
+
+            {panelRecebimentos}
+
+            {panelFluxos}
 
             <MovimentacaoTotal label="saldoAnterior" total={saldoAnterior}/>
             <MovimentacaoTotal label="Saldo Dia" total={saldoDia}/>

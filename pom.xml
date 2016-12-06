@@ -10,7 +10,7 @@
     <properties>
         <vraptor.version>4.2.0-RC4</vraptor.version>
         <vraptor.java8.version>4.0.0.Final</vraptor.java8.version>
-        <vraptor.jpa.version>4.0.4</vraptor.jpa.version>
+        <vraptor.jpa.version>4.0.5</vraptor.jpa.version>
         <weld.version>2.3.2.Final</weld.version>
     </properties>
 
@@ -223,16 +223,16 @@
                     </arguments>
                 </configuration>
             </plugin>
-            <plugin>
-                <groupId>com.heroku.sdk</groupId>
-                <artifactId>heroku-maven-plugin</artifactId>
-                <version>1.1.1</version>
-                <configuration>
-                    <appName>hidden-earth-47779</appName>
-                    <jdkVersion>1.8</jdkVersion>
-                    <warFile>${project.basedir}/target/satisfaction.war</warFile>
-                </configuration>
-            </plugin>
+            <!--<plugin>-->
+                <!--<groupId>com.heroku.sdk</groupId>-->
+                <!--<artifactId>heroku-maven-plugin</artifactId>-->
+                <!--<version>1.1.1</version>-->
+                <!--<configuration>-->
+                    <!--<appName>hidden-earth-47779</appName>-->
+                    <!--<jdkVersion>1.8</jdkVersion>-->
+                    <!--<warFile>${project.basedir}/target/satisfaction.war</warFile>-->
+                <!--</configuration>-->
+            <!--</plugin>-->
         </plugins>
     </build>
 

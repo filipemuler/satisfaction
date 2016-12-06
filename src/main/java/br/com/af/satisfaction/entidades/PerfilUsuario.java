@@ -26,6 +26,8 @@ public class PerfilUsuario {
     private GrupoConta grupoConta;
     private List<Permissao> permissoes;
 
+    private String horaAcesso;
+    private Integer intervaloAcesso;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -65,5 +67,21 @@ public class PerfilUsuario {
 
     public void setPermissoes(List<Permissao> permissoes) {
         this.permissoes = permissoes;
+    }
+
+    public String getHoraAcesso() {
+        return horaAcesso;
+    }
+
+    public void setHoraAcesso(String horaAcesso) {
+        this.horaAcesso = horaAcesso;
+    }
+
+    public Integer getIntervaloAcesso() {
+        return intervaloAcesso;
+    }
+
+    public void setIntervaloAcesso(Integer intervaloAcesso) {
+        this.intervaloAcesso = intervaloAcesso;
     }
 }

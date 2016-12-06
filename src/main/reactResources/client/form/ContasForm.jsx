@@ -31,8 +31,6 @@ class ContasForm extends Component {
     let referente = this.refs.referenteA.value();
     let referente_id = (referente == null) ? null : referente.value;
 
-    let turno = (this.refs.turno.value() == null) ? null : this.refs.turno.value().value;
-
     var data = {
       conta : {
         nome : ReactDOM.findDOMNode(this.refs.nome).value,
@@ -67,13 +65,6 @@ class ContasForm extends Component {
       <Col sm={9}>
         <SimpleSelect options = {this.state.contas} placeholder = "Selecione..."
           ref="referenteA"/>
-      </Col>
-    </FormGroup>
-    <FormGroup controlId="formHorizontalTurno">
-      <Col componentClass={ControlLabel} sm={3}>Turno</Col>
-      <Col sm={9}>
-        <SimpleSelect options = {this.state.turnos} placeholder = "Selecione..."
-          ref="turno"/>
       </Col>
     </FormGroup>
     <FormGroup controlId="formHorizontalEntrada">

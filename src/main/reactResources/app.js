@@ -38,6 +38,10 @@ app.get('/movimentacao/saldos/*', function(req, res) {
     res.send({'saldoAnterior' : '200'});
 });
 
+app.get('/home/usuario', function(req, res) {
+    res.send({'admin' : true});
+});
+
 app.get('/contas/list', function(req, res) {
     res.send({lista : [{'id':'1001', 'nome': 'conta1', 'entrada':'false', 'saida':'true', 'agrupador':'true', 'ordem':'1'},
     {'id':'1002', 'nome': 'conta2','entrada':'false', 'saida':'true', 'agrupador':'true', 'ordem':'2'}]});

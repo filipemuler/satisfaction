@@ -52,7 +52,6 @@ class Cadastro extends Component {
 
   onHandleSubmit(){
     var self = this;
-    console.log(this.refs.form.getDataForm())
     request
       .post(url)
       .send(this.refs.form.getDataForm())
@@ -118,8 +117,6 @@ class Cadastro extends Component {
           cadastro = <FuncionarioForm ref="form"/>
           tabela = <TabelaFuncionario lista={this.state.lista}/>
           break;
-        default:
-
       }
       return(
         <Panel header={this.props.contexto} footer={footer}>
